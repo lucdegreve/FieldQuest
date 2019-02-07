@@ -6,17 +6,14 @@
 	</head>
 		<body>
 		<?php 
-		$id_project=$_GET["id_project"]
-		$link = mysqli_connect('postgre','mdpsql','');
-			mysqli_set_charset($link,'utf8mb4');
-			mysqli_select_db($link,'Geosys_ok')
-							or die ('Impossible to make a connection with Geosys_ok'.
-							mysqli_error($link));
+		$id_project=$_GET["id_project"];
+		$connection =pg_connect("host=localhost port=5432 dbname=Geosys_eng user=postgres password=mdpsql")or die ("Connection impossible");
 		$query="SELECT count(id_file) FROM link_file_project where id_project=$id_project";	// counts the number of files in a project
-		$result=mysqli_query($link,$query) or die ('the query has failed : '.mysqli_error($link));
-		$nb_files = mysqli_fetch_all($result);
+		$result=pg_query($connection,$query);
+		$nb_files = pg_fetch_all($result);
 		if($nb_files[0][0]==0){
 			$sql = 'Delete from projects where id_project="'.$id_project.'"';  // if the project is empty we can delete it
+			echo'The project has been deleted';
 		}
 		else {
 			echo'<script type="text/javascript">';
@@ -26,4 +23,5 @@
 		?>
 		</body>
 </html>
+
 
