@@ -62,7 +62,7 @@
 				<!-- Create the table returning the name of each project and two buttons: "edit" and "delete" -->
 				<table class="table table-striped">
 					<tr>
-						<th scope="col" width=80%>Nom du projet</th>
+						<th scope="col" width=80%>Project name</th>
 						<td width=10%></td>
 						<td width=10%></td>
 					</tr>
