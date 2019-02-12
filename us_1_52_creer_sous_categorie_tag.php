@@ -6,13 +6,15 @@
 	</head>
 		<body>
 		<?php 
-		require("connection.php"); //à modifier en fonction du nom de la page de connexion
+		require "tab_donnees.class.php";
+		require "funct_connex.php";
+		$con = new Connex();
+		$connex = $con->connection;
 		$id_tag_type=$_GET[""];// Demander à Camille 
 		$name_tag_type=$_GET[""];//Demander à Camille
 		$description_tag_type=[""]; //Demander à Camille
 		$sql = 'INSERT INTO tag_type VALUES ("'.$id_tag_type.'", "'.$name_tag_type.'", "'.$description_tag_type.'")'; 
-		//echo $sql;
-		$result=pg_query($connection,$sql);//à modifier en fonction de la page connection
+		$result=pg_query($connex,$sql);
 		echo '<script type="text/javascript">';
 			echo'alert("New tag_type '.$name_tag_type.' created")';
 		?>
