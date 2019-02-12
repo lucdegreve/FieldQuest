@@ -5,6 +5,8 @@
 		<!-- Projects list, with searching, editing and deleting possibilities -->
 		
 		<META charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.css"/>
+		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/custom.css" rel="stylesheet">
 	</head>
@@ -12,15 +14,13 @@
 	<body>
 
 		<?php
+		include("tab_donnees.class.php");
 		//DB connection
-		$connection=pg_connect("host=localhost port=5432 dbname=FieldQuest user=postgres password=mdppostgresql")or die ("Connexion impossible");
+		include("funct_connex.php");
+		$con=new Connex();
+		$connex=$con->connection;
 		//Query
-		$result=pg_query($connection, "SELECT id_project, name_project FROM projects ORDER BY name_project") or die('Échec de la requête : ' . pg_last_error());
-		while ($row=pg_fetch_row($result)) {
-		   $id_project=$row[0];
-		   $name_project=$row[1];
-		}
-		$nbrows=pg_num_rows($result);
+		$result=pg_query($connex, "SELECT id_project, name_project, project_init_date FROM projects ORDER BY project_init_date DESC") or die('Échec de la requête : ' . pg_last_error());
 		?>
 		
 		<!-- Header creation -->
@@ -28,58 +28,28 @@
 			<h1>Header</h1>
 		</div>
 		
-		<?php
-		//Modify the query in case you typed something in the research bar : à modifier !
-		if(isset($_GET['search']) AND $_GET['search']!=""){
-			$search=$_GET['search'];
-			$result=pg_query($connection, "SELECT id_project, name_project FROM projects WHERE name_project LIKE '%".$search."%' ORDER BY name_project") or die('Échec de la requête : ' . pg_last_error());
-			while ($row=pg_fetch_row($result)) {
-			   $id_project=$row[0];
-			   $name_project=$row[1];
-			}
-			$nbrows=pg_num_rows($result);
-		}
-		?>
-		
 		<div class="container">
 			<div class="row">
-				<!-- Create a search bar to look for a project -->
-				<div class="col-md-8">
-					<form name="research_bar" method="GET">
-						<input type="search" name="search" size="50" placeholder="Search a project...">
-						<input type="submit" value="Submit">
-					</form>
-				</div>
-				<!-- Create a button to add a new project -->
-				<div class="col-md-4">
+				<div class="col-md-9"></div>
+				<div class="col-md-3">
 					<form name="add_project" action="#" method="GET">
 						<button type='submit' class='btn btn-success btn-block'><B>Add a project</B></button>
 					</form>
 				</div>
 			</div>
-			</br>
 			<div class="row">
-				<!-- Create the table returning the name of each project and two buttons: "edit" and "delete" -->
-				<table class="table table-striped">
-					<tr>
-						<th scope="col" width=80%>Project name</th>
-						<td width=10%></td>
-						<td width=10%></td>
-					</tr>
+				<div class="col-md-12">
 					<?php
-					for ($i=0;$i<$nbrows;$i++){
-						echo "<tr>";
-							echo "<td>".$tab[$i][1]."</td>";
-							echo '<form name="edit_project" action="#" method="GET">';
-								echo "<td><button type='submit' class='btn btn-primary' name='#' value='#'>Edit</button></td>";
-							echo "</form>";
-							echo '<form name="delete_project" action="us_1_43_supprimer_un_projet.php" method="GET">';
-								echo "<td><button type='submit' class='btn btn-danger' name='id_project' value='".$tab[$i][0]."'>Delete</button></td>";
-							echo "</form>";
-						echo "</tr>";
-					}
+					$tab=new Tab_donnees($result,"PG");
+					//Headers names
+					$tab_headers[0]='Project name';
+					$tab_headers[1]='Start date';
+					//Columns
+					$tab_display[0]='name_project';
+					$tab_display[1]='project_init_date';
+					$tab->creer_tableau("display nowrap", "projects", "", "", "id_project", "", "", "edit.php", "us_1_43_supprimer_un_projet.php", $tab_headers, $tab_display, "", "");
 					?>
-				</table>
+				</div>
 			</div>
 		</div>
 		
