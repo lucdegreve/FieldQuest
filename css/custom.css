@@ -1,16 +1,44 @@
 
 input[type=button], input[type=submit], input[type=reset], button, .button_tag {
 	padding: 6px 18px;
-	margin: 15px 15px;
+	margin: 10px 10px;
 	display: inline-block;
 	color: #000000;
-	font-size: 20px;
+	font-size: 15px;
 	cursor: pointer;
 	background: #c1c1c1;
 	background: linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
 	background: -moz-linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
 	background: -webkit-linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
 	background: -o-linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
+	border: 2px solid #000000;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-o-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+}
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, button:hover, .button_plus:hover {
+	background: linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -moz-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -webkit-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -o-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+}
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active, button:active, .button_plus:active{
+	opacity:0.8;
+}
+
+input[type=button], input[type=submit], input[type=reset], button, .button_tag_modif {
+	padding: 6px 18px;
+	margin: 10px 10px;
+	display: inline-block;
+	color: #000000;
+	font-size: 15px;
+	cursor: pointer;
+	background: #ffff66;
 	border: 2px solid #000000;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
