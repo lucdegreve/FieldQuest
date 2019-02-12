@@ -1,10 +1,10 @@
 
-input[type=button], input[type=submit], input[type=reset], button, .button_plus {
-	padding: 2px 6px;
-	margin: 3px 4px;
+input[type=button], input[type=submit], input[type=reset], button, .button_tag {
+	padding: 6px 18px;
+	margin: 15px 15px;
 	display: inline-block;
 	color: #000000;
-	font-size: 10px;
+	font-size: 20px;
 	cursor: pointer;
 	background: #c1c1c1;
 	background: linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
@@ -38,21 +38,22 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active, 
 	list-style: none;
 	background: #000;
 	color: #fff;
-	width: 200px;
-	font: 1.2em "Trebuchet MS", sans-serif;
+	width: 360px;
+	font: 2em "Trebuchet MS", sans-serif;
   }
   .navigation a, .navigation span {
 	display: block;
-	padding: 4px 10px;
+	padding: 6px 12px;
 	color: #fff;
 	text-decoration: none;
-	background: #000 url(menu-item.png) left bottom no-repeat;
+	background: #000 url(../css/menu-item.png) right bottom no-repeat;
+	background-size: 360px ;
   }
   .navigation .toggleSubMenu a, .navigation .toggleSubMenu span {
-	background-image: url(menu-item-deroule.png);
+	background-image: url(../css/menu-item-deroule.png);
   }
   .navigation .open a, .navigation .open span {
-	background-image: url(menu-item-enroule.png);
+	background-image: url(../css/menu-item-enroule.png);
   }
   .navigation a:hover, .navigation a:focus, .navigation a:active {
 	text-decoration: underline;
