@@ -7,16 +7,16 @@
 	</head>
 		<body>
 		<?php 
-		$id_project=$_GET["id_project"];
+		$id_project= $_GET["id_project"];
 		require "tab_donnees.class.php";
 		require "funct_connex.php";
 		$con = new Connex();
 		$connex = $con->connection;
-		$result= pg_query($connex, "SELECT count(id_file) FROM link_file_project where id_project=$id_project"); // counts the number of files in a project
+		$result= pg_query($connex, "SELECT id_file FROM link_file_project where id_project=$id_project"); // selects the files of a project
 		
-		$nb_files = pg_fetch_all($result);
-		if($nb_files[0][0]==0){
-			$sql = 'Delete from projects where id_project="'.$id_project.'"';  // if the project is empty we can delete it
+		$nb_files = pg_num_rows($result);
+		if($nb_files ==0){
+			$sql = pg_query($connex,'Delete from projects where id_project='.$id_project.'');  // if the project is empty we can delete it
 			echo'The project has been deleted';
 		}
 		else {
