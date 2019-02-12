@@ -36,34 +36,43 @@
         } ) ;
     </script>
 </head>
-    
+<body> 
+    Create
+    <button type="button" class="button_tag button_tag-success">New tag category</button>
+    <button type="button" class="button_tag">New tag</button> 
+    Modify
+    <button type="button" class="button_tag_modif">Modify tag category</button>
+    <button type="button" class="button_tag_modif">Modify tag</button>
+    <a href="#" title="blabla"><blockquote>blaclalala</a> <a href="#" title="modify">coucou</a>
     <?php
+        require "../tab_donnees/funct_connex.php";
         //connection to server + choice of database
-		$link = pg_connect("host=localhost dbname=test2 user=postgres password=postgre ") or die(pg_last_error());
+		$con = new Connex();
+        $connex = $con->connection;
 		//request parameters
 		$query = "SELECT tt.id_tag_type, name_tag_type FROM  tag_type tt  ";
 		//request execution
-        $result = pg_query($link, $query) or die(pg_last_error());
+        $result = pg_query($connex, $query) or die(pg_last_error());
 		// Results browsing line by line
 		// For each line pg_fetch_array return a value table  
-		while ($row = pg_fetch_array($result)) 
-			{ 
+		while ($row = pg_fetch_array($result)) { 
 			// The access to a table element can be do thanks to index or field name
             // Here we are using field name
             $id_cat= $row["id_tag_type"];
             //Beginning of the dynamic menu
 			echo '<ul class="navigation">';
                 //echo '<li><a href="#" title='.$row["name_tag_type"].'>'.$row["name_tag_type"].'</a></li>';
-                echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].'</span>';
+                echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].' </span>';
                     echo '<ul class="subMenu">';
                     $query2 = "SELECT tag_name FROM tags where id_tag_type=".$id_cat; //it gives the name of the tag within the category
-                    $result2 = pg_query($link, $query2)  or die('Échec de la requête : ' . pg_error($link)); 
+                    $result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
                     while ($row2 = pg_fetch_array($result2))
-                        echo '<li><a href="#" title="'.$row2["tag_name"].'">'.$row2["tag_name"].'</a></li>';
+                        echo '<li> <a href="#" title="'.$row2["tag_name"].'">'.$row2["tag_name"].'</a></li>';
                     echo '</ul>';
                 echo '</li>';
-            echo '</ul>';
-	
-			}
+            echo '</ul>';	
+		}
     ?>
+    
+</body>  
 
