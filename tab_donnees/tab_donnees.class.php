@@ -48,19 +48,19 @@ class Tab_donnees
 		         for ($i=0; $i<$this->nb_champs; $i++)
 		         {
 		             $type = pg_field_type ($recordset, $i);
-		             $this->t_type[$i-1]=$type;
+		             $this->t_type[$i]=$type;
 					 //echo $type;
-					 $this->t_entete[$i-1]= pg_field_name($recordset, $i);
+					 $this->t_entete[$i]= pg_field_name($recordset, $i);
 		         }
 				 
 		         //remplit le tableau des enregistrements
 		         $n=0;
 		         while ($row = pg_fetch_row($recordset)) 
 		         {
-		             for ($i=1; $i<=$this->nb_champs; $i++)
+		             for ($i=0; $i<=$this->nb_champs; $i++)
 		             {
 						 
-		                 $this->t_enr[$n][$i-1]=$row[$i];
+		                 $this->t_enr[$n][$i]=$row[$i];
 		             }
 		             $n++;
 		         }
