@@ -37,9 +37,9 @@ $result_status = pg_query($connex, "SELECT id_status as stat, id_status, label_s
 $table_status = new Tab_donnees($result_status,"PG");
 
 
-if (!isset($_POST['id_project'])){	// Get the id of the project to modify and the informations related to the project
-	//$id_project = $_POST['id_project'];	
-	$id_project = 1;
+if (isset($_POST['id_project'])){	// Get the id of the project to modify and the informations related to the project
+	$id_project = $_POST['id_project'];	
+
 	// Query to get the informations of the project to modify
 	$query_modify_project = "SELECT id_status, name_project, project_description, project_init_date, project_end_date 
 		FROM projects WHERE id_project = '".$id_project."'";
@@ -57,7 +57,7 @@ if (!isset($_POST['id_project'])){	// Get the id of the project to modify and th
 		$project_desc = '';
 		$init_date ='';
 		$end_date='';
-}
+	}
 ?>
 
 <h1> New project </h1>
@@ -66,14 +66,14 @@ Fields marked with (*) are mandatory
 <form name='new_project' method='POST' onsubmit='return validate_project()' action='US1-41_create_project.php' >
 
 <table>
-    <tr><td>(*)</td><td>Project name </td>  	<td><input type="text" name="project_name" value="<?php echo $name_project; ?>"></td></tr>
+    <tr><td>(*)</td><td>Project name </td>  	<td><input type="text" name="project_name" value="<?php echo $name_project; ?>" placeholder="Project name"></td></tr>
     <tr><td>(*)</td><td>Date of beginning</td>  <td><input type="date" name="begin_date" value="<?php echo $init_date; ?>"></td></tr>
     <tr><td>   </td><td>Date of end</td>        <td><input type="date" name="end_date" value="<?php echo $end_date; ?>"></td></tr>
-    <tr><td>   </td><td>Project description</td><td><textarea name="project_desc" rows="3"><?php echo $project_desc; ?></textarea></td></tr>    
+    <tr><td>   </td><td>Project description</td><td><textarea name="project_desc" rows="5"><?php echo $project_desc; ?> </textarea></td></tr>    
 	<tr><td>(*)</td><td>Status</td>             <td><?php $table_status->creer_liste_option_plus ( "status", "id_status", "label_status",$status); ?></td></tr>
 </table>
 
-<input type='submit' name='validate' value='Validate'>
+<input type='submit' class='btn btn-success' name='validate' value='Validate'>
 
 </form>
 
