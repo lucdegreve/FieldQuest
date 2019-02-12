@@ -2,14 +2,18 @@
 	<head>
 	<!-- Page developed by Aurélie Jambon -->
 	<!-- Verifying that there is no files in a project before to delete it -->
+	<!-- recuperation de la variable id_project -->
 	<META charset="UTF-8">
 	</head>
 		<body>
 		<?php 
 		$id_project=$_GET["id_project"];
-		$connection =pg_connect("host=localhost port=5432 dbname=Geosys_eng user=postgres password=mdpsql")or die ("Connection impossible");
-		$query="SELECT count(id_file) FROM link_file_project where id_project=$id_project";	// counts the number of files in a project
-		$result=pg_query($connection,$query);
+		require "tab_donnees.class.php";
+		require "funct_connex.php";
+		$con = new Connex();
+		$connex = $con->connection;
+		$result= pg_query($connex, "SELECT count(id_file) FROM link_file_project where id_project=$id_project"); // counts the number of files in a project
+		
 		$nb_files = pg_fetch_all($result);
 		if($nb_files[0][0]==0){
 			$sql = 'Delete from projects where id_project="'.$id_project.'"';  // if the project is empty we can delete it
