@@ -7,6 +7,12 @@
 		</head>
 
 		<body>
+		<!--  
+			Fonction pour importer le pied_de_page à mettre dans la fin du body de votre page
+			<?php
+				 include('.../git/FieldQuest/pied_de_page.php');
+			?>
+		-->
 				<footer class="footer bg-primary">
 					<div class="container">
 						<div class ="row row-20">

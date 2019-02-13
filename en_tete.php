@@ -7,6 +7,12 @@
 		</head>
 
 		<body>
+			<!--  
+			Fonction pour importer l'en_tete à mettre dans le début du body de votre page
+			<?php
+				 include('.../git/FieldQuest/en_tete.php');
+			?>
+			-->
 				<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 					<button class="btn btn-primary" onclick="location.href='https://www.agro-bordeaux.fr/'" >
 					<img src="picto\back.png" class="img-fluid" alt="Responsive image" width="75px" height ="75px">
@@ -17,58 +23,5 @@
 					</button>
 					
 				</nav>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<footer class="footer">
-					<div class="container">
-						<span class="text-muted">Copyright AgroTIC and Geosys.</span>
-					</div>
-				</footer>
 		</body>
 </html>
