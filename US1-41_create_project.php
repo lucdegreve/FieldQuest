@@ -60,22 +60,40 @@ if (isset($_POST['id_project'])){	// Get the id of the project to modify and the
 	}
 ?>
 
-<h1> New project </h1>
-Fields marked with (*) are mandatory
-</br></br>
-<form name='new_project' method='POST' onsubmit='return validate_project()' action='US1-41_create_project.php' >
-
-<table>
-    <tr><td>(*)</td><td>Project name </td>  	<td><input type="text" name="project_name" value="<?php echo $name_project; ?>" placeholder="Project name"></td></tr>
-    <tr><td>(*)</td><td>Date of beginning</td>  <td><input type="date" name="begin_date" value="<?php echo $init_date; ?>"></td></tr>
-    <tr><td>   </td><td>Date of end</td>        <td><input type="date" name="end_date" value="<?php echo $end_date; ?>"></td></tr>
-    <tr><td>   </td><td>Project description</td><td><textarea name="project_desc" rows="5"><?php echo $project_desc; ?> </textarea></td></tr>    
-	<tr><td>(*)</td><td>Status</td>             <td><?php $table_status->creer_liste_option_plus ( "status", "id_status", "label_status",$status); ?></td></tr>
-</table>
-
-<input type='submit' class='btn btn-success' name='validate' value='Validate'>
-
-</form>
+<div class="container">
+	<div class = "col-md-6">
+	<div class="row">Fields marked with (*) are mandatory</div><br/>
+	<form name='new_project' method='POST' onsubmit='return validate_project()' action='US1-41_create_project.php' >
+		<div class ="row">	
+			<div class= "col-md-1">(*)</div>
+			<div class= "col-md-5">Project name </div>
+			<div class = "col-lg-6"><input type="text" name="project_name" value="<?php echo $name_project; ?>" placeholder="Project name"></div>
+		</div><br/>
+		<div class ="row">
+			<div class= "col-md-1">(*)</div>
+			<div class= "col-md-5">Date of beginning</div>
+			<div class="col-md-6"><input type="date" name="begin_date" value="<?php echo $init_date; ?>"></div>
+		</div><br/>
+		<div class ="row">
+			<div class= "col-md-1"> </div>
+			<div class= "col-md-5">Date of end </div>
+			<div class="col-md-6"><input type="date" name="end_date" value="<?php echo $end_date; ?>"></div>
+		</div><br/>
+		<div class ="row">	
+			<div class= "col-md-1"></div>
+			<div class= "col-md-5">Project description </div>
+			<div class="col-md-6"><textarea name="project_desc" rows="5"><?php echo $project_desc; ?> </textarea></div>
+		</div><br/>
+		<div class ="row">
+			<div class= "col-md-1">(*)</div>
+			<div class= "col-md-5">Status </div>
+			<div class="col-md-6"><?php $table_status->creer_liste_option_plus ( "status", "id_status", "label_status",$status); ?></div>
+		</div><br/>
+		<div class="row">
+			<input type='submit' class='btn btn-success' name='validate' value='Validate'>
+		</div>
+		</form>
+	</div>
 
 <?php	// Validate and add or modify the project 
 if(isset($_POST['validate'])){
@@ -94,8 +112,8 @@ if(isset($_POST['validate'])){
 			$query_modify_project = "UPDATE projects SET id_status='".$project_status."', name_project='".$project_name."', project_description='".$project_desc."', 
 			project_init_date='".$project_start."',project_end_date=NULL WHERE id_project = '".$id_project."'";
 		}
-		$result = pg_query($connex, $query_modify_project) or die ('Failed to modify project');
-			echo 'Project modified';
+		$result = pg_query($connex, $query_modify_project) or die ('<div class="alert alert-danger">Failed to modify project</div>');
+			echo '<div class="alert alert-success">Project modified</div>';
 	} else {
 		$project_name = $_POST['project_name'];
 		$project_status = $_POST['status'];
@@ -111,10 +129,15 @@ if(isset($_POST['validate'])){
 			$query_add_project = "INSERT INTO projects (id_status, name_project, project_description, project_init_date)
 			VALUES ('".$project_status."', '".$project_name."', '".$project_desc."', '".$project_start."')";
 		}
-		$result = pg_query($connex, $query_add_project) or die ('Failed to add project');
-			echo 'Project added';
+		$result = pg_query($connex, $query_add_project) or die ('<div class="alert alert-danger">Failed to add project</div>');
+			echo '<div class="alert alert-success">';
+				echo 'Project added';
+			echo '</div>';
+			
 	}	
 }
 
 ?>
+</div> <!--container-->
+
 </html>
