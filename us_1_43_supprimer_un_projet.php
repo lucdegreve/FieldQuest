@@ -6,14 +6,14 @@
 	<META charset="UTF-8">
 	</head>
 		<body>
-		<?php 
+		<?php
 		$id_project= $_GET["id_project"];
-		require "tab_donnees.class.php";
-		require "funct_connex.php";
+		require "tab_donnees/tab_donnees.class.php";
+		require "tab_donnees/funct_connex.php";
 		$con = new Connex();
 		$connex = $con->connection;
 		$result= pg_query($connex, "SELECT id_file FROM link_file_project where id_project=$id_project"); // selects the files of a project
-		
+
 		$nb_files = pg_num_rows($result);
 		if($nb_files ==0){
 			$sql = pg_query($connex,'Delete from projects where id_project='.$id_project.'');  // if the project is empty we can delete it
@@ -27,5 +27,3 @@
 		?>
 		</body>
 </html>
-
-
