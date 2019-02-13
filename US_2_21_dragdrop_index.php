@@ -17,7 +17,7 @@
 		<link href="css/boostrap.min.css" rel="stylesheet" type="text/css">
         <script src="US_2_21_dragdrop_jquery-3.0.0.js" type="text/javascript"></script>
         <script src="US_2_21_dragdrop_script.js" type="text/javascript"></script>
- <title >Deposer un fichier,</title>
+ <title >Upload a file,</title>
  <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
  		<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
  <!-- Openlayers CSS file-->
@@ -49,10 +49,11 @@
 
 
 <body>
-
-<form action="insert_bdd.php" method="get">
-	<h1  align="center">Déposer un fichier </h1> </br>
-	<h2  align="center">Déplacer vos fichiers dans la zone, ou cliquer pour parcourir votre ordinateur </h2>
+<?php
+session_start();
+?>
+<form id ="formdepot" action="insert_bdd.php" method="get">
+	<h1  align="center">Upload a file </h1> </br>
 	<div class="container" >
 		<input type="file" name="file" id="file">
 		<!-- Drag and Drop container-->
@@ -60,7 +61,7 @@
 			<h1>Drag and Drop file here<br/>Or<br/>Click to select file</h1>
 		</div>
 		</div> </br> </br> </br> 
-	<h2 align = "center"> Indiquez la localisation des données </h2>
+	<h2 align = "center"> Select the data localisation </h2>
 	    <div style="margin:0 auto" id="map" >
 	    <!-- Your map will be shown inside this div-->
 	    </div>
@@ -73,11 +74,37 @@
 Latitude :  <span id="Latitude"></span></br> </br>
 Longitude : <span id="Longitude"></span> </br> </br>
 
-Commentaire : <br/>  <textarea id="txtAreaa" rows="10" cols="70"></textarea></br>
+Comment : <br/>  <textarea id="txtAreaa" rows="10" cols="70" form="formdepot"></textarea></br>
 Date :<span> <input type="text" id="datepicker" ></span></br></br></br>
 
-<input type="submit" value="Envoyer le formulaire">
 
+<?php
+require "./tab_donnees/tab_donnees.class.php";
+require "./tab_donnees/funct_connex.php";
+
+$con = new Connex();
+$connex = $con->connection;
+
+$result= pg_query($connex, "SELECT * FROM projects");
+$result2= pg_query($connex, "SELECT * FROM tag_type");
+$tab = new Tab_donnees($result,"PG");
+$tab2 = new Tab_donnees($result2,"PG");
+echo "</BR>";
+echo "</BR>";
+echo "</BR>";
+echo "Choose a project";
+
+$tab->creer_liste_option_plus ( "lst_proj", "id_project", "name_project");
+echo "</BR>";
+echo "</BR>";
+echo "</BR>";
+echo "Choose a main tag";
+
+$tab2->creer_liste_option_plus ( "lst_tag", "id_tag_type", "name_tag_type"," ", " ");
+//$_SESSION['latitude'] = 'green';
+?>
+</BR></BR>
+<input type="submit" value="Envoyer le formulaire">
  </form>
  
  
