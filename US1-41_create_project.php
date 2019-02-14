@@ -97,13 +97,15 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 		</div><br/>
 		<div class="row">
 			<button type='submit' class='btn btn-success' name='validate'>Validate</button>
+			<input type='hidden' name='id_project' value='<?php echo $id_project; ?>'>
 		</div>
 		</form>
 	</div>
 
 <?php	// Validate and add or modify the project 
 if(isset($_POST['validate'])){
-	if ($id_project!=''){
+	if (isset($_POST['id_project'])){
+		$id_project=$_POST['id_project'];
 		$project_name = $_POST['project_name'];
 		$project_status = $_POST['status'];
 		$project_desc = $_POST['project_desc'];
