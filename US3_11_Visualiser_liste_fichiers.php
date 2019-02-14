@@ -10,7 +10,11 @@
 	</head>
 	
 	<body>
-
+		
+		<?php
+				 include("en_tete.php");
+		?>
+		
 		<?php
 		include("tab_donnees.class.php");
 		//DB connection
@@ -125,6 +129,10 @@
 				</table>
 			</div>
 		</div>
+		
+		<?php
+				 include("pied_de_page.php");
+		?>
 		
 	</body>
 
