@@ -25,10 +25,7 @@
 		$nbrows=pg_num_rows($result_files_names);
 		?>
 
-		<!-- Header creation -->
-		<div class="jumbotron jumbotron-fluid">
-			<h1>Header</h1>
-		</div>
+		<!-- Table creation -->
 
 		<div class="container">
 			<div class="row">
@@ -132,9 +129,10 @@
 				</table>
 			</div>
 		</div>
-		<?php
-				 include("pied_de_page.php");
-		?>
-	</body>
 
+
+	</body>
+	<?php
+			 include("pied_de_page.php");
+	?>
 </html>
