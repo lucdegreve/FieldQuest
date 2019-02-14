@@ -5,6 +5,9 @@
       <!-- Create a user account, by Guillaume and Adrien -->
     </head>
     <body>
+		<?php
+				 include("en_tete.php");
+		?>
         <strong> Please fill all the information </strong>
         <BR/>
         <BR/>
@@ -150,6 +153,8 @@
         echo "Data have been correctly inserted into database";
       }
         ?>
-
+		<?php
+				 include("pied_de_page.php");
+		?>
   </body>
 </html>
