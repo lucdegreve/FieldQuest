@@ -37,8 +37,8 @@ $result_status = pg_query($connex, "SELECT id_status as stat, id_status, label_s
 $table_status = new Tab_donnees($result_status,"PG");
 
 
-if (isset($_POST['id_project'])){	// Get the id of the project to modify and the informations related to the project
-	$id_project = $_POST['id_project'];	
+if (isset($_GET['id_project'])){	// Get the id of the project to modify and the informations related to the project
+	$id_project = $_GET['id_project'];	
 
 	// Query to get the informations of the project to modify
 	$query_modify_project = "SELECT id_status, name_project, project_description, project_init_date, project_end_date 
@@ -90,7 +90,7 @@ if (isset($_POST['id_project'])){	// Get the id of the project to modify and the
 			<div class="col-md-6"><?php $table_status->creer_liste_option_plus ( "status", "id_status", "label_status",$status); ?></div>
 		</div><br/>
 		<div class="row">
-			<input type='submit' class='btn btn-success' name='validate' value='Validate'>
+			<button type='submit' class='btn btn-success' name='validate'>Validate</button>
 		</div>
 		</form>
 	</div>

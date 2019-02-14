@@ -14,9 +14,9 @@
 	<body>
 
 		<?php
-		include("tab_donnees.class.php");
+		include("tab_donnees/tab_donnees.class.php");
 		//DB connection
-		include("funct_connex.php");
+		include("tab_donnees/funct_connex.php");
 		$con=new Connex();
 		$connex=$con->connection;
 		//Query
@@ -32,7 +32,7 @@
 			<div class="row">
 				<div class="col-md-9"></div>
 				<div class="col-md-3">
-					<form name="add_project" action="#" method="GET">
+					<form name="add_project" action="US1-41_create_project.php" method="GET">
 						<button type='submit' class='btn btn-success btn-block'><B>Add a project</B></button>
 					</form>
 				</div>
@@ -47,7 +47,7 @@
 					//Columns
 					$tab_display[0]='name_project';
 					$tab_display[1]='project_init_date';
-					$tab->creer_tableau("display nowrap", "projects", "", "", "id_project", "", "", "edit.php", "us_1_43_supprimer_un_projet.php", $tab_headers, $tab_display, "", "");
+					$tab->creer_tableau("display nowrap", "projects", "", "", "id_project", "", "", "US1-41_create_project.php", "us_1_43_supprimer_un_projet.php", $tab_headers, $tab_display, "", "");
 					?>
 				</div>
 			</div>
