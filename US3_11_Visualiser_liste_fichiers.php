@@ -15,9 +15,9 @@
 				 include("en_tete.php");
 		?>
 		<?php
-		include("tab_donnees.class.php");
+		include("tab_donnees/tab_donnees.class.php");
 		//DB connection
-		include("funct_connex.php");
+		include("tab_donnees/funct_connex.php");
 		$con=new Connex();
 		$connex=$con->connection;
 		//Query
