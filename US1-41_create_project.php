@@ -21,6 +21,11 @@ Output variables :
 <script language= "javascript" src="validate.js" type="text/javascript"></script>
 
 </head>
+
+<?php
+				 include("en_tete.php");
+?>
+
 <?php
 // Include the file with all the functions 
 require "tab_donnees/tab_donnees.class.php";
@@ -147,5 +152,9 @@ if(isset($_POST['validate'])){
 
 ?>
 </div> <!--container-->
+
+		<?php
+				 include("pied_de_page.php");
+		?>
 
 </html>
