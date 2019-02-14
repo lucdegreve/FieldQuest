@@ -4,7 +4,9 @@
 
 <head>
 
-
+<?php
+				 include("en_tete.php");
+		?>
 <!-- Développeurs : Manu et Gala
 			Drag and drop which download file automatically when drop. 
 			Issues : can't create a button "upload" (always automatic)
@@ -20,6 +22,7 @@
  <title >Upload a file,</title>
  <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
  		<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+		
  <!-- Openlayers CSS file-->
  
  <style type="text/css">
@@ -34,24 +37,15 @@
  if height is not defined the div will show up with 0 px height  -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Datepicker - Default functionality</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
-  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 </head>
 
 
 <body>
-<?php
-session_start();
-?>
 <form id ="formdepot" action="insert_bdd.php" method="get">
 	<h1  align="center">Upload a file </h1> </br>
 	<div class="container" >
@@ -75,8 +69,20 @@ Latitude :  <span id="Latitude"></span></br> </br>
 Longitude : <span id="Longitude"></span> </br> </br>
 
 Comment : <br/>  <textarea id="txtAreaa" rows="10" cols="70" form="formdepot"></textarea></br>
-Date :<span> <input type="text" id="datepicker" ></span></br></br></br>
 
+Choose a period<input type="text" name="daterange" value="  " />
+
+
+
+<script>
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+});
+</script>
 
 <?php
 require "./tab_donnees/tab_donnees.class.php";
@@ -93,16 +99,21 @@ echo "</BR>";
 echo "</BR>";
 echo "</BR>";
 echo "Choose a project";
-
 $tab->creer_liste_option_plus ( "lst_proj", "id_project", "name_project");
-echo "</BR>";
-echo "</BR>";
-echo "</BR>";
-echo "Choose a main tag";
 
-$tab2->creer_liste_option_plus ( "lst_tag", "id_tag_type", "name_tag_type"," ", " ");
-//$_SESSION['latitude'] = 'green';
 ?>
+</br>
+</br>
+<a href="javascript:ouvre_popup('popuptags.php')">Ajouter un tag</a>
+<script type="text/javascript">
+function ouvre_popup(page) {
+ window.open(page,"nom_popup","menubar=no, status=no, scrollbars=no, menubar=no, width=200, height=100");
+}
+</script>
+
+
+
+
 </BR></BR>
 <input type="submit" value="Envoyer le formulaire">
  </form>
@@ -189,4 +200,7 @@ map.addLayer(markerVectorLayer);
 		
 
 	  </script>
-	  
+	  <?php
+				 include("pied_de_page.php");
+		?>
+		</html>
