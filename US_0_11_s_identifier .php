@@ -24,6 +24,7 @@
             
             
             $link = pg_connect("dbname=fieldquest user=postgres password=postgres");
+            //$link = pg_connect("dbname=fieldquest user=postgres password=Admin");
             $query = "select login, password from user_account
                       where login = '".$login."'";
             $result = pg_query($link, $query);
@@ -155,7 +156,7 @@
                             <form id="connecter" method ="post" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF']); ?> "  role="form">
                                 <div class="form-group">
                                     <label for="Email1">Email address</label>
-                                    <input type="email" name="login" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="prenom@geosys.fr" value="<?php echo $login; ?>" >
+                                    <input type="text" name="login" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="prenom@geosys.fr" value="<?php echo $login; ?>" >
                                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     <p class="comments text-light" > <?php echo $loginError; ?></p>
                                 </div>
@@ -164,10 +165,7 @@
                                     <input type="password" name="ps" class="form-control" id="Password1" placeholder="Password">
                                      <p class="comments text-light" > <?php echo $psError; ?></p>
                                 </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Check1">
-                                    <label class="form-check-label" for="Check1">Check me out</label>
-                                </div>
+                                
                                 <button type="submit" class="btn btn-success">Connect</button>
                             </form>
                         
