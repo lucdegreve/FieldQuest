@@ -7,6 +7,9 @@
 	</head>
 		<body>
 		<?php
+				 include("en_tete.php");
+		?>
+		<?php
 		$id_project= $_GET["id_project"];
 		require "tab_donnees/tab_donnees.class.php";
 		require "tab_donnees/funct_connex.php";
@@ -24,6 +27,9 @@
 			echo "alert('The project isn't empty and cannot be deleted')";
 			echo'</script>';
 		}
+		?>
+		<?php
+				 include("pied_de_page.php");
 		?>
 		</body>
 </html>
