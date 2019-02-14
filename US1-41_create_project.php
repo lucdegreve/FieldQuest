@@ -62,7 +62,13 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 
 <div class="container">
 	<div class = "col-md-6">
+	<form name='backtomanageproject' method='GET' action='US1_42_Gerer_projets.php'>
+		<div class="row">
+			<button type='submit' class='btn btn-info' name='back'>Back to projects</button>
+		</div>
+	</form>
 	<div class="row">Fields marked with (*) are mandatory</div><br/>
+	
 	<form name='new_project' method='POST' onsubmit='return validate_project()' action='US1-41_create_project.php' >
 		<div class ="row">	
 			<div class= "col-md-1">(*)</div>
