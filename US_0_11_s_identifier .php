@@ -8,6 +8,8 @@
 
 
 <?php
+   
+    
     $login = $ps = "";
     $loginError = $psError = "";
     if($_SERVER["REQUEST_METHOD"] == "POST" )
@@ -19,7 +21,9 @@
         if(!empty($login))
         {
             // connexion à la base de données Fieldquest
-            $link = pg_connect("dbname=Fieldquest user=postgres password=Admin");
+            
+            
+            $link = pg_connect("dbname=fieldquest user=postgres password=postgres");
             $query = "select login, password from user_account
                       where login = '".$login."'";
             $result = pg_query($link, $query);
