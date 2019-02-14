@@ -107,7 +107,9 @@
 
     <body>
         
-       
+       <?php
+				 include("en_tete.php");
+		?>
         
         
         
@@ -155,7 +157,11 @@
             </div>
        
        
-        
+        </br>
+		</br>
+		</br>
+		</br>
+		
         
         
         
@@ -164,7 +170,9 @@
          
        
         
-        
+        <?php
+				 include("pied_de_page.php");
+		?>
      
         
        
