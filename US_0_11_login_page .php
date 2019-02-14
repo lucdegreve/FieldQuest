@@ -107,38 +107,7 @@
 
     <body>
         
-         <div class="row no-gutters">
-                
-                <div class="col-md-2 col-sm-5 "   >
-                    <a class="navbar-brand" href="#">
-                        <img src="picto/logo.jpg"  class="img-fluid rounded" alt=""  style="width: 100%;">
-                    </a>
-                </div>
-               
-                <div class="col-md-1 col-sm-2">
-                   
-                </div> 
-                <div class="col-md-9 col-sm-5 ">
-                    <nav class="navbar navbar-expand-lg navbar-light"  style="height: 15%; float: right;  ">
-                    <a class="navbar-brand" href="#">     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <a class="nav-item nav-link" href="#"><h4>Link1</h4></a>
-                            <a class="nav-item nav-link" href="#"><h4>Link1</h4></a>
-                            <a class="nav-item nav-link" href="#"><h4>Help </h4></a>
-                            
-                        </div>
-                    </div>
-                    </nav>
-                                  
-                </div>
-            
-            
-            </div>   
-
+       
         
         
         
@@ -155,10 +124,11 @@
 
                             <form id="connecter" method ="post" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF']); ?> "  role="form">
                                 <div class="form-group">
-                                    <label for="Email1">Email address</label>
-                                    <input type="text" name="login" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="prenom@geosys.fr" value="<?php echo $login; ?>" >
-                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    <label for="Email1">Login</label>
+                                    <input type="text" name="login" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="Login" value="<?php echo $login; ?>" >
                                     <p class="comments text-light" > <?php echo $loginError; ?></p>
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="Password1">Password</label>
