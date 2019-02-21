@@ -3,6 +3,8 @@
       <meta charset="utf-8">
       <title> User account creation </title>
       <!-- Create a user account, by Guillaume and Adrien -->
+      <link rel = "stylesheet" href ="css/bootstrap.min.css">
+      <link rel = "stylesheet" href ="css/custom.css">
     </head>
     <body>
 		<?php
@@ -107,7 +109,7 @@
         <input type="submit" name="createaccount" value="Create account">
         </form>
 
-        <!-- After submitting this form, issset verify first name and last name are filled, if so, data are loaded in the database -->
+        <!-- After submitting this form, issset verifies if first name and last name are filled, if so, data are loaded in the database -->
         <?php
         if (isset($_GET["last_name"],$_GET["first_name"]))
         {
