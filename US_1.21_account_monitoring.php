@@ -4,8 +4,8 @@
 <html lang="en" dir="ltr">
     <head>
       <meta charset="utf-8">
-      <title> User account creation </title>
-      <!-- Create a user account, by Guillaume and Adrien -->
+      <title> Account monitoring </title>
+      <!-- Account monitoring by Adrien -->
       <link rel = "stylesheet" href ="css/bootstrap.min.css">
       <link rel = "stylesheet" href ="css/custom.css">
     </head>
