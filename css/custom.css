@@ -1,3 +1,4 @@
+
 .orange {
   color: #ffffff;
   background-color: #E28C05;
@@ -444,3 +445,105 @@ fieldset[disabled] .gris.active {
 }
 
 /* FIN DU DRAG DROP */
+
+input[type=button], input[type=submit], input[type=reset], button, .button_tag {
+	padding: 6px 18px;
+	margin: 10px 10px;
+	display: inline-block;
+	color: #000000;
+	font-size: 15px;
+	cursor: pointer;
+	background: #c1c1c1;
+	background: linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
+	background: -moz-linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
+	background: -webkit-linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
+	background: -o-linear-gradient(top, #c1c1c1 0%, #a8a8a8 100%);
+	border: 2px solid #000000;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-o-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+}
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, button:hover, .button_plus:hover {
+	background: linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -moz-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -webkit-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -o-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+}
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active, button:active, .button_plus:active{
+	opacity:0.8;
+}
+
+input[type=button], input[type=submit], input[type=reset], button, .button_tag_modif {
+	padding: 6px 18px;
+	margin: 10px 10px;
+	display: inline-block;
+	color: #000000;
+	font-size: 15px;
+	cursor: pointer;
+	background: #ffff66;
+	border: 2px solid #000000;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-moz-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-webkit-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+	-o-box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.25);
+}
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, button:hover, .button_plus:hover {
+	background: linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -moz-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -webkit-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+	background: -o-linear-gradient(top, #dbdbdb 0%, #c1c1c1 100%);
+}
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active, button:active, .button_plus:active{
+	opacity:0.8;
+}
+
+/* Ajout d'un menu en accordeon (pour la gestion des tags) */
+.navigation {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background: #000;
+	color: #fff;
+	width: 360px;
+	font: 2em "Trebuchet MS", sans-serif;
+  }
+  .navigation a, .navigation span {
+	display: block;
+	padding: 6px 12px;
+	color: #fff;
+	text-decoration: none;
+	background: #000 url(../css/menu-item.png) right bottom no-repeat;
+	background-size: 360px ;
+  }
+  .navigation .toggleSubMenu a, .navigation .toggleSubMenu span {
+	background-image: url(../css/menu-item-deroule.png);
+  }
+  .navigation .open a, .navigation .open span {
+	background-image: url(../css/menu-item-enroule.png);
+  }
+  .navigation a:hover, .navigation a:focus, .navigation a:active {
+	text-decoration: underline;
+  }
+  .navigation .subMenu {
+	font-size: .8em;
+	background: #ccc url(subMenu.png) 0 0 repeat-x;
+	font-size: .9em;
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid #666;
+  }
+  .navigation ul.subMenu a {
+	background: none;
+	padding: 3px 20px;
+  }
+/* fin du menu en accordeon */
+
