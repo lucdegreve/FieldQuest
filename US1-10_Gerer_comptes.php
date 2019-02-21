@@ -8,8 +8,9 @@ This page contains the table of all the user accounts.
 
 Input variables : 		
 
-Output variables :										
-		
+Output variables :		id_user_account							
+
+Not done yet : Link with modify account page
 ------------------------------------------------------------->	
 
 <META charset="utf-8"> 
@@ -63,7 +64,7 @@ Output variables :
 				$tab_display[2]='company';
 				$tab_display[3]='name_user_type';
 				$table_user_account->creer_tableau("display nowrap", "accounts", "", "", "id_user_account", "", "", 
-									"**URL modify account**", "**URL suppress account**", 
+									"**URL modify account**", "US1-12_Supprimer_compte.php", 
 									$tab_headers, $tab_display, "", "");
 				?>
 			</div>
