@@ -30,8 +30,6 @@ Output variables :		id of selected tags
 </head>
 <body>
 	<?php
-	// Header of the page 
-	include("en_tete.php");
 	
 	// File to connect to the database & use recordset 
 	require "tab_donnees/funct_connex.php";
@@ -78,10 +76,7 @@ Output variables :		id of selected tags
 		</div>
 	</div> <!-- End col-md-3 class -->
 </div> <!-- End container -->
-<?php
-// Footer of the page 
-include("pied_de_page.php");
-?>
+
 
 </body>
 
