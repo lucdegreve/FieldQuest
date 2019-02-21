@@ -3,23 +3,21 @@
 ?>
 <html lang="en" dir="ltr">
     <head>
-      <meta charset="utf-8">
-      <title> Account monitoring </title>
-      <!-- Account monitoring by Adrien -->
-      <link rel = "stylesheet" href ="css/bootstrap.min.css">
-      <link rel = "stylesheet" href ="css/custom.css">
+        <meta charset="utf-8">
+        <title> Account monitoring </title>
+        <!-- Account monitoring by Adrien -->
+        <link rel = "stylesheet" href ="css/bootstrap.min.css">
+        <link rel = "stylesheet" href ="css/custom.css">
     </head>
     <body>
-
-		<?php
-				 include("en_tete.php");
-		?>
-
+    		<?php
+    				 include("en_tete.php");
+    		?>
         <BR/>
         <strong> Here are your profile information </strong>
         <BR/>
         <BR/>
-        <form name="account_creation" action="US_1.21_p2_change_password.php" method="GET">
+        <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
         <BR/>
 
         <?php
@@ -28,7 +26,6 @@
         $id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
         // For now I will use this one --> it has to be removed when Session start is working !
         $id_user_account = 1;
-
 
         // Connexion to class file and connexion file
         require "tab_donnees/tab_donnees.class.php";
@@ -81,8 +78,8 @@
         echo '</form>';
         ?>
 
-		<?php
-				 include("pied_de_page.php");
-		?>
-  </body>
+      	<?php
+      			 include("pied_de_page.php");
+      	?>
+    </body>
 </html>
