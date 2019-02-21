@@ -64,7 +64,7 @@ Not done yet : Link with modify account page
 				$tab_display[2]='company';
 				$tab_display[3]='name_user_type';
 				$table_user_account->creer_tableau("display nowrap", "accounts", "", "", "id_user_account", "", "", 
-									"**URL modify account**", "US1-12_Supprimer_compte.php", 
+									"US_1.21_account_monitoring.php", "US1-12_Supprimer_compte.php", 
 									$tab_headers, $tab_display, "", "");
 				?>
 			</div>

@@ -26,6 +26,10 @@
         $id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
         // For now I will use this one --> it has to be removed when Session start is working !
         $id_user_account = 1;
+		// Get id_user_account from manage accounts page (if admin clicked on modify)
+		if (isset($_GET['id_user_account'])){
+			$id_user_account = $_GET['id_user_account'];
+		}
 
         // Connexion to class file and connexion file
         require "tab_donnees/tab_donnees.class.php";
