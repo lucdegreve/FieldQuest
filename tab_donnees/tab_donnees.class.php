@@ -329,9 +329,9 @@ class Tab_donnees
 		 
          // rajoute les en têtes pour les colonnes "modifier" et "supprimer", si besoin
          if ($modif != "")
-                 echo ("<TH>" . "Modifier" . "</TH>");
+                 echo ("<TH>" . "Modify" . "</TH>");
          if ($supprim != "")
-                  echo ("<TH>" . "Supprimer" . "</TH>");
+                  echo ("<TH>" . "Suppress" . "</TH>");
          echo "</TR></THEAD>";
 
          //CREATION DU CORPS DU TABLEAU
@@ -432,12 +432,12 @@ class Tab_donnees
 			// ajoute éventuellement la colonne modifier
 			if ($modif != "")
             {
-				echo ("<TD><a href = $modif?$champ_lien=$lien class='lien'>Modifier</A></TD>");
+				echo ("<TD><a href = $modif?$champ_lien=$lien class='lien'>Modify</A></TD>");
 			}
 			// ajoute éventuellement la colonne supprimer
 			if ($supprim != "")
             {
-				echo ("<TD><a href = $supprim?$champ_lien=$lien class='lien'>Supprimer</A></TD>");
+				echo ("<TD><a href = $supprim?$champ_lien=$lien class='lien'>Suppress</A></TD>");
 			}
 			echo "</tr>";
          }
