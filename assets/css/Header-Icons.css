@@ -1,0 +1,137 @@
+#colorful-nav {
+    padding-bottom: 0px;
+    border: 1px transparent;
+}
+
+#colorful-nav .navbar {
+    margin-bottom: 0px;
+}
+
+#colorful-nav {
+    background-color: transparent;
+}
+
+#colorful-nav .navbar-nav {
+    border-radius: 10px;
+    float:none;
+    height: 160px;
+}
+
+#colorful-nav .navbar-collapse {
+    border-top: 0;
+}
+
+#colorful-nav ul>li {
+    float:left;
+    text-align: center;
+    width: 15.2%;
+    padding-bottom: 13px;
+    transition: 0.2s padding-top;
+}
+
+#colorful-nav ul>li:hover {
+    padding-top: 20px;
+}
+
+#colorful-nav .navbar-nav>a {
+    padding-top: 25px;
+    color: white;
+}
+
+#colorful-nav ul>a:hover,
+#colorful-nav ul>a:focus {
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#colorful-nav .glyphicon {
+    font-size: 30px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    color: white;
+}
+
+#colorful-nav .icon-bar {
+    background-color: black;
+}
+
+#colorful-nav .navbar-toggle {
+    float: left;
+    border-color: black;
+    margin-left: 25px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+#colorful-nav .navbar-brand {
+    height: 100px;
+}
+
+#colorful-nav h5{
+    color:white;
+}
+
+#colorful-nav .primary {
+    background-color: #00A5DB;
+}
+
+#colorful-nav .secondary {
+    background-color: #939597;
+}
+
+#colorful-nav .success {
+    background-color: #7FBA00;
+}
+
+#colorful-nav .info {
+    background-color: #005bbf;
+}
+
+#colorful-nav .warning {
+    background-color: #E28C05;
+}
+
+#colorful-nav .danger {
+    background-color: #E53C2E;
+}
+
+#colorful-nav .light {
+    background-color: #f6ce3c;
+}
+
+#colorful-nav .dark {
+    background-color: #343a40;
+}
+
+@media screen and (max-width: 767px){
+
+    #colorful-nav ul>li {
+        text-align: center;
+        width: 100%;
+    }
+
+    #colorful-nav ul>li:hover{
+        padding-top: 0px;
+    }
+}
+
+body {
+
+  background-color:#00A5DB;
+
+  color:#048;
+
+  font-size: 12px;
+
+  line-height: 16px;
+
+}
+
+
+
+#colorful-nav .avatar {
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+}
