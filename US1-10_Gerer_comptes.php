@@ -15,6 +15,9 @@ Output variables :
 <META charset="utf-8"> 
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
+		
 
 </head>
 <body>
@@ -36,9 +39,10 @@ Output variables :
 	$table_user_account = new Tab_donnees($result_user_account,"PG");
 	
 ?>
+	
 	<div class="container">
 		<div class="row">
-		<div class="col-md-9"></div>
+			<div class="col-md-9">			</div>
 			<div class="col-md-3">
 				<form name="add_account" action="**URL add account**" method="GET">
 					<button type='submit' class='btn btn-success btn-block'><B>Add an account</B></button>
@@ -46,7 +50,7 @@ Output variables :
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12"> <!-- Table with user accounts  -->
 				<?php
 				//Headers names
 				$tab_headers[0]='Last name';
