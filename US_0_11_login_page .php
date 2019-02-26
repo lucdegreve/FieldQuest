@@ -20,16 +20,19 @@
         
         if(!empty($login))
         {
-            // connexion à la base de données Fieldquest
+            // Include the file with all the functions 
+            require "tab_donnees/funct_connex.php";
+
             
+            // connexion à la base de données Fieldquest
+            $con = new Connex();
+            $connex = $con->connection;
             
             $link = pg_connect("dbname=fieldquest user=postgres password=postgres");
             //$link = pg_connect("dbname=fieldquest user=postgres password=Admin");
             $query = "select login, password from user_account
                       where login = '".$login."'";
-            $result = pg_query($link, $query);
-            
-            
+            $result = pg_query($connex, $query);
            
             
             if(pg_num_rows($result) == 1){                
