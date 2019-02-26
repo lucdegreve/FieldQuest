@@ -24,7 +24,7 @@
         <?php 
             session_start(); 
             // To add a new client  
-            require "funct_connex.php";
+            require "tab_donnees/funct_connex.php";
             $con=new Connex();
             $connex=$con->connection;    
             // parameters of request 
