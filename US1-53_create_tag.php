@@ -2,12 +2,14 @@
 <html>
 	<head>
         <META charset="UTF-8">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/custom.css">
         <script type="text/javascript">
             function validation(){
                 var al="";
-                // si la valeur du champ prenom est non vide
+                // if value of surname field is empty
                 if(document.form_creation.tag_name.value == "") {
-                // sinon on affiche un message
+                // enter a tag name
                     al="Enter a tag name";
                 }
                 if (al=="")
@@ -22,20 +24,21 @@
 	</head>
 	<body>
         <?php 
+			
             session_start(); 
-            // POUR AJOUTER un nouveau client  
-            require "funct_connex.php";
+            // To add a new client 
+            require_once "funct_connex.php";
             $con=new Connex();
             $connex=$con->connection;    
-            // Paramétrage de la requête 
+            // parameters of request
             $query = "SELECT id_tag_type, name_tag_type  FROM tag_type
-                GROUP BY id_tag_type "; 
-            // Exécution de la requête  
-            // et récupération d'un jeu de résultats (resultset) 
+                GROUP BY id_tag_type ORDER BY name_tag_type"; 
+            // request execution
+            // and recuperation of recordset
             $result = pg_query($connex, $query)  
                 or die('Échec de la requête : ' . pg_error($connex)); 
-            echo '<b>Add a new tag</b> <br/> <br/>';
-            echo '<form name="form_creation" action="US1-53_create_tag.php" onsubmit="return validation()" method="get">';
+				echo '<b>Add a new tag</b> <br/> <br/>';
+				echo '<form name="form_creation" action="US1-53_create_tag.php" onsubmit="return validation()" method="get">';
                 echo 'Choose your tag type :<br/>
                 <select name="liste_type" >
                     <option selected="selected">Select a new category for your new tag</option>';
@@ -47,9 +50,11 @@
                 <input type="text" name="tag_name"><br/>
                 
                 Enter a description :
-                <input type="textarea" name="tag_description" rows=4 cols=40><br/>
-                <div><input type="submit" value="Validate" /></div>
-            </form>';
+				<div class="col-lg-8">
+					<input type="textarea" name="tag_description"><br/>
+					<div><input type="submit" value="Validate" /></div>
+				</div>
+				</form>';
 
             
             if (isset($_GET["tag_name"])){ //if we click on validate the previous form, we create the tag in the database
@@ -57,16 +62,16 @@
                 $con=new Connex();
                 $connex=$con->connection;
                 $query = "SELECT *  FROM tags"; 
-                // Exécution de la requête  
-                // et récupération d'un jeu de résultats (resultset) 
+                // request execution 
+                // and recuperation of recordset 
                 $result = pg_query($connex, $query)  or die('Échec de la requête : ' . pg_error($connex));
 
-                //Choix d'un id différent des autres déjà présent dans la table "tags"
+                //Creation of table to insert a new unique id in "tags" table
                 $tab_id_tag=array() ;	
                 $a=0;
                 while ($row = pg_fetch_array($result)) { 
-                    // L'accès à un élément du tableau peut se faire grâce à l'indice ou grâce au nom du champ 
-                    // Ici, nous y accédons par l'indice 
+					// The access to a table element can be done thanks to index or field name
+                    // We can access here by the index
                     for ($i=1 ; $i <= pg_num_fields($result)-1; $i++)	 	
                         {$tab_id_tag[$a]=$row[0];
                         $a=$a+1;
@@ -78,7 +83,7 @@
                     $new_id=$new_id+1;
                 }
 
-                //Récupération des données à insérer dans la base de données
+                //Recuperation of data to insert in the database
                 $id_tag=$new_id;
                 $id_tag_type=$_GET["liste_type"]; 
                 $tag_name=$_GET["tag_name"];
