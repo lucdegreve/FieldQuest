@@ -5,8 +5,8 @@
 <?php
 include('menu_administrateurs.html');
 
-require "tab_donnees.class.php";
-require "funct_connex.php";
+require "tab_donnees/funct_connex.php";
+require "tab_donnees/tab_donnees.class.php";
 
 $con = new Connex();
 $connex = $con->connection;
