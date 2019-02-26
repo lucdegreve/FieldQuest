@@ -18,7 +18,7 @@ Output variables :		id of selected tags
 <META charset="utf-8"> 
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/custom.css">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>  
@@ -41,14 +41,17 @@ require "tab_donnees/tab_donnees.class.php";
 $con = new Connex();
 $connex = $con->connection;
 ?>
-
+<!-- Form to get selected filters  -->
+<form name='filters' method = 'GET' action = 'US4-11_Filtre_avec_tag_all_tags.php'>
 <div class='container'>
 	
 	<?php 
-	// include page data type
+	// TO DO : include page data type
+	// Include page with collapse button & content for project names
 	include "US4-11_Filtrer_avec_tag_project.php"; 
-	// include page for source 
+	// TO DO : include page for source 
 	?>
+	<!-- Collapse button for date (start and end)-->
 	<p>
 		<button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseDate" aria-expanded="true" aria-controls="collapseDate">
 			Date
@@ -63,10 +66,22 @@ $connex = $con->connection;
 		</div>
 	</div>
 	<?php
-	include "US4-11_Filtrer_avec_tag_format.php";
+	// Include page with collapse button & content for file format 
+	include "US4-11_Filtrer_avec_tag_format.php"; 
+	// Include page with collapse button & content for unit 
 	include "US4-11_Filtrer_avec_tag_unit.php";
 	?>
+	<!-- Search button -->
+	<button type='submit' class='btn btn_lg btn-success' name='search'>Search</button>
 </div>
+</form>
+
+<?php
+if (isset($_GET['search'])){
+	
+}
+?>
+
 </body>
 
 </html>
