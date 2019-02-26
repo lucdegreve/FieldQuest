@@ -3,7 +3,7 @@
 	<head>
         <META charset="UTF-8">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/custom.css">
+
         <script type="text/javascript">
             function validation(){
                 var al="";
@@ -27,7 +27,7 @@
 			
             session_start(); 
             // To add a new client 
-            require_once "funct_connex.php";
+            require_once "tab_donnees/funct_connex.php";
             $con=new Connex();
             $connex=$con->connection;    
             // parameters of request
@@ -50,10 +50,8 @@
                 <input type="text" name="tag_name"><br/>
                 
                 Enter a description :
-				<div class="col-lg-8">
-					<input type="textarea" name="tag_description"><br/>
-					<div><input type="submit" value="Validate" /></div>
-				</div>
+				<input type="text" name="tag_description"><br/>
+				<div><input type="submit" value="Validate" /></div>
 				</form>';
 
             
