@@ -12,8 +12,11 @@ $file_size = $_SESSION["upload_file_size"];
 $comment=$_GET['Comment'];
 $longitude= $_SESSION['longitude'];
 $latitude = $_SESSION['latitude'];
+$file_projet= $_GET['lst_proj'];
 // date from the daterange picker
 $date=$_GET['daterange'];
+//get file format
+$file_extension = end(explode('.',$file_name));
 
 // start&end date from DRP us format
 $start_date = substr($date,0,10);
@@ -58,10 +61,40 @@ while ($row = pg_fetch_array($result)) {
 	}
 }
 
+// getting format id
+$query = "SELECT label_format,id_format FROM  format  ";
+$result = pg_query($connex, $query) or die(pg_last_error());
+
+//finding if format already exists and adding id if so
+while ($row = pg_fetch_array($result)) { 
+	if ($row[0]==$file_extension){
+		$file_format=$row[1];
+		break;
+	}
+}
+// or creating format and id
+if (isset($file_format)){
+	$file_format=$file_format;
+		}
+else{
+	// creating format into db
+		$query = "insert into format (label_format) VALUES('".$file_extension."') ";
+		$result = pg_query($connex, $query) or die(pg_last_error());
+		//finding new id  for this format in DB
+		$query = "SELECT label_format,id_format FROM  format  ";
+		$result = pg_query($connex, $query) or die(pg_last_error());
+		while ($row = pg_fetch_array($result)) { 
+			if ($row[0]==$file_extension){
+				$file_format=$row[1];
+				break;
+			}
+		}
+}
+
+
 //Test var |||| needs to be changed for real session's variable
 $id_user_account=1;
 $use_id_user_account=1;
-$id_format=1;
 $id_validation_state=1;
 $id_version=1;
 
@@ -71,7 +104,7 @@ $id_version=1;
 		
 		
 		$query = "INSERT INTO files(id_user_account,use_id_user_account,id_format,id_validation_state,id_version,upload_date, file_name, file_comment, data_init_date,data_end_date,latitude,longitude,file_place,file_size) 
-        VALUES ('".$id_user_account."','".$use_id_user_account."','".$id_format."','".$id_validation_state."',
+        VALUES ('".$id_user_account."','".$use_id_user_account."','".$file_format."','".$id_validation_state."',
         '".$id_version."','".$today_fr."','".$file_name."','".$comment."','".$starting_date."','".$ending_date."','".$latitude."','".$longitude."','".$file_place."','".$file_size."')";
         $query_result = pg_query($connex,$query) or die (pg_last_error() );
 
@@ -95,5 +128,10 @@ for ($i=0;$i<$nb_tags;$i++){
 				VALUES ('".$id_now."','".$all_tags[$i]."')";
 	$query_result = pg_query($connex,$query) or die (pg_last_error() );
 }
+
+// insert file and projet link
+	$query = "insert into link_file_project (id_file,id_project)
+				VALUES ('".$id_now."','".$file_projet."')";
+	$query_result = pg_query($connex,$query) or die (pg_last_error() );
 
 		
