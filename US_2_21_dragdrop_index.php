@@ -58,10 +58,10 @@
 	<!--Latitude :  <span id="Latitude"></span></br> </br>
 	Longitude : <span id="Longitude"></span> </br> </br>-->
 	
-	Latitude :  <textarea id="Latitude" rows="1" cols="15" form="formdepot"></textarea>
-    Longitude : <textarea id="Longitude" rows="1" cols="15" form="formdepot"></textarea></br> </br>
+	Latitude :  <textarea id="Latitude" name="Latitude" rows="1" cols="15" class="textbox" form="formdepot"></textarea>
+    Longitude : <textarea id="Longitude" name="Longitude" rows="1" cols="15" class="textbox" form="formdepot"></textarea></br> </br>
 
-	Comment : <br/>  <textarea id="txtAreaa" rows="10" cols="70" form="formdepot"></textarea></br>
+	Comment : <br/>  <textarea id="Comment" name="Comment" rows="10" cols="70" class="textbox" form="formdepot"></textarea></br>
 
 	Choose a period : <input type="text" name="daterange" value="  " />
 
@@ -147,11 +147,11 @@ $tab->creer_liste_option_plus ( "lst_proj", "id_project", "name_project");
 			echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].' </span>';
 			echo '<ul class="subMenu">';
 			
-			$query2 = "SELECT tag_name FROM tags where id_tag_type=".$id_cat; //it gives the name of the tag within the category
+			$query2 = "SELECT id_tag, tag_name FROM tags where id_tag_type=".$id_cat; //it gives the name of the tag within the category
             $result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
 			while ($row2 = pg_fetch_array($result2)) {
-				echo '<li><div><input type="checkbox" id="' . $row2["tag_name"] . '" name="' . $row2["tag_name"] . '">';
-				echo '<label for="' . $row2["tag_name"] . '"> ' . $row2["tag_name"] . '</label></div></li>';
+				echo '<li><div><input type="checkbox" id="' . $row2["id_tag"] . '_tag" name="' . $row2["id_tag"] . '_tag">';
+				echo '<label for="' . $row2["id_tag"] . '_tag"> ' . $row2["tag_name"] . '</label></div></li>';
 			}
 			echo '</ul>';
 			echo '</li>';
