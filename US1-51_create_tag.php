@@ -38,7 +38,7 @@
             $result = pg_query($connex, $query)  
                 or die('Échec de la requête : ' . pg_error($connex)); 
 				echo '<b>Add a new tag</b> <br/> <br/>';
-				echo '<form name="form_creation" action="US1-53_create_tag.php" onsubmit="return validation()" method="get">';
+				echo '<form name="form_creation" action="US1-51_create_tag.php" onsubmit="return validation()" method="get">';
                 echo 'Choose your tag type :<br/>
                 <select name="liste_type" >
                     <option selected="selected">Select a new category for your new tag</option>';
@@ -56,7 +56,7 @@
 
             
             if (isset($_GET["tag_name"])){ //if we click on validate the previous form, we create the tag in the database
-                require_once "funct_connex.php";
+                require_once "tab_donnees/funct_connex.php";
                 $con=new Connex();
                 $connex=$con->connection;
                 $query = "SELECT *  FROM tags"; 

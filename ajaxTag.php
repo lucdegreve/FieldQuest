@@ -8,7 +8,7 @@
 <?php
 	echo "<select name='tag'>";
 	if(isset($_POST["id_tag_type"])){
-		require_once "funct_connex.php";
+		require_once "tab_donnees/funct_connex.php";
         $con=new Connex();
         $connex=$con->connection;
         $res = pg_query($connex, "SELECT * FROM tags WHERE id_tag_type=".$_POST["id_tag_type"]." ORDER BY tag_name")

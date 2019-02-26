@@ -46,7 +46,7 @@
 
             
             if (isset($_GET["name_tag_type"])){ //if we click on validate the previous form, we create the tag in the database
-                require_once "funct_connex.php";
+                require_once "tab_donnees/funct_connex.php";
                 $con=new Connex();
                 $connex=$con->connection;
                 $query = "SELECT *  FROM tag_type"; 

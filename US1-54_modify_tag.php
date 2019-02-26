@@ -31,10 +31,9 @@
                     return false;
                 }
             }
-
         </script>
+
         <script type='text/javascript'>
-        
             function getXhr(){
                 var xhr = null; 
                     if(window.XMLHttpRequest) // Firefox and others
@@ -80,7 +79,7 @@
 	</head>
 	<body>
         <?php 
-        require "funct_connex.php";
+        require "tab_donnees/funct_connex.php";
         echo '<form  method="get">';
         echo '<fieldset style="width: 500px">
 				<legend>Select the tag to modify</legend>
@@ -88,8 +87,8 @@
                 //display a list with all the tag type 
                 //when we select a tag type it calls the go() js function to update the second list
 				echo ' <select name="tag_type" id="tag_type" onchange="go()"> 
-					<option value="-1">Choose a tag type</option>';
-                    require_once "funct_connex.php";
+					<option value="-1"></option>';
+                    require_once "tab_donnees/funct_connex.php";
                     $con=new Connex();
                     $connex=$con->connection;
                     $res = pg_query($connex, "SELECT * FROM tag_type ORDER BY name_tag_type asc ")or die(pg_last_error($connex));
@@ -106,17 +105,36 @@
 				<label>Tag</label>
 				<div id="tag" style="display:inline">
 				<select name="tag">';
-                    echo '<option value="-1">Choose a tag</option>';
+                    echo '<option value="-1"></option>';
 				echo '</select>
                 </div>';
-                echo '<div style="display:inline"> <input type="submit" value="Modify"  /></div>';
-			echo '</fieldset>';
+                echo '<div style="display:inline"> <input name="modify" type="submit" value="Modify"  /></div>';
+                ?>
+                <div style="display:inline"> <input name="delete" type="submit" value="Delete" onClick="return confirm('Do you really want to delete the tag?')"  /></div>
+			<?php echo '</fieldset>';
         echo '</form>';
         
+        // if we click on the Validate button of the previous form 
+        //(to send the informations to modify the tag type table)
+        if (isset($_GET["delete"])){
+            session_start();
+            $id_tag=$_GET["tag"];
+            require_once "tab_donnees/funct_connex.php";
+            $con=new Connex();
+            $connex=$con->connection;
+            // Request to update the table "tag_type"
+            $query = "DELETE FROM tags  WHERE id_tag='".$id_tag."' " ;       
+            // Request execution
+            $result = pg_query($connex, $query)  
+                or die('Échec de la requête : ' . pg_error($connex)); 
+            // displays this message if the modification is a success
+            echo 'The tag has been deleted';
+        }
+
         //if we click on previous "modify" it displays a new form 
         //to modify the fields of the selected tag
         //which displays the value of the fields to modify it
-        if (isset($_GET["tag"])){
+        if (isset($_GET["modify"])){
             session_start(); 
             $id_tag=$_GET["tag"];
             $_SESSION["id_tag"]=$id_tag; 
@@ -127,7 +145,7 @@
                 Edit the tag name  :
                 <input type="text" name="tag_name" value="'.$row3["tag_name"].'" ><br/>
                 Edit the new description:
-                <input type="text" name="tag_description" value="'.$row3["tag_description"].'" ><br/>
+                <textarea name="tag_description"  >'.$row3["tag_description"].'</textarea><br/>
                 <div><input type="submit" value="Submit" /></div>
                 </form>';
             }
@@ -147,7 +165,7 @@
             if (isset($_GET["tag_description"]))
                 {$tag_description = $_GET["tag_description"];
             } 
-            require_once "funct_connex.php";
+            require_once "tab_donnees/funct_connex.php";
             $con=new Connex();
             $connex=$con->connection;
             $res = pg_query($connex, "SELECT * FROM tag_type ")or die(pg_last_error($connex));

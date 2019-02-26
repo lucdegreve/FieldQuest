@@ -36,14 +36,14 @@
 	</head>
 	<body>
         <?php 
-        require "funct_connex.php";
+        require "tab_donnees/funct_connex.php";
         echo '<form  method="get">
             <fieldset style="width: 500px"> 
 				<legend>Select the tag type to modify</legend>
 				<label>Tag type</label>
 				<select name="tag_type" id="tag_type">
 					<option value="-1">-</option>';
-                    require_once "funct_connex.php";
+                    require_once "tab_donnees/funct_connex.php";
                     $con=new Connex();
                     $connex=$con->connection;
                     $res = pg_query($connex, "SELECT * FROM tag_type ORDER BY name_tag_type ASC ")or die(pg_last_error($connex));
@@ -67,7 +67,7 @@
         //which displays the value of the fields to modify it
         if (isset($_GET["tag_type"])){
             session_start(); 
-            require_once "funct_connex.php";
+            require_once "tab_donnees/funct_connex.php";
             $con=new Connex();
             $connex=$con->connection;
             $id_tag_type=$_GET["tag_type"];
@@ -95,7 +95,7 @@
                 {$description_tag_type = $_GET["description_tag_type"];
             } 
             else $description_tag_type= " ";
-            require_once "funct_connex.php";
+            require_once "tab_donnees/funct_connex.php";
             $con=new Connex();
             $connex=$con->connection;
             $res = pg_query($connex, "SELECT * FROM tag_type ")or die(pg_last_error($connex));
