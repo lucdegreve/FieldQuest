@@ -3,7 +3,8 @@
 <!-----------------------------------------------------------
        US4-11 Filtrer avec des tags - Units part  
 Developped by Ophélie			      
-This page contains code to display the filter labels based on the Tag Units
+This page contains code to display the filter labels based on the Tag Units.
+It is used in **'US4-11_Filtre_avec_tag_all_tags.php'** along with other similar pages to display other kinds of tags.
 
 
 Input variables : 		
@@ -17,27 +18,12 @@ Output variables :		id of selected tags
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/custom.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>  
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
+<!-- Import for collapse and event handling of checkbox buttons in main page US4-11_Filtre_avec_tag_all_tags.php -->
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
- <script type= 'text/javascript' src = 'manage_checkbox_button.js'></script> 
 </head>
 <body>
 	<?php
-	
-	// File to connect to the database & use recordset 
-	require "tab_donnees/funct_connex.php";
-	require "tab_donnees/tab_donnees.class.php";
-	
-	// Connexion with the database 
-	$con = new Connex();
-	$connex = $con->connection;
+	// Call to connexion file and connexion etablished in main page 'US4-11_Filtre_avec_tag_all_tags.php'
 	
 	// Query to get the tags of the tag type units 
 	$query_units = "SELECT t.id_tag, t.tag_name FROM tags t JOIN tag_type tt on t.id_tag_type = tt.id_tag_type 
@@ -46,14 +32,13 @@ Output variables :		id of selected tags
 	// Get recordset as a table
 	$table_units = new Tab_donnees($result_units,"PG");
 	?>
-<div class="container">	
-	<div class = "col-md-5">
+
 		<p>
-		  <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
-			Units
+		  <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseUnit" aria-expanded="true" aria-controls="collapseUnit">
+			Unit
 		  </button>
 		</p>
-		<div class="collapse" id="collapseExample">
+		<div class="collapse" id="collapseUnit">
 		  <div class="card card-body">
 			<div class="form-check">
 				<?php 
@@ -66,7 +51,7 @@ Output variables :		id of selected tags
 				
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';
-					echo '<button type="button" class="btn" data-color="primary" id = "'. $id_tag .'">'.$tag_name.'</button>';
+					echo '<button type="button" class="btn" data-color="primary" id = "unit_'. $id_tag .'">'.$tag_name.'</button>';
 					echo '<input type="checkbox" class="hidden" />';
 					echo '</span>';
 				}
@@ -74,8 +59,6 @@ Output variables :		id of selected tags
 			</div>
 		  </div>
 		</div>
-	</div> <!-- End col-md-3 class -->
-</div> <!-- End container -->
 
 
 </body>

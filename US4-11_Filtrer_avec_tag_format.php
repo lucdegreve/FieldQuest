@@ -3,7 +3,8 @@
 <!-----------------------------------------------------------
        US4-11 Filtrer avec des tags - File format  
 Developped by Ophélie			      
-This page contains code to display the filter labels based on the format of files 
+This page contains code to display the filter labels based on the format of files. 
+It is used in **'US4-11_Filtre_avec_tag_all_tags.php'** along with other similar pages to display other kinds of tags.
 
 
 Input variables : 		
@@ -17,28 +18,13 @@ Output variables :		id of selected formats
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/custom.css">
 
-<!-- Import for collapse -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>  
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
-<!-- Import for checkbox button -->
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- Import for collapse and event handling of checkbox buttons in main page US4-11_Filtre_avec_tag_all_tags.php -->
 
-<!-- Javascript to handle checkbox button events -->
- <script type= 'text/javascript' src = 'manage_checkbox_button.js'></script> 
 </head>
 
 <body>
 <?php 
-	// File to connect to the database & use recordset 
-	require "tab_donnees/funct_connex.php";
-	require "tab_donnees/tab_donnees.class.php";
-	
-	// Connexion with the database 
-	$con = new Connex();
-	$connex = $con->connection;
+	// Call to connexion file and connexion etablished in main page 'US4-11_Filtre_avec_tag_all_tags.php'
 	
 	// Query to get formats 
 	$query_format = "SELECT id_format, label_format FROM format";
@@ -48,15 +34,13 @@ Output variables :		id of selected formats
 	$table_format = new Tab_donnees($result_format,"PG");
 ?>
 <!-- Collapse button -->
-<div class="container">	
-	<div class = "col-md-5">
 		<p>
-		  <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+		  <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseFormat" aria-expanded="true" aria-controls="collapseFormat">
 			File format
 		  </button>
 		</p>
 		<!-- Content of collapse -->
-		<div class="collapse" id="collapseExample">
+		<div class="collapse" id="collapseFormat">
 		  <div class="card card-body">
 			<div class="form-check">
 				<?php 
@@ -69,7 +53,7 @@ Output variables :		id of selected formats
 				
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';
-					echo '<button type="button" class="btn" data-color="primary" id = "'. $id_format .'">'.$label_format.'</button>';
+					echo '<button type="button" class="btn" data-color="primary" id = "format_'. $id_format .'">'.$label_format.'</button>';
 					echo '<input type="checkbox" class="hidden" />';
 					echo '</span>';
 				}
@@ -77,8 +61,6 @@ Output variables :		id of selected formats
 			</div>
 		  </div>
 		</div>
-	</div> <!-- End col-md-3 class -->
-</div> <!-- End container -->
 
 </body>
 </html>
