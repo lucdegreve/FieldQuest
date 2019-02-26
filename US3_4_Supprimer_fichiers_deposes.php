@@ -42,8 +42,8 @@
 			$id_file_to_delete=$_GET['id_file'];
 			//echo $id_file_to_delete."</br>";
 			//Queries FOR DELETE
-			//$result_delete_key=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
-			//$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			$result_delete_key=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
 		}
 		?>
 		
