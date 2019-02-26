@@ -40,6 +40,11 @@
     		?>
 
         <BR/>
+        <!-- Form to go to the account manage page -->
+        <form name='backtomanageaccounts' method='GET' action='US1-10_Gerer_comptes.php'>
+            <button type='submit' class='btn btn-info' name='back'>Back to accounts</button>
+	</form>
+        
         <strong> Here are your profile information </strong>
         <BR/>
         <BR/>
@@ -47,9 +52,12 @@
 
         <?php
             // Session variable
-            $id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
+            //$id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
             // For now I will use this one --> it has to be removed when Session start is working !
-            $id_user_account = 1;
+            //$id_user_account = 1;
+            
+            // id of the clicked user
+            $id_user_account = $_GET['id_user_account'];
 
             // Connexion to class file and connexion file
             require "tab_donnees/tab_donnees.class.php";
@@ -126,6 +134,8 @@
                         echo '<td> Company website</td><td> <input type="text" size = "50" name="website" value="'.$row[9].'"> </td>';
                     echo '</tr>';
                 echo '</table>';
+                
+                echo '<input type="hidden" name="id_user_account" value="'.$id_user_account.'"></input>';
             ?>
 
             <BR/>
