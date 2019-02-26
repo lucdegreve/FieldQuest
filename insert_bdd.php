@@ -1,36 +1,51 @@
 <html>
 <?php
-session_start();
 require "./tab_donnees/tab_donnees.class.php";
 require "./tab_donnees/funct_connex.php";
+// getting last page variable
+session_start();
 
-if (isset($_GET['Comment'])) {
-	$comment = $_GET['Comment'];
-	echo $comment . '<br/>';
-}
+//Get all infos on uploaded file
+$file_name = $_SESSION["upload_filename"];
+$lfile_place = $_SESSION["upload_location"];
+$file_size = $_SESSION["upload_file_size"];
+$comment=$_GET['Comment'];
+$longitude= $_SESSION['longitude'];
+$latitude = $_SESSION['latitude'];
+// date from the daterange picker
+$date=$_GET['daterange'];
 
-if (isset($_GET['Latitude'])) {
-	$lat = $_GET['Latitude'];
-	echo $lat . '<br/>';
-}
+// start&end date from DRP us format
+$start_date = substr($date,0,10);
+$end_date = substr($date,-10,10);
 
-if (isset($_GET['Longitude'])) {
-	$long = $_GET['Longitude'];
-	echo $long . '<br/>';
-}
+// cutting sto create Date in French Format
+$monthdeb = substr($start_date,0,2);
+$daydeb = substr($start_date,3,2);
+$yeardeb = substr($start_date,6,4);
 
-if (isset($_GET['daterange'])) {
-	$date = $_GET['daterange'];
-	echo $date . '<br/>';
-}
+// real starting date
+$starting_date = $daydeb."/".$monthdeb."/".$yeardeb;
 
-if (isset($_GET['lst_proj'])) {
-	$id_proj = $_GET['lst_proj'];
-	echo $id_proj . '<br/>';
-}
+// to create Date in French Format
+$monthend = substr($end_date,0,2);
+$dayend = substr($end_date,3,2);
+$yearend = substr($end_date,6,4);
 
-//Get selected tags
-$all_tags = array(); //empty list will contain all selected tags id
+// real ending date
+$ending_date = $dayend."/".$monthend."/".$yearend;
+
+
+//get todays date and turn it into en date
+$today_en = date("m/d/y");   
+$todD = substr($today_en,0,2);
+$todM = substr($today_en,3,2);
+$todY = substr($today_en,6,4);      
+$today_fr= $todM."/".$todD."/".$todY;                  //date at good format
+
+
+
+$all_tags = array(); //empty list which will contain all selected tags id
 $con = new Connex();
 $connex = $con->connection;
 $query = "SELECT id_tag FROM  tags  ";
@@ -43,14 +58,42 @@ while ($row = pg_fetch_array($result)) {
 	}
 }
 
-//Get all infos on uploaded file
-$filename = $_SESSION["upload_filename"];
-$location = $_SESSION["upload_location"];
-$upload_date = $_SESSION["upload_date"];
-$filesize = $_SESSION["upload_file_size"];
+//Test var |||| needs to be changed for real session's variable
+$id_user_account=1;
+$use_id_user_account=1;
+$id_format=1;
+$id_validation_state=1;
+$id_version=1;
 
-$con = new Connex();
-$connex = $con->connection;
-$query = 'INSERT INTO fichiers(id_client,nom_client,prenom_client,adresse_client,cp_client,ville_client,tel_client,site_client,mail_client,photo_client) VALUES ("'.$code.'","'.$nom.'","'.$prenom.'","'.$adresse.'","'.$codepostal.'","'.$ville.'","'.$Tel.'","'.$site.'","'.$mail.'","'.$chill.'")';
 
-?>
+// importing in the DB
+
+		
+		
+		$query = "INSERT INTO files(id_user_account,use_id_user_account,id_format,id_validation_state,id_version,upload_date, file_name, file_comment, data_init_date,data_end_date,latitude,longitude,file_place,file_size) 
+        VALUES ('".$id_user_account."','".$use_id_user_account."','".$id_format."','".$id_validation_state."',
+        '".$id_version."','".$today_fr."','".$file_name."','".$comment."','".$starting_date."','".$ending_date."','".$latitude."','".$longitude."','".$file_place."','".$file_size."')";
+        $query_result = pg_query($connex,$query) or die (pg_last_error() );
+
+		
+		Echo " Your file was successfully imported, Thanks you";
+		
+		
+		//getting file's id from DB to put tags into DB
+		
+$query = "SELECT id_file FROM  files where file_name='".$file_name."'";
+$result = pg_query($connex, $query) or die(pg_last_error());
+while ($row = pg_fetch_array($result)) { 
+$id_now=$row[0];
+}
+
+
+// inserting tags into DB
+$nb_tags = count($all_tags);
+for ($i=0;$i<$nb_tags;$i++){
+	$query = "insert into link_tag_project (id_file,id_tag)
+				VALUES ('".$id_now."','".$all_tags[$i]."')";
+	$query_result = pg_query($connex,$query) or die (pg_last_error() );
+}
+
+		

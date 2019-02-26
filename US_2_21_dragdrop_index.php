@@ -58,8 +58,8 @@
 	<!--Latitude :  <span id="Latitude"></span></br> </br>
 	Longitude : <span id="Longitude"></span> </br> </br>-->
 	
-	Latitude :  <textarea id="Latitude" name="Latitude" rows="1" cols="15" class="textbox" form="formdepot"></textarea>
-    Longitude : <textarea id="Longitude" name="Longitude" rows="1" cols="15" class="textbox" form="formdepot"></textarea></br> </br>
+ <span id="Latitude"  style="display:none"></span>
+<span id="Longitude"  style="display:none"></span>
 
 	Comment : <br/>  <textarea id="Comment" name="Comment" rows="10" cols="70" class="textbox" form="formdepot"></textarea></br>
 
@@ -97,7 +97,7 @@ $tab->creer_liste_option_plus ( "lst_proj", "id_project", "name_project");
 ?>
 </br>
 </br>
-<a href="javascript:ouvre_popup('popuptags.php')">Ajouter un tag</a>
+<h2 align = "left"> Choose tags </h2>
 
 <script type="text/javascript"> // allows to make a tree structure dynamic
 
@@ -160,17 +160,12 @@ $tab->creer_liste_option_plus ( "lst_proj", "id_project", "name_project");
     ?>
 
 
-<script type="text/javascript">
-function ouvre_popup(page) {
- window.open(page,"nom_popup","menubar=no, status=no, scrollbars=no, menubar=no, width=200, height=100");
-}
-</script>
 
 
 
 
 </BR></BR>
-<input type="submit" value="Envoyer le formulaire">
+<input type="submit" value="Send the form">
  </form>
  
  
@@ -181,7 +176,7 @@ function ouvre_popup(page) {
  
 
  
- // creation carte : centree sur paris 
+ // creating map : center on paris
  var map = new ol.Map({
         target: 'map',
         layers: [
@@ -196,7 +191,7 @@ function ouvre_popup(page) {
       });
 	  
 	  
-// que faire en cas de clic 
+// create pinpoint onclick
 map.on('click', function(event) {
 	map.setLayerGroup(new ol.layer.Group());  // on rajoute la couche OSM car supprimee en cas de pin point
 	couche = new ol.layer.Tile({
@@ -204,7 +199,7 @@ map.on('click', function(event) {
           });
 		  map.addLayer(couche); 
 		  
-		  // on recupere les coordonnées du click
+		  //getting coordonates
 var coords = ol.proj.toLonLat(event.coordinate);
 var marker = new ol.Feature({
   geometry: new ol.geom.Point(
@@ -225,7 +220,7 @@ var markerVectorLayer = new ol.layer.Vector({
   source: vectorSource,
 });
 map.addLayer(markerVectorLayer);
-
+// passing variables through ajax to put them into session's variables
 					$.ajax({
     type: "GET",
     url: "ajax1.php",
@@ -238,6 +233,7 @@ map.addLayer(markerVectorLayer);
 						alert('Erreur');
 					}
 })
+//same
 
 					$.ajax({
     type: "GET",
