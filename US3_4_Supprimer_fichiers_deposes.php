@@ -42,13 +42,18 @@
 			$id_file_to_delete=$_GET['id_file'];
 			//echo $id_file_to_delete."</br>";
 			//Queries FOR DELETE
-			$result_delete_key=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
-			$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			//$result_delete_key=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			//$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
 		}
 		?>
 		
 		<div class="container">
 			<h1>Files have been deleted successfully !</h1>
+			<div align="center">
+				<form action="US3_11_Visualiser_liste_fichiers.php" method="GET">
+					<button type="submit" class="btn btn-md btn-primary">Previous page</button>
+				</form>
+			</div>
 		</div>
 
 	</body>
