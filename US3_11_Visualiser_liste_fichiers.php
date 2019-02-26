@@ -14,7 +14,7 @@
 		<?php
 		//Header
 		include("en_tete.php");
-		echo "</br></br>";
+		echo "</br>";
 		//DB connection
 		include("tab_donnees/funct_connex.php");
 		$con=new Connex();
@@ -25,11 +25,12 @@
 		?>
 
 		<!-- Table creation -->
-		<div class="container">
+		<div class="container-fluid"> 
 			<form name="box_delete" method="GET" action="US3_4_Supprimer_fichiers_deposes.php">
 				<div class="row">
-					<div class="col-md-10"></div><div class="col-md-2">
-						<button type="submit" class="btn btn-md btn-danger btn-block">Delete selection</button>
+					<div class="col-md-10"><h1><B>Files list</B></h1></div>
+					<div class="col-md-2" align="right">
+						<button type="submit" class="btn btn-md btn-danger">Delete selection</button>
 					</div>
 				</div></br>
 				<div class="row">				
@@ -38,11 +39,12 @@
 							<tr>
 								<th scope="col" width="5%">State</th>
 								<th scope="col" width="25%">File name</th>
-								<th scope="col" width="15%">Upload date</th>
+								<th scope="col" width="10%">Upload date</th>
 								<th scope="col" width="20%">Origin</th>
-								<th scope="col" width="15%">Size</th>
+								<th scope="col" width="10%">Size</th>
 								<th scope="col" width="15%"></th>
-								<th scope="col" width="5%">Delete</th>
+								<th scope="col" width="10%"></th>
+								<th scope="col" width="5%">Select</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -75,12 +77,15 @@
 										echo "<th scope='row'>".$size."</th>";									
 										echo "<td>";
 											echo '<div class="btn-group-vertical btn-block" role="group" aria-label="Basic example">';
-												echo '<button id="btnEditFile" type="button" class="btn btn-sm btn-outline-warning" value='.$id_file.' onclick="return edit_file()">Edit file</button>';
-												echo '<button id="btnEditMetadata" type="button" class="btn btn-sm btn-outline-warning" value='.$id_file.' onclick="return edit_metadata()">Edit metadata</button>';
+												echo '<button id="btnEditFile" type="button" class="btn btn-sm btn-outline-warning" onclick="return edit_file('.$id_file.')">Edit file</button>';
+												echo '<button id="btnEditMetadata" type="button" class="btn btn-sm btn-outline-warning" onclick="return edit_metadata('.$id_file.')">Edit metadata</button>';
 											echo '</div>';
 										echo "</td>";
 										echo "<td>";
-											echo '<div align="center"><input type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'"></div>';
+											echo "<button type='button' id='btnDelete' name='btnDelete' class='btn btn-sm btn-outline-danger btn-block' onclick='return delete_file(".$id_file.")'>Delete</button>";
+										echo "</td>";
+										echo "<td>";
+											echo '</br><div align="center"><input type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'"></div>';
 										echo "</td>";
 									echo "</tr>";
 								}
@@ -94,7 +99,10 @@
 										echo "<td ".$bold.">".$size."</td>";
 										echo "<td></td>";
 										echo "<td>";
-											echo '<div align="center"><input type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'"></div>';									
+											echo "<button type='button' id='btnDelete' name='btnDelete' class='btn btn-sm btn-outline-danger btn-block' onclick='return delete_file(".$id_file.")'>Delete</button>";
+										echo "</td>";
+										echo "<td>";
+											echo '</br><div align="center"><input type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'"></div>';									
 										echo "</td>";
 									echo "</tr>";
 								}
@@ -116,9 +124,17 @@
 										echo "<td>".$date."</td>";
 										echo "<td ".$bold.">".$first_name." ".$last_name."</td>";
 										echo "<td ".$bold.">".$size."</td>";
-										echo "<td>";										
-											echo "<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' value='".$name."' onclick='return popup()'>See versions</button>";								
+										echo "<td>";
+											echo '<div class="btn-group-vertical btn-block" role="group" aria-label="Basic example">';
+												echo '<button id="btnEditFile" type="button" class="btn btn-sm btn-outline-warning" onclick="return edit_file('.$id_file.')">Edit file</button>';
+												echo '<button id="btnEditMetadata" type="button" class="btn btn-sm btn-outline-warning" onclick="return edit_metadata('.$id_file.')">Edit metadata</button>';
+											echo '</div>';
 										echo "</td>";
+										echo "<td>";
+											?>
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $name; ?>")'>See versions</button>								
+											<?php
+										echo "</td>";										
 										echo "<td></td>";
 									echo "</tr>";
 								}
@@ -127,18 +143,13 @@
 						</tbody>
 					</table>
 				</div></br>
-				<!-- <div class="row">
-					<div class="col-md-10"></div><div class="col-md-2">
-						<button type="submit" class="btn btn-md btn-danger btn-block">Delete selection</button>
-					</div>
-				</div>--> 
 			</form>
 		</div>
 
 	</body>
 	
 	<?php
-	echo "</br></br>";
+	echo "</br>";
 	include("pied_de_page.php");
 	?>
 	
@@ -153,24 +164,23 @@
 	
 	<script type="text/javascript">
 		//Ouvrir la popup pour afficher les différentes versions
-		function popup() {
-			var versions;
-			versions = document.getElementById("btnVersions").value; 							
-			window.open('US3_11_Visualiser_liste_fichiers_P2.php?name='+versions,'newWin','width=1000,height=400');
+		function popup(name) {	
+			window.open("US3_11_Visualiser_liste_fichiers_P2.php?name="+name,'newWin','width=1000,height=400');
 		}	
 		
 		//Ouvrir la page "edit file"
-		function edit_file() {
-			var id_file;
-			id_file = document.getElementById("btnEditFile").value; 
-			document.location.href="/Edit_file.php?id_file="+id_file;
+		function edit_file(id_file) { 
+			document.location.href="Edit_file.php?id_file="+id_file;
 		}
 		
 		//Ouvrir la page "edit metadata"
-		function edit_metadata() {
-			var id_file;
-			id_file = document.getElementById("btnEditMetadata").value; 
-			document.location.href="/Edit_metadata.php?id_file="+id_file;
+		function edit_metadata(id_file) {
+			document.location.href="Edit_metadata.php?id_file="+id_file;
+		}
+		
+		//Ouvrir la page "US3_4_Supprimer_fichiers_deposes"
+		function delete_file(id_file) { 
+			document.location.href="US3_4_Supprimer_fichiers_deposes.php?id_file="+id_file;
 		}
 	
 	</script>
