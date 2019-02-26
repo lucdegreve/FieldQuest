@@ -11,7 +11,7 @@ This page contains code to display the filter labels:
 
 Input variables : 		
 
-Output variables :		id of selected formats 								
+Output variables :		id of selected tags							
 		
 ------------------------------------------------------------->	
 
@@ -40,13 +40,29 @@ require "tab_donnees/tab_donnees.class.php";
 // Connexion to the database 
 $con = new Connex();
 $connex = $con->connection;
-
 ?>
+
 <div class='container'>
 	
 	<?php 
 	// include page data type
 	include "US4-11_Filtrer_avec_tag_project.php"; 
+	// include page for source 
+	?>
+	<p>
+		<button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseDate" aria-expanded="true" aria-controls="collapseDate">
+			Date
+		</button>
+	</p>
+	<div class="collapse" id="collapseDate">
+		<div class="card card-body">
+			<label for ='start_date'>from</label>
+			<input type = 'date' name ='start' id='start_date' >
+			<label for ='end_date'>to</label>
+			<input type='date' name ='end' id='end_date'>
+		</div>
+	</div>
+	<?php
 	include "US4-11_Filtrer_avec_tag_format.php";
 	include "US4-11_Filtrer_avec_tag_unit.php";
 	?>
