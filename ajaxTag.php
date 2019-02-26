@@ -11,7 +11,7 @@
 		require_once "funct_connex.php";
         $con=new Connex();
         $connex=$con->connection;
-        $res = pg_query($connex, "SELECT * FROM tags WHERE id_tag_type=".$_POST["id_tag_type"])
+        $res = pg_query($connex, "SELECT * FROM tags WHERE id_tag_type=".$_POST["id_tag_type"]." ORDER BY tag_name")
         or die(pg_last_error($connex));
         while($row = pg_fetch_assoc($res)){
             echo "<option value='".$row["id_tag"]."'>".$row["tag_name"]."</option>";
