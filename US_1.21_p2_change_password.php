@@ -56,9 +56,30 @@
         // Connexion to class file and connexion file
         require "tab_donnees/tab_donnees.class.php";
         require "tab_donnees/funct_connex.php";
+
+
         // Variables needed for connexion
         $con = new Connex();
         $connex = $con->connection;
+
+        ?>
+
+        <?php
+        if (isset($_GET["new_password"]))
+        {
+        $new_password = $_GET["new_password"];
+
+        // Query to update database
+        $query = "UPDATE user_account
+                  SET password = '".$new_password."'
+                  WHERE id_user_account = '".$id_user_account."'";
+        $query_result = pg_query($connex,$query) or die (pg_last_error() );
+
+        echo "Your password have been correctly changed";
+        }
+        ?>
+
+        <?php
 
         // Query to get all information needed from user_account
         $result= pg_query($connex, "SELECT password FROM user_account WHERE id_user_account = $id_user_account");
@@ -84,20 +105,6 @@
         echo '</form>';
         ?>
 
-        <?php
-        if (isset($_GET["new_password"]))
-        {
-        $new_password = $_GET["new_password"];
-
-        // Query to update database
-        $query = "UPDATE user_account
-                  SET password = '".$new_password."'
-                  WHERE id_user_account = '".$id_user_account."'";
-        $query_result = pg_query($connex,$query) or die (pg_last_error() );
-
-        echo "Your password have been correctly changed";
-        }
-        ?>
 
     		<?php
     				 include("pied_de_page.php");
