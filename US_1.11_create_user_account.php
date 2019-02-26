@@ -152,7 +152,7 @@
         '".$postcode."','".$city."','".$country."','".$email."','".$phone."','".$company."','".$website."','".$substr_fn.$last_name."','".$password."')";
         $query_result = pg_query($connex,$query) or die (pg_last_error() );
 
-        echo "Data have been correctly inserted into database";
+        echo "User account have been correctly created and inserted into the database";
       }
         ?>
 		<?php
