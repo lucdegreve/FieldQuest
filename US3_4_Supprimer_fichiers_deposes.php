@@ -14,11 +14,14 @@
 		<?php
 		//Header
 		include("en_tete.php");
-		echo "</br></br>";
+		echo "
+		</br>";
 		//DB connection
 		include("tab_donnees/funct_connex.php");
 		$con=new Connex();
 		$connex=$con->connection;
+		
+	//IF CHECKBOX
 		//Query to get all file id
 		$result_nb_files=pg_query($connex, "SELECT id_file FROM files") or die('Échec de la requête : ' . pg_last_error());
 		//Get variables from form
@@ -27,10 +30,20 @@
 			$variable="id_file_".$id_file;
 			if(isset($_GET[$variable])){
 				$id_file_to_delete=$_GET[$variable];
-				echo $id_file_to_delete."</br>";
-			}
-			//Query FOR DELETE
-			//$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+				//echo $id_file_to_delete."</br>";
+				//Queries FOR DELETE
+				$result_delete_key=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+				$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			}	
+		}
+		
+	//IF "DELETE" BUTTON
+		if(isset($_GET['id_file'])){
+			$id_file_to_delete=$_GET['id_file'];
+			//echo $id_file_to_delete."</br>";
+			//Queries FOR DELETE
+			$result_delete_key=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
 		}
 		?>
 		
@@ -41,7 +54,7 @@
 	</body>
 	
 	<?php
-	echo "</br></br>";
+	echo "</br>";
 	include("pied_de_page.php");
 	?>
 	
