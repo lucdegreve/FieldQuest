@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /* Getting file name */
 $filename = $_FILES['file']['name'];
@@ -25,3 +26,10 @@ if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
 }
 
 echo json_encode($return_arr);
+
+$_SESSION["upload_filename"]=$new_filename;
+$_SESSION["upload_location"]="US_2_21_dragdrop_upload/";
+$_SESSION["upload_date"]= $date->format('Y-m-d');
+$_SESSION["upload_file_size"]= $filesize;
+
+?>

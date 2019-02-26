@@ -1,7 +1,9 @@
 <html>
 <?php
+session_start();
 require "./tab_donnees/tab_donnees.class.php";
 require "./tab_donnees/funct_connex.php";
+
 if (isset($_GET['Comment'])) {
 	$comment = $_GET['Comment'];
 	echo $comment . '<br/>';
@@ -41,6 +43,11 @@ while ($row = pg_fetch_array($result)) {
 	}
 }
 
+//Get all infos on uploaded file
+$filename = $_SESSION["upload_filename"];
+$location = $_SESSION["upload_location"];
+$upload_date = $_SESSION["upload_date"];
+$filesize = $_SESSION["upload_file_size"];
 
 $con = new Connex();
 $connex = $con->connection;
