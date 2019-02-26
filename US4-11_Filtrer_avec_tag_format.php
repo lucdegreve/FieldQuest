@@ -54,7 +54,7 @@ Output variables :		id of selected formats
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';
 					echo '<button type="button" class="btn" data-color="primary" id = "format_'. $id_format .'">'.$label_format.'</button>';
-					echo '<input type="checkbox" class="hidden" />';
+					echo '<input type="checkbox" class="hidden" name="format[]" value="'.$label_format.'"/>';
 					echo '</span>';
 				}
 				?>

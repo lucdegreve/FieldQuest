@@ -2,7 +2,7 @@
 <head>
 <!-----------------------------------------------------------
        US4-11 Filtrer avec des tags - File format  
-Developped by Ophélie			      
+Developped by OphÃ©lie			      
 This page contains code to display the filter labels:
 - US4-11_Filtrer_avec_tag_project.php
 - US4-11_Filtrer_avec_tag_format.php
@@ -77,7 +77,30 @@ $connex = $con->connection;
 </form>
 
 <?php
+
 if (isset($_GET['search'])){
+
+	$start_date = $_GET['start'];
+	$end_date = $_GET['end'];
+	echo 'date : '.$start_date.' - '.$end_date.'</br></br>';
+	
+	if (isset($_GET['format'])){
+		$array_format = print_r($_GET['format'],true);
+		echo '</br>';
+		print_r($array_format);
+	}
+	
+	if (isset($_GET['projet'])){
+		$array_projet = print_r($_GET['projet'], true);
+		echo '</br>';
+		print_r($array_projet);
+	}
+	
+	if (isset($_GET['unit'])){
+		$array_unit = print_r($_GET['unit'], true);
+		echo '</br>';
+		print_r($array_unit);
+	}
 	
 }
 ?>

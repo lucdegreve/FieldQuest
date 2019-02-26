@@ -52,7 +52,7 @@ Output variables :		id of selected tags
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';
 					echo '<button type="button" class="btn" data-color="primary" id = "unit_'. $id_tag .'">'.$tag_name.'</button>';
-					echo '<input type="checkbox" class="hidden" />';
+					echo '<input type="checkbox" class="hidden" name="unit[]" value="'.$tag_name.'"/>';
 					echo '</span>';
 				}
 				?>

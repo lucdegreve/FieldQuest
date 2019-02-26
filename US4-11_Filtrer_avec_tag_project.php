@@ -54,7 +54,7 @@ $table_projects = new Tab_donnees($result_project,"PG");
 			// Make checkbox button 
 			echo '<span class="button-checkbox">';
 			echo '<button type="button" class="btn" data-color="primary" id = project_"'. $id_project .'">'.$name_project.'</button>';
-			echo '<input type="checkbox" class="hidden" />';
+			echo '<input type="checkbox" class="hidden" name="projet[]" value="'.$name_project.'"/>';
 			echo '</span>';
 		}
 		?>
