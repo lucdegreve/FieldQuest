@@ -34,19 +34,22 @@
             // and recuperation of recordset 
             $result = pg_query($connex, $query)  
                 or die('Échec de la requête : ' . pg_error($connex)); 
-				echo '<b>Add a new type tag</b> <br/> <br/>';
-				echo '<form name="form_creation" action="US1-53_create_tag_type.php" onsubmit="return validation()" method="get">
-                Enter the tag type title :
-                <input type="text" name="name_tag_type"><br/>
-                
-                Enter a description :
-                <input type="textarea" name="description_tag_type" rows=4 cols=40><br/>
-                <div><input type="submit" value="Validate" /></div>
+				echo '<form name="form_creation" action="US1-53_create_tag_type.php" onsubmit="return validation()" method="get">'; 
+				echo '<div class="card" style="width:800px">';
+					echo '<h4 class="card-title">Add a new type tag</h4> <br/> ';
+					echo '<div class=card-body>';
+					echo '<label>Enter the tag type title :</label>
+					<input type="text" name="name_tag_type"><br/></br> 
+					
+					<label>Enter a description :</label>
+					<input type="textarea" name="description_tag_type" rows=4 cols=40><br/></br>
+					<div class="col-lg-8"><input type="submit" value="Validate" /></div>
+					</div>
 				</form>';
 
             
             if (isset($_GET["name_tag_type"])){ //if we click on validate the previous form, we create the tag in the database
-                require_once "tab_donnees/funct_connex.php";
+                require_once "funct_connex.php";
                 $con=new Connex();
                 $connex=$con->connection;
                 $query = "SELECT *  FROM tag_type"; 
