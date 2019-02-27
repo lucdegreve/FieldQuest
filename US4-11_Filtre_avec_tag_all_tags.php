@@ -44,17 +44,15 @@ $connex = $con->connection;
 <!-- Form to get selected filters  -->
 <form name='filters' method = 'GET' action = 'US4-11_Filtre_avec_tag_all_tags.php'>
 <div class='container'>
+<div class= 'col-md-4'>
 	
 	<?php 
-	// TO DO : include page data type
-	
 	// Include page with collapse button & content for project names
 	include "US4-11_Filtrer_avec_tag_project.php"; 
-	// TO DO : include page for source 
 	?>
 	<!-- Collapse button for date (start and end)-->
 	<p>
-		<button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseDate" aria-expanded="true" aria-controls="collapseDate">
+		<button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseDate" aria-expanded="true" aria-controls="collapseDate">
 			Date
 		</button>
 	</p>
@@ -71,10 +69,14 @@ $connex = $con->connection;
 	include "US4-11_Filtrer_avec_tag_format.php"; 
 	// Include page with collapse button & content for unit 
 	include "US4-11_Filtrer_avec_tag_unit.php";
+	// Include page with collapse button & content for data type 
 	include "US_4_11_filtre_avec_tag_data_type.php";
+	// Include page for source 
+	include "US4_11_requete_source.php";
 	?>
 	<!-- Search button -->
 	<button type='submit' class='btn btn_lg btn-success' name='search'>Search</button>
+</div>
 </div>
 </form>
 

@@ -4,8 +4,8 @@
 <?php
 // Définition des sources
 
-require "tab_donnees.class.php";
-require "funct_connex.php";
+require_once "tab_donnees/tab_donnees.class.php";
+require_once "tab_donnees/funct_connex.php";
 
 $con = new Connex();
 $connex = $con->connection;

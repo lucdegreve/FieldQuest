@@ -1,4 +1,4 @@
-code effectue par Florian et clement en lien avec la source : barre de recherche avec checkbox
+<!--code effectue par Florian et clement en lien avec la source : barre de recherche avec checkbox -->
 <html>
 <head>
 	<META charset="UTF-8">
@@ -32,9 +32,9 @@ code effectue par Florian et clement en lien avec la source : barre de recherche
 </script>
 
 </head>
-<?php include('menu_administrateurs.html'); ?>
+
 <body>
-	<div class = "container">
+	<!-- <div class = "container"> -->
 		<!-- Ci-dessous la section réservée à l'affichage de la liste déroulante  -->
 		<h3> Select the sources </h3>
 
@@ -52,7 +52,7 @@ code effectue par Florian et clement en lien avec la source : barre de recherche
 				<br/>
 				<span id="txtFiles"></span>
 
-	</div>
+	<!-- </div> -->
 
 
 </body>
