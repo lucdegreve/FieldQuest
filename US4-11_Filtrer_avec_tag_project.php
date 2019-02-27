@@ -35,7 +35,7 @@ $table_projects = new Tab_donnees($result_project,"PG");
 ?>
 
 <p>
-  <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseProject" aria-expanded="true" aria-controls="collapseProject">
+  <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseProject" aria-expanded="true" aria-controls="collapseProject">
 	Project
   </button>
 </p>

@@ -35,7 +35,7 @@ Output variables :		id of selected formats
 ?>
 <!-- Collapse button -->
 		<p>
-		  <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseFormat" aria-expanded="true" aria-controls="collapseFormat">
+		  <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseFormat" aria-expanded="true" aria-controls="collapseFormat">
 			File format
 		  </button>
 		</p>

@@ -34,7 +34,7 @@ Output variables :		id of selected tags
 	?>
 
 		<p>
-		  <button class="btn btn-lg btn-primary" type="button" data-toggle="collapse" data-target="#collapseUnit" aria-expanded="true" aria-controls="collapseUnit">
+		  <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseUnit" aria-expanded="true" aria-controls="collapseUnit">
 			Unit
 		  </button>
 		</p>
