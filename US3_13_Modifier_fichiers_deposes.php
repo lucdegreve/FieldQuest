@@ -116,7 +116,7 @@
 						<!-- Projects -->
 						<?php
 						//Query projects
-						$result_projects_list = pg_query($connex, "SELECT * FROM projects");						
+						$result_projects_list = pg_query($connex, "SELECT * FROM projects ORDER BY name_project");						
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						echo "Select a project :  ";
 						$tab_projects_list -> creer_liste_option_plus("lst_proj", "id_project", "name_project", $id_project, "");
@@ -157,7 +157,7 @@
 
 						<?php
 							//request parameters
-							$query = "SELECT tt.id_tag_type, name_tag_type FROM  tag_type tt  ";
+							$query = "SELECT tt.id_tag_type, name_tag_type FROM  tag_type tt ORDER BY name_tag_type";
 							//request execution
 							$result = pg_query($connex, $query) or die(pg_last_error());
 							// Results browsing line by line
@@ -171,7 +171,7 @@
 								echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].' </span>';
 								echo '<ul class="subMenu">';
 								
-								$query2 = "SELECT id_tag, tag_name FROM tags where id_tag_type=".$id_cat; //it gives the name of the tag within the category
+								$query2 = "SELECT id_tag, tag_name FROM tags where id_tag_type=".$id_cat." ORDER BY tag_name"; //it gives the name of the tag within the category
 								$result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
 								while ($row2 = pg_fetch_array($result2)) {
 									$check=false;
@@ -187,7 +187,7 @@
 									if($check==false){
 										echo '<li><div><input type="checkbox" id="'.$row2["id_tag"].'_tag" name="'.$row2["id_tag"].'_tag">';										
 									}
-									echo '<label for="'.$row2["id_tag"].'_tag"> '.$row2["id_tag"].' '.$row2["tag_name"].'</label></div></li>';
+									echo '<label for="'.$row2["id_tag"].'_tag"> '.$row2["tag_name"].'</label></div></li>';
 								}
 								echo '</ul>';
 								echo '</li>';
