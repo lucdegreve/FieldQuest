@@ -15,10 +15,7 @@ Output variables :		id of selected formats
 			<title></title>
 			<link rel="stylesheet" href="css/bootstrap.min.css">
 			<link rel="stylesheet" href="css/custom.css">
-			<!-- Import for collapse -->
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>  
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+			<!-- Import for collapse and event handling of checkbox buttons in main page US4-11_Filtre_avec_tag_all_tags.php -->
 		</head>
 		<body>
 
@@ -39,7 +36,7 @@ Output variables :		id of selected formats
 
 			<?php
 			
-			// connection to data base
+			// connection to data base in main page 'US4-11_Filtre_avec_tag_all_tags.php'
 				$requete = "SELECT id_tag_type, name_tag_type FROM tag_type";
 				$result=pg_query($connex,$requete);//exécution de la requête
 				$pp=pg_num_rows($result);
@@ -85,7 +82,7 @@ Output variables :		id of selected formats
 								
 								echo '<span class="button-checkbox">';
 								echo '<button type="button" class="btn" data-color="primary" id = "'. $id_tag .'">'.$name_tag.'</button>';
-                                                                echo '<input type="checkbox" class="hidden" name="format[]" value="'.$id_tag.'"/>';
+                                echo '<input type="checkbox" class="hidden" name="tag[]" value="'.$id_tag.'"/>';
 								echo '</span>';
 								
 								echo "</td>";

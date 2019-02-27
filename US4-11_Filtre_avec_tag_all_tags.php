@@ -47,6 +47,7 @@ $connex = $con->connection;
 	
 	<?php 
 	// TO DO : include page data type
+	
 	// Include page with collapse button & content for project names
 	include "US4-11_Filtrer_avec_tag_project.php"; 
 	// TO DO : include page for source 
@@ -70,6 +71,7 @@ $connex = $con->connection;
 	include "US4-11_Filtrer_avec_tag_format.php"; 
 	// Include page with collapse button & content for unit 
 	include "US4-11_Filtrer_avec_tag_unit.php";
+	include "US_4_11_filtre_avec_tag_data_type.php";
 	?>
 	<!-- Search button -->
 	<button type='submit' class='btn btn_lg btn-success' name='search'>Search</button>
@@ -100,6 +102,12 @@ if (isset($_GET['search'])){
 		$array_unit = print_r($_GET['unit'], true);
 		echo '</br>';
 		print_r($array_unit);
+	}
+	
+	if (isset($_GET['tag'])){
+		$array_tag = print_r($_GET['tag'], true);
+		echo '</br>';
+		print_r($array_tag);
 	}
 	
 }
