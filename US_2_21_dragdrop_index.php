@@ -4,7 +4,7 @@
 
 	<head>
 		<!-- Développeurs : Manu et Gala -->
-		<!-- Drag and drop which download file automatically when drop. -->
+		<!-- Drag and drop which download file automatically when drop -->
 		<!-- Issues : can't create a button "upload" (always automatic) -->
 		
 		<link href="css/custom.css" rel="stylesheet" type="text/css">
@@ -55,7 +55,7 @@
 						<h4><B>Your file</B></h4>
 						<input type="file" name="file" id="file">							
 						<div class="upload-area"  id="uploadfile" align="left">
-							</br><B>Drag and drop file here</B><br/></br>or<br/></br><B>Click to select a file</B>
+							</br><B>Drag and drop a file here</B><br/></br>or<br/></br><B>Click to select a file</B>
 						</div>
 						</br>
 					</div></div>
@@ -64,7 +64,7 @@
 						<h4><B>Select the data localisation</B></h4></br>
 						<div style="margin:0 auto" id="map" >
 							<!-- Your map will be shown inside this div-->
-						</div>	
+						</div>						
 						<span id="Latitude" style="display:none"></span>
 						<span id="Longitude" style="display:none"></span>
 					</div></div>
@@ -74,10 +74,10 @@
 				<div class="row">
 					
 					<div class="col-md-6"><div class="jumbotron">
-						<h4><B>Other informations</B></h4></br>
+						<h4><B>Other information</B></h4></br>
 						
 						<!-- Period -->
-						Choose a period : <input type="text" name="daterange" value="  " /></br></br>
+						Select a period : <input type="text" name="daterange" value=""/></br></br>
 						<script>
 						$(function() {
 						  $('input[name="daterange"]').daterangepicker({
@@ -93,7 +93,7 @@
 						//Query projects
 						$result_projects_list = pg_query($connex, "SELECT * FROM projects");						
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
-						echo "Choose a project :  ";
+						echo "Select a project :  ";
 						$tab_projects_list -> creer_liste_option_plus("lst_proj", "id_project", "name_project");
 						?></br></br>
 						
@@ -102,7 +102,7 @@
 					</div></div>
 					
 					<div class="col-md-6"><div class="jumbotron">					
-						<h4><B>Choose tags</B></h4></br>
+						<h4><B>Select tags</B></h4></br>
 
 						<script type="text/javascript"> // allows to make a tree structure dynamic
 							$(document).ready( function () {
