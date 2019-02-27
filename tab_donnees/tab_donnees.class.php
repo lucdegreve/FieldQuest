@@ -57,7 +57,7 @@ class Tab_donnees
 		         $n=0;
 		         while ($row = pg_fetch_row($recordset)) 
 		         {
-		             for ($i=0; $i<=$this->nb_champs; $i++)
+		             for ($i=0; $i<$this->nb_champs; $i++)
 		             {
 						 
 		                 $this->t_enr[$n][$i]=$row[$i];
