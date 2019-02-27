@@ -36,27 +36,30 @@
             // request execution
             // and recuperation of recordset
             $result = pg_query($connex, $query)  
-                or die('Échec de la requête : ' . pg_error($connex)); 
-				echo '<b>Add a new tag</b> <br/> <br/>';
-				echo '<form name="form_creation" action="US1-51_create_tag.php" onsubmit="return validation()" method="get">';
-                echo 'Choose your tag type :<br/>
-                <select name="liste_type" >
-                    <option selected="selected">Select a new category for your new tag</option>';
-                    while($row = pg_fetch_array($result)){
-                        echo '<option value ='.$row["id_tag_type"].'> '.$row["name_tag_type"].' </option>';
-                    }
-                echo '</select></br>
-                Enter the tag title :
-                <input type="text" name="tag_name"><br/>
-                
-                Enter a description :
-				<input type="text" name="tag_description"><br/>
-				<div><input type="submit" value="Validate" /></div>
+                or die('Échec de la requête : ' . pg_error($connex));
+				echo '<form name="form_creation" action="US1-53_create_tag.php" onsubmit="return validation()" method="get">';
+				echo '<div class="card" style="width:800px">';
+					echo '<h4 class="card-title">Add a new tag</h4> <br/> ';
+					echo '<div class=card-body>';
+					echo '<label>Choose your tag type :</label><br/>
+					<select name="liste_type" >;
+						<option selected="selected">Select a new category for your new tag</option>';
+						while($row = pg_fetch_array($result)){
+							echo '<option value ='.$row["id_tag_type"].'> '.$row["name_tag_type"].' </option>';
+						}
+					echo '</select></br></br>
+					<label>Enter the tag title :</label>
+					<input type="text" name="tag_name"><br/></br>
+					
+					<label>Enter a description :</label>
+					<input type="textarea" name="tag_description" class="col-lg-8"><br/></br>
+					<div><input type="submit" value="Validate" /></div>
+					</div>
 				</form>';
-
+				
             
             if (isset($_GET["tag_name"])){ //if we click on validate the previous form, we create the tag in the database
-                require_once "tab_donnees/funct_connex.php";
+                require_once "funct_connex.php";
                 $con=new Connex();
                 $connex=$con->connection;
                 $query = "SELECT *  FROM tags"; 
