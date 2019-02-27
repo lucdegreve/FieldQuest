@@ -93,11 +93,11 @@
 								//State "not validated"
 								if($valid=="not validated"){
 									echo "<tr>";
-										echo "<td ".$bold."><img src='picto/refused.png' width='27' height='27'/></td>";
+										echo "<td><img src='picto/refused.png' width='27' height='27'/></td>";
 										echo "<td>".$name."</td>";
 										echo "<td>".$date."</td>";
-										echo "<td ".$bold.">".$first_name." ".$last_name."</td>";
-										echo "<td ".$bold.">".$size."</td>";
+										echo "<td>".$first_name." ".$last_name."</td>";
+										echo "<td>".$size."</td>";
 										echo "<td>";
 											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
 										echo "</td>";
@@ -123,11 +123,11 @@
 										}
 									}						
 									echo "<tr>";
-										echo "<td ".$bold."><img src='picto/validated.png' width='30' height='30'/></td>";
+										echo "<td><img src='picto/validated.png' width='30' height='30'/></td>";
 										echo "<td>".$name."</td>";
 										echo "<td>".$date."</td>";
-										echo "<td ".$bold.">".$first_name." ".$last_name."</td>";
-										echo "<td ".$bold.">".$size."</td>";
+										echo "<td>".$first_name." ".$last_name."</td>";
+										echo "<td>".$size."</td>";
 										echo "<td>";
 											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
 										echo "</td>";
