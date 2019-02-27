@@ -23,51 +23,39 @@ Output variables :		id of selected formats
 		<body>
 
 
-			<!-- Navbar for Search -->
-			<nav class="navbar navbar-light bg-light">
-			  <form class="form-inline">
-					<FONT size="6">Search :</FONT>
-			  </form>
-			</nav>
-			<br/>
 			<!-- button data type with collapse -->
-			<div class="container">
-
-				<button type="submit" name="button1" class="btn btn-success btn-block" data-toggle="collapse" data-target="#collapsefirst" aria-expanded="true" aria-controls="collapseExample"/>
+                        <p>
+				<button type="button" name="button1" class="btn btn-lg btn-primary" data-toggle="collapse" data-target="#collapseFirst" aria-expanded="true" aria-controls="collapseFirst"/>
 				Data type
 				</button>
-				
-			</div>
+                        </p>
 			</br>
-			<!-- separateur -->
-			<hr size="8" width="90%" color="success">
+			
 			</br>
 			<!-- collapse div -->
-			<div class="collapse" id="collapsefirst">
+			<div class="collapse" id="collapseFirst">
 				<div class="card card-body">
+                                <div class="form-check">
 
 			<?php
 			
 			// connection to data base
-				require_once "funct_connex.php";
-				$con = new Connex();
-				$connex = $con->connection;
 				$requete = "SELECT id_tag_type, name_tag_type FROM tag_type";
 				$result=pg_query($connex,$requete);//exécution de la requête
 				$pp=pg_num_rows($result);
+                                
 				echo "<table>";
-				echo "<tr>";
+				
 				
 			// For loop for first button	
 					for ($i=0 ;  $i<$pp ;$i++){
-						
+						echo "<tr>";
 						$row=pg_fetch_row($result);
 						$id=$row[0];
 						$name=$row[1];
 						
 						echo "<td>";
-						
-						echo '<button type="submit" name='.$name.' value='.$id.' class="btn btn-primary" data-toggle="collapse" data-target="#collapse'.$id.'" aria-expanded="true" aria-controls="collapse2">';
+						echo '<button type="button" name='.$name.' value='.$id.' class="btn btn-primary" data-toggle="collapse" data-target="#collapse'.$id.'" aria-expanded="true" aria-controls="collapse2">';
 						echo $name;
 						echo '</button>';
 						
@@ -89,15 +77,15 @@ Output variables :		id of selected formats
 							for ($j=0 ;  $j<$pp2 ;$j++){
 						
 								$row2=pg_fetch_row($result2);
-								$id2=$row2[0];
-								$name2=$row2[1];
+								$id_tag=$row2[0];
+								$name_tag=$row2[1];
 								echo "<tr>";
 
 								echo "<td>";
 								
 								echo '<span class="button-checkbox">';
-								echo '<button type="button" class="btn" data-color="primary" id = "'. $id2 .'">'.$name2.'</button>';
-								echo '<input type="checkbox" class="hidden" />';
+								echo '<button type="button" class="btn" data-color="primary" id = "'. $id_tag .'">'.$name_tag.'</button>';
+                                                                echo '<input type="checkbox" class="hidden" name="format[]" value="'.$id_tag.'"/>';
 								echo '</span>';
 								
 								echo "</td>";
@@ -107,16 +95,17 @@ Output variables :		id of selected formats
 								echo "</table>";
 								
 								
-						echo "</td>";
+                                                echo '</td>';
+                                                echo "</tr>";
 					}
 			
-				echo "</tr>";
+				
 				echo "</table>";
 			
 
 
 			?>
-			
+			</div>
 			</div>
 			</div>
 		</body>
