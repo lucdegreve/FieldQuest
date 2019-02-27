@@ -16,12 +16,12 @@
 		include("en_tete.php");
 		echo "</br>";
 		//DB connection
-		include("tab_donnees/funct_connex.php");
+		require "./tab_donnees/funct_connex.php";
 		$con=new Connex();
 		$connex=$con->connection;
 		//Query : list of distinct file names
-		$result_files_names=pg_query($connex, "SELECT file_name, MIN(upload_date) FROM files GROUP BY file_name ORDER BY MIN(upload_date) DESC") or die('Échec de la requête : ' . pg_last_error());
-		$nbrows=pg_num_rows($result_files_names);
+		$result_files_id=pg_query($connex, "SELECT id_original_file, MIN(upload_date) FROM files GROUP BY id_original_file ORDER BY MIN(upload_date) DESC") or die('Échec de la requête : ' . pg_last_error());
+		$nbrows=pg_num_rows($result_files_id);
 		?>
 
 		<!-- Table creation -->
@@ -40,21 +40,22 @@
 								<th scope="col" width="5%">State</th>
 								<th scope="col" width="25%">File name</th>
 								<th scope="col" width="10%">Upload date</th>
-								<th scope="col" width="20%">Origin</th>
-								<th scope="col" width="10%">Size</th>
-								<th scope="col" width="15%"></th>
+								<th scope="col" width="17%">Origin</th>
+								<th scope="col" width="8%">Size</th>
+								<th scope="col" width="10%"></th>
+								<th scope="col" width="10%"></th>
 								<th scope="col" width="10%"></th>
 								<th scope="col" width="5%">Select</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							while($row=pg_fetch_array($result_files_names)){
-								$file_name=$row[0];
+							while($row=pg_fetch_array($result_files_id)){
+								$id=$row[0];
 								//Query to get the last version for each file name
 								$query="SELECT id_file, file_name, to_char(upload_date,'DD/MM/YYYY'), file_size, label_validation_state, id_version, last_name, first_name, id_original_file
 								FROM user_account ua JOIN files f ON ua.id_user_account=f.id_user_account JOIN validation_state vs ON f.id_validation_state=vs.id_validation_state
-								WHERE file_name='".$file_name."' AND id_version=(SELECT MAX(id_version) FROM files WHERE file_name='".$file_name."')";
+								WHERE id_original_file='".$id."' AND id_version=(SELECT MAX(id_version) FROM files WHERE id_original_file='".$id."')";
 								$result_files_list=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
 								while($col=pg_fetch_array($result_files_list)){
 									$id_file=$col[0];
@@ -74,12 +75,12 @@
 										echo "<th scope='row'>".$name."</th>";
 										echo "<th scope='row'>".$date."</th>";
 										echo "<th scope='row'>".$first_name." ".$last_name."</th>";
-										echo "<th scope='row'>".$size."</th>";									
+										echo "<th scope='row'>".$size."</th>";
 										echo "<td>";
-											echo '<div class="btn-group-vertical btn-block" role="group" aria-label="Basic example">';
-												echo '<button id="btnEditFile" type="button" class="btn btn-sm btn-outline-warning" onclick="return edit_file('.$id_file.')">Edit file</button>';
-												echo '<button id="btnEditMetadata" type="button" class="btn btn-sm btn-outline-warning" onclick="return edit_metadata('.$id_file.')">Edit metadata</button>';
-											echo '</div>';
+											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
+										echo "</td>";
+										echo "<td>";
+											echo '<button type="button" id="btnEdit" name="btnEdit" class="btn btn-sm btn-outline-warning btn-block" onclick="return edit_file('.$id_file.')">Edit</button>';													
 										echo "</td>";
 										echo "<td>";
 											echo "<button type='button' id='btnDelete' name='btnDelete' class='btn btn-sm btn-outline-danger btn-block' onclick='return delete_file(".$id_file.")'>Delete</button>";
@@ -97,6 +98,9 @@
 										echo "<td>".$date."</td>";
 										echo "<td ".$bold.">".$first_name." ".$last_name."</td>";
 										echo "<td ".$bold.">".$size."</td>";
+										echo "<td>";
+											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
+										echo "</td>";
 										echo "<td></td>";
 										echo "<td>";
 											echo "<button type='button' id='btnDelete' name='btnDelete' class='btn btn-sm btn-outline-danger btn-block' onclick='return delete_file(".$id_file.")'>Delete</button>";
@@ -125,14 +129,14 @@
 										echo "<td ".$bold.">".$first_name." ".$last_name."</td>";
 										echo "<td ".$bold.">".$size."</td>";
 										echo "<td>";
-											echo '<div class="btn-group-vertical btn-block" role="group" aria-label="Basic example">';
-												echo '<button id="btnEditFile" type="button" class="btn btn-sm btn-outline-warning" onclick="return edit_file('.$id_file.')">Edit file</button>';
-												echo '<button id="btnEditMetadata" type="button" class="btn btn-sm btn-outline-warning" onclick="return edit_metadata('.$id_file.')">Edit metadata</button>';
-											echo '</div>';
+											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
+										echo "</td>";
+										echo "<td>";
+											echo '<button type="button" id="btnEdit" name="btnEdit" class="btn btn-sm btn-outline-warning btn-block" onclick="return edit_file('.$id_file.')">Edit</button>';
 										echo "</td>";
 										echo "<td>";
 											?>
-											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $name; ?>")'>See versions</button>								
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>								
 											<?php
 										echo "</td>";										
 										echo "<td></td>";
@@ -164,18 +168,13 @@
 	
 	<script type="text/javascript">
 		//Ouvrir la popup pour afficher les différentes versions
-		function popup(name) {	
-			window.open("US3_11_Visualiser_liste_fichiers_P2.php?name="+name,'newWin','width=1000,height=400');
+		function popup(original_id) {	
+			window.open("US3_11_Visualiser_liste_fichiers_P2.php?original_id="+original_id,'newWin','width=1000,height=400');
 		}	
 		
 		//Ouvrir la page "edit file"
 		function edit_file(id_file) { 
-			document.location.href="Edit_file.php?id_file="+id_file;
-		}
-		
-		//Ouvrir la page "edit metadata"
-		function edit_metadata(id_file) {
-			document.location.href="Edit_metadata.php?id_file="+id_file;
+			document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
 		}
 		
 		//Ouvrir la page "US3_4_Supprimer_fichiers_deposes"
