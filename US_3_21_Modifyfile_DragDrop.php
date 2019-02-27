@@ -7,7 +7,8 @@
 <head>
 
 <?php
-				 include("en_tete.php");
+				session_start();
+				include("en_tete.php");
 		?>
 <!-- Développeurs : JB et Fagniné
 			Drag and drop which download file automatically when drop. 
@@ -24,8 +25,13 @@
 	<!-- Java script to create the drag and drop and to send the file to the server in a repertory -->
  <title >Upload the modified file</title>
  
- 		
-  
+ <?php
+// Recuperation of the modified file id. we use a session variable because this variable is used in the next page (insert query)
+
+//$_SESSION["idfile"]=$_GET["id_file"] ;
+$_SESSION["idfile"]=4;
+
+?>
  
 
 
@@ -42,7 +48,7 @@
 			<h1>Drag and Drop file here<br/>Or<br/>Click to select file</h1>
 		</div>
 		</div> 
-		<input type="submit" value="Envoyer le formulaire">
+		<input type="submit" value="Send file">
 	</form>
  <br/>
  <br/>
