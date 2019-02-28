@@ -25,32 +25,29 @@ ligne 90 url : mettre l'url souhaité-->
    $con = new Connex();
    $connex = $con->connection;
 
-   $query = "SELECT sources FROM files";
+   $query = "SELECT id_user_account, first_name, last_name FROM user_account";
    $result = pg_query($query) or die('Échec de la requête : ' . pg_last_error());
 
    $n = pg_num_rows($result);
    ?>
 
-  <br />
-  <div class="container">
-   <div class="row">
-    <h2 align="center">Tentative PHP Ajax</h2>
-     <br />
-     <div class="col-md-6" style="margin:0 auto; float:none;">
       <span id="success_message"></span>
       <form method="post" id="programmer_form">
        <div class="form-group">
-        <label>Sources</label>
-        <input type="text" name="sources" id="sources" class="form-control" />
-       </div>
-       <div class="form-group">
-        <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
+        <p>
+			<button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseSource" aria-expanded="true" aria-controls="collapseSource">
+				Sources
+			</button>
+		</p>
+		<div class="collapse" id="collapseSource">
+			<div class="card card-body">
+				<input type="text" name="sources" id="sources" class="form-control" />
+			</div>
+		</div>
+		
        </div>
       </form>
-     </div>
-    </div>
-   </div>
-  </div>
+
  </body>
 </html>
 <script>
@@ -58,7 +55,7 @@ ligne 90 url : mettre l'url souhaité-->
 <?php
 $list = array();
 while($row = pg_fetch_array($result)) {
-  $list[] =  $row[0];
+  $list[] =  $row[1].' '.$row[2];
 }
 $list = join( $list, "','");
 echo("aaaalist = ['".$list."']");

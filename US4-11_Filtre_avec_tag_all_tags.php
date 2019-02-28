@@ -7,7 +7,7 @@ This page contains code to display the filter labels:
 - US4-11_Filtrer_avec_tag_project.php
 - US4-11_Filtrer_avec_tag_format.php
 - US4-11_Filtrer_avec_tag_unit.php
-
+- US_4_11_filtre_avec_tag_data_type.php
 
 Input variables : 		
 
@@ -34,8 +34,8 @@ Output variables :		id of selected tags
 <body>
 <?php
 // Files to connect to the database and use recordset
-require "tab_donnees/funct_connex.php";
-require "tab_donnees/tab_donnees.class.php";
+require_once "tab_donnees/funct_connex.php";
+require_once "tab_donnees/tab_donnees.class.php";
 
 // Connexion to the database 
 $con = new Connex();
@@ -68,8 +68,11 @@ $connex = $con->connection;
 	include "US4-11_Filtrer_avec_tag_format.php"; 
 	// Include page with collapse button & content for unit 
 	include "US4-11_Filtrer_avec_tag_unit.php";
+	// Include page with source bar search 
+	include "US4_11_Requete_source_final.php";
 	// Include page with collapse button & content for data type 
 	include "US_4_11_filtre_avec_tag_data_type.php";
+	
 	?>
 	<!-- Search button -->
 	<button type='submit' class='btn btn_lg btn-success' name='search'>Search</button>
