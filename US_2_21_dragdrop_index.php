@@ -65,8 +65,8 @@
 						<div style="margin:0 auto" id="map" >
 							<!-- Your map will be shown inside this div-->
 						</div>						
-						<span id="Latitude" style="display:none"></span>
-						<span id="Longitude" style="display:none"></span>
+						Latitude : <span id="Latitude" ></span> </br>
+						Longitude : <span id="Longitude" ></span>
 					</div></div>
 					
 				</div>
@@ -173,14 +173,22 @@
 	<?php
 	include("pied_de_page.php");
 	?>
-	
-	<!-- Openlayesr JS file --> 
-	<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script> 
 
-	<script type="text/javascript">
-	
-	// creating map : center on paris
-	var map = new ol.Map({
+
+
+
+
+
+
+<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+ <!-- Openlayesr JS fIle -->
+
+ <script type="text/javascript"  >
+ 
+
+ 
+ // creating map : center on paris
+ var map = new ol.Map({
         target: 'map',
         layers: [
 			new ol.layer.Tile({

@@ -7,7 +7,7 @@ session_start();
 
 //Get all infos on uploaded file
 $file_name = $_SESSION["upload_filename"];
-$lfile_place = $_SESSION["upload_location"];
+$file_place = $_SESSION["upload_location"];
 $file_size = $_SESSION["upload_file_size"];
 $comment=$_GET['Comment'];
 $longitude= $_SESSION['longitude'];
