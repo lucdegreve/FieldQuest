@@ -49,7 +49,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php
+							<?php                            
+                            $path='US_2_21_dragdrop_upload/';                           
+                           
 							while($row=pg_fetch_array($result_files_id)){
 								$id=$row[0];
 								//Query to get the last version for each file name
@@ -59,7 +61,7 @@
 								$result_files_list=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
 								while($col=pg_fetch_array($result_files_list)){
 									$id_file=$col[0];
-									$name=$col[1];
+									$name=$col[1];                                    
 									$date=$col[2];
 									$size=$col[3];
 									$valid=$col[4];
@@ -69,7 +71,8 @@
 									$original_id=$col[8];
 								}
 								//State "being checked
-								if($valid=="being checked"){
+                                $var1 = $path.$name;								
+                                if($valid=="being checked"){
 									echo "<tr class='table-active'>";
 										echo "<th scope='row'></th>";
 										echo "<th scope='row'>".$name."</th>";
@@ -77,7 +80,11 @@
 										echo "<th scope='row'>".$first_name." ".$last_name."</th>";
 										echo "<th scope='row'>".$size."</th>";
 										echo "<td>";
-											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
+                                            echo "<a href='".$var1."' download> ";
+                                                
+											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';
+                                            
+                                            echo "</a>";
 										echo "</td>";
 										echo "<td>";
 											echo '<button type="button" id="btnEdit" name="btnEdit" class="btn btn-sm btn-outline-warning btn-block" onclick="return edit_file('.$id_file.')">Edit</button>';													
@@ -99,7 +106,13 @@
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";
 										echo "<td>";
-											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
+                                    
+                                            echo "<a href='".$var1."' download> ";
+                                    
+											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';
+                                    
+                                            echo "</a>";
+                                    
 										echo "</td>";
 										echo "<td></td>";
 										echo "<td>";
@@ -128,8 +141,10 @@
 										echo "<td>".$date."</td>";
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";
-										echo "<td>";
-											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
+										echo "<td>";                                    
+                                            echo "<a href='".$var1."' download> ";                                            
+											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';                                    
+                                            echo "</a>";                                            
 										echo "</td>";
 										echo "<td>";
 											echo '<button type="button" id="btnEdit" name="btnEdit" class="btn btn-sm btn-outline-warning btn-block" onclick="return edit_file('.$id_file.')">Edit</button>';
