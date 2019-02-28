@@ -21,6 +21,11 @@ Output variables :
 	</head>
 
 	<body>
+        
+                <?php
+                        
+                ?>
+
 
 		<?php
 		//Header
@@ -28,11 +33,96 @@ Output variables :
 		echo "</br>";
 		//DB connection
 		require "./tab_donnees/funct_connex.php";
-		require "tab_donnees/tab_donnees.class.php";
+		require "./tab_donnees/tab_donnees.class.php";
 		$con=new Connex();
 		$connex=$con->connection;
+                
+                //Query : filtered search
+                // To Do : Add Sources to the query
+                $query="SELECT f.id_original_file, MIN(f.upload_date)
+                        FROM files f
+                            LEFT JOIN version v on f.id_version = v.id_version
+                            LEFT JOIN link_file_project lfp ON lfp.id_file=f.id_file
+                            LEFT JOIN projects p ON lfp.id_file=p.id_project
+                            LEFT JOIN format fr ON fr.id_format=f.id_format
+                            LEFT JOIN user_account u ON u.id_user_account=f.id_user_account
+                            LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
+                            LEFT JOIN tags t ON t.id_tag=ltp.id_tag
+                        WHERE f.id_validation_state = '2' AND ";
+                
+                if ($_GET['start']!=''){
+                        $start_date = $_GET['start'];
+                        $query .= " f.upload_date >'".$start_date."' AND ";
+                }
+                
+                if ($_GET['end']!=''){
+                        $end_date = $_GET['end'];
+                        $query .= " f.upload_date <'".$end_date."' AND ";
+                }
+                
+                if (isset($_GET['format'])){
+                        //$array_format = print_r($_GET['format'],true);
+                        //print_r($array_format);
+                        $query .= " f.id_format IN (";
+                        foreach ($_GET['format'] AS $i){
+                                $query .= $i.", ";
+                        }
+                        $query = substr($query, 0, strlen($query) -2);
+                        $query .= ")";
+                        $query .= " AND ";
+                }
+                
+                if (isset($_GET['projet'])){
+                        //$array_projet = print_r($_GET['projet'], true);
+                        //print_r($array_projet);
+                        $query .= " lfp.id_project IN (";
+                        foreach ($_GET['projet'] AS $i){
+                                $query .= $i.", ";
+                        }
+                        $query = substr($query, 0, strlen($query) -2);
+                        $query .= ")";
+                        $query .= " AND ";
+                }
+                
+                $TAG_SLD='(';
+                if (isset($_GET['unit'])){
+                        //$array_unit = print_r($_GET['unit'], true);
+                        foreach ($_GET['unit'] AS $i){
+                                $TAG_SLD .= $i.", ";
+                        }
+                        echo '</br>';
+                        //print_r($array_unit);
+                }
+                
+                if (isset($_GET['tag'])){
+                        //$array_tag = print_r($_GET['tag'], true);
+                        foreach ($_GET['tag'] AS $i){
+                                $TAG_SLD .= $i.", ";
+                        }
+                        echo '</br>';
+                        //print_r($array_tag);
+                }
+                if ($TAG_SLD!='('){
+                        
+                        $query .= " ltp.id_tag IN ".$TAG_SLD;
+                        $query = substr($query, 0, strlen($query) -2);
+                        $query .= ")";
+                }
+                
+                
+                if (substr($query, -6)=='WHERE '){
+                    $query = substr($query, 0, strlen($query) -6);
+                }
+                
+                if (substr($query, -4)=='AND '){
+                    $query = substr($query, 0, strlen($query) -4);
+                }
+                
+                $query .= " GROUP BY f.id_original_file ORDER BY MIN(f.upload_date) DESC";
+                
+                
 		//Query : list of distinct file names
-		$result_files_id=pg_query($connex, "SELECT id_original_file, MIN(upload_date) FROM files GROUP BY id_original_file ORDER BY MIN(upload_date) DESC") or die('Échec de la requête : ' . pg_last_error());
+		$result_files_id=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
 		$nbrows=pg_num_rows($result_files_id);
 		?>
 
@@ -116,7 +206,7 @@ Output variables :
 										}
 									}						
 									echo "<tr>";
-										echo "<td ><img src='picto/validated.png' width='30' height='30'/></td>";
+										echo "<td><img src='picto/validated.png' width='30' height='30'/></td>";
 										// Popover to display metadata for each file
 										echo '<td>'.$name.' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
 										echo "<td>".$date."</td>";
