@@ -22,7 +22,7 @@ Output variables :		id of selected formats
 
 			<!-- button data type with collapse -->
                         <p>
-				<button type="button" name="button1" class="btn btn-lg btn-primary" data-toggle="collapse" data-target="#collapseFirst" aria-expanded="true" aria-controls="collapseFirst"/>
+				<button type="button" name="button1" class="btn btn-lg btn-primary btn-block" data-toggle="collapse" data-target="#collapseFirst" aria-expanded="true" aria-controls="collapseFirst"/>
 				Data type
 				</button>
                         </p>
@@ -45,6 +45,7 @@ Output variables :		id of selected formats
 				
 				
 			// For loop for first button	
+					
 					for ($i=0 ;  $i<$pp ;$i++){
 						echo "<tr>";
 						$row=pg_fetch_row($result);
@@ -52,11 +53,10 @@ Output variables :		id of selected formats
 						$name=$row[1];
 						
 						echo "<td>";
-						echo '<button type="button" name='.$name.' value='.$id.' class="btn btn-primary" data-toggle="collapse" data-target="#collapse'.$id.'" aria-expanded="true" aria-controls="collapse2">';
+						echo '<button type="button" name='.$name.' value='.$id.' class="btn btn-primary btn-block" data-toggle="collapse" data-target="#collapse'.$id.'" aria-expanded="true" aria-controls="collapse2">';
 						echo $name;
 						echo '</button>';
 						
-						echo "&nbsp; ";
 						
 						echo '<div class="collapse" id="collapse'.$id.'">';
 						echo '<div class="card card-body">';
@@ -89,17 +89,14 @@ Output variables :		id of selected formats
 								echo "</tr>";
 								}
 								
-								echo "</table>";
+							echo "</table>";
 								
 								
-                                                echo '</td>';
-                                                echo "</tr>";
+                            echo '</td>';
+                            echo "</tr>";
 					}
-			
 				
 				echo "</table>";
-			
-
 
 			?>
 			</div>
