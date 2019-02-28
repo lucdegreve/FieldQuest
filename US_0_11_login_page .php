@@ -8,7 +8,8 @@
 
 
 <?php
-
+   
+    
     $login = $ps = "";
     $loginError = $psError = "";
     if($_SERVER["REQUEST_METHOD"] == "POST" )
@@ -19,16 +20,21 @@
         
         if(!empty($login))
         {
+            // Include the file with all the functions 
+            require "tab_donnees/funct_connex.php";
+
+            
             // connexion à la base de données Fieldquest
+            $con = new Connex();
+            $connex = $con->connection;
             
-            
-            $link = pg_connect("dbname=fieldquest user=postgres password=postgres");
+            //$link = pg_connect("dbname=fieldquest user=postgres password=postgres");
             //$link = pg_connect("dbname=fieldquest user=postgres password=Admin");
-            $query = "select id_user,id_user_type,login, password from user_account
+            $query = "select login, password from user_account
                       where login = '".$login."'";
-            $result = pg_query($link, $query);
+            $result = pg_query($connex, $query);
            
- 
+            
             if(pg_num_rows($result) == 1){                
                 while ($row = pg_fetch_row($result)) {
                     //echo "login:".$row[0]." password: ".$row[1];
@@ -121,7 +127,7 @@
                     <div class="col-md-4 col-sm-6 border-white bg-secondary" style="border-radius: 15%;padding: 2%">
                         
 
-                            <form id="connecter" method ="post" action="US0_page_intermediaire.php "  role="form">
+                            <form id="connecter" method ="post" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF']); ?> "  role="form">
                                 <div class="form-group">
                                     <label for="Email1">Login</label>
                                     <input type="text" name="login" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="Login" value="<?php echo $login; ?>" >
@@ -153,7 +159,13 @@
                 
             </div>
        
- 
+       
+        </br>
+		</br>
+		</br>
+		</br>
+		
+        
         
         
         
