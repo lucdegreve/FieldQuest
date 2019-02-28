@@ -46,7 +46,7 @@
 		$connex = $con->connection;
 		?>		
 		
-		<form id ="formdepot" action="insert_bdd.php" method="GET">
+		<form id ="formdepot" action="US_2_21_insert_bdd.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
 				
@@ -233,7 +233,7 @@
 	// passing variables through ajax to put them into session's variables
 						$.ajax({
 		type: "GET",
-		url: "ajax1.php",
+		url: "US_2_21_ajax1.php",
 		data:{coords:coords}, //name is a $_GET variable name here,
 							   // and 'youwant' is its value to be passed 
 		success: function(response) {
@@ -247,7 +247,7 @@
 
 						$.ajax({
 		type: "GET",
-		url: "ajax2.php",
+		url: "US_2_21_ajax2.php",
 		data:{coords:coords}, //name is a $_GET variable name here,
 							   // and 'youwant' is its value to be passed 
 		success: function(response) {
