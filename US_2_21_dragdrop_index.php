@@ -11,6 +11,8 @@
 		<link href="css/boostrap.min.css" rel="stylesheet" type="text/css">
 		<script src="US_2_21_dragdrop_jquery-3.0.0.js" type="text/javascript"></script>
 		<script src="US_2_21_dragdrop_script.js" type="text/javascript"></script>
+		<script type= 'text/javascript' src = 'manage_checkbox_button.js'></script>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">	
 
 		<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
 		<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
@@ -91,11 +93,33 @@
 						<!-- Projects -->
 						<?php
 						//Query projects
-						$result_projects_list = pg_query($connex, "SELECT * FROM projects");						
+						//$id_user = $_SESSION[$id_user]; A DECOMMENTER QUANS LA VARIABLE DE SESSION SERA VALABLE
+						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=1 ORDER BY name_project asc");	//CHANGER L'ID					
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
-						echo "Select a project :  ";
-						$tab_projects_list -> creer_liste_option_plus("lst_proj", "id_project", "name_project");
-						?></br></br>
+						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
+						?>
+						Select one or several project(s) :
+						<div class="container">
+							<div class="card card-body">
+								<div class="form-check">
+									<?php 
+										// For each format 
+										for ($i=0; $i< $tab_projects_list->nb_enregistrements (); $i++){
+											// Get id of the format n°$i  of recordset
+											$id_project = $tab_projects_list-> t_enr[$i][0];
+											// Get label of the format n°$i  of recordset
+											$name_project = $tab_projects_list-> t_enr [$i][2];
+										
+											// Make checkbox button 
+											echo '<span class="button-checkbox">';
+											echo '<button type="button" class="btn" data-color="primary" id = project_"'. $id_project .'">'.$name_project.'</button>';
+											echo '<input type="checkbox" class="hidden" name="projet[]" value="'.$id_project.'"/>';
+											echo '</span>';
+										}
+									?>
+								</div>
+							</div>
+						</div>
 						
 						<!-- Comments -->
 						Comment : <br/> <textarea id="Comment" name="Comment" class="form-control" form="formdepot"></textarea>
@@ -132,7 +156,7 @@
 
 						<?php
 							//request parameters
-							$query = "SELECT tt.id_tag_type, name_tag_type FROM  tag_type tt  ";
+							$query = "SELECT tt.id_tag_type, name_tag_type FROM  tag_type tt  ORDER BY name_tag_type";
 							//request execution
 							$result = pg_query($connex, $query) or die(pg_last_error());
 							// Results browsing line by line
@@ -146,7 +170,7 @@
 								echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].' </span>';
 								echo '<ul class="subMenu">';
 								
-								$query2 = "SELECT id_tag, tag_name FROM tags where id_tag_type=".$id_cat; //it gives the name of the tag within the category
+								$query2 = "SELECT id_tag, tag_name FROM tags where id_tag_type=".$id_cat." ORDER BY tag_name"; //it gives the name of the tag within the category
 								$result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
 								while ($row2 = pg_fetch_array($result2)) {
 									echo '<li><div><input type="checkbox" id="' . $row2["id_tag"] . '_tag" name="' . $row2["id_tag"] . '_tag">';
