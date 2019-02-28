@@ -3,9 +3,9 @@
 <html lang="en">
 
 	<head>
-		<!-- Développeur : Elsa -->
+		<!-- Développeur : Elsa, JB & Fagniné -->
 		<!-- Drag and drop which download file automatically when drop -->
-		<!-- Issues : can't create a button "upload" (always automatic) -->
+		<!-- Modify metadata (with current metadata mentionned in the fields) -->
 		
 		<link href="css/custom.css" rel="stylesheet" type="text/css">
 		<link href="css/boostrap.min.css" rel="stylesheet" type="text/css">
@@ -36,6 +36,7 @@
 	<body>
 		
 		<?php
+		session_start();
 		//Header
 		include("en_tete.php");
 		echo "</br>";
@@ -46,6 +47,7 @@
 		$connex = $con->connection;
 		//Get variable from form
 		$id_file=$_GET['id_file'];
+		$_SESSION["id_file"]=$id_file;
 		//Query to get current information about the file
 		$result_info=pg_query($connex, "SELECT latitude, longitude, to_char(data_init_date,'MM/DD/YYYY'), to_char(data_end_date,'MM/DD/YYYY'), file_comment FROM files WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
 		while($row=pg_fetch_array($result_info)){
@@ -69,7 +71,7 @@
 		}
 		?>		
 		
-		<form id ="form_edit" action="edit_bdd.php" method="GET">
+		<form id ="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
 				
@@ -77,7 +79,7 @@
 						<!-- Drag and drop container -->						
 						<h4><B>New file</B></h4>
 						<input type="file" name="file" id="file">							
-						<div class="upload-area"  id="uploadfile" align="left">
+						<div class="upload-area"  id="uploadfile">
 							</br><B>Drag and drop new file here</B><br/></br>or<br/></br><B>Click to select a new file</B>
 						</div>
 						</br>
@@ -201,7 +203,7 @@
 			</div>
 			
 			<div align="center">
-				<button type="submit" class="btn btn-lg btn-success">Send the form</button>
+				<button type="submit" class="btn btn-lg btn-success">Validate</button>
 			</div>
 		</form></br>
 		
