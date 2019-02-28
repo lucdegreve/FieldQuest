@@ -6,7 +6,7 @@
 Developped by Ophélie	& Diane	
 	      
 This page displays the result of the search by tags as a table. 
-Code based on "US3_11_Visualisere_liste_fichiers.php" developped by Elsa & Axelle
+Code based on "US3_11_Visualiser_liste_fichiers.php" developped by Elsa & Axelle
 
 
 Input variables : 		
@@ -116,12 +116,12 @@ Output variables :
 										}
 									}						
 									echo "<tr>";
-										echo "<td ".$bold."><img src='picto/validated.png' width='30' height='30'/></td>";
+										echo "<td ><img src='picto/validated.png' width='30' height='30'/></td>";
 										// Popover to display metadata for each file
 										echo '<td>'.$name.' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
 										echo "<td>".$date."</td>";
-										echo "<td ".$bold.">".$first_name." ".$last_name."</td>";
-										echo "<td ".$bold.">".$size."</td>";
+										echo "<td>".$first_name." ".$last_name."</td>";
+										echo "<td>".$size."</td>";
 										echo "<td>";
 											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
 										echo "</td>";
