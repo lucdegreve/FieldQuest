@@ -132,11 +132,15 @@ for ($i=0;$i<$nb_tags;$i++){
 	$query_result = pg_query($connex,$query) or die (pg_last_error() );
 }
 
-// insert file and projet link
-	$query = "insert into link_file_project (id_file,id_project)
-				VALUES ('".$id_now."','".$file_projet."')";
-	$query_result = pg_query($connex,$query) or die (pg_last_error() );
-
+// insert file and projet link (multiple projects)
+if(isset($_GET['projet']) && !empty($_GET['projet'])){ 
+    $Col1_Array = $_GET['projet']; 
+    foreach($Col1_Array as $selectValue){ 
+		$query = "insert into link_file_project (id_file,id_project)
+				VALUES ('".$id_now."','".$selectValue."')";
+		$query_result = pg_query($connex,$query) or die (pg_last_error() );
+    } 
+}	
 ?>
 <br/>
 <div class="container-fluid" >
