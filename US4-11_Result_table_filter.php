@@ -16,8 +16,6 @@ Output variables :
 ---------------------------------------------------------------------------------->	
 
 		<META charset="UTF-8">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/custom.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -51,16 +49,18 @@ Output variables :
                         WHERE f.id_validation_state = '2' AND ";
                 
                 if ($_POST['start']!=''){
-                        $start_date = $_POST['start'];
+                        $start_date = $_GET['start'];
                         $query .= " f.upload_date >'".$start_date."' AND ";
                 }
                 
                 if ($_POST['end']!=''){
-                        $end_date = $_POST['end'];
+                        $end_date = $_GET['end'];
                         $query .= " f.upload_date <'".$end_date."' AND ";
                 }
                 
                 if (isset($_POST['format'])){
+                        //$array_format = print_r($_GET['format'],true);
+                        //print_r($array_format);
                         $query .= " f.id_format IN (";
                         foreach ($_POST['format'] AS $i){
                                 $query .= $i.", ";
@@ -71,6 +71,8 @@ Output variables :
                 }
                 
                 if (isset($_POST['projet'])){
+                        //$array_projet = print_r($_GET['projet'], true);
+                        //print_r($array_projet);
                         $query .= " lfp.id_project IN (";
                         foreach ($_POST['projet'] AS $i){
                                 $query .= $i.", ";
@@ -86,17 +88,21 @@ Output variables :
                 
                 $TAG_SLD='(';
                 if (isset($_POST['unit'])){
+                        //$array_unit = print_r($_GET['unit'], true);
                         foreach ($_POST['unit'] AS $i){
                                 $TAG_SLD .= $i.", ";
                         }
                         echo '</br>';
+                        //print_r($array_unit);
                 }
                 
                 if (isset($_POST['tag'])){
+                        //$array_tag = print_r($_GET['tag'], true);
                         foreach ($_POST['tag'] AS $i){
                                 $TAG_SLD .= $i.", ";
                         }
                         echo '</br>';
+                        //print_r($array_tag);
                 }
                 if ($TAG_SLD!='('){
                         
@@ -142,8 +148,8 @@ Output variables :
 								<th scope="col" width="8%">Size</th>
 								<th scope="col" width="10%"></th>
 								<th scope="col" width="10%"></th>
-								<th id="select" scope="col" width="10%" style="text-align:center;">Select</th>
-								<th class="droite" scope="col" width="5%" style="text-align:center;"><input id="id_selectAll" type="checkbox" onclick="selectAll();"></th>
+								<th scope="col" width="10%"></th>
+								<th scope="col" width="5%">Select</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -220,7 +226,7 @@ Output variables :
 											<?php
 										echo "</td>";										
 										echo "<td>";
-											echo '</br><div align="center"><input  id='.$id_file.' type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'" onclick= "compteur('.$id_file.');" ></div>';
+											echo '</br><div align="center"><input type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'"></div>';
 										echo "</td>";
 									echo "</tr>";
 								}
@@ -244,12 +250,11 @@ Output variables :
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="bootstrap/js/jquery.min.js"><\/script>')</script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
+	
 	
 	<!-- Resources for popover -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
@@ -273,57 +278,7 @@ Output variables :
 				$('[data-toggle="popover"]').popover('hide');
 			}
 		});
-		
-		
-	     // Function Compteur
-        
-        var count=0;
-        
-        function compteur(id_file) {
-            if(document.getElementById(id_file).checked){
-                count++;
-            }else{
-                count--;
-            }
-            document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
-                
-		}
-        
-        
-        
-        
-        
-        function cocherTout(etat){
-            var cases = document.getElementsByTagName('input');   // on recupere tous les INPUT
-            for(var i=0; i<cases.length; i++)     // on les parcourt
-                if(cases[i].type == 'checkbox')     // si on a une checkbox...
-                cases[i].checked = etat;     // ... on la coche ou non
-        }
-        
-
-              
-        
-        
-        
-        function selectAll() {
-            var all = <?php echo $nbrows; ?>;
-           
-            if(document.getElementById("id_selectAll").checked){
-                cocherTout(true);
-				count=all;
-                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
-            }else{
-                cocherTout(false);
-				count=0;
-                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
-                
-                
-            }            
-            
-                
-		}
-        
-        
+	
 	</script>
 	
 </html>
