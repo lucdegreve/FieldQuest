@@ -1,5 +1,4 @@
 <html>
-
 	<head>
 <!--------------------------------------------------------------------------------
        US4-11 Filtrer avec des tags - Table of query result  
@@ -19,22 +18,8 @@ Output variables :
 	</head>
 
 	<body>
-        
-                <?php
-                        
-                ?>
-
-
 		<?php
-		//Header
-		include("en_tete.php");
-		echo "</br>";
-		//DB connection
-		require "./tab_donnees/funct_connex.php";
-		require "./tab_donnees/tab_donnees.class.php";
-		$con=new Connex();
-		$connex=$con->connection;
-                
+
                 //Query : filtered search
                 // To Do : Add Sources to the query
                 $query="SELECT f.id_original_file, MIN(f.upload_date)
@@ -230,76 +215,59 @@ Output variables :
 				</div></br>
 			</form>
 		</div>
+                
 
-	</body>
-	
-	<?php
-	echo "</br>";
-	include("pied_de_page.php");
-	?>
-	
-	<!-- Bootstrap core JavaScript
-	================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="bootstrap/js/jquery.min.js"><\/script>')</script>
-	
-	
-	<!-- Resources for popover -->
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
-	
-	<script type="text/javascript">
-		//Ouvrir la popup pour afficher les différentes versions
-		function popup(original_id) {	
-			window.open("US3_11_Visualiser_liste_fichiers_P2.php?original_id="+original_id,'newWin','width=1000,height=400');
-		}	
-		
-		//Ouvrir la page "edit file"
-		function edit_file(id_file) { 
-			document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
-		}
-		
-		$('[data-toggle="popover"]').popover();
 
-		$('body').on('click', function (e) {
-		//only buttons
-			if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) { 
-				$('[data-toggle="popover"]').popover('hide');
-			}
-		});
-	
-	
-		     // Function Compteur 
+
+<script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+
+
+<script type="text/javascript">
+        //Ouvrir la popup pour afficher les différentes versions
+        function popup(original_id) {	
+                window.open("US3_11_Visualiser_liste_fichiers_P2.php?original_id="+original_id,'newWin','width=1000,height=400');
+        }	
+        
+        //Ouvrir la page "edit file"
+        function edit_file(id_file) { 
+                document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
+        }
+        
+        $('[data-toggle="popover"]').popover();
+
+        $('body').on('click', function (e) {
+        //only buttons
+                if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) { 
+                        $('[data-toggle="popover"]').popover('hide');
+                }
+        });
+        
+        
+        // Function Compteur 
          
         var count=0; 
          
         function compteur(id_file) { 
             if(document.getElementById(id_file).checked){ 
                 count++; 
-            }else{ 
+            }
+            else{ 
                 count--; 
             } 
             document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ; 
-                 
-		} 
+        }
          
-         
+        
         function cocherTout(etat){ 
             var cases = document.getElementsByTagName('input');   // on recupere tous les INPUT 
             for(var i=0; i<cases.length; i++)     // on les parcourt 
                 if(cases[i].type == 'checkbox')     // si on a une checkbox... 
                 cases[i].checked = etat;     // ... on la coche ou non 
-        } 
+        }
          
- 
-               
-         
-         
-         
+
         function selectAll() { 
             var all = <?php echo $nbrows; ?>; 
             
@@ -307,16 +275,16 @@ Output variables :
                 cocherTout(true); 
 				count=all; 
                 document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ; 
-            }else{ 
+            }
+            else{ 
                 cocherTout(false); 
 				count=0; 
-                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ; 
-                 
-                 
-            }             
-             
-                 
-		} 
-	</script>
+                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
+            }
+        }
+
+</script>
+
+</body>
 	
 </html>

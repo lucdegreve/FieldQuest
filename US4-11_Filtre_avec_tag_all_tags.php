@@ -15,32 +15,19 @@ Output variables :		id of selected tags
 		
 ------------------------------------------------------------->	
 
-<META charset="utf-8"> 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>  
-
-
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <script type= 'text/javascript' src = 'manage_checkbox_button.js'></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
 </head>
 
 <body>
-<?php
-// Files to connect to the database and use recordset
-require_once "tab_donnees/funct_connex.php";
-require_once "tab_donnees/tab_donnees.class.php";
 
-// Connexion to the database 
-$con = new Connex();
-$connex = $con->connection;
-?>
 <!-- Form to get selected filters  -->
-<form name='filters' method = 'POST' action = 'US4-11_Result_table_filter.php'>
-<div class='container'>
+<form name='filters' method = 'POST' action = 'US4-11_Main_page_filter.php'>
+
 	
 	<?php 
 	// Include page with collapse button & content for project names
@@ -73,7 +60,7 @@ $connex = $con->connection;
 	?>
 	<!-- Search button -->
 	<button type='submit' class='btn btn_lg btn-success' name='search'>Search</button>
-</div>
+
 </form>
 
 

@@ -27,8 +27,8 @@
 			margin: 0;
 		}
 		#map {
-			width: 1000px;
-			height: 800px;
+			width: 800px;
+			height: 600px;
 		}
 	</style>
 
@@ -39,101 +39,87 @@
 <div id='map'></div>
 
 <?php
-require "./tab_donnees/tab_donnees.class.php";
-require "./tab_donnees/funct_connex.php";
 require_once "Zip_classes/src/zip.php";
 
     $zip = new Zip();
     $zip->zip_start("zip_map_file.zip");
 
-//connexion to database
-$con = new Connex();
-$connex = $con->connection;
-
 // real query that'll be used when pages are linked
-/*
-$query_map = "SELECT f.id_file, f.latitude, f.longitude,f.file_place, f.file_name, f.file_comment
-			FROM files f
-                            LEFT JOIN version v on f.id_version = v.id_version
-                            LEFT JOIN link_file_project lfp ON lfp.id_file=f.id_file
-                            LEFT JOIN projects p ON lfp.id_file=p.id_project
-                            LEFT JOIN format fr ON fr.id_format=f.id_format
-                            LEFT JOIN user_account u ON u.id_user_account=f.id_user_account
-                            LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
-                            LEFT JOIN tags t ON t.id_tag=ltp.id_tag
-                        WHERE f.id_validation_state = '2' AND ";
+
+$query_map = "SELECT f.id_file as id_file, f.latitude as latitude, f.longitude as longitude, f.file_name as file_name, f.file_place as file_place, f.file_comment as file_comment
+                FROM files f
+                    LEFT JOIN version v on f.id_version = v.id_version
+                    LEFT JOIN link_file_project lfp ON lfp.id_file=f.id_file
+                    LEFT JOIN projects p ON lfp.id_file=p.id_project
+                    LEFT JOIN format fr ON fr.id_format=f.id_format
+                    LEFT JOIN user_account u ON u.id_user_account=f.id_user_account
+                    LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
+                    LEFT JOIN tags t ON t.id_tag=ltp.id_tag
+                WHERE f.id_validation_state = '2' AND ";
                 
-                if ($_GET['start']!=''){
-                        $start_date = $_GET['start'];
-                        $query .= " f.upload_date >'".$start_date."' AND ";
+                if ($_POST['start']!=''){
+                        $start_date = $_POST['start'];
+                        $query_map .= " f.upload_date >'".$start_date."' AND ";
                 }
                 
-                if ($_GET['end']!=''){
-                        $end_date = $_GET['end'];
-                        $query .= " f.upload_date <'".$end_date."' AND ";
+                if ($_POST['end']!=''){
+                        $end_date = $_POST['end'];
+                        $query_map .= " f.upload_date <'".$end_date."' AND ";
                 }
                 
-                if (isset($_GET['format'])){
-                        //$array_format = print_r($_GET['format'],true);
-                        //print_r($array_format);
-                        $query .= " f.id_format IN (";
-                        foreach ($_GET['format'] AS $i){
-                                $query .= $i.", ";
+                if (isset($_POST['format'])){
+                        $query_map .= " f.id_format IN (";
+                        foreach ($_POST['format'] AS $i){
+                                $query_map .= $i.", ";
                         }
-                        $query = substr($query, 0, strlen($query) -2);
-                        $query .= ")";
-                        $query .= " AND ";
+                        $query_map = substr($query_map, 0, strlen($query_map) -2);
+                        $query_map .= ")";
+                        $query_map .= " AND ";
                 }
                 
-                if (isset($_GET['projet'])){
-                        //$array_projet = print_r($_GET['projet'], true);
-                        //print_r($array_projet);
-                        $query .= " lfp.id_project IN (";
-                        foreach ($_GET['projet'] AS $i){
-                                $query .= $i.", ";
+                if (isset($_POST['projet'])){
+                        $query_map .= " lfp.id_project IN (";
+                        foreach ($_POST['projet'] AS $i){
+                                $query_map .= $i.", ";
                         }
-                        $query = substr($query, 0, strlen($query) -2);
-                        $query .= ")";
-                        $query .= " AND ";
+                        $query_map = substr($query_map, 0, strlen($query_map) -2);
+                        $query_map .= ")";
+                        $query_map .= " AND ";
                 }
                 
                 $TAG_SLD='(';
-                if (isset($_GET['unit'])){
-                        //$array_unit = print_r($_GET['unit'], true);
-                        foreach ($_GET['unit'] AS $i){
+                if (isset($_POST['unit'])){
+                        foreach ($_POST['unit'] AS $i){
                                 $TAG_SLD .= $i.", ";
                         }
                         echo '</br>';
-                        //print_r($array_unit);
                 }
                 
-                if (isset($_GET['tag'])){
-                        //$array_tag = print_r($_GET['tag'], true);
-                        foreach ($_GET['tag'] AS $i){
+                if (isset($_POST['tag'])){
+                        foreach ($_POST['tag'] AS $i){
                                 $TAG_SLD .= $i.", ";
                         }
                         echo '</br>';
-                        //print_r($array_tag);
                 }
                 if ($TAG_SLD!='('){
                         
-                        $query .= " ltp.id_tag IN ".$TAG_SLD;
-                        $query = substr($query, 0, strlen($query) -2);
-                        $query .= ")";
+                        $query_map .= " ltp.id_tag IN ".$TAG_SLD;
+                        $query_map = substr($query_map, 0, strlen($query_map) -2);
+                        $query_map .= ")";
                 }
                 
                 
-                if (substr($query, -6)=='WHERE '){
-                    $query = substr($query, 0, strlen($query) -6);
+                if (substr($query_map, -6)=='WHERE '){
+                    $query_map = substr($query_map, 0, strlen($query_map) -6);
                 }
                 
-                if (substr($query, -4)=='AND '){
-                    $query = substr($query, 0, strlen($query) -4);
+                if (substr($query_map, -4)=='AND '){
+                    $query_map = substr($query_map, 0, strlen($query_map) -4);
                 }
-		$query .= " GROUP BY f.id_file";
-	*/ 
+		$query_map .= " GROUP BY f.id_file";
+	
 $query = "SELECT id_file, latitude, longitude, file_name,file_place, file_comment FROM  files  ";
-$result = pg_query($connex, $query) or die(pg_last_error());
+$result = pg_query($connex, $query_map) or die(pg_last_error());
 
 //creating a list of lists containing all the needed informations
 $fichresult=array();
@@ -236,11 +222,10 @@ for ($j=0;$j<count($fichresult);$j++){
 	if(Polygon.getBounds().contains(mark.getLatLng())==true){
 		
 		<?php
-	$file = "US_2_21_dragdrop_upload/apple_lion.jpg";
+		$file = "US_2_21_dragdrop_upload/apple_lion.jpg";
 	$zip->zip_add('"'.$fichresult[$j][4]."".$fichresult[$j][3].'"');
 	// Quick check to verify that the file exists
 		// adresse a modifier avec la vraie du serveur TELECHARGEMENT NE FONCTIONNANT PAS
-		
 	?>
 	}
 	<?php
@@ -273,9 +258,9 @@ for ($j=0;$j<count($fichresult);$j++){
 	<?php
 	}
 }
-?>
 
 
+	?>
 </script>
 
 
