@@ -42,7 +42,7 @@ $con = new Connex();
 $connex = $con->connection;
 ?>
 <!-- Form to get selected filters  -->
-<form name='filters' method = 'GET' action = 'US4-11_Result_table_filter.php'>
+<form name='filters' method = 'POST' action = 'US4-11_Result_table_filter.php'>
 <div class='container'>
 	
 	<?php 
