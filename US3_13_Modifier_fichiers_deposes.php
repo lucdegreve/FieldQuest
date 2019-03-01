@@ -73,7 +73,7 @@
 		}
 		?>		
 		
-		<form id ="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
+		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
 				
@@ -88,14 +88,12 @@
 					</div></div>
 					
 					<div class="col-md-6"><div class="jumbotron">
-						<h2><B>Select a new data localisation</B></h2>
-						<!-- A MODIFIER MANU : afficher le pin point sur la carte avec les coordonnées affichées ci-dessous -->
-						<?php echo "Current latitude : ".$latitude." & longitude : ".$longitude." (à supprimer)"; ?>
+						<h2><B>Select a new data localisation</B></h2></br>
 						<div style="margin:0 auto" id="map" >
 							<!-- Your map will be shown inside this div-->
 						</div>	
-						Latitude : <span id="Latitude"></span></br>
-						Longitude : <span id="Longitude"></span>
+						Latitude : <span id="Latitude"><?php echo $latitude; ?></span></br>
+						Longitude : <span id="Longitude"><?php echo $longitude; ?></span>
 						<!-- Si aucune coordonnée n'est sélectionnée, il faut transmettre les anciennes -->
 						<?php $_SESSION['latitude']=$latitude;
 						$_SESSION['longitude']=$longitude; ?>
@@ -208,7 +206,7 @@
 			</div>
 			
 			<div align="center">
-				<button type="submit" class="btn btn-lg btn-success">Validate</button>
+				<button type="submit" class="btn btn-lg btn-success" onclick="return validate()">Validate</button>
 			</div>
 		</form></br>
 		
@@ -220,6 +218,18 @@
 	
 	<!-- Openlayesr JS fIle -->
 	<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+		function validate(){
+			if(document.form_edit.file.value != ""){
+				return true;
+			}
+			else{
+				alert("Please, add a file !");
+				return false;
+			}
+		}
+	</script>
  
 
 	<script type="text/javascript">
@@ -237,6 +247,29 @@
 			zoom: 3 //Initial Zoom Level
         })
     });	  
+	
+	var marker = new ol.Feature({
+  geometry: new ol.geom.Point(
+    ol.proj.fromLonLat([<?php echo $latitude; ?>,<?php echo $longitude; ?>])
+  ),  // Cordinates of old point
+});
+
+marker.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(({
+            crossOrigin: 'anonymous',
+            src: 'pinpoint2.png',
+			scale: 0.1
+        }))
+    }));
+
+var vectorSource = new ol.source.Vector({
+  features: [marker]
+});
+
+var markerVectorLayer = new ol.layer.Vector({
+  source: vectorSource,
+});
+map.addLayer(markerVectorLayer);
 	  
 	// create pinpoint onclick
 	map.on('click', function(event) {
