@@ -18,7 +18,15 @@
 			include("en_tete.php");
 			$id_user=$_GET['id_user'];
 			$id_user_type=$_GET['id_user_type'];
-			$link = pg_connect("dbname=fieldquest user=postgres password=postgres");
+			
+			// Include the file with all the functions 
+            require "tab_donnees/funct_connex.php";
+
+            // connexion à la base de données Fieldquest
+            $con = new Connex();
+            $connex = $con->connection;
+			
+			$link = $connex;
 			//$link = pg_connect("dbname=fieldquest1 user=postgres password=Admin");
 			$query = "select id_user_account,id_user_type,first_name,last_name,login ,password from user_account
 			where id_user_account='".$id_user."'AND id_user_type='".$id_user_type."'";
