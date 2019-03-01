@@ -100,6 +100,11 @@
           <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
               <input type="submit" name="change_password" value="Change your password">
           </form>
+          
+          <form name="account_monitoring_user" action="US_1.22_p2_delete_account.php" method="GET">
+              <input type="submit" name="delete_account" value="Delete my account">
+          </form>
+
 
         	<?php
         			 include("pied_de_page.php");
