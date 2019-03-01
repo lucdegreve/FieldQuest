@@ -8,12 +8,6 @@
 
 		<body>
 			
-			<!--  
-			Fonction pour importer l'en_tete à mettre dans le début du body de votre page
-			<?php
-				 include('.../git/FieldQuest/en_tete.php');
-			?>
-			-->
 				<nav class="navbar navbar-expand-lg navbar-dark bg-info">
 				<?php
 					session_start();
