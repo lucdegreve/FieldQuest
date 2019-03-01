@@ -1,6 +1,4 @@
-<?php
-     session_start();
-?>
+
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
@@ -18,9 +16,9 @@
         <strong> Here are your profile information </strong>
         <BR/>
         <?php
-              $id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
+              $id_user = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
               // For now I will use this one --> it has to be removed when Session start is working !
-              $id_user_account = 1;
+              //$id_user_account = 1;
               require "tab_donnees/tab_donnees.class.php";
               require "tab_donnees/funct_connex.php";
               // Variables needed for connexion
@@ -56,7 +54,7 @@
           <?php
 
                 // Query to get all information needed from user_account
-                $result= pg_query($connex, "SELECT last_name, first_name, company, address, postcode, city, country, email, phone, website FROM user_account WHERE id_user_account = $id_user_account");
+                $result= pg_query($connex, "SELECT last_name, first_name, company, address, postcode, city, country, email, phone, website FROM user_account WHERE id_user_account = $id_user");
                 $row = pg_fetch_row($result);
 
                 // Then present all the info properly in a table
@@ -100,11 +98,6 @@
           <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
               <input type="submit" name="change_password" value="Change your password">
           </form>
-          
-          <form name="account_monitoring_user" action="US_1.22_p2_delete_account.php" method="GET">
-              <input type="submit" name="delete_account" value="Delete my account">
-          </form>
-
 
         	<?php
         			 include("pied_de_page.php");
