@@ -11,6 +11,8 @@
 		<link href="css/boostrap.min.css" rel="stylesheet" type="text/css">
 		<script src="US_2_21_dragdrop_jquery-3.0.0.js" type="text/javascript"></script>
 		<script src="US_2_21_dragdrop_script.js" type="text/javascript"></script>
+		<script type= 'text/javascript' src = 'manage_checkbox_button.js'></script>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 		<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
 		<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
@@ -77,23 +79,26 @@
 				
 					<div class="col-md-6"><div class="jumbotron">
 						<!-- Drag and drop container -->						
-						<h4><B>New file</B></h4>
+						<h2><B>New file</B></h2>
 						<input type="file" name="file" id="file">							
 						<div class="upload-area"  id="uploadfile">
-							</br><B>Drag and drop new file here</B><br/></br>or<br/></br><B>Click to select a new file</B>
+							<B>Drag and drop new file here</B><br/>or<br/><B>Click to select a new file</B>
 						</div>
 						</br>
 					</div></div>
 					
 					<div class="col-md-6"><div class="jumbotron">
-						<h4><B>Select the data localisation</B></h4></br>
-						<!-- A MODIFIER MANU -->
-						<?php echo "Latitude : ".$latitude." and longitude : ".$longitude; ?>
+						<h2><B>Select a new data localisation</B></h2>
+						<!-- A MODIFIER MANU : afficher le pin point sur la carte avec les coordonnées affichées ci-dessous -->
+						<?php echo "Current latitude : ".$latitude." & longitude : ".$longitude." (à supprimer)"; ?>
 						<div style="margin:0 auto" id="map" >
 							<!-- Your map will be shown inside this div-->
 						</div>	
-						<span id="Latitude" style="display:none"></span>
-						<span id="Longitude" style="display:none"></span>
+						Latitude : <span id="Latitude"></span></br>
+						Longitude : <span id="Longitude"></span>
+						<!-- Si aucune coordonnée n'est sélectionnée, il faut transmettre les anciennes -->
+						<?php $_SESSION['latitude']=$latitude;
+						$_SESSION['longitude']=$longitude; ?>
 					</div></div>
 					
 				</div>
@@ -101,7 +106,7 @@
 				<div class="row">
 					
 					<div class="col-md-6"><div class="jumbotron">
-						<h4><B>Other information</B></h4></br>
+						<h2><B>Other information</B></h2></br>
 						
 						<!-- Period -->
 						Select a period : <input type="text" name="daterange" value="<?php echo $init_date." - ".$end_date; ?>" /> </br></br>
@@ -129,7 +134,7 @@
 					</div></div>
 					
 					<div class="col-md-6"><div class="jumbotron">					
-						<h4><B>Select tags</B></h4></br>
+						<h2><B>Select new tags</B></h2></br>
 
 						<script type="text/javascript"> // allows to make a tree structure dynamic
 							$(document).ready( function () {
@@ -213,13 +218,14 @@
 	include("pied_de_page.php");
 	?>
 	
-	<!-- Openlayesr JS file --> 
-	<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script> 
+	<!-- Openlayesr JS fIle -->
+	<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+ 
 
 	<script type="text/javascript">
-	
-	// creating map : center on paris
-	var map = new ol.Map({
+ 
+ // creating map : center on paris
+ var map = new ol.Map({
         target: 'map',
         layers: [
 			new ol.layer.Tile({
@@ -264,7 +270,7 @@
 	// passing variables through ajax to put them into session's variables
 						$.ajax({
 		type: "GET",
-		url: "ajax1.php",
+		url: "US_2_21_ajax1.php",
 		data:{coords:coords}, //name is a $_GET variable name here,
 							   // and 'youwant' is its value to be passed 
 		success: function(response) {
@@ -278,7 +284,7 @@
 
 						$.ajax({
 		type: "GET",
-		url: "ajax2.php",
+		url: "US_2_21_ajax2.php",
 		data:{coords:coords}, //name is a $_GET variable name here,
 							   // and 'youwant' is its value to be passed 
 		success: function(response) {
@@ -289,6 +295,6 @@
 						}
 	})
 				});
-	 </script>
+	</script>
 	 
 </html>
