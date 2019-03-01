@@ -54,21 +54,21 @@
 				
 					<div class="col-md-6"><div class="jumbotron">
 						<!-- Drag and drop container -->						
-						<h4><B>Your file</B></h4>
+						<h2><B>Your file</B></h2>
 						<input type="file" name="file" id="file">							
 						<div class="upload-area"  id="uploadfile" align="left">
-							</br><B>Drag and drop a file here</B><br/></br>or<br/></br><B>Click to select a file</B>
+							<B>Drag and drop a file here</B></br>or<br/><B>Click to select a file</B>
 						</div>
 						</br>
 					</div></div>
 					
 					<div class="col-md-6"><div class="jumbotron">
-						<h4><B>Select the data localisation</B></h4></br>
+						<h2><B>Select the data localisation</B></h2></br>
 						<div style="margin:0 auto" id="map" >
 							<!-- Your map will be shown inside this div-->
 						</div>						
-						Latitude : <span id="Latitude" ></span> </br>
-						Longitude : <span id="Longitude" ></span>
+						Latitude : <span id="Latitude"></span> </br>
+						Longitude : <span id="Longitude"></span>
 					</div></div>
 					
 				</div>
@@ -76,7 +76,7 @@
 				<div class="row">
 					
 					<div class="col-md-6"><div class="jumbotron">
-						<h4><B>Other information</B></h4></br>
+						<h2><B>Other information</B></h2></br>
 						
 						<!-- Period -->
 						Select a period : <input type="text" name="daterange" value=""/></br></br>
@@ -126,7 +126,7 @@
 					</div></div>
 					
 					<div class="col-md-6"><div class="jumbotron">					
-						<h4><B>Select tags</B></h4></br>
+						<h2><B>Select tags</B></h2></br>
 
 						<script type="text/javascript"> // allows to make a tree structure dynamic
 							$(document).ready( function () {
