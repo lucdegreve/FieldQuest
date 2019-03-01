@@ -237,6 +237,29 @@
 			zoom: 3 //Initial Zoom Level
         })
     });	  
+	
+	var marker = new ol.Feature({
+  geometry: new ol.geom.Point(
+    ol.proj.fromLonLat([<?php echo $latitude; ?>,<?php echo $longitude; ?>])
+  ),  // Cordinates of old point
+});
+
+marker.setStyle(new ol.style.Style({
+        image: new ol.style.Icon(({
+            crossOrigin: 'anonymous',
+            src: 'pinpoint2.png',
+			scale: 0.1
+        }))
+    }));
+
+var vectorSource = new ol.source.Vector({
+  features: [marker]
+});
+
+var markerVectorLayer = new ol.layer.Vector({
+  source: vectorSource,
+});
+map.addLayer(markerVectorLayer);
 	  
 	// create pinpoint onclick
 	map.on('click', function(event) {
