@@ -51,18 +51,16 @@ Output variables :
                         WHERE f.id_validation_state = '2' AND ";
                 
                 if ($_POST['start']!=''){
-                        $start_date = $_GET['start'];
+                        $start_date = $_POST['start'];
                         $query .= " f.upload_date >'".$start_date."' AND ";
                 }
                 
                 if ($_POST['end']!=''){
-                        $end_date = $_GET['end'];
+                        $end_date = $_POST['end'];
                         $query .= " f.upload_date <'".$end_date."' AND ";
                 }
                 
                 if (isset($_POST['format'])){
-                        //$array_format = print_r($_GET['format'],true);
-                        //print_r($array_format);
                         $query .= " f.id_format IN (";
                         foreach ($_POST['format'] AS $i){
                                 $query .= $i.", ";
@@ -73,8 +71,6 @@ Output variables :
                 }
                 
                 if (isset($_POST['projet'])){
-                        //$array_projet = print_r($_GET['projet'], true);
-                        //print_r($array_projet);
                         $query .= " lfp.id_project IN (";
                         foreach ($_POST['projet'] AS $i){
                                 $query .= $i.", ";
@@ -90,21 +86,17 @@ Output variables :
                 
                 $TAG_SLD='(';
                 if (isset($_POST['unit'])){
-                        //$array_unit = print_r($_GET['unit'], true);
                         foreach ($_POST['unit'] AS $i){
                                 $TAG_SLD .= $i.", ";
                         }
                         echo '</br>';
-                        //print_r($array_unit);
                 }
                 
                 if (isset($_POST['tag'])){
-                        //$array_tag = print_r($_GET['tag'], true);
                         foreach ($_POST['tag'] AS $i){
                                 $TAG_SLD .= $i.", ";
                         }
                         echo '</br>';
-                        //print_r($array_tag);
                 }
                 if ($TAG_SLD!='('){
                         
