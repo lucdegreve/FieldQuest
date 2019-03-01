@@ -143,12 +143,11 @@ if(isset($_GET['projet']) && !empty($_GET['projet'])){
 }	
 ?>
 <br/>
-<div class="container-fluid" >
-	<div class="row">
-		<div class="col-md-12"><div class="jumbotron">
-			Your file was successfully imported, Thanks you
-		</div>
-	</div>
+<div class="container">
+	<h1  align="center">Your file has been imported successfully, thank you !</h1></br>
 </div>
+
 <?php	include("pied_de_page.php"); ?>
+
+</html>
 		
