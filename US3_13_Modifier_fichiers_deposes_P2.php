@@ -11,7 +11,7 @@
 	<script src="US_2_21_dragdrop_jquery-3.0.0.js" type="text/javascript"></script>
 	<script src="US_2_21_dragdrop_script.js" type="text/javascript"></script>
 	
-	<title>Your modification has been considered</title>
+	<title>Your modification has been considered successfully !</title>
 	</head>
 	
 	<body>
@@ -27,7 +27,7 @@
 		$con = new Connex();
 		$connex = $con->connection;
 		
-		//On met une valeur en dur pour l'id_user_account pour l'instant
+		//On met une valeur en dur pour l'id_user_account pour le moment
 		$id_user_account=1;
 		
 		//Get id_original_file
@@ -37,6 +37,7 @@
 		}
 
 		//Tous les echo ci dessous ne seront pas présents plus tard mais ils aident pour travailler sur la page !
+		echo "<U>Commentaires à supprimer</U> : </br>";
 		echo "File name : ".$_SESSION["upload_filename"]."<br/>";
 		echo "File location : ".$_SESSION["upload_location"]."<br/>";
 		echo "File modification date : ".$_SESSION["upload_date"]."<br/>";
@@ -106,20 +107,47 @@
 			//A CODER
 			
 		//Get new latitude and longitude
+		$longitude= $_SESSION['longitude'];
+		$latitude = $_SESSION['latitude'];
+		echo "Latitude : ".$latitude." & Longitude : ".$longitude."</br>";		
 		
-			
-
-		//It will be an insert and not an update finally. We recuperate some metadata of the modified data and we create an insertion with the new file, indicating the id of the original file"
+		//Get new tags
+		$selected_tags=array(); //Empty list which will contain all selected tags id
+		$result_id_tag=pg_query($connex, "SELECT id_tag, tag_name FROM  tags") or die(pg_last_error());
+		echo "Liste des tags sélectionnés : ";
+		//For every tag, check if tag is selected
+		while($row=pg_fetch_array($result_id_tag)) { 
+			$var=$_GET[$row["id_tag"]."_tag"];
+			if ($var == "on") { //If checkbox is checked...
+				array_push($selected_tags, $row["id_tag"]); //... add tag id to array
+				echo $row["tag_name"].", ";
+			}
+		}
+		
+		
 		//Insertion of the data for the modified file which has been upladed previously
-		$query="INSERT INTO files (id_user_account, id_format, id_validation_state, id_version, upload_date, file_name, file_place, file_size, id_original_file, file_comment, data_init_date, data_end_date) VALUES (".$id_user_account.",".$id_format.",2,".$max_version .",'".$_SESSION["upload_date"]."','".$_SESSION["upload_filename"]."','".$_SESSION["upload_location"]."',".$_SESSION["upload_file_size"].",".$original_id.",'".$comment."','".$start_date."','".$end_date."')"; 
-		$query_result = pg_query($connex,$query) or die (pg_last_error() );
+		$query_insert="INSERT INTO files (id_user_account, id_format, id_validation_state, id_version, upload_date, file_name, file_place, file_size, id_original_file, file_comment, data_init_date, data_end_date, latitude, longitude) VALUES (".$id_user_account.",".$id_format.",2,".$max_version .",'".$_SESSION["upload_date"]."','".$_SESSION["upload_filename"]."','".$_SESSION["upload_location"]."',".$_SESSION["upload_file_size"].",".$original_id.",'".$comment."','".$start_date."','".$end_date."','".$latitude."','".$longitude."')"; 
+		$result_insert=pg_query($connex,$query_insert) or die (pg_last_error() );
+		
+		//Get file's ID from DB to put tags into DB		
+		$result_new_id=pg_query($connex, "SELECT id_file FROM files WHERE file_name='".$_SESSION["upload_filename"]."'") or die(pg_last_error());
+		while($row = pg_fetch_array($result_new_id)) { 
+			$new_id=$row[0];
+		}
+		echo "</br>Nouvel ID généré : ".$new_id;
+		
+		//Insert tags into DB
+		$nb_tags=count($selected_tags);
+		for($i=0;$i<$nb_tags;$i++){
+			$result_insert_tags=pg_query($connex, "INSERT INTO link_tag_project (id_file, id_tag) VALUES (".$new_id.",'".$selected_tags[$i]."')") or die (pg_last_error() );
+		}
 		?>
 	
 		<div class="container">
 			<h1  align="center">Your modification has been considered !</h1></br>
 			<div align="center">
 				<form action="US3_11_Visualiser_liste_fichiers.php" method="GET">
-					<button type="submit" class="btn btn-md btn-primary">Previous page</button>
+					<button type="submit" class="btn btn-md btn-primary">Back to the files list</button>
 				</form>
 			</div>
 		</div></br>
