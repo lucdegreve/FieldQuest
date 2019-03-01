@@ -41,6 +41,10 @@
 <?php
 require "./tab_donnees/tab_donnees.class.php";
 require "./tab_donnees/funct_connex.php";
+require_once "Zip_classes/src/zip.php";
+
+    $zip = new Zip();
+    $zip->zip_start("zip_map_file.zip");
 
 //connexion to database
 $con = new Connex();
@@ -232,8 +236,11 @@ for ($j=0;$j<count($fichresult);$j++){
 	if(Polygon.getBounds().contains(mark.getLatLng())==true){
 		
 		<?php
+	$file = "US_2_21_dragdrop_upload/apple_lion.jpg";
+	$zip->zip_add('"'.$fichresult[$j][4]."".$fichresult[$j][3].'"');
+	// Quick check to verify that the file exists
 		// adresse a modifier avec la vraie du serveur TELECHARGEMENT NE FONCTIONNANT PAS
-	//file_put_contents("0Z_".$fichresult[$j][3]."", file_get_contents("http://localhost/depot/FieldQuest/US_2_21_dragdrop_upload/".$fichresult[$j][3].""));
+		
 	?>
 	}
 	<?php
@@ -266,9 +273,9 @@ for ($j=0;$j<count($fichresult);$j++){
 	<?php
 	}
 }
+?>
 
 
-	?>
 </script>
 
 
