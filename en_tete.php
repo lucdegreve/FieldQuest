@@ -21,7 +21,7 @@
 					</button>
 					<?php
 					}
-					else if ($id_user_type==2)
+					else if ($id_user_type==3)
 					{
 					?>
 					
@@ -30,7 +30,7 @@
 					</button>
 					<?php
 					}
-					else if ($id_user_type==3)
+					else if ($id_user_type==2)
 					{
 					?>
 					<button class="btn btn-info" onclick="location.href='US0_page_accueil_internes.php'" >
