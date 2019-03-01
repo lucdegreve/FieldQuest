@@ -48,7 +48,7 @@
 		$connex = $con->connection;
 		?>		
 		
-		<form id ="formdepot" action="US_2_21_insert_bdd.php" method="GET">
+		<form id ="formdepot" name="formdepot" action="US_2_21_insert_bdd.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
 				
@@ -188,7 +188,7 @@
 			</div>
 			
 			<div align="center">
-				<button type="submit" class="btn btn-lg btn-success">Send the form</button>
+				<button type="submit" class="btn btn-lg btn-success" onclick="return validate()">Send the form</button>
 			</div>
 		</form></br>
 		
@@ -198,7 +198,17 @@
 	include("pied_de_page.php");
 	?>
 
-
+	<script type="text/javascript">
+		function validate(){
+			if(document.formdepot.file.value != ""){
+				return true;
+			}
+			else{
+				alert("Please, add a file !");
+				return false;
+			}
+		}
+	</script>
 
 
 
