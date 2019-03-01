@@ -14,8 +14,11 @@
 			//Liantsoa
 			//page intermediaire qui recupere le login et la passeword quand un utilisateur veut se connecter et dirigera ensuite vers la page accueil specififique a chaque utilisateur
 			// connexion à la base de données Fieldquest
-			session_start();
+			
+			//recuperate header 
 			include("en_tete.php");
+			
+			//recuparate id_user and id user type
 			$id_user=$_GET['id_user'];
 			$id_user_type=$_GET['id_user_type'];
 			
@@ -27,15 +30,17 @@
             $connex = $con->connection;
 			
 			$link = $connex;
-			//$link = pg_connect("dbname=fieldquest1 user=postgres password=Admin");
+			
 			$query = "select id_user_account,id_user_type,first_name,last_name,login ,password from user_account
 			where id_user_account='".$id_user."'AND id_user_type='".$id_user_type."'";
 			$result = pg_query($link, $query);
 			$row=pg_fetch_array($result);
+			
 			$id_user=$row[0];
 			$id_user_type=$row[1];
 			$first_name=$row[2];
 			$last_name=$row[3];
+			
 			$_SESSION['id_user_account']=$id_user;
 			$id_user=$_SESSION['id_user_account'];
 			$_SESSION['id_user_type']=$id_user_type;

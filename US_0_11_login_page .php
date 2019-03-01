@@ -8,8 +8,8 @@
 
 
 <?php
-   
-    session_start();
+include("en_tete.php");
+    //session_start();
     $login = $ps = "";
     $loginError = $psError = "";
     if($_SERVER["REQUEST_METHOD"] == "POST" )
@@ -44,8 +44,8 @@
                         {
 							$id_user=$row[2];
 							$id_user_type=$row[3];
-							$_SESSION['id_user_account']=$id_user;
-							$_SESSION['id_user_type']=$id_user_type;
+							//$_SESSION['id_user_account']=$id_user;
+							//$_SESSION['id_user_type']=$id_user_type;
                             //echo "bon ps";
                             header('Location: US0_page_intermediaire.php?id_user='.$id_user.'&id_user_type='.$id_user_type);
                             exit();
@@ -114,9 +114,7 @@
 
     <body>
         
-       <?php
-				 include("en_tete.php");
-		?>
+       
         
         
         
