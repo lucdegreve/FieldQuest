@@ -50,21 +50,21 @@ Output variables :
                             LEFT JOIN tags t ON t.id_tag=ltp.id_tag
                         WHERE f.id_validation_state = '2' AND ";
                 
-                if ($_GET['start']!=''){
+                if ($_POST['start']!=''){
                         $start_date = $_GET['start'];
                         $query .= " f.upload_date >'".$start_date."' AND ";
                 }
                 
-                if ($_GET['end']!=''){
+                if ($_POST['end']!=''){
                         $end_date = $_GET['end'];
                         $query .= " f.upload_date <'".$end_date."' AND ";
                 }
                 
-                if (isset($_GET['format'])){
+                if (isset($_POST['format'])){
                         //$array_format = print_r($_GET['format'],true);
                         //print_r($array_format);
                         $query .= " f.id_format IN (";
-                        foreach ($_GET['format'] AS $i){
+                        foreach ($_POST['format'] AS $i){
                                 $query .= $i.", ";
                         }
                         $query = substr($query, 0, strlen($query) -2);
@@ -72,11 +72,11 @@ Output variables :
                         $query .= " AND ";
                 }
                 
-                if (isset($_GET['projet'])){
+                if (isset($_POST['projet'])){
                         //$array_projet = print_r($_GET['projet'], true);
                         //print_r($array_projet);
                         $query .= " lfp.id_project IN (";
-                        foreach ($_GET['projet'] AS $i){
+                        foreach ($_POST['projet'] AS $i){
                                 $query .= $i.", ";
                         }
                         $query = substr($query, 0, strlen($query) -2);
@@ -84,19 +84,23 @@ Output variables :
                         $query .= " AND ";
                 }
                 
+                if ($_POST['sources']!=''){
+                        $query .= "f.id_user_account IN (".$_POST['sources'].") AND ";
+                }
+                
                 $TAG_SLD='(';
-                if (isset($_GET['unit'])){
+                if (isset($_POST['unit'])){
                         //$array_unit = print_r($_GET['unit'], true);
-                        foreach ($_GET['unit'] AS $i){
+                        foreach ($_POST['unit'] AS $i){
                                 $TAG_SLD .= $i.", ";
                         }
                         echo '</br>';
                         //print_r($array_unit);
                 }
                 
-                if (isset($_GET['tag'])){
+                if (isset($_POST['tag'])){
                         //$array_tag = print_r($_GET['tag'], true);
-                        foreach ($_GET['tag'] AS $i){
+                        foreach ($_POST['tag'] AS $i){
                                 $TAG_SLD .= $i.", ";
                         }
                         echo '</br>';
