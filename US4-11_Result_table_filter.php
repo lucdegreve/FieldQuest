@@ -142,8 +142,8 @@ Output variables :
 								<th scope="col" width="8%">Size</th>
 								<th scope="col" width="10%"></th>
 								<th scope="col" width="10%"></th>
-								<th scope="col" width="10%"></th>
-								<th scope="col" width="5%">Select</th>
+								<th id="select" scope="col" width="10%" style="text-align:center;">Select</th>
+								<th class="droite" scope="col" width="5%" style="text-align:center;"><input id="id_selectAll" type="checkbox" onclick="selectAll();"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -220,7 +220,7 @@ Output variables :
 											<?php
 										echo "</td>";										
 										echo "<td>";
-											echo '</br><div align="center"><input type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'"></div>';
+											echo '</br><div align="center"><input  id='.$id_file.' type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'" onclick= "compteur('.$id_file.');" ></div>';
 										echo "</td>";
 									echo "</tr>";
 								}
@@ -273,7 +273,57 @@ Output variables :
 				$('[data-toggle="popover"]').popover('hide');
 			}
 		});
-	
+		
+		
+	     // Function Compteur
+        
+        var count=0;
+        
+        function compteur(id_file) {
+            if(document.getElementById(id_file).checked){
+                count++;
+            }else{
+                count--;
+            }
+            document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
+                
+		}
+        
+        
+        
+        
+        
+        function cocherTout(etat){
+            var cases = document.getElementsByTagName('input');   // on recupere tous les INPUT
+            for(var i=0; i<cases.length; i++)     // on les parcourt
+                if(cases[i].type == 'checkbox')     // si on a une checkbox...
+                cases[i].checked = etat;     // ... on la coche ou non
+        }
+        
+
+              
+        
+        
+        
+        function selectAll() {
+            var all = <?php echo $nbrows; ?>;
+           
+            if(document.getElementById("id_selectAll").checked){
+                cocherTout(true);
+				count=all;
+                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
+            }else{
+                cocherTout(false);
+				count=0;
+                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
+                
+                
+            }            
+            
+                
+		}
+        
+        
 	</script>
 	
 </html>
