@@ -75,7 +75,7 @@
                   WHERE id_user_account = '".$id_user_account."'";
         $query_result = pg_query($connex,$query) or die (pg_last_error() );
 
-        echo "Your password have been correctly changed";
+        echo "Your password has correctly been changed";
         }
         ?>
 
@@ -105,6 +105,9 @@
         echo '</form>';
         ?>
 
+        <form action = "US_1.21_account_monitoring_by_user.php" method = "POST" name = "Return">
+        <input type = "submit" value = "Return">
+        </form>
 
     		<?php
     				 include("pied_de_page.php");
