@@ -254,7 +254,7 @@ for ($j=0;$j<count($fichresult);$j++){
 		
 	?> 
 	// creating all the markers, with the onclickpopup, 
-	L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> ).addTo(map);
+	L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][3]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> ).addTo(map);
 	<?php
 	}
 }
