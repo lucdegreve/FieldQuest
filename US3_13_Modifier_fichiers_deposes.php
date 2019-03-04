@@ -78,11 +78,15 @@
 				<div class="row">
 				
 					<div class="col-md-6"><div class="jumbotron">
-						<!-- Drag and drop container -->						
-						<h2><B>New file</B></h2>
-						<input type="file" name="file" id="file">							
-						<div class="upload-area"  id="uploadfile">
-							<B>Drag and drop new file here</B><br/>or<br/><B>Click to select a new file</B>
+						<!-- Drag and drop container -->
+						<div class="checkbox">
+							<label><input id="new_file" type="checkbox" name="new_file" value="check"><h2><B>Add a new file</B></h2></label>
+						</div>
+						<div id="conditional_part" style="display:none">
+							<input type="file" name="file" id="file">							
+							<div class="upload-area"  id="uploadfile">
+								<B>Drag and drop new file here</B><br/>or<br/><B>Click to select a new file</B>
+							</div>
 						</div>
 						</br>
 					</div></div>
@@ -216,17 +220,30 @@
 	include("pied_de_page.php");
 	?>
 	
-	<!-- Openlayesr JS fIle -->
+	<!-- Openlayers JS file -->
 	<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
-		function validate(){
-			if(document.form_edit.file.value != ""){
-				return true;
+		//Drag and drop available only if box has been checked + a new file has to be selected if the box has been checked
+		$('#new_file').change(function() {
+			if(this.checked != true){
+				$("#conditional_part").hide();
 			}
 			else{
-				alert("Please, add a file !");
-				return false;
+				$("#conditional_part").show();
+			}
+		});		
+		
+		//If box has been selected, a new ile has to be selected
+		function validate(){
+			if(document.form_edit.new_file.checked == true){
+				if(document.form_edit.file.value != ""){
+					return true;
+				}
+				else{
+					alert("Please, add a file !");
+					return false;
+				}
 			}
 		}
 	</script>
