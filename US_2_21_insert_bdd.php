@@ -41,6 +41,7 @@ $ending_date = $dayend."/".$monthend."/".$yearend;
 
 
 //get todays date and turn it into en date
+
 $today_en = date("m/d/y");
 $todD = substr($today_en,0,2);
 $todM = substr($today_en,3,2);
@@ -55,7 +56,9 @@ $connex = $con->connection;
 $query = "SELECT id_tag FROM  tags  ";
 $result = pg_query($connex, $query) or die(pg_last_error());
 //for all tags check if tag selected
+
 while ($row = pg_fetch_array($result)) {
+
 	$var=$_GET[$row["id_tag"]."_tag"];
 	if ($var == "on") { //if checkbox checked
 		array_push($all_tags, $row["id_tag"]); //add tag id to array
@@ -67,7 +70,9 @@ $query = "SELECT label_format,id_format FROM  format  ";
 $result = pg_query($connex, $query) or die(pg_last_error());
 
 //finding if format already exists and adding id if so
+
 while ($row = pg_fetch_array($result)) {
+
 	if ($row[0]==$file_extension){
 		$file_format=$row[1];
 		break;
@@ -84,7 +89,9 @@ else{
 		//finding new id  for this format in DB
 		$query = "SELECT label_format,id_format FROM  format  ";
 		$result = pg_query($connex, $query) or die(pg_last_error());
+
 		while ($row = pg_fetch_array($result)) {
+
 			if ($row[0]==$file_extension){
 				$file_format=$row[1];
 				break;
@@ -105,6 +112,7 @@ $id_version=1;
 
 
 		$query = "INSERT INTO files(id_user_account,use_id_user_account,id_format,id_validation_state,id_version,upload_date, file_name, file_comment, data_init_date,data_end_date,latitude,longitude,file_place,file_size)
+
         VALUES ('".$id_user_account."','".$use_id_user_account."','".$file_format."','".$id_validation_state."',
         '".$id_version."','".$today_fr."','".$file_name."','".$comment."','".$starting_date."','".$ending_date."','".$latitude."','".$longitude."','".$file_place."','".$file_size."')";
         $query_result = pg_query($connex,$query) or die (pg_last_error() );
@@ -116,6 +124,7 @@ $id_version=1;
 $query = "SELECT id_file FROM  files where file_name='".$file_name."'";
 $result = pg_query($connex, $query) or die(pg_last_error());
 while ($row = pg_fetch_array($result)) {
+
 $id_now=$row[0];
 }
 
@@ -133,6 +142,7 @@ for ($i=0;$i<$nb_tags;$i++){
 }
 
 // insert file and projet link (multiple projects)
+
 if(isset($_GET['projet']) && !empty($_GET['projet'])){
     $Col1_Array = $_GET['projet'];
     foreach($Col1_Array as $selectValue){
@@ -141,6 +151,7 @@ if(isset($_GET['projet']) && !empty($_GET['projet'])){
 		$query_result = pg_query($connex,$query) or die (pg_last_error() );
     }
 }
+
 ?>
 <br/>
 <div class="container">
@@ -154,3 +165,4 @@ if(isset($_GET['projet']) && !empty($_GET['projet'])){
 <?php	include("pied_de_page.php"); ?>
 
 </html>
+

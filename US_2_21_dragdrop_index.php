@@ -105,6 +105,7 @@
 						//Query projects
 						$id_user = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
 						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account='".$id_user."' ORDER BY name_project asc");	//CHANGER L'ID
+
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
 						?>
@@ -112,8 +113,10 @@
 						<div class="container">
 							<div class="card card-body">
 								<div class="form-check">
+
 									<?php
 										// For each format
+
 										for ($i=0; $i< $tab_projects_list->nb_enregistrements (); $i++){
 											// Get id of the format n°$i  of recordset
 											$id_project = $tab_projects_list-> t_enr[$i][0];
@@ -163,6 +166,8 @@
 								});
 							});
 						</script>
+
+		
 
 						<?php
 							//request parameters
@@ -246,6 +251,7 @@ $last_lon = $last_data[1];
 			})
         ],
         view: new ol.View({
+
 			center: ol.proj.fromLonLat([<?php echo $last_lat.','.$last_lon ?>]), // Coordinates of Paris
 			zoom: 3 //Initial Zoom Level
         })
@@ -299,7 +305,9 @@ $last_lon = $last_data[1];
 		type: "GET",
 		url: "US_2_21_ajax2.php",
 		data:{coords:coords}, //name is a $_GET variable name here,
+
 							   // and 'youwant' is its value to be passed
+
 		success: function(response) {
 							document.getElementById("Longitude").innerHTML=response;
 						},
@@ -309,5 +317,7 @@ $last_lon = $last_data[1];
 	})
 				});
 	 </script>
+
+
 
 </html>
