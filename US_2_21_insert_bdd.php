@@ -55,6 +55,7 @@ $connex = $con->connection;
 $query = "SELECT id_tag FROM  tags  ";
 $result = pg_query($connex, $query) or die(pg_last_error());
 //for all tags check if tag selected
+
 while ($row = pg_fetch_array($result)) { 
 	$var=$_GET[$row["id_tag"]."_tag"];
 	if ($var == "on") { //if checkbox checked
@@ -67,6 +68,7 @@ $query = "SELECT label_format,id_format FROM  format  ";
 $result = pg_query($connex, $query) or die(pg_last_error());
 
 //finding if format already exists and adding id if so
+
 while ($row = pg_fetch_array($result)) { 
 	if ($row[0]==$file_extension){
 		$file_format=$row[1];
@@ -83,7 +85,7 @@ else{
 		$result = pg_query($connex, $query) or die(pg_last_error());
 		//finding new id  for this format in DB
 		$query = "SELECT label_format,id_format FROM  format  ";
-		$result = pg_query($connex, $query) or die(pg_last_error());
+
 		while ($row = pg_fetch_array($result)) { 
 			if ($row[0]==$file_extension){
 				$file_format=$row[1];
@@ -109,7 +111,6 @@ $id_version=1;
         '".$id_version."','".$today_fr."','".$file_name."','".$comment."','".$starting_date."','".$ending_date."','".$latitude."','".$longitude."','".$file_place."','".$file_size."')";
         $query_result = pg_query($connex,$query) or die (pg_last_error() );
 
-		
 		
 		//getting file's id from DB to put tags into DB
 		
@@ -141,13 +142,19 @@ if(isset($_GET['projet']) && !empty($_GET['projet'])){
 		$query_result = pg_query($connex,$query) or die (pg_last_error() );
     } 
 }	
+
 ?>
 <br/>
 <div class="container">
 	<h1  align="center">Your file has been imported successfully, thank you !</h1></br>
 </div>
 
+
+<form action = "US_2_21_dragdrop_index.php" method = "POST" name = "Return">
+<input type = "submit" value = "Return">
+</form>
+
 <?php	include("pied_de_page.php"); ?>
 
 </html>
-		
+
