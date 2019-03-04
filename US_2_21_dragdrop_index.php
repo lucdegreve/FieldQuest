@@ -26,8 +26,8 @@
 		</style>
 
 		<?php
+		include("en_tete.php");
 		// Variable de session
-		session_start();
 		$_SESSION["latitude"]=NULL;
 		$_SESSION["longitude"]=NULL;
 		?>
@@ -46,7 +46,7 @@
 
 		<?php
 		//Header
-		include("en_tete.php");
+		
 		echo "</br>";
 		//DB connection
 		require "./tab_donnees/tab_donnees.class.php";
@@ -54,7 +54,6 @@
 		$con = new Connex();
 		$connex = $con->connection;
 		// Session reinilisation
-		session_start();
 		$_SESSION["latitude"]=NULL;
 		$_SESSION["longitude"]=NULL;
 		?>
@@ -104,8 +103,8 @@
 						<!-- Projects -->
 						<?php
 						//Query projects
-						//$id_user = $_SESSION[$id_user]; A DECOMMENTER QUANS LA VARIABLE DE SESSION SERA VALABLE
-						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=1 ORDER BY name_project asc");	//CHANGER L'ID
+						$id_user = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
+						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account='".$id_user."' ORDER BY name_project asc");	//CHANGER L'ID
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
 						?>
