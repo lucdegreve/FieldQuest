@@ -32,6 +32,7 @@
 				$id_file_to_delete=$_GET[$variable];
 				//echo $id_file_to_delete."</br>";
 				//Queries FOR DELETE
+
 				$result_info=pg_query($connex, "SELECT file_name, label_format FROM files JOIN format ON files.id_format=format.id_format WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
 				while($col=pg_fetch_array($result_info)){
 					$name=$col[0];
@@ -54,6 +55,7 @@
 			$id_file_to_delete=$_GET['id_file'];
 			//echo $id_file_to_delete."</br>";
 			//Queries FOR DELETE
+
 			$result_info=pg_query($connex, "SELECT file_name, label_format FROM files JOIN format ON files.id_format=format.id_format WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
 			while($col=pg_fetch_array($result_info)){
 				$name=$col[0];
@@ -72,7 +74,9 @@
 		?>
 		
 		<div class="container">
+
 			<h1>Files have been deleted successfully !</h1></br>
+
 			<div align="center">
 				<form action="US3_11_Visualiser_liste_fichiers.php" method="GET">
 					<button type="submit" class="btn btn-md btn-primary">Previous page</button>

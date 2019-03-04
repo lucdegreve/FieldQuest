@@ -38,14 +38,15 @@
 </head>
 <body> 
     Create
-    <button type="button" class="button_tag button_tag-success">New tag category</button>
-    <button type="button" class="button_tag">New tag</button> 
+    <a href="US1-53_create_tag_type.php"><button type="button" class="button_tag button_tag-success">New tag category</button></a>
+    <a href="US1-51_create_tag.php"><button type="button" class="button_tag">New tag</button> </a>
     Modify
-    <button type="button" class="button_tag_modif">Modify tag category</button>
-    <button type="button" class="button_tag_modif">Modify tag</button>
-    <a href="#" title="blabla"><blockquote>blaclalala</a> <a href="#" title="modify">coucou</a>
+    <a href="US1-54_modify_tag_type.php"><button type="button" class="button_tag_modif"  >Modify tag category</button> </a>
+    <a href="US1-54_modify_tag.php"><button type="button" class="button_tag_modif">Modify tag</button></a>
+
     <?php
-        require "../tab_donnees/funct_connex.php";
+        session_start();
+        require "tab_donnees/funct_connex.php";
         //connection to server + choice of database
 		$con = new Connex();
         $connex = $con->connection;
@@ -64,11 +65,14 @@
                 //echo '<li><a href="#" title='.$row["name_tag_type"].'>'.$row["name_tag_type"].'</a></li>';
                 echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].' </span>';
                     echo '<ul class="subMenu">';
-                    $query2 = "SELECT tag_name FROM tags where id_tag_type=".$id_cat; //it gives the name of the tag within the category
+                    $query2 = "SELECT id_tag_type, tag_name,  tag_description FROM tags where id_tag_type=".$id_cat." ORDER BY tag_name"; //it gives the name of the tag within the category
                     $result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
                     while ($row2 = pg_fetch_array($result2))
-                        echo '<li> <a href="#" title="'.$row2["tag_name"].'">'.$row2["tag_name"].'</a></li>';
-                    echo '</ul>';
+                        echo '<li> <a href="#" title="'.$row2["tag_name"].'" value="'.$row2["id_tag_type"].'">'.$row2["tag_name"].'</a></li>';
+                        $_SESSION["id_tag_type"]=$row2["id_tag_type"]; //on garde l'id de la catégorie en variable de session
+                        $_SESSION["tag_name"]=$row2["tag_name"]; //on garde le nom du tag en variable de session
+                        $_SESSION["tag_description"]=$row2["tag_description"];
+                        echo '</ul>';
                 echo '</li>';
             echo '</ul>';	
 		}
