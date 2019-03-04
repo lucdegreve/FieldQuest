@@ -114,7 +114,6 @@
                 <BR/>
                 <input type="submit" name="createaccount" value="Create account">
         </form>
-
         <!-- After submitting this form, issset verifies if first name and last name are filled, if so, data are loaded in the database -->
         <?php
             if (isset($_GET["last_name"],$_GET["first_name"]))
@@ -161,7 +160,9 @@
                 echo "User account have been correctly created and inserted into the database";
             }
         ?>
-        
+<form action = "US1-10_Gerer_comptes.php" method = "POST" name = "Return">
+<input type = "submit" value = "Return">
+</form>
     		<?php
     				 include("pied_de_page.php");
     		?>
