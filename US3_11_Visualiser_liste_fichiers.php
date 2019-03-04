@@ -73,7 +73,7 @@
 									$extension=$col[9];
 								}
 								
-								//State "being checked                                								
+								//State "being checked"                               								
                                 if($valid=="being checked"){
 									echo "<tr class='table-active'>";
 										echo "<th scope='row'></th>";
@@ -82,7 +82,7 @@
 										echo "<th scope='row'>".$first_name." ".$last_name."</th>";
 										echo "<th scope='row'>".$size."</th>";
 										echo "<td>";
-                                            echo "<a href='".$path.$name.".".$extension."' download> ";                                                
+                                            echo "<a href='".$path.$name."' download> ";                                                
 												echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';                                            
                                             echo "</a>";
 										echo "</td>";
@@ -107,7 +107,7 @@
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";
 										echo "<td>";                                    
-                                            echo "<a href='".$path.$name.".".$extension."' download> ";                                    
+                                            echo "<a href='".$path.$name."' download> ";                                    
 												echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';
                                             echo "</a>";                                    
 										echo "</td>";
@@ -140,7 +140,7 @@
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";
 										echo "<td>";                                    
-                                            echo "<a href='".$path.$name.".".$extension."' download> ";                                            
+                                            echo "<a href='".$path.$name."' download> ";                                            
 												echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';                                    
                                             echo "</a>";                                            
 										echo "</td>";
