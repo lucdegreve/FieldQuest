@@ -34,12 +34,14 @@
 			// Parcours des résultats ligne par ligne
 			// Pour chaque ligne mysqli_fetch_array renvoie un tableau de valeurs
 
+
 		?>
 
 		<!-- Header creation -->
 
 
 		<div class="container">
+
 			<div class="row">
 				<div class="col-md-9"></div>
 				<div class="col-md-3">
@@ -53,7 +55,9 @@
 					<?php
 					//creation du tableau
 						echo '<table id="example" class="display" border=1 bordercolor="black" bgcolor="white" size = 30>';
+
 					// en tete du tableau
+
 							echo '<thead>';
 							echo '<tr>';
 							echo '<th>' ;
@@ -72,6 +76,7 @@
 							echo '</thead>';
 
 					//corps du tableau
+
 							echo '<tbody>';
 							while ($row = pg_fetch_array($result))
 								{
@@ -88,6 +93,7 @@
 											echo '</td>';
 											// ajoute éventuellement la colonne supprimer
 											echo '<td>';
+
 												echo ("<a href = 'us_1_43_supprimer_un_projet.?id_project=".$row[0]."' class='lien'>Delete</A>");
 											echo '</td>';
 									echo '</tr>';

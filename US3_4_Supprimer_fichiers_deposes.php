@@ -32,8 +32,21 @@
 				$id_file_to_delete=$_GET[$variable];
 				//echo $id_file_to_delete."</br>";
 				//Queries FOR DELETE
-				$result_delete_key=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
-				$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+
+				$result_info=pg_query($connex, "SELECT file_name, label_format FROM files JOIN format ON files.id_format=format.id_format WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+				while($col=pg_fetch_array($result_info)){
+					$name=$col[0];
+					$extension=$col[1];
+				}
+				//Delete the linked projects
+				$result_delete_projects=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+				//Delete the inked tags
+				$result_delete_tags=pg_query($connex, "DELETE FROM link_tag_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+				//Delete the file in the "files" table
+				$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());	
+				//Delete the real file on the server
+				$path='US_2_21_dragdrop_upload/';
+				unlink($path.$name.".".$extension);
 			}	
 		}
 		
@@ -42,13 +55,28 @@
 			$id_file_to_delete=$_GET['id_file'];
 			//echo $id_file_to_delete."</br>";
 			//Queries FOR DELETE
-			$result_delete_key=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+
+			$result_info=pg_query($connex, "SELECT file_name, label_format FROM files JOIN format ON files.id_format=format.id_format WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			while($col=pg_fetch_array($result_info)){
+				$name=$col[0];
+				$extension=$col[1];
+			}
+			//Delete the linked projects
+			$result_delete_projects=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			//Delete the inked tags
+			$result_delete_tags=pg_query($connex, "DELETE FROM link_tag_project WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			//Delete the file in the "files" table
 			$result_delete=pg_query($connex, "DELETE FROM files WHERE id_file=".$id_file_to_delete) or die('Échec de la requête : ' . pg_last_error());
+			//Delete the real file on the server
+			$path='US_2_21_dragdrop_upload/';
+			unlink($path.$name.".".$extension);
 		}
 		?>
 		
 		<div class="container">
-			<h1>Files have been deleted successfully !</h1>
+
+			<h1>Files have been deleted successfully !</h1></br>
+
 			<div align="center">
 				<form action="US3_11_Visualiser_liste_fichiers.php" method="GET">
 					<button type="submit" class="btn btn-md btn-primary">Previous page</button>
