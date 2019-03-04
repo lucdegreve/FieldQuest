@@ -9,6 +9,7 @@
 
 <?php
    
+   
     
     $login = $ps = "";
     $loginError = $psError = "";
@@ -23,8 +24,8 @@
             // connexion à la base de données Fieldquest
             
             
-            $link = pg_connect("dbname=fieldquest user=postgres password=postgres");
-            //$link = pg_connect("dbname=fieldquest user=postgres password=Admin");
+            //$link = pg_connect("dbname=fieldquest user=postgres password=postgres");
+            $link = pg_connect("dbname=fieldquest user=postgres password=Admin");
             $query = "select login, password from user_account
                       where login = '".$login."'";
             $result = pg_query($link, $query);
@@ -40,7 +41,7 @@
                         if($ps == $row[1])
                         {
                             //echo "bon ps";
-                            header('Location: http://www.commentcamarche.net/forum/');
+                            header('Location: US3_11_Visualiser_liste_fichiers.php');
                             exit();
                         }else{
                             $psError = "Wrong password ";
