@@ -38,8 +38,7 @@
 			}
 
 			//Tous les echo ci dessous ne seront pas présents plus tard mais ils aident pour travailler sur la page !
-			echo "<U>Commentaires à supprimer</U> : </br>";
-			echo "A file has been added !</br>";
+			echo "<U>Commentaires à supprimer</U> : a file has been added !</br>";
 			echo "File name : ".$_SESSION["upload_filename"]."<br/>";
 			echo "File location : ".$_SESSION["upload_location"]."<br/>";
 			echo "File modification date : ".$_SESSION["upload_date"]."<br/>";
@@ -104,9 +103,6 @@
 				$start_date = $daydeb."/".$monthdeb."/".$yeardeb;
 				$end_date = $dayend."/".$monthend."/".$yearend;
 			echo "Start date : ".$start_date." & End date : ".$end_date."</br>";
-			
-			//Get the new projects
-				//A CODER
 				
 			//Get new latitude and longitude
 			$longitude= $_SESSION['longitude'];
@@ -131,12 +127,20 @@
 			$query_insert="INSERT INTO files (id_user_account, id_format, id_validation_state, id_version, upload_date, file_name, file_place, file_size, id_original_file, file_comment, data_init_date, data_end_date, latitude, longitude) VALUES (".$id_user_account.",".$id_format.",2,".$max_version .",'".$_SESSION["upload_date"]."','".$_SESSION["upload_filename"]."','".$_SESSION["upload_location"]."',".$_SESSION["upload_file_size"].",".$original_id.",'".$comment."','".$start_date."','".$end_date."','".$latitude."','".$longitude."')"; 
 			$result_insert=pg_query($connex,$query_insert) or die (pg_last_error() );
 			
-			//Get file's ID from DB to put tags into DB		
+			//Get file's ID from DB to put projects and tags into DB		
 			$result_new_id=pg_query($connex, "SELECT id_file FROM files WHERE file_name='".$_SESSION["upload_filename"]."'") or die(pg_last_error());
 			while($row = pg_fetch_array($result_new_id)) { 
 				$new_id=$row[0];
 			}
-			echo "</br>Nouvel ID généré : ".$new_id;
+			echo "</br>Nouvel ID généré : ".$new_id;			
+			
+			//Get the new projects and insert them in the DB
+			if(isset($_GET['projet']) && !empty($_GET['projet'])){ 
+				$Col1_Array = $_GET['projet']; 
+				foreach($Col1_Array as $selectValue){
+					$result_projects=pg_query($connex, "INSERT INTO link_file_project (id_file, id_project) VALUES (".$new_id.",'".$selectValue."')") or die (pg_last_error() );
+				} 
+			}
 			
 			//Insert tags into DB
 			$nb_tags=count($selected_tags);
@@ -152,8 +156,7 @@
 		else{
 			
 			//Tous les echo ci dessous ne seront pas présents plus tard mais ils aident pour travailler sur la page !
-			echo "<U>Commentaires à supprimer</U> : </br>";
-			echo "No file added !</br>";
+			echo "<U>Commentaires à supprimer</U> : No file added !</br>";
 			echo "File name : ".$_SESSION["upload_filename"]."<br/>";
 			echo "File location : ".$_SESSION["upload_location"]."<br/>";
 			echo "File modification date : ".$_SESSION["upload_date"]."<br/>";
@@ -209,8 +212,19 @@
 			$query_update="UPDATE files SET id_validation_state=2, file_comment='".$comment."', data_init_date='".$start_date."', data_end_date='".$end_date."', latitude='".$latitude."', longitude='".$longitude."' WHERE id_file=".$id_file; 
 			$result_update=pg_query($connex,$query_update) or die (pg_last_error() );
 			
+			//Delete former projects in the DB
+			$result_delete_projects=pg_query($connex, "DELETE FROM link_file_project WHERE id_file=".$id_file) or die (pg_last_error() );
+			
+			//Get the new projects and insert them in the DB
+			if(isset($_GET['projet']) && !empty($_GET['projet'])){ 
+				$Col1_Array = $_GET['projet']; 
+				foreach($Col1_Array as $selectValue){
+					$result_projects=pg_query($connex, "INSERT INTO link_file_project (id_file, id_project) VALUES (".$id_file.",'".$selectValue."')") or die (pg_last_error() );
+				} 
+			}
+			
 			//Delete former tags in the DB
-			$result_delete=pg_query($connex, "DELETE FROM link_tag_project WHERE id_file=".$id_file) or die (pg_last_error() );
+			$result_delete_tags=pg_query($connex, "DELETE FROM link_tag_project WHERE id_file=".$id_file) or die (pg_last_error() );
 			
 			//Insert new tags into DB
 			$nb_tags=count($selected_tags);
