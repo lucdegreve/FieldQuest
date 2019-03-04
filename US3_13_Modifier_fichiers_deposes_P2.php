@@ -26,15 +26,16 @@
 		$connex = $con->connection;
 		
 		//On met une valeur en dur pour l'id_user_account pour le moment
-		$id_user_account=1;
+		$id_user=7;
 		
 	//IF A NEW FILE HAS BEEN SELECTED
 		if(isset($_GET['new_file'])){
 		
-			//Get id_original_file
-			$result_original_id=pg_query($connex, "SELECT id_original_file FROM files WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
+			//Get id_original_file and id_user_account
+			$result_original_id=pg_query($connex, "SELECT id_original_file, id_user_account FROM files WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
 			while($row=pg_fetch_array($result_original_id)){
 				$original_id=$row[0];
+				$id_user_account=$row[1];
 			}
 
 			//Tous les echo ci dessous ne seront pas présents plus tard mais ils aident pour travailler sur la page !
@@ -124,7 +125,7 @@
 			
 			
 			//Insertion of the data for the modified file which has been uploaded previously
-			$query_insert="INSERT INTO files (id_user_account, id_format, id_validation_state, id_version, upload_date, file_name, file_place, file_size, id_original_file, file_comment, data_init_date, data_end_date, latitude, longitude) VALUES (".$id_user_account.",".$id_format.",2,".$max_version .",'".$_SESSION["upload_date"]."','".$_SESSION["upload_filename"]."','".$_SESSION["upload_location"]."',".$_SESSION["upload_file_size"].",".$original_id.",'".$comment."','".$start_date."','".$end_date."','".$latitude."','".$longitude."')"; 
+			$query_insert="INSERT INTO files (id_user_account, use_id_user_account, id_format, id_validation_state, id_version, upload_date, file_name, file_place, file_size, id_original_file, file_comment, data_init_date, data_end_date, latitude, longitude) VALUES (".$id_user_account.",".$id_user.",".$id_format.",2,".$max_version .",'".$_SESSION["upload_date"]."','".$_SESSION["upload_filename"]."','".$_SESSION["upload_location"]."',".$_SESSION["upload_file_size"].",".$original_id.",'".$comment."','".$start_date."','".$end_date."','".$latitude."','".$longitude."')"; 
 			$result_insert=pg_query($connex,$query_insert) or die (pg_last_error() );
 			
 			//Get file's ID from DB to put projects and tags into DB		
