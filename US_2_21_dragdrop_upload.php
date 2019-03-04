@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 /* Getting file name */
 session_start();
@@ -33,6 +32,4 @@ $_SESSION["upload_filename"]=$new_filename;
 $_SESSION["upload_location"]="US_2_21_dragdrop_upload/";
 $_SESSION["upload_date"]= $date->format('Y-m-d');
 $_SESSION["upload_file_size"]= $filesize;
-
-?>
-
+//variables kept because they are necessary to update data in the database
