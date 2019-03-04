@@ -28,11 +28,14 @@
 		?>
 		
 		<!-- Header creation -->
-		<div class="jumbotron jumbotron-fluid">
-			<h1>Header</h1>
-		</div>
 		
-		<div class="container">
+                    </br>
+                    <div align="center">
+                            <h1>Manage projects</h1>
+                    </div>
+                    </br>
+		
+                        <div class="container">
 			<div class="row">
 				<div class="col-md-9"></div>
 				<div class="col-md-3">
