@@ -28,6 +28,10 @@
 			echo'</script>';
 		}
 		?>
+		
+		<form name="return" action="US1_42_Gerer_projets.php" method="POST">
+			              		<input type="submit" name="return" value="Return">
+		</form>
 		<?php
 				 include("pied_de_page.php");
 		?>

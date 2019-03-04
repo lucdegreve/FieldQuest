@@ -7,6 +7,7 @@
 		</head>
 
 		<body>
+
 			
 				<nav class="navbar navbar-expand-lg navbar-dark bg-info">
 				<?php
@@ -26,6 +27,7 @@
 					?>
 					
 					<button class="btn btn-info" onclick="location.href='US0_page_accueil_externes.php'" >
+
 					<img src="picto\back.png" class="img-fluid" alt="Responsive image" width="75px" height ="75px">
 					</button>
 					<?php

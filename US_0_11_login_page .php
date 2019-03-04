@@ -8,8 +8,10 @@
 
 
 <?php
+
 include("en_tete.php");
     //session_start();
+
     $login = $ps = "";
     $loginError = $psError = "";
     if($_SERVER["REQUEST_METHOD"] == "POST" )
@@ -28,12 +30,14 @@ include("en_tete.php");
             $con = new Connex();
             $connex = $con->connection;
             
+
          
             //$link = pg_connect("dbname=fieldquest user=postgres password=Admin");
             $query = "select login, password  ,id_user_account,id_user_type,first_name,last_name from user_account
                       where login = '".$login."'AND password='".$ps."'";
             $result = pg_query($connex, $query);
 			
+
             
             if(pg_num_rows($result) == 1){                
                 while ($row = pg_fetch_row($result)) {
@@ -47,7 +51,9 @@ include("en_tete.php");
 							//$_SESSION['id_user_account']=$id_user;
 							//$_SESSION['id_user_type']=$id_user_type;
                             //echo "bon ps";
+
                             header('Location: US0_page_intermediaire.php?id_user='.$id_user.'&id_user_type='.$id_user_type);
+
                             exit();
                         }else{
                             $psError = "Wrong password ";
