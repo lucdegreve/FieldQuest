@@ -31,7 +31,7 @@ ligne 90 url : mettre l'url souhaité-->
       <span id="success_message"></span>
        <div class="form-group">
         <p>
-			<button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseSource" aria-expanded="true" aria-controls="collapseSource">
+			<button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#collapseSource" aria-expanded="true" aria-controls="collapseSource">
 				Sources
 			</button>
 		</p>

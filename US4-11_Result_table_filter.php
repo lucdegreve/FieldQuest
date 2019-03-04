@@ -32,16 +32,16 @@ Output variables :
                             LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
                             LEFT JOIN tags t ON t.id_tag=ltp.id_tag
                         WHERE f.id_validation_state = '2' AND ";
-                
+                if (isset($_POST['start'])){
                 if ($_POST['start']!=''){
                         $start_date = $_POST['start'];
                         $query .= " f.upload_date >'".$start_date."' AND ";
-                }
-                
+                }}
+                if (isset($_POST['end'])){
                 if ($_POST['end']!=''){
                         $end_date = $_POST['end'];
                         $query .= " f.upload_date <'".$end_date."' AND ";
-                }
+                }}
                 
                 if (isset($_POST['format'])){
                         $query .= " f.id_format IN (";
@@ -62,10 +62,10 @@ Output variables :
                         $query .= ")";
                         $query .= " AND ";
                 }
-                
+                if (isset($_POST['sources'])){
                 if ($_POST['sources']!=''){
                         $query .= "f.id_user_account IN (".$_POST['sources'].") AND ";
-                }
+                }}
                 
                 $TAG_SLD='(';
                 if (isset($_POST['unit'])){
@@ -103,7 +103,6 @@ Output variables :
 		//Query : list of distinct file names
 		$result_files_id=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
 		$nbrows=pg_num_rows($result_files_id);
-        
 		?>
 
 		<!-- Table creation -->
@@ -133,19 +132,13 @@ Output variables :
 						</thead>
 						<tbody>
 							<?php
-                            
-                            
-                            
 							while($row=pg_fetch_array($result_files_id)){
 								$id=$row[0];
-                                
-                                
 								//Query to get the last version for each file name
 								$query="SELECT id_file, file_name, to_char(upload_date,'DD/MM/YYYY'), file_size, label_validation_state, id_version, last_name, first_name, id_original_file, file_comment
 								FROM user_account ua JOIN files f ON ua.id_user_account=f.id_user_account JOIN validation_state vs ON f.id_validation_state=vs.id_validation_state
 								WHERE id_original_file='".$id."' AND id_version=(SELECT MAX(id_version) FROM files WHERE id_original_file='".$id."')";
 								$result_files_list=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
-                                
 								while($col=pg_fetch_array($result_files_list)){
 									$id_file=$col[0];
 									$name=$col[1];
@@ -216,9 +209,6 @@ Output variables :
 									echo "</tr>";
 								}
 							}
-                
-                            
-                            
 							?>
 						</tbody>
 					</table>
@@ -228,9 +218,6 @@ Output variables :
                 
 
 
-
-<script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 
 

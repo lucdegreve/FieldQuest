@@ -16,9 +16,7 @@ Output variables :		id of selected tags
 ------------------------------------------------------------->	
 
 
-
-<script type= 'text/javascript' src = 'manage_checkbox_button.js'></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script type= 'text/javascript' src = 'manage_checkbox_button_bt4.js'></script>
 
 
 </head>
@@ -35,7 +33,7 @@ Output variables :		id of selected tags
 	?>
 	<!-- Collapse button for date (start and end)-->
 	<p>
-		<button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseDate" aria-expanded="true" aria-controls="collapseDate">
+		<button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#collapseDate" aria-expanded="true" aria-controls="collapseDate">
 			Date
 		</button>
 	</p>
@@ -59,10 +57,14 @@ Output variables :		id of selected tags
 	
 	?>
 	<!-- Search button -->
-	<button type='submit' class='btn btn_lg btn-success' name='search'>Search</button>
+	<button type='submit' class='btn btn_sm btn-success' name='search'>Search</button>
 
 </form>
-
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
 
 </body>
 
