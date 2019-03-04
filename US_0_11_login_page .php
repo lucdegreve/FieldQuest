@@ -8,30 +8,36 @@
 
 
 <?php
-   
-   
-    
+
+include("en_tete.php");
+    //session_start();
+
     $login = $ps = "";
     $loginError = $psError = "";
     if($_SERVER["REQUEST_METHOD"] == "POST" )
     {
         $login = InputCleaner($_POST['login']);
         $ps = InputCleaner($_POST['ps']);
-        
+
         
         if(!empty($login))
         {
+            // Include the file with all the functions 
+            require "tab_donnees/funct_connex.php";
+
+            
             // connexion à la base de données Fieldquest
+            $con = new Connex();
+            $connex = $con->connection;
             
-            
-            //$link = pg_connect("dbname=fieldquest user=postgres password=postgres");
-            $link = pg_connect("dbname=fieldquest user=postgres password=Admin");
-            $query = "select login, password from user_account
-                      where login = '".$login."'";
-            $result = pg_query($link, $query);
-            
-            
-           
+
+         
+            //$link = pg_connect("dbname=fieldquest user=postgres password=Admin");
+            $query = "select login, password  ,id_user_account,id_user_type,first_name,last_name from user_account
+                      where login = '".$login."'AND password='".$ps."'";
+            $result = pg_query($connex, $query);
+			
+
             
             if(pg_num_rows($result) == 1){                
                 while ($row = pg_fetch_row($result)) {
@@ -40,8 +46,14 @@
 
                         if($ps == $row[1])
                         {
+							$id_user=$row[2];
+							$id_user_type=$row[3];
+							//$_SESSION['id_user_account']=$id_user;
+							//$_SESSION['id_user_type']=$id_user_type;
                             //echo "bon ps";
-                            header('Location: US3_11_Visualiser_liste_fichiers.php');
+
+                            header('Location: US0_page_intermediaire.php?id_user='.$id_user.'&id_user_type='.$id_user_type);
+
                             exit();
                         }else{
                             $psError = "Wrong password ";
@@ -108,9 +120,7 @@
 
     <body>
         
-       <?php
-				 include("en_tete.php");
-		?>
+       
         
         
         
@@ -125,7 +135,7 @@
                     <div class="col-md-4 col-sm-6 border-white bg-secondary" style="border-radius: 15%;padding: 2%">
                         
 
-                            <form id="connecter" method ="post" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF']); ?> "  role="form">
+                            <form id="connecter" method ="POST" action="<?php echo htmlspecialchars( $_SERVER['PHP_SELF']); ?> "  role="form">
                                 <div class="form-group">
                                     <label for="Email1">Login</label>
                                     <input type="text" name="login" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="Login" value="<?php echo $login; ?>" >
