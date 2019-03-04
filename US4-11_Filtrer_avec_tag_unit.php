@@ -14,9 +14,6 @@ Output variables :		id of selected tags
 ------------------------------------------------------------->	
 
 <META charset="utf-8"> 
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/custom.css">
 
 <!-- Import for collapse and event handling of checkbox buttons in main page US4-11_Filtre_avec_tag_all_tags.php -->
 
@@ -34,7 +31,7 @@ Output variables :		id of selected tags
 	?>
 
 		<p>
-		  <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseUnit" aria-expanded="true" aria-controls="collapseUnit">
+		  <button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#collapseUnit" aria-expanded="true" aria-controls="collapseUnit">
 			Unit
 		  </button>
 		</p>
@@ -51,8 +48,8 @@ Output variables :		id of selected tags
 				
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';
-					echo '<button type="button" class="btn" data-color="primary" id = "unit_'. $id_tag .'">'.$tag_name.'</button>';
-					echo '<input type="checkbox" class="hidden" name="unit[]" value="'.$id_tag.'"/>';
+					echo '<button type="button" class="btn btn-sm" data-color="primary" id = "unit_'. $id_tag .'">'.$tag_name.'</button>';
+					echo '<input type="checkbox" style="display: none;" name="unit[]" value="'.$id_tag.'"/>';
 					echo '</span>';
 				}
 				?>

@@ -14,9 +14,7 @@ Output variables :		id of selected formats
 ------------------------------------------------------------->	
 
 <META charset="utf-8"> 
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/custom.css">
+
 
 <!-- Import for collapse and event handling of checkbox buttons in main page US4-11_Filtre_avec_tag_all_tags.php -->
 
@@ -35,7 +33,7 @@ Output variables :		id of selected formats
 ?>
 <!-- Collapse button -->
 		<p>
-		  <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseFormat" aria-expanded="true" aria-controls="collapseFormat">
+		  <button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#collapseFormat" aria-expanded="true" aria-controls="collapseFormat">
 			File format
 		  </button>
 		</p>
@@ -53,8 +51,8 @@ Output variables :		id of selected formats
 				
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';
-					echo '<button type="button" class="btn" data-color="primary" id = "format_'. $id_format .'">'.$label_format.'</button>';
-					echo '<input type="checkbox" class="hidden" name="format[]" value="'.$id_format.'"/>';
+					echo '<button type="button" class="btn btn-sm" data-color="primary" id = "format_'. $id_format .'">'.$label_format.'</button>';
+					echo '<input type="checkbox" style="display: none;" name="format[]" value="'.$id_format.'" unchecked/>';
 					echo '</span>';
 				}
 				?>

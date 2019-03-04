@@ -15,9 +15,6 @@ Output variables :		id of selected formats
 ------------------------------------------------------------->	
 
 <META charset="utf-8"> 
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/custom.css">
 
 <!-- Import for collapse and event handling of checkbox buttons in main page US4-11_Filtre_avec_tag_all_tags.php -->
 
@@ -35,7 +32,7 @@ $table_projects = new Tab_donnees($result_project,"PG");
 ?>
 
 <p>
-  <button class="btn btn-lg btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseProject" aria-expanded="true" aria-controls="collapseProject">
+  <button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#collapseProject" aria-expanded="true" aria-controls="collapseProject">
 	Project
   </button>
 </p>
@@ -53,8 +50,8 @@ $table_projects = new Tab_donnees($result_project,"PG");
 		
 			// Make checkbox button 
 			echo '<span class="button-checkbox">';
-			echo '<button type="button" class="btn" data-color="primary" id = project_"'. $id_project .'">'.$name_project.'</button>';
-			echo '<input type="checkbox" class="hidden" name="projet[]" value="'.$id_project.'"/>';
+			echo '<button type="button" class="btn btn-sm" data-color="primary" id = project_"'. $id_project .'">'.$name_project.'</button>';
+			echo '<input type="checkbox" style="display: none;" name="projet[]" value="'.$id_project.'"/>';
 			echo '</span>';
 		}
 		?>

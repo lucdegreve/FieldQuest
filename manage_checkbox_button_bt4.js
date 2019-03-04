@@ -8,10 +8,10 @@ $(function () {
             color = $button.data('color'),
             settings = {
                 on: {
-                    icon: 'glyphicon glyphicon-check'
+                    icon: 'fa fa-check-square-o'
                 },
                 off: {
-                    icon: 'glyphicon glyphicon-unchecked'
+                    icon: 'fa fa-square-o'
                 }
             };
 
@@ -57,7 +57,7 @@ $(function () {
 
             // Inject the icon if applicable
             if ($button.find('.state-icon').length == 0) {
-                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i>');
             }
         }
         init();
