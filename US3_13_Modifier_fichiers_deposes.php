@@ -59,17 +59,19 @@
 			$end_date=$row[3];
 			$comment=$row[4];
 		}
-		//Query to get the current project linked to the file
+		//Query to get the current projects linked to the file
 		$result_project=pg_query($connex, "SELECT id_project FROM link_file_project WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
-		while($col=pg_fetch_array($result_project)){
-			$id_project=$col[0];
+		$i=0;
+		while($proj=pg_fetch_array($result_project)){
+			$tab_checked_projects[$i]=$proj[0];
+			$i++;
 		}
 		//Query to get the current tags linked to the file
 		$result_tags=pg_query($connex, "SELECT id_tag FROM link_tag_project WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
-		$i=0;
-		while ($tag=pg_fetch_array($result_tags)){
+		$j=0;
+		while($tag=pg_fetch_array($result_tags)){
 			$tab_checked_tags[$i]=$tag[0];
-			$i++;
+			$j++;
 		}
 		?>		
 		
@@ -125,11 +127,48 @@
 						<!-- Projects -->
 						<?php
 						//Query projects
-						$result_projects_list = pg_query($connex, "SELECT * FROM projects ORDER BY name_project");						
+						//$id_user = $_SESSION[$id_user]; A DECOMMENTER QUANS LA VARIABLE DE SESSION SERA VALABLE
+						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=1 ORDER BY name_project asc");	//CHANGER L'ID					
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
-						echo "Select a project :  ";
-						$tab_projects_list -> creer_liste_option_plus("lst_proj", "id_project", "name_project", $id_project, "");
-						?></br></br>
+						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
+						?>
+						Select one or several project(s) :
+						<div class="container">
+							<div class="card card-body">
+								<div class="form-check">
+									<?php 
+									//For each project 
+									for ($i=0; $i<$tab_projects_list->nb_enregistrements (); $i++){
+										//Get id of the project n°$i of recordset
+										$id_project = $tab_projects_list-> t_enr[$i][0];
+										//Get label of the project n°$i of recordset
+										$name_project = $tab_projects_list-> t_enr [$i][2];
+										
+										$check=false;
+										for($k=0;$k<count($tab_checked_projects);$k++){
+											if($id_project==$tab_checked_projects[$k]){
+												$check=true;
+											}										
+										}
+									
+										//Box checked if the file is already linked to the project
+										if($check==true){
+											echo '<span class="button-checkbox">';
+												echo '<button type="button" class="btn" data-color="primary" id=project_"'.$id_project.'">'.$name_project.'</button>';
+												echo '<input type="checkbox" class="hidden" name="projet[]" value="'.$id_project.'" checked>';
+											echo '</span>';
+										}
+										else{
+											echo '<span class="button-checkbox">';
+												echo '<button type="button" class="btn" data-color="primary" id=project_"'.$id_project.'">'.$name_project.'</button>';
+												echo '<input type="checkbox" class="hidden" name="projet[]" value="'.$id_project.'"/>';
+											echo '</span>';
+										}
+									}
+									?>
+								</div>
+							</div>
+						</div>
 						
 						<!-- Comments -->
 						Comment : <br/> <textarea id="Comment" name="Comment" class="form-control" form="form_edit"><?php echo $comment; ?></textarea>
