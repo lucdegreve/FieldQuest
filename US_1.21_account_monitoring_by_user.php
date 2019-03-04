@@ -42,7 +42,7 @@
                     $query = "UPDATE user_account
                               SET   company = '".$company."', address = '".$address."', postcode = '".$postcode."', city = '".$city."', country = '".$country."',
                               email = '".$email."', phone = '".$phone."', website = '".$website."'
-                              WHERE id_user_account = '".$id_user_account."'";
+                              WHERE id_user_account = '".$id_user."'";
                     $query_result = pg_query($connex,$query) or die (pg_last_error() );
                     echo "</br>";
                     echo "Data have been correctly inserted into database";
