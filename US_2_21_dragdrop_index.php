@@ -105,6 +105,7 @@
 						//Query projects
 						$id_user = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
 						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account='".$id_user."' ORDER BY name_project asc");	//CHANGER L'ID
+
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
 						?>
@@ -112,15 +113,17 @@
 						<div class="container">
 							<div class="card card-body">
 								<div class="form-check">
-									<?php
-										// For each format
+
+									<?php 
+										// For each format 
 										for ($i=0; $i< $tab_projects_list->nb_enregistrements (); $i++){
 											// Get id of the format n°$i  of recordset
 											$id_project = $tab_projects_list-> t_enr[$i][0];
 											// Get label of the format n°$i  of recordset
 											$name_project = $tab_projects_list-> t_enr [$i][2];
 
-											// Make checkbox button
+										
+											// Make checkbox button 
 											echo '<span class="button-checkbox">';
 											echo '<button type="button" class="btn" data-color="primary" id = project_"'. $id_project .'">'.$name_project.'</button>';
 											echo '<input type="checkbox" class="hidden" name="projet[]" value="'.$id_project.'"/>';
@@ -130,12 +133,12 @@
 								</div>
 							</div>
 						</div>
-
+						
 						<!-- Comments -->
 						Comment : <br/> <textarea id="Comment" name="Comment" class="form-control" form="formdepot"></textarea>
 					</div></div>
-
-					<div class="col-md-6"><div class="jumbotron">
+					
+					<div class="col-md-6"><div class="jumbotron">					
 						<h2><B>Select tags</B></h2></br>
 
 						<script type="text/javascript"> // allows to make a tree structure dynamic
@@ -163,6 +166,63 @@
 								});
 							});
 						</script>
+
+						<?php
+							//request parameters
+							$query = "SELECT tt.id_tag_type, name_tag_type FROM  tag_type tt  ORDER BY name_tag_type";
+							//request execution
+							$result = pg_query($connex, $query) or die(pg_last_error());
+							// Results browsing line by line
+							// For each line pg_fetch_array return a value table  
+							while ($row = pg_fetch_array($result)) { 
+								// The access to a table element can be do thanks to index or field name
+								// Here we are using field name
+								$id_cat= $row["id_tag_type"];
+								
+								echo '<ul class="navigation">';
+								echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].' </span>';
+								echo '<ul class="subMenu">';
+								
+								$query2 = "SELECT id_tag, tag_name FROM tags where id_tag_type=".$id_cat." ORDER BY tag_name"; //it gives the name of the tag within the category
+								$result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
+								while ($row2 = pg_fetch_array($result2)) {
+									echo '<li><div><input type="checkbox" id="' . $row2["id_tag"] . '_tag" name="' . $row2["id_tag"] . '_tag">';
+									echo '<label for="' . $row2["id_tag"] . '_tag"> ' . $row2["tag_name"] . '</label></div></li>';
+								}
+								echo '</ul>';
+								echo '</li>';
+								echo '</ul>';
+							}
+						?>
+						</br>
+					</div></div>
+					
+				</div>
+			</div>
+			
+			<div align="center">
+				<button type="submit" class="btn btn-lg btn-success" onclick="return validate()">Send the form</button>
+			</div>
+		</form></br>
+		
+	</body>
+	
+	<?php
+	include("pied_de_page.php");
+	?>
+
+	<script type="text/javascript">
+		function validate(){
+			if(document.formdepot.file.value != ""){
+				return true;
+			}
+			else{
+				alert("Please, add a file !");
+				return false;
+			}
+		}
+	</script>
+
 
 						<?php
 							//request parameters
@@ -236,7 +296,6 @@ $last_lon = $last_data[1];
  <script type="text/javascript"  >
 
 
-
  // creating map : center on paris
  var map = new ol.Map({
         target: 'map',
@@ -246,6 +305,7 @@ $last_lon = $last_data[1];
 			})
         ],
         view: new ol.View({
+
 			center: ol.proj.fromLonLat([<?php echo $last_lat.','.$last_lon ?>]), // Coordinates of Paris
 			zoom: 3 //Initial Zoom Level
         })
@@ -299,7 +359,9 @@ $last_lon = $last_data[1];
 		type: "GET",
 		url: "US_2_21_ajax2.php",
 		data:{coords:coords}, //name is a $_GET variable name here,
-							   // and 'youwant' is its value to be passed
+
+							   // and 'youwant' is its value to be passed 
+
 		success: function(response) {
 							document.getElementById("Longitude").innerHTML=response;
 						},
