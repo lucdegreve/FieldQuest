@@ -21,17 +21,18 @@
             }
 
         </script>
+		
 	</head>
 	<body>
 		<?php
 				 include("en_tete.php");
         ?>
-		<div class="container">
+        <div class="container">
         <?php 
             // To add a new client 
             require "./tab_donnees/funct_connex.php";
 			echo '<form name="coucou" action="US1-54_manage_tags.php">
-				<div style="display:inline"> <input name="return" class="btn btn-outline-info" type="submit" value="return" /></div>
+				<button name="return" class="btn btn-outline-info" type="submit">back</button>
 				</form>';
             $con=new Connex();
             $connex=$con->connection;    
