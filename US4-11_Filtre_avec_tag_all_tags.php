@@ -2,7 +2,7 @@
 <head>
 <!-----------------------------------------------------------
        US4-11 Filtrer avec des tags - File format  
-Developped by Ophélie	& Diane		      
+Developped by OphÃ©lie	& Diane		      
 This page contains code to display the filter labels:
 - US4-11_Filtrer_avec_tag_project.php
 - US4-11_Filtrer_avec_tag_format.php
@@ -56,8 +56,13 @@ Output variables :		id of selected tags
 	include "US_4_11_filtre_avec_tag_data_type.php";
 	
 	?>
-	<!-- Search button -->
-	<button type='submit' class='btn btn_sm btn-success' name='search'>Search</button>
+	
+			<div class="row">
+					<!-- Search button -->
+					<button type='submit' class='btn btn_lg btn-success' name='search'>Search</button>
+					<!-- Save button -->
+					<button type='submit' class='btn btn_lg btn-success' name='save'>Save filters</button>
+			</div>
 
 </form>
 <script>
