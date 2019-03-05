@@ -35,18 +35,21 @@
 
         } ) ;
     </script>
+	<?php session_start() ?>
 </head>
 <body> 
+	<?php
+		include("en_tete.php");
+    ?>
     Create
-    <a href="US1-53_create_tag_type.php"><button type="button" class="button_tag button_tag-success">New tag category</button></a>
-    <a href="US1-51_create_tag.php"><button type="button" class="button_tag">New tag</button> </a>
+    <a href="US1-51_create_tag_type.php"><button type="button" class='btn btn-outline-primary'>New tag category</button></a>
+    <a href="US1-53_create_tag.php"><button type="button" class='btn btn-outline-primary'>New tag</button> </a>
     Modify
-    <a href="US1-54_modify_tag_type.php"><button type="button" class="button_tag_modif"  >Modify tag category</button> </a>
-    <a href="US1-54_modify_tag.php"><button type="button" class="button_tag_modif">Modify tag</button></a>
+    <a href="US1-54_modify_tag_type.php"><button type="button" class='btn btn-outline-warning'  >Modify tag category</button> </a>
+    <a href="US1-54_modify_tag.php"><button type="button" class='btn btn-outline-warning'>Modify tag</button></a>
 
     <?php
-        session_start();
-        require "tab_donnees/funct_connex.php";
+        require "./tab_donnees/funct_connex.php";
         //connection to server + choice of database
 		$con = new Connex();
         $connex = $con->connection;
@@ -79,4 +82,7 @@
     ?>
     
 </body>  
+	<?php
+		include("pied_de_page.php");
+	?>
 
