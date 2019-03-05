@@ -90,7 +90,7 @@
 								<B>Drag and drop new file here</B><br/>or<br/><B>Click to select a new file</B>
 							</div>
 						</div>
-						</br>
+						</br></br></br>
 					</div></div>
 					
 					<div class="col-md-6"><div class="jumbotron">
@@ -113,7 +113,7 @@
 						<h2><B>Other information</B></h2></br>
 						
 						<!-- Period -->
-						Select a period : <input type="text" name="daterange" value="<?php echo $init_date." - ".$end_date; ?>" /> </br></br>
+						Select a period : <input type="text" name="daterange" value="<?php echo $init_date." - ".$end_date; ?>" /> </br>
 						<script>
 						$(function() {
 						  $('input[name="daterange"]').daterangepicker({
@@ -242,7 +242,7 @@
 								echo '</ul>';
 							}
 						?>
-						</br>
+						</br></br>
 					</div></div>
 					
 				</div>

@@ -35,7 +35,6 @@
 
         } ) ;
     </script>
-	<?php session_start() ?>
 </head>
 <body> 
 	<?php

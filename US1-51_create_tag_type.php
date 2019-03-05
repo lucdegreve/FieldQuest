@@ -19,11 +19,10 @@
             }
 
         </script>
-		<?php session_start() ?>
 	</head>
 	<body>
 		<?php
-				 include("en_tete.php");
+			include("en_tete.php");
         ?>
         <div class="container"> 
         <?php  
