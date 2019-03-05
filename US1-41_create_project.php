@@ -1,4 +1,6 @@
-<?php session_start();
+
+<?php
+	include("en_tete.php");
 //In the case the page is just updated, we need to empty the session variable not to keep users in memory
 if (!isset($_POST['validate'])){
 	if(isset($_SESSION["id_user_list"])){
@@ -29,9 +31,7 @@ Output variables :
 
 </head>
 
-<?php
-				 include("en_tete.php");
-?>
+
 
 <!-- Function add_user for datalist -->
 <script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
