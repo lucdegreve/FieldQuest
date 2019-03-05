@@ -50,8 +50,6 @@ Output variables :
 
 	<link rel="stylesheet" href="styles.css">
 
-
-
 <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
 <!-- END SCRIPT -->
 
@@ -73,21 +71,37 @@ Output variables :
         $connex=$con->connection;
         
         ?>
-		<div class="row">
-            <div class="col-md-3">
-                <?php include ("US4-11_Filtre_avec_tag_all_tags.php"); ?>
-            </div>
-            <div class="col-md-9">
-                <div>
-                    <?php include ("US4-11_Result_table_filter.php"); ?>
-                    <?php include ("US4_11_Carte.php"); ?>
+        <div class="row">
+                <div class="col-md-3">
+                    <?php include ("US4-11_Filtre_avec_tag_all_tags.php"); ?>
                 </div>
-            </div>
-		</div>
+                <div class="col-md-9">
+                        <!-- Navigation tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                        <a href="#list" data-toggle="tab" role="tab" class="nav-link active">Files list</a>
+                                </li>
+                                <li>
+                                        <a href="#map" data-toggle="tab" role="tab" class="nav-link">Map</a>
+                                </li>
+                        </ul>
+                        
+                        <!-- Table panes -->
+                        <div class="tab-content">
+                                <div class="tab-pane active" id="list" role="tabpanel" aria-labelledby="list">
+                                        <?php include ("US4-11_Result_table_filter.php"); ?>
+                                </div>
+                                <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map">
+                                        <?php include ("US4_11_Carte.php"); ?>
+                                </div>
+                        </div>                                                           
+                </div>
+        </div>
+
     </body>
         
     	<?php
 	echo "</br>";
-	//include("pied_de_page.php");
+	include("pied_de_page.php");
 	?>	
 </html>

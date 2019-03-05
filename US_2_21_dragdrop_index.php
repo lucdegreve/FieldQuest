@@ -6,18 +6,18 @@
 		<!-- Développeurs : Manu et Gala -->
 		<!-- Drag and drop which download file automatically when drop -->
 		<!-- Issues : can't create a button "upload" (always automatic) -->
-		
+
 		<link href="css/custom.css" rel="stylesheet" type="text/css">
 		<link href="css/boostrap.min.css" rel="stylesheet" type="text/css">
 		<script src="US_2_21_dragdrop_jquery-3.0.0.js" type="text/javascript"></script>
 		<script src="US_2_21_dragdrop_script.js" type="text/javascript"></script>
 		<script type= 'text/javascript' src = 'manage_checkbox_button.js'></script>
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">	
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 		<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
 		<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-				
-		<!-- Openlayers CSS file-->		 
+
+		<!-- Openlayers CSS file-->
 		<style type="text/css">
 		  #map{
 		   width:90%;
@@ -36,13 +36,15 @@
 	</head>
 
 	<body>
-		
+
 		<?php
 		//Header
 		include("en_tete.php");
 		echo "</br>";
 		//Get id of the user
 		session_start();
+		$_SESSION["latitude"]=NULL;
+		$_SESSION["longitude"]=NULL;
 		//$id_user=$_SESSION['id_user']; A DECOMMENTER
 		//$user_type=$_SESSION['user_type']; A DECOMMENTER
 		$id_user=7;
@@ -52,38 +54,38 @@
 		require "./tab_donnees/funct_connex.php";
 		$con = new Connex();
 		$connex = $con->connection;
-		?>		
-		
+		?>
+
 		<form id ="formdepot" name="formdepot" action="US_2_21_insert_bdd.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
-				
+
 					<div class="col-md-6"><div class="jumbotron">
-						<!-- Drag and drop container -->						
+						<!-- Drag and drop container -->
 						<h2><B>Your file</B></h2>
-						<input type="file" name="file" id="file">							
+						<input type="file" name="file" id="file">
 						<div class="upload-area"  id="uploadfile" align="left">
 							<B>Drag and drop a file here</B></br>or<br/><B>Click to select a file</B>
 						</div>
 						</br></br></br>
 					</div></div>
-					
+
 					<div class="col-md-6"><div class="jumbotron">
 						<h2><B>Select the data localisation</B></h2></br>
 						<div style="margin:0 auto" id="map" >
 							<!-- Your map will be shown inside this div-->
-						</div>						
+						</div>
 						Latitude : <span id="Latitude"></span> </br>
 						Longitude : <span id="Longitude"></span>
 					</div></div>
-					
+
 				</div>
-				
+
 				<div class="row">
-					
+
 					<div class="col-md-6"><div class="jumbotron">
 						<h2><B>Other information</B></h2></br>
-						
+
 						<!-- Period -->
 						Select a period : <input type="text" name="daterange" value=""/></br>
 						<script>
@@ -95,11 +97,11 @@
 						  });
 						});
 						</script>
-						
+
 						<!-- Projects -->
 						<?php
 						//Query projects
-						$result_projects_list = pg_query($connex, "SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=".$id_user." ORDER BY name_project asc");	//CHANGER L'ID					
+						$result_projects_list = pg_query($connex, "SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=".$id_user." ORDER BY name_project asc");	//CHANGER L'ID
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
 						?>
@@ -107,15 +109,15 @@
 						<div class="container">
 							<div class="card card-body">
 								<div class="form-check">
-									<?php 
-										// For each format 
+									<?php
+										// For each format
 										for ($i=0; $i< $tab_projects_list->nb_enregistrements (); $i++){
 											// Get id of the format n°$i  of recordset
 											$id_project = $tab_projects_list-> t_enr[$i][0];
 											// Get label of the format n°$i  of recordset
 											$name_project = $tab_projects_list-> t_enr [$i][2];
-										
-											// Make checkbox button 
+
+											// Make checkbox button
 											echo '<span class="button-checkbox">';
 											echo '<button type="button" class="btn" data-color="primary" id = project_"'. $id_project .'">'.$name_project.'</button>';
 											echo '<input type="checkbox" class="hidden" name="projet[]" value="'.$id_project.'"/>';
@@ -125,12 +127,12 @@
 								</div>
 							</div>
 						</div>
-						
+
 						<!-- Comments -->
 						Comment : <br/> <textarea id="Comment" name="Comment" class="form-control" form="formdepot"></textarea>
 					</div></div>
-					
-					<div class="col-md-6"><div class="jumbotron">					
+
+					<div class="col-md-6"><div class="jumbotron">
 						<h2><B>Select tags</B></h2></br>
 
 						<script type="text/javascript"> // allows to make a tree structure dynamic
@@ -165,18 +167,18 @@
 							//request execution
 							$result = pg_query($connex, $query) or die(pg_last_error());
 							// Results browsing line by line
-							// For each line pg_fetch_array return a value table  
-							while ($row = pg_fetch_array($result)) { 
+							// For each line pg_fetch_array return a value table
+							while ($row = pg_fetch_array($result)) {
 								// The access to a table element can be do thanks to index or field name
 								// Here we are using field name
 								$id_cat= $row["id_tag_type"];
-								
+
 								echo '<ul class="navigation">';
 								echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].' </span>';
 								echo '<ul class="subMenu">';
-								
+
 								$query2 = "SELECT id_tag, tag_name FROM tags where id_tag_type=".$id_cat." ORDER BY tag_name"; //it gives the name of the tag within the category
-								$result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
+								$result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex));
 								while ($row2 = pg_fetch_array($result2)) {
 									echo '<li><div><input type="checkbox" id="' . $row2["id_tag"] . '_tag" name="' . $row2["id_tag"] . '_tag">';
 									echo '<label for="' . $row2["id_tag"] . '_tag"> ' . $row2["tag_name"] . '</label></div></li>';
@@ -188,9 +190,9 @@
 						?>
 						</br>
 					</div></div>
-					
+
 				</div>
-				
+
 				<div class="row">
 					<div class="col-md-3">
 						<?php if($user_type==1 or $user_type==2){ ?>
@@ -203,12 +205,12 @@
 						<button type="submit" class="btn btn-lg btn-success btn-block" onclick="return validate()"><h2>Send the form</h2></button>
 					</div>
 				</div>
-				
+
 			</div>
 		</form></br>
-		
+
 	</body>
-	
+
 	<?php
 	include("pied_de_page.php");
 	?>
@@ -225,7 +227,14 @@
 		}
 	</script>
 
-
+<?php
+// Recuperation of the last data uploaded coordinates / Made by Eva & Guillaume
+$last_coord =  "SELECT latitude, longitude FROM files GROUP BY latitude, longitude, upload_date, id_file HAVING upload_date = (SELECT MAX(upload_date) FROM files WHERE latitude IS NOT NULL AND latitude <> '') AND id_file =(SELECT MAX(id_file) FROM files WHERE latitude IS NOT NULL AND latitude <> '')";
+$result_lc = pg_query($connex, $last_coord) or die('Echec de la requête :'.pg_last_error($connex));
+$last_data = pg_fetch_array($result_lc);
+$last_lat = $last_data[0];
+$last_lon = $last_data[1];
+?>
 
 
 
@@ -233,10 +242,10 @@
  <!-- Openlayesr JS fIle -->
 
  <script type="text/javascript"  >
- 
 
- 
- // creating map : center on paris
+
+
+ // creating map : center on last datas
  var map = new ol.Map({
         target: 'map',
         layers: [
@@ -245,25 +254,25 @@
 			})
         ],
         view: new ol.View({
-			center: ol.proj.fromLonLat([2.7246093749999925,48.57478976304037]), // Coordinates of Paris
+			center: ol.proj.fromLonLat([<?php echo $last_lat.','.$last_lon ?>]), // Coordinates of last datas
 			zoom: 3 //Initial Zoom Level
         })
-    });	  
-	  
+    });
+
 	// create pinpoint onclick
 	map.on('click', function(event) {
-		map.setLayerGroup(new ol.layer.Group());  // on rajoute la couche OSM car supprimee en cas de pin point
+		map.setLayerGroup(new ol.layer.Group());  // we add OSM because delete when pinpoint
 		couche = new ol.layer.Tile({
 				source: new ol.source.OSM()
 			  });
-			  map.addLayer(couche); 
-			  
+			  map.addLayer(couche);
+
 			  //getting coordonates
 	var coords = ol.proj.toLonLat(event.coordinate);
 	var marker = new ol.Feature({
 	  geometry: new ol.geom.Point(
 		ol.proj.fromLonLat(coords)
-	  ), 
+	  ),
 	});
 	marker.setStyle(new ol.style.Style({
 			image: new ol.style.Icon(({
@@ -284,7 +293,7 @@
 		type: "GET",
 		url: "US_2_21_ajax1.php",
 		data:{coords:coords}, //name is a $_GET variable name here,
-							   // and 'youwant' is its value to be passed 
+							   // and 'youwant' is its value to be passed
 		success: function(response) {
 							document.getElementById("Latitude").innerHTML=response;
 						},
@@ -298,7 +307,7 @@
 		type: "GET",
 		url: "US_2_21_ajax2.php",
 		data:{coords:coords}, //name is a $_GET variable name here,
-							   // and 'youwant' is its value to be passed 
+							   // and 'youwant' is its value to be passed
 		success: function(response) {
 							document.getElementById("Longitude").innerHTML=response;
 						},
@@ -308,5 +317,5 @@
 	})
 				});
 	 </script>
-	 
+
 </html>

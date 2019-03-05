@@ -78,8 +78,15 @@
         </script>
 	</head>
 	<body>
+        <?php
+				 include("en_tete.php");
+        ?>
+        <div class="container">
         <?php 
-        require "tab_donnees/funct_connex.php";
+        require "./tab_donnees/funct_connex.php";
+		echo'<form action="US1-54_manage_tags.php">
+				<div style="display:inline"> <input name="return" class="btn btn-outline-info" type="submit" value="return" /></div>
+				</form>';
         echo '<form  method="get">';
         echo '<fieldset style="width: 500px">
 				<legend>Select the tag to modify</legend>
@@ -88,7 +95,7 @@
                 //when we select a tag type it calls the go() js function to update the second list
 				echo ' <select name="tag_type" id="tag_type" onchange="go()"> 
 					<option value="-1"></option>';
-                    require_once "tab_donnees/funct_connex.php";
+                    require_once "./tab_donnees/funct_connex.php";
                     $con=new Connex();
                     $connex=$con->connection;
                     $res = pg_query($connex, "SELECT * FROM tag_type ORDER BY name_tag_type asc ")or die(pg_last_error($connex));
@@ -108,16 +115,18 @@
                     echo '<option value="-1"></option>';
 				echo '</select>
                 </div>';
-                echo '<div style="display:inline"> <input name="modify" type="submit" value="Modify"  /></div>';
+                echo '<div style="display:inline"> <button name="modify" type="submit" class="btn btn-outline-warning">Modify</button></div>';
                 ?>
-                <div style="display:inline"> <input name="delete" type="submit" value="Delete" onClick="return confirm('Do you really want to delete the tag?')"  /></div>
-			<?php echo '</fieldset>';
+        
+        <div style="display:inline"> <button name="delete" type="submit" class="btn btn-outline-danger" onClick="return confirm('Do you really want to delete the tag?')">Delete</button></div>
+        </div>
+        <div class="container"> 
+                        <?php echo '</fieldset>';
         echo '</form>';
         
         // if we click on the Validate button of the previous form 
         //(to send the informations to modify the tag type table)
         if (isset($_GET["delete"])){
-            session_start();
             $id_tag=$_GET["tag"];
             require_once "tab_donnees/funct_connex.php";
             $con=new Connex();
@@ -135,26 +144,35 @@
         //to modify the fields of the selected tag
         //which displays the value of the fields to modify it
         if (isset($_GET["modify"])){
-            session_start(); 
+            
             $id_tag=$_GET["tag"];
             $_SESSION["id_tag"]=$id_tag; 
             $query3 = 'SELECT * FROM tags where id_tag='.$_GET["tag"];
             $result3 = pg_query($connex, $query3)or die(pg_last_error($connex));
             while($row3 = pg_fetch_assoc($result3)){
                 echo '<form method="GET" name="edition_tag" action="US1-54_modify_tag.php">
-                Edit the tag name  :
-                <input type="text" name="tag_name" value="'.$row3["tag_name"].'" ><br/>
-                Edit the new description:
-                <textarea name="tag_description"  >'.$row3["tag_description"].'</textarea><br/>
-                <div><input type="submit" value="Submit" /></div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Edit the tag name : </span> </br>
+                    </div>
+                    <input type="text" name="tag_name" value="'.$row3["tag_name"].'" ><br/>
+                </div>
+                </br>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default"> Edit the description :</span>
+                    </div>
+                    <textarea class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="tag_description"  >'.$row3["tag_description"].'</textarea><br/>
+                </div>
+                <div><button type="submit" class="btn btn-outline-success">Submit</button></div>
                 </form>';
             }
+            
             
         }
         // if we click on the Validate button of the previous form 
         //(to send the informations to modify the tag type table)
         if (isset($_GET["tag_name"])){
-            session_start();
             $id_tag=$_SESSION["id_tag"];
             $tag_name=$_GET["tag_name"];
             $tag_description=$_GET["tag_description"];
@@ -180,5 +198,10 @@
         }
         
 		?>
+        </div>
 	</body>
+    <?php
+			 include("pied_de_page.php");
+    ?>
+</html>
 </html>

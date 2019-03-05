@@ -37,7 +37,6 @@ Output variables :
 		$connex=$con->connection;
 
                 //Query : filtered search
-                // To Do : Add Sources to the query
                 $query="SELECT f.id_original_file, MIN(f.upload_date)
                         FROM files f
                             LEFT JOIN version v on f.id_version = v.id_version
@@ -125,8 +124,8 @@ Output variables :
 		<div class="container-fluid">
 			<form name="box_download" method="GET" action="**URL_download**">
 				<div class="row">
-					<div class="col-md-10"><h1><B>Files list</B></h1></div>
-					<div class="col-md-2" align="right">
+					<div class="col-md-9"><h1><B>Files list</B></h1></div>
+					<div class="col-md-1" align="right">
 						<button type="submit" class="btn btn-md btn-success">Download selection</button>
 					</div>
 				</div></br>
