@@ -11,7 +11,9 @@ This page contains code to display the filter labels:
 
 Input variables : 		
 
-Output variables :		id of selected tags							
+Output variables :		id of selected tags		
+
+Modified by Eva : add javascript section because we've got 2 button in the same form that have different action (Save filter button and Search button)					
 		
 ------------------------------------------------------------->	
 
@@ -23,8 +25,28 @@ Output variables :		id of selected tags
 
 <body>
 
+<script language="Javascript">
+<!--
+function OnButton1()
+{
+    document.filters.action = "US4-11_Main_page_filter.php"
+    //document.filters.target = "_blank";    // Open in a new window
+    document.filters.submit();             // Submit the page
+    return true;
+}
+
+function OnButton2()
+{
+    document.filters.action = "US4-11_Save_filters.php"
+    //document.filters.target = "_blank";    // Open in a new window
+    document.filters.submit();             // Submit the page
+    return true;
+}
+-->
+</script>
+
 <!-- Form to get selected filters  -->
-<form name='filters' method = 'POST' action = 'US4-11_Main_page_filter.php'>
+<form name='filters' method = 'POST'>
 
 	
 	<?php 
@@ -59,12 +81,13 @@ Output variables :		id of selected tags
 	
 			<div class="row">
 					<!-- Search button -->
-					<button type='submit' class='btn btn_lg btn-success' name='search'>Search</button>
+					<button type='submit' class='btn btn_lg btn-success' name='search' value="Button1" onclick="return OnButton1();">Search</button>
 					<!-- Save button -->
-					<button type='submit' class='btn btn_lg btn-success' name='save'>Save filters</button>
+					<button type='submit' class='btn btn_lg btn-success' name='save' value="Button2" onclick="return OnButton2();">Save filters</button>
 			</div>
 
 </form>
+
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover(); 
