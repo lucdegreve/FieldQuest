@@ -76,7 +76,6 @@
                 xhr.send("id_tag_type="+idtypetag);
             }
         </script>
-		<?php session_start() ?>
 	</head>
 	<body>
         <?php
