@@ -38,7 +38,7 @@ Output variables :
 	for ($i=0;$i<count($user_list_b);$i++){
 		echo'<tr id='.$i.'>';
 			echo'<td>'.$user_list_b[$i][1].' '.$user_list_b[$i][2].'</td>';
-			echo'<td><input type="button" name="delete_user" value="Delete" onclick=deleteuser1('.$user_list_b[$i][0].')>'; 
+			echo'<td><button type="button" class="btn btn-danger" name="delete_user" onclick=deleteuser1('.$user_list_b[$i][0].')>Delete</button>'; 
 		echo'</tr>';
 	}
 	echo '</table>';

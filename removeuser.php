@@ -44,8 +44,8 @@ Output variables :
 		  $table_users = $tab->t_enr;
 		  echo "<BR/>";
 		  //echo '<p class = "'.$table_users[0][0].'">';
-		  echo '<input type="button" name="button_user '.$table_users[0][0].'" value="'.$table_users[0][1].' '.$table_users[0][2].'">';
-		  echo '<input type="button" name="remove_project" value="Remove user" onclick=removeuser1('.$table_users[0][0].')>';
+		  echo '<button type="button" class="btn btn-info" name="button_user '.$table_users[0][0].'" >'.$table_users[0][1].' '.$table_users[0][2].'</button>';
+		  echo '<button type="button" class="btn btn-danger" name="remove_project" onclick=removeuser1('.$table_users[0][0].')>Remove user</button>';
 		  //echo'</p>';
 	  }
 ?>
