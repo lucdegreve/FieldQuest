@@ -13,14 +13,14 @@
 				 include('.../git/FieldQuest/pied_de_page.php');
 			?>
 		-->
-				<footer class="footer bg-info ">
+				<footer class="footer bg-primary fixed-bottom">
 					<div class="container">
 					
 						<div class ="row row-20">
 							
 							<div class="col-md-12 center">
 								Copyright AgroTIC and Geosys.
-								<button class="btn btn-info float-right" onclick="location.href='https://www.geosys.com/fr/'" >
+								<button class="btn btn-primary float-right" onclick="location.href='https://www.geosys.com/fr/'" >
 								<img src="picto\geosys_logo.png" class="rounded float-right" alt="Responsive image" width="100px" height ="50px">
 								</button>
 							</div>

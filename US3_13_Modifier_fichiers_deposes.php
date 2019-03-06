@@ -62,6 +62,7 @@
 		//Query to get the current projects linked to the file
 		$result_project=pg_query($connex, "SELECT id_project FROM link_file_project WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
 		$i=0;
+		$tab_checked_projects=array();
 		while($proj=pg_fetch_array($result_project)){
 			$tab_checked_projects[$i]=$proj[0];
 			$i++;
@@ -69,12 +70,15 @@
 		//Query to get the current tags linked to the file
 		$result_tags=pg_query($connex, "SELECT id_tag FROM link_tag_project WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
 		$j=0;
+		$tab_checked_tags = array();
 		while($tag=pg_fetch_array($result_tags)){
 			$tab_checked_tags[$i]=$tag[0];
 			$j++;
 		}
 		?>		
-		
+		<form method="get" action="US3_22_alert_incomplete_file.php">
+		<button type="submit">Send an alert</button>
+		</form>
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
