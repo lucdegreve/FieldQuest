@@ -1,5 +1,5 @@
 <?php
-     session_start();
+    
 ?>
 <html lang="en" dir="ltr">
     <head>
@@ -22,7 +22,7 @@
 
     		<?php
     				 include("en_tete.php");
-    				 include("pied_de_page.php");
+    				 
     		?>
 
         <?php
@@ -112,7 +112,14 @@ echo	"</div>";
 echo "</div>";
 }
 ?>
+<br/><br/>
+
+
+
 
 </body>
+<?php
+include("pied_de_page.php");
+?>
 
 </html>
