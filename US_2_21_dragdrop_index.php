@@ -45,10 +45,10 @@
 		session_start();
 		$_SESSION["latitude"]=NULL;
 		$_SESSION["longitude"]=NULL;
-		//$id_user=$_SESSION['id_user']; A DECOMMENTER
-		//$user_type=$_SESSION['user_type']; A DECOMMENTER
-		$id_user=7;
-		$user_type=2;
+		$id_user=$_SESSION['id_user'];
+		$id_user_type=$_SESSION['id_user_type'];
+		//$id_user=7;
+		//$id_user_type=2;
 		//DB connection
 		require "./tab_donnees/tab_donnees.class.php";
 		require "./tab_donnees/funct_connex.php";
@@ -195,7 +195,7 @@
 
 				<div class="row">
 					<div class="col-md-3">
-						<?php if($user_type==1 or $user_type==2){ ?>
+						<?php if($id_user_type==1 or $id_user_type==2){ ?>
 						<div class="checkbox">
 							<label><input id="validated" type="checkbox" name="validated" value="validated"><h3>Do you want to validate this file ?</h3></label>
 						</div>
