@@ -232,8 +232,16 @@
 $last_coord =  "SELECT latitude, longitude FROM files GROUP BY latitude, longitude, upload_date, id_file HAVING upload_date = (SELECT MAX(upload_date) FROM files WHERE latitude IS NOT NULL AND latitude <> '') AND id_file =(SELECT MAX(id_file) FROM files WHERE latitude IS NOT NULL AND latitude <> '')";
 $result_lc = pg_query($connex, $last_coord) or die('Echec de la requête :'.pg_last_error($connex));
 $last_data = pg_fetch_array($result_lc);
-$last_lat = $last_data[0];
-$last_lon = $last_data[1];
+
+// If there it's the first datas, coordinates of Bordeaux are chosen
+if ($last_data[0]>-300)
+{
+	$last_lat = $last_data[0];
+	$last_lon = $last_data[1];
+}else{
+	$last_lat = -0.5791425704956054;
+	$last_lon = 44.832499993490615;
+}
 ?>
 
 

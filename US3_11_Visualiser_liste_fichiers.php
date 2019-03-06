@@ -149,8 +149,12 @@
 										echo "</td>";
 										echo "<td>";
 											?>
-											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>								
+																						<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>	
+											<?php if ($extension =='jpg' or $extension =='png'){
+											?>	
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>Visualize</button>														
 											<?php
+											}
 										echo "</td>";										
 										echo "<td></td>";
 									echo "</tr>";
@@ -183,6 +187,9 @@
 		//Ouvrir la popup pour afficher les différentes versions
 		function popup(original_id) {	
 			window.open("US3_11_Visualiser_liste_fichiers_P2.php?original_id="+original_id,'newWin','width=1000,height=400');
+		}	
+				function popup_visualize(original_id) {	
+			window.open("US5_2_Visualize?original_id="+original_id,'newWin','width=1000,height=400');
 		}	
 		
 		//Ouvrir la page "edit file"

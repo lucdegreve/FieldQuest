@@ -62,6 +62,7 @@
 		//Query to get the current projects linked to the file
 		$result_project=pg_query($connex, "SELECT id_project FROM link_file_project WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
 		$i=0;
+		$tab_checked_projects=array();
 		while($proj=pg_fetch_array($result_project)){
 			$tab_checked_projects[$i]=$proj[0];
 			$i++;
@@ -69,6 +70,7 @@
 		//Query to get the current tags linked to the file
 		$result_tags=pg_query($connex, "SELECT id_tag FROM link_tag_project WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
 		$j=0;
+		$tab_checked_tags = array();
 		while($tag=pg_fetch_array($result_tags)){
 			$tab_checked_tags[$i]=$tag[0];
 			$j++;
