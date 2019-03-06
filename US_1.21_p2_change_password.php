@@ -1,5 +1,5 @@
 <?php
-     session_start();
+     //session_start();
 ?>
 <html lang="en" dir="ltr">
     <head>
@@ -41,9 +41,8 @@
     		?>
 
         <BR/>
-        <strong> Change your password </strong>
-        <BR/>
-        <BR/>
+        <h2 style="text-align:center;"> Change your password </h2>
+        
         <form name="password_change" action="US_1.21_p2_change_password.php"  onsubmit="return changepassword()" method="GET">
         <BR/>
 
@@ -78,6 +77,16 @@
         echo "Your password has correctly been changed";
         }
         ?>
+            
+         <div class="card border-white" style="padding-top: 2%;">
+                <div class="row">
+                    <div class="col-md-1 col-sm-1">
+                    </div>
+                    <div class="col-md-2 col-sm-1"></div>
+                    <!-- Centre de page-->
+                                       
+                    
+                    <div class="col-md-6 col-sm-8 border-white bg-primary" style="border-radius: 15px;padding: 2%;">
 
         <?php
 
@@ -88,26 +97,40 @@
         // Then it presents all the info properly in a table
         echo '<table>';
         echo '<tr>';
-        echo '<td> Old password  </td><td><input type="text" size = "50"  name="old_password" value=""> </td>';
+        echo '<td> <strong>Old password </strong>  </td><td><input type="password" size = "50"  name="old_password" value="" style="background:#f8f9fa; border-radius: 5px; margin-bottom:10px;"> </td>';
         echo '</tr>';
         echo '<tr>';
-        echo '<td> New password </td><td><input type="text" size = "50"  name="new_password" value=""> </td>';
+        echo '<td> <strong>New password</strong> </td><td><input type="password" size = "50"  name="new_password" value="" style="background:#f8f9fa; border-radius: 5px;"> </td>';
         echo '</tr>';
         echo '<tr>';
-        echo '<td> Verify password </td><td><input type="text" size = "50"  name="password_verif" value=""> </td>';
+        echo '<td> <strong> Verify password </strong> </td><td><input type="password" size = "50"  name="password_verif" value="" style="background:#f8f9fa; border-radius: 5px;"> </td>';
         echo '</tr>';
         echo '</table>';
 
         echo '<input type="hidden" size = "50"  name="true_password" value='.$row[0].'>';
 
-        echo '<BR/>';
-        echo '<input type="submit" name="change_password" value="Change your password">';
+        //echo '<BR/>';
+        echo '<input type="submit" name="change_password" value="Submit" style=" float:right;">';
         echo '</form>';
         ?>
+        
+         </div>
+                        
+                     
+
+                    <!-- Centre de page-->
+                    <div class="col-md-2 col-sm-1"> </div>
+                    <div class="col-md-1 col-sm-1">
+                        <b class="card text-center border-white"></b>           
+                    </div>
+                </div>
+        </div>
 
         <form action = "US_1.21_account_monitoring_by_user.php" method = "POST" name = "Return">
-        <input type = "submit" value = "Return">
+        <input type = "submit" value = "Back">
         </form>
+            
+        <br><br><br><br><br><br>
 
     		<?php
     				 include("pied_de_page.php");
