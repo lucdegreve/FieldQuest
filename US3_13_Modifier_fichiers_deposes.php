@@ -74,7 +74,9 @@
 			$j++;
 		}
 		?>		
-		
+		<form method="get" action="US3_22_alert_incomplete_file.php">
+		<button type="submit">Send an alert</button>
+		</form>
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
