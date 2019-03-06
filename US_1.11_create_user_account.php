@@ -111,6 +111,7 @@
                 </table>
 
                 <button type="submit" class="btn btn-outline-success" name="createaccount">Create account</button>
+				
         </form>
         <!-- After submitting this form, issset verifies if first name and last name are filled, if so, data are loaded in the database -->
         <?php
@@ -158,10 +159,11 @@
                 echo "User account have been correctly created and inserted into the database";
             }
         ?>
-</div.
+
 <form action = "US1-10_Gerer_comptes.php" method = "POST" name = "Return">
-<button name="return" class="btn btn-outline-info" type="submit">back</button>
+<button name="return" class="btn btn-outline-info" style="float:left;" type="submit">back</button>
 </form>
+<br/><br/><br/><br/><br/><br/>
     		<?php
     				 include("pied_de_page.php");
     		?>
