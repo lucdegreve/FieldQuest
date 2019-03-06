@@ -1,24 +1,40 @@
 <html>
+
 	<head>
 <!--------------------------------------------------------------------------------
-       US4-11 Filtrer avec des tags - Table of query result  
-Developped by Ophélie	& Diane	
-	      
-This page displays the result of the search by tags as a table. 
+       US4-11 Filtrer avec des tags - Table of query result
+Developped by Ophélie	& Diane
+
+This page displays the result of the search by tags as a table.
 Code based on "US3_11_Visualiser_liste_fichiers.php" developped by Elsa & Axelle
 
 
-Input variables : 		
+Input variables :
 
-Output variables :								
-		
----------------------------------------------------------------------------------->	
+Output variables :
+
+---------------------------------------------------------------------------------->
 
 		<META charset="UTF-8">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/custom.css" rel="stylesheet">
 	</head>
 
 	<body>
+
+
+
+
 		<?php
+		session_start();
+		//Header
+		include("en_tete.php");
+		echo "</br>";
+		//DB connection
+		require "./tab_donnees/funct_connex.php";
+		require "./tab_donnees/tab_donnees.class.php";
+		$con=new Connex();
+		$connex=$con->connection;
 
                 //Query : filtered search
                 $query="SELECT f.id_original_file, MIN(f.upload_date)
@@ -31,17 +47,17 @@ Output variables :
                             LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
                             LEFT JOIN tags t ON t.id_tag=ltp.id_tag
                         WHERE f.id_validation_state = '2' AND ";
-                if (isset($_POST['start'])){
+
                 if ($_POST['start']!=''){
                         $start_date = $_POST['start'];
                         $query .= " f.upload_date >'".$start_date."' AND ";
-                }}
-                if (isset($_POST['end'])){
+                }
+
                 if ($_POST['end']!=''){
                         $end_date = $_POST['end'];
                         $query .= " f.upload_date <'".$end_date."' AND ";
-                }}
-                
+                }
+
                 if (isset($_POST['format'])){
                         $query .= " f.id_format IN (";
                         foreach ($_POST['format'] AS $i){
@@ -51,7 +67,7 @@ Output variables :
                         $query .= ")";
                         $query .= " AND ";
                 }
-                
+
                 if (isset($_POST['projet'])){
                         $query .= " lfp.id_project IN (";
                         foreach ($_POST['projet'] AS $i){
@@ -61,11 +77,11 @@ Output variables :
                         $query .= ")";
                         $query .= " AND ";
                 }
-                if (isset($_POST['sources'])){
+
                 if ($_POST['sources']!=''){
                         $query .= "f.id_user_account IN (".$_POST['sources'].") AND ";
-                }}
-                
+                }
+
                 $TAG_SLD='(';
                 if (isset($_POST['unit'])){
                         foreach ($_POST['unit'] AS $i){
@@ -73,7 +89,7 @@ Output variables :
                         }
                         echo '</br>';
                 }
-                
+
                 if (isset($_POST['tag'])){
                         foreach ($_POST['tag'] AS $i){
                                 $TAG_SLD .= $i.", ";
@@ -81,31 +97,31 @@ Output variables :
                         echo '</br>';
                 }
                 if ($TAG_SLD!='('){
-                        
+
                         $query .= " ltp.id_tag IN ".$TAG_SLD;
                         $query = substr($query, 0, strlen($query) -2);
                         $query .= ")";
                 }
-                
-                
+
+
                 if (substr($query, -6)=='WHERE '){
                     $query = substr($query, 0, strlen($query) -6);
                 }
-                
+
                 if (substr($query, -4)=='AND '){
                     $query = substr($query, 0, strlen($query) -4);
                 }
-                
+
                 $query .= " GROUP BY f.id_original_file ORDER BY MIN(f.upload_date) DESC";
-                
-                
+
+
 		//Query : list of distinct file names
 		$result_files_id=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
 		$nbrows=pg_num_rows($result_files_id);
 		?>
 
 		<!-- Table creation -->
-		<div class="container-fluid"> 
+		<div class="container-fluid">
 			<form name="box_download" method="GET" action="**URL_download**">
 				<div class="row">
 					<div class="col-md-9"><h1><B>Files list</B></h1></div>
@@ -113,7 +129,7 @@ Output variables :
 						<button type="submit" class="btn btn-md btn-success">Download selection</button>
 					</div>
 				</div></br>
-				<div class="row">				
+				<div class="row">
 					<table class="table">
 						<thead class="thead-dark">
 							<tr>
@@ -124,13 +140,17 @@ Output variables :
 								<th scope="col" width="8%">Size</th>
 								<th scope="col" width="10%"></th>
 								<th scope="col" width="10%"></th>
-								<th id="select" scope="col" width="10%" style="text-align:center;">Select</th> 
-								<th class="droite" scope="col" width="5%" style="text-align:center;"><input id="id_selectAll" type="checkbox" onclick="selectAll();"></th> 
-							
+								<th id="select" scope="col" width="10%" style="text-align:center;">Select</th>
+								<th class="droite" scope="col" width="5%" style="text-align:center;"><input id="id_selectAll" type="checkbox" onclick="selectAll();"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
+
+							//Compteur pour faire transiter la donnée vers le téléchargement
+							$pos=0;
+
+
 							while($row=pg_fetch_array($result_files_id)){
 								$id=$row[0];
 								//Query to get the last version for each file name
@@ -154,9 +174,9 @@ Output variables :
 										$metadata="Tags: ";
 									}
 								}
-								// Query to get metadata of the file 
+								// Query to get metadata of the file
 								$query_metadata = "SELECT t.tag_name
-											FROM link_tag_project ltp JOIN tags t on t.id_tag = ltp.id_tag 
+											FROM link_tag_project ltp JOIN tags t on t.id_tag = ltp.id_tag
 											WHERE ltp.id_file = '".$id_file."'";
 								$result_metadata = pg_query($connex, $query_metadata) or die (' Failed to get tags');
 								$table_metadata = new Tab_donnees($result_metadata,'PG');
@@ -165,11 +185,11 @@ Output variables :
 								}
 								for ($i=0; $i< $table_metadata->nb_enregistrements();$i++){
 									$metadata .= $table_metadata->t_enr[$i][0].", ";
-									
+
 								}
 								// Delete last ', ' in $metadata
 								$metadata = substr($metadata, 0, strlen($metadata)-2);
-								
+
 								//State "validated"
 								if($valid=="validated"){
 									if($id_file!=$original_id){
@@ -180,10 +200,10 @@ Output variables :
 											$date=$col[0];
 											$last_name=$col[1];
 											$first_name=$col[2];
-											
-											
+
+
 										}
-									}						
+									}
 									echo "<tr>";
 										echo "<td><img src='picto/validated.png' width='30' height='30'/></td>";
 										// Popover to display metadata for each file
@@ -192,18 +212,43 @@ Output variables :
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";
 										echo "<td>";
-											echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download</button>';													
+
+
+										//Affichage du lien de telechargement qui prend en compte le nom du fichier ainsi que le chemin
+										//Affichage de la requete par fichier
+										$querydl = "SELECT fi.file_place, fi.file_name, fo.label_format
+										          FROM files fi JOIN format fo
+										          ON fi.id_format = fo.id_format
+															WHERE fi.id_file = $original_id";
+										$resultdl = pg_query($querydl) or die('Échec de la requête : ' . pg_last_error());
+
+										//creation d'une liste contenant le non, l'extension et la pos du fichier
+										$row = pg_fetch_array($resultdl);
+										$listdl = array();
+									  $listdl[] =  $row[1];
+									  $listdl[] = $row[2];
+									  $listdl = join( $listdl, ".");
+
+									  $_SESSION["path[".$pos."]"] = $row[0];
+
+										//Récuperation des valeurs pour la fonction download
+										echo '<a href="download.php?file='.$listdl.'&i='.$pos.'" button type="button" class="btn btn-sm btn-outline-success btn-block">Dowload File</a>';
+										$pos=$pos+1;
+
+
+
+
 										echo "</td>";
 										echo "<td>";
 											echo '<button type="button" id="btnEdit" name="btnEdit" class="btn btn-sm btn-outline-warning btn-block" onclick="return edit_file('.$id_file.')">Edit</button>';
 										echo "</td>";
 										echo "<td>";
 											?>
-											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>								
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>
 											<?php
-										echo "</td>";										
+										echo "</td>";
 										echo "<td>";
-											echo '</br><div align="center"><input  id='.$id_file.' type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'" onclick= "compteur('.$id_file.');" ></div>'; 
+											echo '</br><div align="center"><input  id='.$id_file.' type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'" onclick= "compteur('.$id_file.');" ></div>';
 										echo "</td>";
 									echo "</tr>";
 								}
@@ -214,73 +259,99 @@ Output variables :
 				</div></br>
 			</form>
 		</div>
-                
+
+	</body>
+
+	<?php
+	echo "</br>";
+	include("pied_de_page.php");
+	?>
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="bootstrap/js/jquery.min.js"><\/script>')</script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Resources for popover -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+
+	<script type="text/javascript">
+		//Ouvrir la popup pour afficher les différentes versions
+		function popup(original_id) {
+			window.open("US3_11_Visualiser_liste_fichiers_P2.php?original_id="+original_id,'newWin','width=1000,height=400');
+		}
+
+		//Ouvrir la page "edit file"
+		function edit_file(id_file) {
+			document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
+		}
+
+		$('[data-toggle="popover"]').popover();
+
+		$('body').on('click', function (e) {
+		//only buttons
+			if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) {
+				$('[data-toggle="popover"]').popover('hide');
+			}
+		});
 
 
+	     // Function Compteur
 
+        var count=0;
 
-
-<script type="text/javascript">
-        //Ouvrir la popup pour afficher les différentes versions
-        function popup(original_id) {	
-                window.open("US3_11_Visualiser_liste_fichiers_P2.php?original_id="+original_id,'newWin','width=1000,height=400');
-        }	
-        
-        //Ouvrir la page "edit file"
-        function edit_file(id_file) { 
-                document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
-        }
-        
-        $('[data-toggle="popover"]').popover();
-
-        $('body').on('click', function (e) {
-        //only buttons
-                if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) { 
-                        $('[data-toggle="popover"]').popover('hide');
-                }
-        });
-        
-        
-        // Function Compteur 
-         
-        var count=0; 
-         
-        function compteur(id_file) { 
-            if(document.getElementById(id_file).checked){ 
-                count++; 
+        function compteur(id_file) {
+            if(document.getElementById(id_file).checked){
+                count++;
+            }else{
+                count--;
             }
-            else{ 
-                count--; 
-            } 
-            document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ; 
-        }
-         
-        
-        function cocherTout(etat){ 
-            var cases = document.getElementsByTagName('input');   // on recupere tous les INPUT 
-            for(var i=0; i<cases.length; i++)     // on les parcourt 
-                if(cases[i].type == 'checkbox')     // si on a une checkbox... 
-                cases[i].checked = etat;     // ... on la coche ou non 
-        }
-         
+            document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
 
-        function selectAll() { 
-            var all = <?php echo $nbrows; ?>; 
-            
-            if(document.getElementById("id_selectAll").checked){ 
-                cocherTout(true); 
-				count=all; 
-                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ; 
-            }
-            else{ 
-                cocherTout(false); 
-				count=0; 
+		}
+
+
+
+
+
+        function cocherTout(etat){
+            var cases = document.getElementsByTagName('input');   // on recupere tous les INPUT
+            for(var i=0; i<cases.length; i++)     // on les parcourt
+                if(cases[i].type == 'checkbox')     // si on a une checkbox...
+                cases[i].checked = etat;     // ... on la coche ou non
+        }
+
+
+
+
+
+
+        function selectAll() {
+            var all = <?php echo $nbrows; ?>;
+
+            if(document.getElementById("id_selectAll").checked){
+                cocherTout(true);
+				count=all;
                 document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
+            }else{
+                cocherTout(false);
+				count=0;
+                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
+
+
             }
-        }
 
-</script>
 
-</body>
-	
+		}
+
+
+	</script>
+
 </html>

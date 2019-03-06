@@ -13,7 +13,7 @@
 				 include('.../git/FieldQuest/pied_de_page.php');
 			?>
 		-->
-				<footer class="footer bg-info fixed-bottom">
+				<footer class="footer bg-info ">
 					<div class="container">
 					
 						<div class ="row row-20">

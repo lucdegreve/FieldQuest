@@ -11,12 +11,10 @@
     		<?php
     				 include("en_tete.php");
     		?>
+        <div align='center'>
+        <h1> User Account creation</h1>
 
-        <strong> Please fill all the information </strong>
-        <BR/>
-        <BR/>
-
-        NB : All the fields with (*) must be filled
+        NB : All fields with (*) must be completed
 
         <!-- Function valider(), verify for each field if it is filled. If not, warning message appears -->
         <script type="text/javascript">
@@ -111,8 +109,8 @@
                         <td> Company website </td><td> <input type="text" size = "50" name="website" value=""> </td>
                     </tr>
                 </table>
-                <BR/>
-                <input type="submit" name="createaccount" value="Create account">
+
+                <button type="submit" class="btn btn-outline-success" name="createaccount">Create account</button>
         </form>
         <!-- After submitting this form, issset verifies if first name and last name are filled, if so, data are loaded in the database -->
         <?php
@@ -160,11 +158,13 @@
                 echo "User account have been correctly created and inserted into the database";
             }
         ?>
+</div.
 <form action = "US1-10_Gerer_comptes.php" method = "POST" name = "Return">
-<input type = "submit" value = "Return">
+<button name="return" class="btn btn-outline-info" type="submit">back</button>
 </form>
     		<?php
     				 include("pied_de_page.php");
     		?>
-  </body>
+    
+    </body>
 </html>

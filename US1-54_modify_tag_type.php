@@ -33,20 +33,25 @@
             }
 
         </script>
+		
 	</head>
 	<body>
 		<?php
 				 include("en_tete.php");
         ?>
-        <div class="container"> 
+        <div class="container">
         <?php 
         require "./tab_donnees/funct_connex.php";
 		echo'<form action="US1-54_manage_tags.php">
-				<div style="display:inline"> <input name="return" class="btn btn-outline-info" type="submit" value="return" /></div>
+				<button name="return" class="btn btn-outline-info" type="submit">back</button>
 				</form>';
+        ?>
+        </div>
+        <div align='center'> 
+        <?php
         echo '<form  method="get">
             <fieldset style="width: 500px"> 
-				<legend>Select the tag type to modify</legend>
+				<h1>Select the tag type to modify</h1>
 				<label>Tag type</label>
 				<select name="tag_type" id="tag_type">
 					<option value="-1">-</option>';
@@ -67,7 +72,7 @@
                 echo '</select>
                 <div style="display:inline"> <button type="submit" class="btn btn-outline-warning">Modify</button></div>'
 				?>
-				<div style="display:inline"> <input name="delete" class="btn btn-outline-danger" type="submit" value="Delete" onClick="return confirm('Do you really want to delete the tag?')"  /></div>
+				<button name="return" class="btn btn-outline-danger" type="submit" onClick="return confirm('Do you really want to delete the tag?')"/>Delete </button>
 				<?php
             echo '</fieldset>
         </form>';

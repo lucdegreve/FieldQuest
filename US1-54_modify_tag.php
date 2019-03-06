@@ -76,6 +76,7 @@
                 xhr.send("id_tag_type="+idtypetag);
             }
         </script>
+		
 	</head>
 	<body>
         <?php
@@ -85,7 +86,7 @@
         <?php 
         require "./tab_donnees/funct_connex.php";
 		echo'<form action="US1-54_manage_tags.php">
-				<div style="display:inline"> <input name="return" class="btn btn-outline-info" type="submit" value="return" /></div>
+				<button name="return" class="btn btn-outline-info" type="submit">back</button>
 				</form>';
         echo '<form  method="get">';
         echo '<fieldset style="width: 500px">
