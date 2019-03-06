@@ -6,12 +6,11 @@
 
 <?php
 	include("en_tete.php");
-	//$id_user = $_SESSION[$id_user_account] ; variables sessions à lier
-	$id_user = 1;
+	$id_user=$_SESSION['id_user_account'];
 ?>
 
 
-<!-- Développeur : Eva
+<!-- Développeur : Eva & Liantsoa
 	Access my deposit history
 	-> writing the query to access the list of my submitted files	
 	-> table to display the results of the query
@@ -60,16 +59,16 @@ require "./tab_donnees/funct_connex.php";
 $con = new Connex();
 $connex = $con->connection;
 
-$query = "SELECT id_file, file_name, id_format, id_validation_state, id_version, upload_date, file_comment, data_init_date, data_end_date, evaluation_date, evaluation_comment, file_size FROM files WHERE id_user_account=$id_user";
+$query = "SELECT  id_file, file_name, id_format, label_validation_state, id_version, upload_date, file_comment, data_init_date, data_end_date, evaluation_date, evaluation_comment, file_size FROM files JOIN validation_state ON files.id_validation_state = validation_state.id_validation_state WHERE id_user_account=$id_user";
 $result = pg_query($connex,$query) or die (pg_last_error() );
+
+										
 
 echo "</BR>";
 
 ?>
 
-<form name="return" action="US_2_21_dragdrop_index.php" method="GET"> <!-- URL à changer (Liantsoa) -->
-<button type='submit' class='btn btn-success btn-block'>Back to the home page</button>
-</form>
+
 
 </br>
 
@@ -87,6 +86,7 @@ echo "</BR>";
 
 					<?php
 					//creation du tableau
+					
 						echo '<table id="example" class="display" border="1" cellpadding="4" bordercolor="E8E8E8" bgcolor="white">';
 					// en tete du tableau
 							echo '<thead>';
@@ -127,20 +127,34 @@ echo "</BR>";
 									echo '<th>';
 										echo  'Size';
 									echo '</th>';
+									echo '<th>';
+										echo  'Delete';
+									echo '</th>';
 								echo '</tr>';
 							echo '</thead>';
 
 					//corps du tableau
 							echo '<tbody>';
 							while ($row = pg_fetch_array($result))
+								
 								{
 									echo '<tr>' ;
 										for($i=0; $i<  pg_num_fields($result); $i++)
 										{
 											echo '<td>';
 												echo $row[$i]."  ";
-											echo '</td>';
-										}		
+											echo '</td>';											
+										}
+											echo '<td>';
+												if ($row[3]=='not validated')
+												{
+												echo ("<a href =# class='lien'>Delete</A>");
+												}
+												else
+												{
+												echo "";
+												}
+											echo '</td>';			
 									echo '</tr>';
 								}
 							echo '</tbody>';

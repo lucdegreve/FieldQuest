@@ -79,12 +79,12 @@ function OnButton2()
 	
 	?>
 	
-			<div class="row">
+			<div class="row mx-auto">
 					<!-- Search button -->
 					<button type='submit' class='btn btn_lg btn-success' name='search' value="Button1" onclick="return OnButton1();">Search</button>
 					<!-- Save button -->
 					<button type='submit' class='btn btn_lg btn-success' name='save' value="Button2" onclick="return OnButton2();">Save filters</button>
-			</div>
+                        </div>
 
 </form>
 
