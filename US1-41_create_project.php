@@ -11,6 +11,7 @@ if (!isset($_POST['validate'])){
        US1-41 Create a project 
 Developped by Diane, Ophélie and Aurélie      
 This page contains the form to create a new project or to modify a project.
+Display : yes
 Needed/called pages : 	tab_donnees.class.php, funct_connex.php, 
 						userprop.php, update_list_1.php, 
 						removeuser.php, update_list_2.php,
@@ -329,9 +330,14 @@ if(isset($_POST['validate'])){
 		$project_status = $_POST['status'];
 		$project_desc = $_POST['project_desc'];
 		$project_start = $_POST['begin_date'];
-		$id_users_kept=$_SESSION["users_asso_before"];
-		//$id_users_asso_after[]=$id_user_kept[0];
-		//echo "liste finale ".var_dump($id_users_asso_after);
+		// variable to get users associated to the project before modification and kept during modification
+		$users_kept=$_SESSION["users_asso_before"]; 
+		echo "utilisateurs présents av et ap ". var_dump($users_kept);
+		//to have users already associated before modif and the new ones in same variable
+		for($i=0;$i<count($users_kept);$i++){
+			$id_users_asso_after[]=$users_kept[$i][0];
+		}
+		echo "liste finale ".var_dump($id_users_asso_after);
 		if ($_POST['end_date']!=""){
 			$project_end = $_POST['end_date'];
 			
@@ -345,10 +351,15 @@ if(isset($_POST['validate'])){
 		$result = pg_query($connex, $query_modify_project) or die ('<div class="alert alert-danger">Failed to modify project</div>');
 			echo '<div class="alert alert-success">Project modified</div>';
 		
+		//to delete former users associated to the project
+		$result_delete_users = pg_query($connex, "DELETE FROM link_project_users where id_project=$id_project")
+			 or die ('<div class="alert alert-danger">Failed to add project</div>');	
+		
+		
 		//to add users to current project
-		for ($i=0;$i<count($id_users_asso);$i++){
+		for ($i=0;$i<count($id_users_asso_after);$i++){
 			$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account) 
-													VALUES ('".$id_project."','".$id_users_update[$i][0]."')")
+													VALUES ('".$id_project."','".$id_users_asso_after[$i]."')")
 			 or die ('<div class="alert alert-danger">Failed to add project</div>');		
 		}
 	} else {
