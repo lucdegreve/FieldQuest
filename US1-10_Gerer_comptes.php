@@ -69,8 +69,10 @@ Not done yet : Link with modify account page
 				?>
 			</div>
 		</div>
+	<div class="row"></div>
+	
 	</div>
-
+<br/><br/><br/><br/>
 	<?php
 	// Include footer
 	include("pied_de_page.php");
