@@ -19,18 +19,21 @@
             }
 
         </script>
+		
 	</head>
 	<body>
 		<?php
-			include("en_tete.php");
+				 include("en_tete.php");
         ?>
         <div class="container"> 
         <?php  
             // To add a new client  
             require "./tab_donnees/funct_connex.php";
 			echo'<form action="US1-54_manage_tags.php">
-				<div style="display:inline"> <input name="return" class="btn btn-outline-info" type="submit" value="return" /></div>
-				</form>';
+				<button name="return" class="btn btn-outline-info" type="submit">back</button>
+				</form><h1>Add a new tag type</h1>';
+                                
+                            
             $con=new Connex();
             $connex=$con->connection;    
             // parameters of request 
@@ -41,9 +44,8 @@
             $result = pg_query($connex, $query)  
                 or die('Échec de la requête : ' . pg_last_error($connex)); 
 				echo '<form name="form_creation" action="US1-53_create_tag_type.php" onsubmit="return validation()" method="get">'; 
-                echo '<fieldset style="width: 500px">
-					<legend>Add a new type of tag</legend>';                  
-					echo '</select></br></br>
+                echo '<fieldset style="width: 500px">';                  
+					echo '</select></br>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-default"> Enter the tag type : </span>

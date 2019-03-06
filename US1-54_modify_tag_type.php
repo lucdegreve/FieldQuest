@@ -46,8 +46,7 @@
 				<button name="return" class="btn btn-outline-info" type="submit">back</button>
 				</form>';
         ?>
-        </div>
-        <div align='center'> 
+        
         <?php
         echo '<form  method="get">
             <fieldset style="width: 500px"> 
@@ -111,14 +110,14 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">Edit the tag type </span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_tag_type" value="'.$row3["name_tag_type"].'" ><br/>
+                    <input type="text" class="col-md-6 col-md-offset-6" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_tag_type" value="'.$row3["name_tag_type"].'" ><br/>
                 </div>
                 </br>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">Edit the description</span>
                     </div>
-                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="description_tag_type" value="'.$row3["description_tag_type"].'">
+                    <input type="text" class="col-md-6 col-md-offset-6" class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="description_tag_type" value="'.$row3["description_tag_type"].'">
                 </div>
                
                 <div><button type="submit" class="btn btn-outline-success">Validate</button></div>
@@ -148,6 +147,7 @@
         }
         
 		?>
+        </div>
 	</body>
 	<?php
 		include("pied_de_page.php");
