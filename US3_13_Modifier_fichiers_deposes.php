@@ -81,9 +81,9 @@ echo "</br>";
 			$j++;
 		}
 		?>		
-		<form method="get" action="US3_22_alert_incomplete_file.php">
-		<button type="submit">Send an alert</button>
-		</form>
+		<form name="alert" method="get" action="US3_22_alert_incomplete_file.php">
+			<button type="submit" class="btn btn-lg btn-outline-warning"><font size=4>Send an alert</font></button>
+		</form></br>
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
@@ -258,7 +258,7 @@ echo "</br>";
 			</div>
 			
 			<div align="center">
-				<button type="submit" class="btn btn-lg btn-success" onclick="return validate()">Validate</button>
+				<button type="submit" class="btn btn-lg btn-success" onclick="return validate()"><font size=4>Validate</font></button>
 			</div>
 		</form></br>
 		
