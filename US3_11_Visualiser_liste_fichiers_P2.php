@@ -19,7 +19,7 @@
 		//Get variable
 		$original_id=$_GET['original_id'];
 		//Query
-		$query="SELECT id_file, file_name, to_char(upload_date,'DD/MM/YYYY'), file_size, id_version, use_id_user_account FROM files
+		$query="SELECT id_file, file_name, to_char(upload_date,'DD/MM/YYYY'), file_size, id_version, use_id_user_account, file_place FROM files
 		WHERE id_original_file=".$original_id."
 		ORDER BY id_version DESC";
 		$result_versions=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
@@ -46,6 +46,8 @@
 						$size=$col[3];
 						$version=$col[4];
 						$use_id_user_account=$col[5];
+						$place=$col[6];
+						$link=$place."".$file_name;
 						$result_editor=pg_query($connex, "SELECT first_name, last_name FROM user_account WHERE id_user_account=".$use_id_user_account) or die('Échec de la requête : ' . pg_last_error());
 						while($name=pg_fetch_array($result_editor)){
 							$first_name=$name[0];
@@ -57,6 +59,7 @@
 							echo "<td>".$first_name." ".$last_name."</td>";
 							echo "<td>".$size."</td>";
 							echo "<td>".$version."</td>";
+							echo "<td> <a href = ".$link." download>Telecharger</a></li> </br> ";
 						echo "</tr>";
 					}?>
 				</tbody>
