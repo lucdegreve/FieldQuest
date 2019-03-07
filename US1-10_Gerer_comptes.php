@@ -26,6 +26,11 @@ Not done yet : Link with modify account page
 	// Include header
 	include("en_tete.php");
 	echo "</br>";
+	
+	//Get the user id 
+	$id_user=$_SESSION['id_user_account'];
+	$user_type=$_SESSION['id_user_type'];
+
 	// Include files containing connexion to database & tab_donnees class
 	require "tab_donnees/tab_donnees.class.php";
 	require "tab_donnees/funct_connex.php";
@@ -45,10 +50,19 @@ Not done yet : Link with modify account page
 	<div class="container">
 		<div class="row">
 			<div class="col-md-1">
-				<form method="GET"  action="US1-10_Gerer_comptes.php">
+				<?php if($user_type==1){ ?>
+				<form method="GET"  action="US0_page_accueil_admin.php">
+				<?php }
+				if ($user_type==2){ ?>
+				<form method="GET"  action="US0_page_accueil_internes.php">
+				<?php }
+				if($user_type==3){ ?>
+				<form method="GET"  action="US0_page_accueil_externes.php">
+				<?php } ?>
 					<button align="center" type="submit" class="btn btn-primary btn-md">Back</button>
 				</form>
 			</div>
+			
 			<div class="col-md-7"></div>
 			<div class="col-md-4">
 				<form name="add_account" action="US_1.11_create_user_account.php" method="GET">
