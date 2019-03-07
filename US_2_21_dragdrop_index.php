@@ -272,7 +272,7 @@ if (!isset($_GET['validate'])){
 						</div>
 						<?php } ?>
 					</div>
-					<div class="col-md-1"></div><div class="col-md-4">
+					<div class="col-md-2"></div><div class="col-md-2">
 						<button type="submit" name="validate" class="btn btn-lg btn-success btn-block" onclick="return validate()"><h2>Send the form</h2></button>
 					</div>
 				</div>
