@@ -156,7 +156,7 @@ if(isset($_GET['projet']) && !empty($_GET['projet'])){
 }
 echo "<br/>";
 
-if($user_type==1 or $user_type==2){ ?>
+if($user_type==1){ ?>
 	<div class="container">
 		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
 		<div align="center">
@@ -166,7 +166,17 @@ if($user_type==1 or $user_type==2){ ?>
 		</div>
 	</div>
 <?php }
-else { ?>
+if($user_type==2){ ?>
+	<div class="container">
+		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
+		<div align="center">
+			<form action="US0_page_accueil_internes.php" method="GET">
+				<button type="submit" class="btn btn-md btn-primary">Back to the home page</button>
+			</form>
+		</div>
+	</div>
+<?php }
+if($user_type==3){ ?>
 	<div class="container">
 		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
 		<div align="center">
