@@ -4,21 +4,21 @@
 
 <!--------------------------------------------------------------------------------
 
-       US4-11 Filtrer avec des tags - Table of query result  
+       US4-11 Filtrer avec des tags - Table of query result
 
-Developped by Ophélie	& Diane	
+Developped by Ophélie	& Diane
 
-This page displays the result of the search by tags as a table. 
+This page displays the result of the search by tags as a table.
 
 ///// This page is included in US4-11_Main_page_filter.php /////
 
 Code based on "US3_11_Visualiser_liste_fichiers.php" developped by Elsa & Axelle
 
-Input variables : 		
+Input variables :
 
-Output variables :	
-							
----------------------------------------------------------------------------------->	
+Output variables :
+
+---------------------------------------------------------------------------------->
 
 		<META charset="UTF-8">
                 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@ Output variables :
                             LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
 							LEFT JOIN tags t ON t.id_tag=ltp.id_tag
 							Where f.id_file NOT IN (0) AND ";
-				
+
 				if (isset($_POST['Validation_state'])){
 						$query .= " f.id_validation_state IN (";
 						foreach ($_POST['Validation_state'] AS $i){
@@ -69,7 +69,7 @@ Output variables :
                         }
                 }
 
-                
+
                 if (isset($_POST['format'])){
                         $query .= " f.id_format IN (";
                         foreach ($_POST['format'] AS $i){
@@ -80,9 +80,9 @@ Output variables :
                         $query .= " AND ";
                 }
 
-                
+
                 if (isset($_POST['projet'])){
-                    
+
                         $query .= " lfp.id_project IN (";
                         foreach ($_POST['projet'] AS $i){
                                 $query .= $i.", ";
@@ -90,7 +90,7 @@ Output variables :
                         $query = substr($query, 0, strlen($query) -2);
                         $query .= ")";
                         $query .= " AND ";
-                        
+
                 }
 
                 if (isset($_POST['sources'])){
@@ -123,7 +123,7 @@ Output variables :
                         $query .= ")";
                 }
 
-                
+
                 //Cut end of query
                 if (substr($query, -6)=='WHERE '){
                     $query = substr($query, 0, strlen($query) -6);
@@ -133,7 +133,7 @@ Output variables :
                     $query = substr($query, 0, strlen($query) -4);
                 }
 
-                
+
                 $query .= " GROUP BY f.id_original_file ORDER BY MIN(f.upload_date) DESC";
 
 
@@ -141,15 +141,15 @@ Output variables :
 
 		$result_files_id=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
 		$nbrows=pg_num_rows($result_files_id);
-                
+
 		?>
 
 
 		<!-- Table creation -->
 
-		<div class="container-fluid"> 
+		<div class="container-fluid">
 
-			<form name="box_download" method="GET" action="**URL_download**">
+			<form name="box_download" action="downloadmultiple.php" method="post">
 
 				<div class="row">
 
@@ -163,7 +163,7 @@ Output variables :
 
 				</div></br>
 
-				<div class="row">				
+				<div class="row">
 
 					<table class="table">
 
@@ -185,11 +185,11 @@ Output variables :
 
 								<th scope="col" width="10%"></th>
 
-								<th id="select" scope="col" width="10%" style="text-align:center;">Select</th> 
+								<th id="select" scope="col" width="10%" style="text-align:center;">Select</th>
 
-								<th class="droite" scope="col" width="5%" style="text-align:center;"><input id="id_selectAll" type="checkbox" onclick="selectAll();"></th> 
+								<th class="droite" scope="col" width="5%" style="text-align:center;"><input id="id_selectAll" type="checkbox" onclick="selectAll();"></th>
 
-							
+
 
 							</tr>
 
@@ -198,7 +198,7 @@ Output variables :
 						<tbody>
 
 							<?php
-                                                        
+
                                                         //Compteur pour faire transiter la donnée vers le téléchargement
 							$pos=0;
 
@@ -215,9 +215,9 @@ Output variables :
 								WHERE id_original_file='".$id."' AND id_version=(SELECT MAX(id_version) FROM files WHERE id_original_file='".$id."')";
 
 								$result_files_list=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
-                                                                
+
                                                                 //Type of metadata of the file
-                                                                
+
 								while($col=pg_fetch_array($result_files_list)){
 
 									$id_file=$col[0];
@@ -229,19 +229,19 @@ Output variables :
 									$last_name=$col[6];
 									$first_name=$col[7];
 									$original_id=$col[8];
-                                                                        
+
 									if ($col[9]!= ''){
 										$metadata="Comment :".$col[9]."\r\n Tags: ";
 									} else {
 										$metadata="Tags: ";
 									}
-                                                                        
+
 								}
 
-								// Query to get metadata of the file 
+								// Query to get metadata of the file
 
 								$query_metadata = "SELECT t.tag_name
-											FROM link_tag_project ltp JOIN tags t on t.id_tag = ltp.id_tag 
+											FROM link_tag_project ltp JOIN tags t on t.id_tag = ltp.id_tag
 											WHERE ltp.id_file = '".$id_file."'";
 
 								$result_metadata = pg_query($connex, $query_metadata) or die (' Failed to get tags');
@@ -257,7 +257,7 @@ Output variables :
 								for ($i=0; $i< $table_metadata->nb_enregistrements();$i++){
 
 									$metadata .= $table_metadata->t_enr[$i][0].", ";
-                                                                        
+
 								}
 
 								// Delete last ', ' in $metadata
@@ -284,7 +284,7 @@ Output variables :
 
 										}
 
-									}						
+									}
 
 									echo "<tr>";
 
@@ -323,13 +323,13 @@ Output variables :
                                                                                             $listdl[] =  $rowdl[1];
 
                                                                                             $listdl[] = $rowdl[2];
-																							
-																							$extension = $rowdl[2];
-																							
-																							$link = $rowdl[0]."".$rowdl[1];
+
+																																														$extension = $rowdl[2];
+
+																																														$link = $rowdl[0]."".$rowdl[1];
 
                                                                                             $listdl = join( $listdl, ".");
-																							
+
 
                                                                                             $_SESSION["path[".$pos."]"] = $rowdl[0];
 
@@ -351,27 +351,27 @@ Output variables :
 
 											?>
 
-											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>								
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>
 											<?php if ($extension =='jpg' or $extension =='png'){
-											?>	
-											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>picture preview</button>														
+											?>
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>picture preview</button>
 											<?php
 											// closing the extension if
 												  }
 												  if ($extension =='pdf'){
 													echo '	<a href='.$link.' target="_blank" class="btn btn-sm btn-outline-primary btn-block" >PDF preview</a>';
 												  }
-												  if ($extension =='xls'){ 
+												  if ($extension =='xls'){
 											?>
-												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>XLS preview</button>	
-											<?php	
+												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>XLS preview</button>
+											<?php
 											}
 
-										echo "</td>";										
+										echo "</td>";
 
 										echo "<td>";
 
-											echo '</br><div align="center"><input  id='.$id_file.' type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'" onclick= "compteur('.$id_file.');" ></div>'; 
+											echo '</br><div align="center"><label><input type="checkbox" name="brochure[]" value="'.$rowdl[0].$listdl.'"></label></div>'; 
 
 										echo "</td>";
 
@@ -393,7 +393,7 @@ Output variables :
 
 		</div>
 
-                
+
 
 
 
@@ -409,31 +409,31 @@ Output variables :
 
         //Ouvrir la popup pour afficher les différentes versions
 
-        function popup(original_id) {	
+        function popup(original_id) {
 
                 window.open("US3_11_Visualiser_liste_fichiers_P2.php?original_id="+original_id,'newWin','width=1000,height=400');
 
-        }	
-		
-				//Ouvrir la popup pour visualiser le fichier
-		function popup_visualize(original_id) {	
-			window.open("US5_2_Visualize.php?original_id="+original_id,'newWin','width=1000,height=400');
-		}	
-			function popup_visualize_xls(original_id) {	
-				window.open("US5_2_Visualize_xls?original_id="+original_id,'newWin','width=1000,height=400');
-			}	
+        }
 
-        
+				//Ouvrir la popup pour visualiser le fichier
+		function popup_visualize(original_id) {
+			window.open("US5_2_Visualize.php?original_id="+original_id,'newWin','width=1000,height=400');
+		}
+			function popup_visualize_xls(original_id) {
+				window.open("US5_2_Visualize_xls?original_id="+original_id,'newWin','width=1000,height=400');
+			}
+
+
 
         //Ouvrir la page "edit file"
 
-        function edit_file(id_file) { 
+        function edit_file(id_file) {
 
                 document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
 
         }
 
-        
+
 
         $('[data-toggle="popover"]').popover();
 
@@ -443,7 +443,7 @@ Output variables :
 
         //only buttons
 
-                if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) { 
+                if ($(e.target).data('toggle') !== 'popover' && $(e.target).parents('.popover.in').length === 0) {
 
                         $('[data-toggle="popover"]').popover('hide');
 
@@ -451,77 +451,77 @@ Output variables :
 
         });
 
-        
-
-        
-
-        // Function Compteur 
-
-         
-
-        var count=0; 
-
-         
-
-        function compteur(id_file) { 
-
-            if(document.getElementById(id_file).checked){ 
-
-                count++; 
-
-            }
-
-            else{ 
-
-                count--; 
-
-            } 
-
-            document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ; 
-
-        }
-
-         
-
-        
-
-        function cocherTout(etat){ 
-
-            var cases = document.getElementsByTagName('input');   // on recupere tous les INPUT 
-
-            for(var i=0; i<cases.length; i++)     // on les parcourt 
-
-                if(cases[i].type == 'checkbox')     // si on a une checkbox... 
-
-                cases[i].checked = etat;     // ... on la coche ou non 
-
-        }
-
-         
 
 
 
-        function selectAll() { 
 
-            var all = <?php echo $nbrows; ?>; 
+        // Function Compteur
 
-            
 
-            if(document.getElementById("id_selectAll").checked){ 
 
-                cocherTout(true); 
+        var count=0;
 
-				count=all; 
 
-                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ; 
+
+        function compteur(id_file) {
+
+            if(document.getElementById(id_file).checked){
+
+                count++;
 
             }
 
-            else{ 
+            else{
 
-                cocherTout(false); 
+                count--;
 
-				count=0; 
+            }
+
+            document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
+
+        }
+
+
+
+
+
+        function cocherTout(etat){
+
+            var cases = document.getElementsByTagName('input');   // on recupere tous les INPUT
+
+            for(var i=0; i<cases.length; i++)     // on les parcourt
+
+                if(cases[i].type == 'checkbox')     // si on a une checkbox...
+
+                cases[i].checked = etat;     // ... on la coche ou non
+
+        }
+
+
+
+
+
+        function selectAll() {
+
+            var all = <?php echo $nbrows; ?>;
+
+
+
+            if(document.getElementById("id_selectAll").checked){
+
+                cocherTout(true);
+
+				count=all;
+
+                document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
+
+            }
+
+            else{
+
+                cocherTout(false);
+
+				count=0;
 
                 document.getElementById("select").innerHTML= 'selected <br> ('+ count +')' ;
 
@@ -537,7 +537,6 @@ Output variables :
 
 </body>
 
-	
+
 
 </html>
-
