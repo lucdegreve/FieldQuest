@@ -29,7 +29,7 @@
         // Session variable
         $id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
         // For now I will use this one --> it has to be removed when Session start is working !
-        $id_user_account = 1;
+        //$id_user_account = 1;
 
         // Connexion to class file and connexion file
         require "tab_donnees/tab_donnees.class.php";

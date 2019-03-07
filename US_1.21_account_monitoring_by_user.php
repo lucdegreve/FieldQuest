@@ -93,13 +93,17 @@
                 echo '</tr>';
                 echo '</table>';
           ?>
-              <button type="submit" class="btn btn-outline-success" name="change_info">Change your information</button>
+            <button type="submit" class="btn btn-outline-success" name="change_info">Change your information</button>
           </form>
 
           <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
               <button type="submit" name="change_password" class="btn-outline-warning">Change your password</button>
           </form>
-
+		  
+			<button type="submit" class="btn btn-md btn-danger" onclick="location.href='US_1.22_p2_delete_account.php'" name="delete_account">Delete my account</button>
+        	<?php
+        			 include("pied_de_page.php");
+        	?>
     </div>
     </body>
     <?php
