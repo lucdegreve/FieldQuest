@@ -8,7 +8,7 @@
 
 
 <?php
-include("en_tete.php");
+include("en_tete_login.php");
     //session_start();
     $login = $ps = "";
     $loginError = $psError = "";
@@ -142,9 +142,8 @@ include("en_tete.php");
                                     <input type="password" name="ps" class="form-control" id="Password1" placeholder="Password">
                                      <p class="comments text-light" > <?php echo $psError; ?></p>
                                 </div>
-                                <div align="center">
-									<button type="submit" class="btn btn-success">Connection</button>
-								</div>
+                                
+                                <button type="submit" class="btn btn-success">Connect</button>
                             </form>
                         
                            
