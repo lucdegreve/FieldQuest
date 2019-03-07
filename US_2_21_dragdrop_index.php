@@ -1,5 +1,15 @@
 <!doctype html>
 
+<?php
+//Header
+include("en_tete.php");
+echo "</br>";
+//In the case the page is just updated, we need to empty the session variable not to keep users in memory
+if (!isset($_GET['validate'])){
+	if(isset($_SESSION["id_user_list"])){
+		unset($_SESSION["id_user_list"]);}}
+?>
+
 <html lang="en">
 
 	<head>
@@ -25,7 +35,7 @@
 		  }
 		</style>
 
-		<!--Basic styling for map div, if height is not defined the div will show up with 0 px height  -->
+		<!-- Basic styling for map div, if height is not defined the div will show up with 0 px height -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -36,19 +46,54 @@
 	</head>
 
 	<body>
-
+	
+		<!-- Function add_user for datalist -->
+		<script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> 
+		<script type="text/javascript">
+			function add_user1(){
+				$.ajax({
+					type: 'get',
+					dataType: 'html',
+					url: 'US2_21_userprop.php', 
+					timeout: 1000, 
+					data: {
+						id_user_value: document.formdepot.users_na.value
+						},
+					success: function (response) {
+						document.getElementById("associated_users").innerHTML=response;
+						},
+					error: function () {
+						alert('Query has failed1');
+					}
+				});
+			}	
+			
+			function removeuser1(str){
+				$.ajax({
+					type: 'get',
+					dataType: 'html',
+					url: 'US2_21_removeuser.php', 
+					timeout: 1000, 
+					data: {
+						id_user_value:str
+						},
+					success: function (response) {
+						document.getElementById("associated_users").innerHTML=response;
+						},
+					error: function () {
+						alert('Query has failed');
+					}
+				}); 
+			}
+		</script>
+		
+		
 		<?php
-		//Header
-		include("en_tete.php");
-		echo "</br>";
 		//Get id of the user
-		session_start();
-		$_SESSION["latitude"]=NULL;
-		$_SESSION["longitude"]=NULL;
-		//$id_user=$_SESSION['id_user']; A DECOMMENTER
-		//$user_type=$_SESSION['user_type']; A DECOMMENTER
-		$id_user=7;
-		$user_type=2;
+		$id_user=$_SESSION['id_user_account'];
+		$user_type=$_SESSION['id_user_type'];
+		//$id_user=7;
+		//$user_type=2;
 		//DB connection
 		require "./tab_donnees/tab_donnees.class.php";
 		require "./tab_donnees/funct_connex.php";
@@ -129,8 +174,34 @@
 						</div>
 
 						<!-- Comments -->
-						Comment : <br/> <textarea id="Comment" name="Comment" class="form-control" form="formdepot"></textarea>
-					</div></div>
+						Comment : <br/> <textarea id="Comment" name="Comment" class="form-control" form="formdepot"></textarea></br>
+						
+						<?php
+						if($user_type==1 or $user_type==2){ 
+							//Query to get all external users
+							$result_external_users=pg_query($connex, "SELECT id_user_account, last_name, first_name FROM user_account WHERE id_user_type=3 ORDER BY last_name");
+							$tab_external_users=new Tab_donnees($result_external_users,"PG");
+							$tab_external_users = $tab_external_users->t_enr;
+							$_SESSION["users_not_asso_before"]=$tab_external_users; //for ajax dynamic part in update_list.php
+							?>						
+							<!-- Datalist with the external users -->						
+							<label for="Users"> Choose a user to associate to the file :</label></br>
+							<div id="list_users_a">
+									<input list="users" type="text" id="users_na" autocomplete="off">
+									<datalist id="users">
+										<?php
+										for($i=0; $i<count($tab_external_users); $i++){	
+											echo'<option value="'.$tab_external_users[$i][0].'" label="'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'">'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'</option>';
+										}
+										?>
+									</datalist>
+									
+								<!-- Button to add the selected user to the project -->
+								<input type="button" value="Add a user" name="addu" onclick="add_user1()">
+							</div>
+							<p> Associated user : <span id="associated_users"></span></p>
+						<?php } ?>
+					</div></div> 
 
 					<div class="col-md-6"><div class="jumbotron">
 						<h2><B>Select tags</B></h2></br>
@@ -202,7 +273,7 @@
 						<?php } ?>
 					</div>
 					<div class="col-md-1"></div><div class="col-md-4">
-						<button type="submit" class="btn btn-lg btn-success btn-block" onclick="return validate()"><h2>Send the form</h2></button>
+						<button type="submit" name="validate" class="btn btn-lg btn-success btn-block" onclick="return validate()"><h2>Send the form</h2></button>
 					</div>
 				</div>
 

@@ -397,7 +397,8 @@ if(isset($_POST['validate'])){
 		
 	}	
 echo'</div>'; //container
-	
+	if(isset($_SESSION["id_user_list"])){
+		unset($_SESSION["id_user_list"]);}
 	}
 ?>
 

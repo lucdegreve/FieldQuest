@@ -38,7 +38,6 @@
 	<body>
 		
 		<?php
-		session_start();
 		//Header
 		include("en_tete.php");
 		echo "</br>";
@@ -76,9 +75,18 @@
 			$j++;
 		}
 		?>		
-		<form method="get" action="US3_22_alert_incomplete_file.php">
-		<button type="submit">Send an alert</button>
-		</form>
+		
+		 
+                <form action="US4-11_Main_page_filter.php">
+                <button name="return" class="btn btn-outline-info btn-lg" type="submit">back</button>
+                    <div align ="center">
+                        <form method="get" action="US3_22_alert_incomplete_file.php">
+                        <button type="submit" class="btn btn-outline-warning btn-lg">Send an alert</button>
+                        </form>
+                    </div>
+                </form>
+                
+                </br>
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">

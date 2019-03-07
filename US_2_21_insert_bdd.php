@@ -1,10 +1,21 @@
 <html>
 <?php
 include("en_tete.php");
+echo "</br>";
 require "./tab_donnees/tab_donnees.class.php";
 require "./tab_donnees/funct_connex.php";
-// getting last page variable
-session_start();
+
+$id_user=$_SESSION['id_user_account'];
+$user_type=$_SESSION['id_user_type'];
+
+//Determine the origin of the file
+if(!isset($_SESSION["id_user_list"]) or $_SESSION["id_user_list"]==""){
+	$origin=$id_user;
+}
+else{
+	$origin=$_SESSION["id_user_list"];
+}
+
 
 //Get all infos on uploaded file
 $file_name = $_SESSION["upload_filename"];
@@ -102,18 +113,12 @@ else{
 }
 
 
-//Test var |||| needs to be changed for real session's variable
-	//$id_user_account et $use_id_user_account doivent être les mêmes lors d'un dépôt !!! /!\
-$id_user_account=1;
-$use_id_user_account=1;
-
-
 // importing in the DB
 
 
 
 		$query = "INSERT INTO files(id_user_account,use_id_user_account,id_format,id_validation_state,id_version,upload_date, file_name, file_comment, data_init_date,data_end_date,latitude,longitude,file_place,file_size)
-        VALUES ('".$id_user_account."','".$use_id_user_account."','".$file_format."','".$id_validation_state."',
+        VALUES ('".$origin."','".$origin."','".$file_format."','".$id_validation_state."',
         1,'".$today_fr."','".$file_name."','".$comment."','".$starting_date."','".$ending_date."','".$latitude."','".$longitude."','".$file_place."','".$file_size."')";
         $query_result = pg_query($connex,$query) or die (pg_last_error() );
 
@@ -149,16 +154,49 @@ if(isset($_GET['projet']) && !empty($_GET['projet'])){
 		$query_result = pg_query($connex,$query) or die (pg_last_error() );
     }
 }
+echo "<br/>";
+
+if($user_type==1){ ?>
+	<div class="container">
+		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
+		<div align="center">
+			<form action="US0_page_accueil_admin.php" method="GET">
+				<button type="submit" class="btn btn-md btn-primary">Back to the home page</button>
+			</form>
+		</div>
+	</div>
+<?php }
+if($user_type==2){ ?>
+	<div class="container">
+		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
+		<div align="center">
+			<form action="US0_page_accueil_internes.php" method="GET">
+				<button type="submit" class="btn btn-md btn-primary">Back to the home page</button>
+			</form>
+		</div>
+	</div>
+<?php }
+if($user_type==3){ ?>
+	<div class="container">
+		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
+		<div align="center">
+			<form action="US0_page_accueil_externes.php" method="GET">
+				<button type="submit" class="btn btn-md btn-primary">Back to the home page</button>
+			</form>
+		</div>
+	</div>
+<?php } ?>
+
+<?php
+//Reset of $_SESSION variables
+$_SESSION["upload_filename"]=NULL;
+$_SESSION["upload_location"]=NULL;
+$_SESSION["upload_date"]=NULL;
+$_SESSION["upload_file_size"]=NULL;
+$_SESSION['longitude']=NULL;
+$_SESSION['latitude']=NULL;
+
+include("pied_de_page.php"); 
 ?>
-<br/>
-<div class="container">
-	<h1  align="center">Your file has been imported successfully, thank you !</h1></br>
-</div>
-
-<form action = "US_2_21_dragdrop_index.php" method = "POST" name = "Return">
-<input type = "submit" value = "Return">
-</form>
-
-<?php	include("pied_de_page.php"); ?>
 
 </html>

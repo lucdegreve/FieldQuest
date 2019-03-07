@@ -9,7 +9,8 @@
 Developped by Ophélie	& Diane	
 
 This page displays the result of the search by tags as a table. 
-/////////// This page is included in US4-11_Main_page_filter.php/////////
+
+///// This page is included in US4-11_Main_page_filter.php /////
 
 Code based on "US3_11_Visualiser_liste_fichiers.php" developped by Elsa & Axelle
 

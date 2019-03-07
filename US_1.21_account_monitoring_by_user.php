@@ -9,11 +9,15 @@
     </head>
 
     <body>
+    
         <?php
               include("en_tete.php");
         ?>
+        <div class='container'>
+       <form action="US0_page_accueil_externes.php">
+            <button name="return" class="btn btn-outline-info" type="submit">back</button>
         <BR/>
-        <strong> Here are your profile information </strong>
+        <h1> Here are your profile information </h1>
         <BR/>
         <?php
               $id_user = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
@@ -48,9 +52,7 @@
                     echo "Data have been correctly inserted into database";
               }
           ?>
-          <BR/>
           <form name="account_monitoring_user" action="US_1.21_account_monitoring_by_user.php" method="GET">
-          <BR/>
           <?php
 
                 // Query to get all information needed from user_account
@@ -91,8 +93,7 @@
                 echo '</tr>';
                 echo '</table>';
           ?>
-          <BR/>
-              <input type="submit" name="change_info" value="Change your information">
+              <button type="submit" class="btn btn-outline-success" name="change_info">Change your information</button>
           </form>
 
           <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
@@ -102,5 +103,6 @@
         	<?php
         			 include("pied_de_page.php");
         	?>
+    </div>
     </body>
 </html>

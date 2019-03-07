@@ -22,6 +22,7 @@ Output variables :		$_SESSION["id_user_list"]
 	
 	//Variable from US1-41_create_project
     $id_user_value = $_GET["id_user_value"];
+	if($id_user_value!=""){
 
 	//To create variables without emptying them each time
     if(!isset($_SESSION["id_user_list"])){
@@ -43,7 +44,9 @@ Output variables :		$_SESSION["id_user_list"]
 		  $tab = new Tab_donnees($result,"PG");
 		  $table_users = $tab->t_enr;
 		  echo "<BR/>";
-		  echo '<input type="button" name="button_user '.$table_users[0][0].'" value="'.$table_users[0][1].' '.$table_users[0][2].'">';
-		  echo '<input type="button" name="remove_user" value="Remove user" onclick=removeuser1('.$table_users[0][0].')>'; // removeuser1 is an ajax function called in US1-41_create_project
+		  echo '<button type="button" class="btn btn-info" name="button_user '.$table_users[0][0].'" >'.$table_users[0][1].' '.$table_users[0][2].'</button>';
+		  echo '<button type="button" class="btn btn-danger" name="remove_user" onclick=removeuser1('.$table_users[0][0].')>Remove user</button>'; // removeuser1 is an ajax function called in US1-41_create_project
 	  }
+	}
+	
 ?>
