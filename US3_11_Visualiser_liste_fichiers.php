@@ -189,7 +189,7 @@
 		
 		//Ouvrir la popup pour visualiser le fichier
 		function popup_visualize(original_id) {	
-			window.open("US5_2_Visualize?original_id="+original_id,'newWin','width=1000,height=400');
+			window.open("US5_2_Visualize.php?original_id="+original_id,'newWin','width=1000,height=400');
 		}	
 		
 		//Ouvrir la page "edit file"
