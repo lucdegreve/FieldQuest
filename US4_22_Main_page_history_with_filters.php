@@ -61,7 +61,9 @@ $id_user = 1;
 			<?php include "US_4_21_access_history.php"; ?>
 		</div>
 	</div>
-
+	<div class ="row">
+	<?php include "US4_22_Map.php"; ?>
+	</div>
 <?php
 	// Include footer
 	include("pied_de_page.php");

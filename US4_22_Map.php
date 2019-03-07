@@ -40,12 +40,7 @@ This page will be used in "US4_22_Main_page_history_with_filters.php"
 
 <?php
 
-require_once "./tab_donnees/tab_donnees.class.php";
-require_once "./tab_donnees/funct_connex.php";
-// Connexion to the database
-$con = new Connex();
-$connex = $con->connection;
-$id_user=$_SESSION['id_user_account']; // Get id of user 
+//$id_user=$_SESSION['id_user_account']; // Get id of user 
 
 require_once "Zip_classes/src/zip.php";
 
@@ -147,6 +142,7 @@ while ($row = pg_fetch_array($result)) {
 <script>
 
 // creatinG the map
+	var dll_link = '';
 	var map = L.map('map').setView([2.7246093749999925,48.57478976304037], 2);
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -208,7 +204,6 @@ map.addLayer(editableLayers);
 //what happens when a polygon is created
 map.on('draw:created', function(e) {
 	//if user confirms he wants to download
-if(confirm("Do you want to download these files ?")){
   var type = e.layerType,
     layer = e.layer;
 	Polygon = e.layer;
@@ -229,12 +224,15 @@ for ($j=0;$j<count($fichresult);$j++){
 	var mark = L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> );
 	mark.addTo(map);
 	if(Polygon.getBounds().contains(mark.getLatLng())==true){
-		
+		dll_link=dll_link+ "<?php echo $fichresult[$j][5]."  <a href = ".$link." download>Telecharger</a></li> </br>"; ?> "
+		var popup = L.popup()
+		.setLatLng(Polygon.getBounds().getCenter())
+		.setContent(dll_link)
+		.openOn(map);
 		<?php
-		$file = "US_2_21_dragdrop_upload/apple_lion.jpg";
-	$zip->zip_add('"'.$fichresult[$j][4]."".$fichresult[$j][3].'"');
 	// Quick check to verify that the file exists
 		// adresse a modifier avec la vraie du serveur TELECHARGEMENT NE FONCTIONNANT PAS
+		
 	?>
 	}
 	<?php
@@ -243,7 +241,7 @@ for ($j=0;$j<count($fichresult);$j++){
 	?>
 // save the polygon
   editableLayers.addLayer(layer);
-}
+  dll_link="";
 });
 
 
@@ -263,15 +261,17 @@ for ($j=0;$j<count($fichresult);$j++){
 		
 	?> 
 	// creating all the markers, with the onclickpopup, 
-	L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][3]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> ).addTo(map);
+	L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> ).addTo(map);
 	<?php
 	}
 }
+?>
 
 
-	?>
 </script>
-
+<div id="dialog" title="Basic dialog">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
 
 
 </body>
