@@ -1,4 +1,4 @@
-<?php session_start();
+<?php 
     if(!isset($_GET["modify_account"])){
         if(isset($_SESSION["id_project_list_am"])){
             unset($_SESSION["id_project_list_am"]);
@@ -73,10 +73,9 @@ So we have to create dynamic list of project to add or to remove, what we do wit
     		<?php
     				 include("en_tete.php");
     		?>
-
+<div align="center">
         <BR/>
-        <strong> Here are your profile information </strong>
-        <BR/>
+        <h2> Here are your profile information </h2>
         <BR/>
         Fields with (*) must be filled
 
@@ -187,7 +186,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                     echo '</tr>';
                 echo '</table>';
             ?>
-
+</div>
             <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
             <script type="text/javascript">
             // Here are all the Ajax functions that will be used to associate/remove/delete projects of the user
@@ -313,7 +312,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
                   }
 
-              </script>
+              </script><div align="center">
 
               <?php
               // Now creation of the table of already associated projects
@@ -327,17 +326,17 @@ So we have to create dynamic list of project to add or to remove, what we do wit
               $_SESSION["already_associated_projects"]=$tab_associated_project;
 
               $nb_rows = pg_num_rows($result_already_associated_project);
-              echo "</BR>";
+              
               echo'<div id="associated_projects_before" class= "col-md-6">';
                   echo '<table>';
                       for ($i=0; $i < $nb_rows ; $i++) {
                         echo '<tr>';
-                            echo '<td> Projet '.$tab_associated_project[$i][0].' : '.$tab_associated_project[$i][1].' </td> <td> <input type="button" name="delete_project" value="Delete" onclick=deleteproject1('.$tab_associated_project[$i][0].')> </td>';
+                            echo '<td> Projet '.$tab_associated_project[$i][0].' : '.$tab_associated_project[$i][1].' </td> <td> <button name="delete_project" class= "btn btn-outline-danger" onclick=deleteproject1('.$tab_associated_project[$i][0].')>Delete </button></td>';
                         echo '</tr>';
                       }
                   echo '</table>';
               echo '</div>';
-              echo "</BR>";
+             
               ?>
 
               <?php
@@ -362,25 +361,22 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                                 echo '<option value="'.$table_project_2[$k][0].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
                             }
                       echo '</datalist>';
-                  echo '<input type="button" value="Add a project" name="addproject" onclick=addproject2() >';
+                  echo '<button value="Add a project" class="btn btn-outline-warning" name="addproject" onclick=addproject2()>Add a Project </button>';
               echo '</div>';
               ?>
 
-
-              <BR/>
+              </BR>
               <p> Associated project(s) : <span id="associated_project"></span></p>
               <BR/>
-              <BR/>
-              <input type="submit" name="modify_account" value="Modify user account">
+              <button type="submit" class="btn btn-outline-success" name="modify_account">Modify user account</button>
 
               <?php
-              echo "</BR>";
               echo "</BR>";
                   if (isset($_GET["last_name"],$_GET["first_name"])){
                           echo "Database have been correctly updated";
                   }
               ?>
-        </form>
+        </form></div>
       	<?php
       			 include("pied_de_page.php");
       	?>
