@@ -38,22 +38,25 @@
 	
 </head>
 <body> 
-<div align='center'>
-        
-	<?php
-		include("en_tete.php");
-		echo "</br>";
-    ?>
-    <h2> Manage tags</h2>
+<?php
+	include("en_tete.php");
+	echo "</br>";
+?>
+<div class="container">
+	
+	<div align="center">
+		<h2>Manage tags</h2>
+	</div></br>
+	
     <a href="US1-51_create_tag_type.php"><button type="button" class='btn btn-outline-primary'>New tag category</button></a>
     <a href="US1-53_create_tag.php"><button type="button" class='btn btn-outline-primary'>New tag</button> </a>
-    </br>
     
     <a href="US1-54_modify_tag_type.php"><button type="button" class='btn btn-outline-warning'  >Modify tag category</button> </a>
     <a href="US1-54_modify_tag.php"><button type="button" class='btn btn-outline-warning'>Modify tag</button></a>
     </br></br>
 
     <?php
+		echo "<div align='center'>";
         require "./tab_donnees/funct_connex.php";
         //connection to server + choice of database
 		$con = new Connex();
@@ -84,6 +87,7 @@
                 echo '</li>';
             echo '</ul>';	
 		}
+		echo "</div>"
     ?>
 </br></br>
 </div>    
