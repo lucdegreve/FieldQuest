@@ -80,12 +80,16 @@ echo "</br>";
 			$tab_checked_tags[$i]=$tag[0];
 			$j++;
 		}
-		?>		
+		?>
+		
+		<div class="container-fluid">
 		<form name="alert" method="get" action="US3_22_alert_incomplete_file.php">
 			<button type="submit" class="btn btn-lg btn-outline-warning"><font size=4>Send an alert</font></button>
-		</form></br>
+		</form>
+		</div></br>
+		
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
-			<div class="container-fluid" >
+			<div class="container-fluid">
 				<div class="row">
 				
 					<div class="col-md-6"><div class="jumbotron">

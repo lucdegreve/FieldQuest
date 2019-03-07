@@ -32,7 +32,7 @@ $table_validation_state = new Tab_donnees($result_validation_state,"PG");
 
 <p>
   <button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#collapseValidationState" aria-expanded="true" aria-controls="collapseValidationState">
-	Validation State
+	Validation state
   </button>
 </p>
 <!-- Content of collapse -->

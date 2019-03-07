@@ -152,10 +152,10 @@ Output variables :
 			<form name="box_download" action="downloadmultiple.php" method="post">
 
 				<div class="row">
-
+					
 					<div class="col-md-9"><h1><B>Files list</B></h1></div>
 
-					<div class="col-md-1" align="right">
+					<div class="col-md-3" align="right">
 
 						<button type="submit" class="btn btn-md btn-success">Download selection</button>
 
@@ -175,7 +175,7 @@ Output variables :
 
 								<th scope="col" width="25%">File name</th>
 
-								<th scope="col" width="10%">Upload date</th>
+								<th scope="col" width="10%"><font size=2>Upload date</font></th>
 
 								<th scope="col" width="17%">Origin</th>
 
