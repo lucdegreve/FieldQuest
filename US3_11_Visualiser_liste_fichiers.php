@@ -79,7 +79,7 @@
                                 if($valid=="being checked"){
 									echo "<tr class='table-active'>";
 										echo "<th scope='row'></th>";
-										echo "<th scope='row'>".$name."</th>";
+										echo "<th scope='row'>".substr($name."</td>",10);
 										echo "<th scope='row'>".$date."</th>";
 										echo "<th scope='row'>".$first_name." ".$last_name."</th>";
 										echo "<th scope='row'>".$size."</th>";
@@ -104,7 +104,7 @@
 								if($valid=="not validated"){
 									echo "<tr>";
 										echo "<td><img src='picto/refused.png' width='27' height='27'/></td>";
-										echo "<td>".$name."</td>";
+										echo "<td>".substr($name."</td>",10);
 										echo "<td>".$date."</td>";
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";
@@ -137,7 +137,7 @@
 									}						
 									echo "<tr>";
 										echo "<td><img src='picto/validated.png' width='30' height='30'/></td>";
-										echo "<td>".$name."</td>";
+										echo "<td>".substr($name."</td>",10);
 										echo "<td>".$date."</td>";
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";

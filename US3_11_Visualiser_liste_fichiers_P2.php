@@ -52,7 +52,7 @@
 							$last_name=$name[1];
 						}
 						echo "<tr class='table-info'>";
-							echo "<td>".$file_name."</td>";
+							echo "<td>".substr($file_name,10)."</td>";
 							echo "<td>".$date."</td>";
 							echo "<td>".$first_name." ".$last_name."</td>";
 							echo "<td>".$size."</td>";
