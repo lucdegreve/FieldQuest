@@ -38,19 +38,20 @@
 	<body>
 		<?php
 				 include("en_tete.php");
+				 echo "</br>";
         ?>
         <div class="container">
         <?php 
         require "./tab_donnees/funct_connex.php";
 		echo'<form action="US1-54_manage_tags.php">
-				<button name="return" class="btn btn-outline-info" type="submit">back</button>
+				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
 				</form>';
         ?>
         
         <?php
         echo '<form  method="get">
             <fieldset style="width: 500px"> 
-				<h1>Select the tag type to modify</h1>
+				<h4>Select the tag type to modify</h4>
 				<label>Tag type</label>
 				<select name="tag_type" id="tag_type">
 					<option value="-1">-</option>';
