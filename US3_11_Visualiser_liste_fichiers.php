@@ -87,13 +87,13 @@
 										echo "<td>";
 											//Visualization depends on extension
 											if($extension =='jpg' or $extension =='png'){ ?>	
-											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>Preview</button>														
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-info btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>Preview</button>														
 											<?php }
 											if ($extension =='pdf'){
-												echo '<a href='.$link.' target="_blank"><button type="button" class="btn btn-sm btn-primary btn-block" onclick="return preview_file('.$id_file.')">Preview</button></a>';
+												echo '<a href='.$link.' target="_blank"><button type="button" class="btn btn-sm btn-info btn-block" onclick="return preview_file('.$id_file.')">Preview</button></a>';
 											}
 											if ($extension =='xls'){ ?>
-												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-primary btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>Preview</button>	
+												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-info btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>Preview</button>	
 											<?php }
 										echo "</td>";
 										echo "<td>";
@@ -124,13 +124,13 @@
 										echo "<td>";
 											//Visualization depends on extension
 											if($extension =='jpg' or $extension =='png'){ ?>	
-											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>Preview</button>														
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-info btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>Preview</button>														
 											<?php }
 											if ($extension =='pdf'){
-												echo '<a href='.$link.' target="_blank"><button type="button" class="btn btn-sm btn-primary btn-block" onclick="return preview_file('.$id_file.')">Preview</button></a>';
+												echo '<a href='.$link.' target="_blank"><button type="button" class="btn btn-sm btn-info btn-block" onclick="return preview_file('.$id_file.')">Preview</button></a>';
 											}
 											if ($extension =='xls'){ ?>
-												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-primary btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>Preview</button>	
+												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-info btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>Preview</button>	
 											<?php }
 										echo "</td>";
 										echo "<td>";                                    
@@ -169,13 +169,13 @@
 										echo "<td>";
 											//Visualization depends on extension
 											if($extension =='jpg' or $extension =='png'){ ?>	
-											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>Preview</button>														
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-info btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>Preview</button>														
 											<?php }
 											if ($extension =='pdf'){
-												echo '<a href='.$link.' target="_blank"><button type="button" class="btn btn-sm btn-primary btn-block" onclick="return preview_file('.$id_file.')">Preview</button></a>';
+												echo '<a href='.$link.' target="_blank"><button type="button" class="btn btn-sm btn-info btn-block" onclick="return preview_file('.$id_file.')">Preview</button></a>';
 											}
 											if ($extension =='xls'){ ?>
-												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-primary btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>Preview</button>	
+												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-info btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>Preview</button>	
 											<?php }
 										echo "</td>";
 										echo "<td>";                                    
