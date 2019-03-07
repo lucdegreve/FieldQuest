@@ -55,26 +55,27 @@
 						{
 							echo '<h2>You are logged in as <b>'.$first_name.'</b></h2>';
 							echo '<form method="GET"  action="US0_page_accueil_admin.php">';
-							echo '<button type="submit" class="btn btn-success btn-lg">Go to the home page</button>';
+							echo '<button align="center" type="submit" class="btn btn-primary btn-lg"><font size=4>Go to the home page</font></button>';
 							echo '</form>';
 						} 
 						if ($id_user_type==2) 
 						{
 							echo '<h2>You are logged in as <b>'.$first_name.'</b></h2>';
 							echo '<form method="GET"  action="US0_page_accueil_internes.php">';
-							echo '<button type="submit" class="btn btn-success btn-lg">Go to the home page</button>';
+							echo '<button align="center" type="submit" class="btn btn-primary btn-lg"><font size=4>Go to the home page</font></button>';
 							echo '</form>';
 						} 
 						if ($id_user_type==3)
 						{
 							echo '<h2>You are logged in as <b>'.$first_name.'</b></h2>';
 							echo '<form method="GET"  action="US0_page_accueil_externes.php">';
-							echo '<button type="submit" class="btn btn-success btn-lg">Go to the home page</button>';
+							echo '<button align="center" type="submit" class="btn btn-primary btn-lg"><font size=4>Go to the home page</font></button>';
 							echo '</form>';
 						}
 					echo '</div>';		
 				echo '</div>';
 			echo '</div>';
+			echo "</br>";
 		include("pied_de_page.php");
 		?>
   </body>
