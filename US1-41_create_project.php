@@ -1,4 +1,4 @@
-<?php session_start();
+<?php 
 //In the case the page is just updated, we need to empty the session variable not to keep users in memory
 if (!isset($_POST['validate'])){
 	if(isset($_SESSION["id_user_list"])){
@@ -185,9 +185,9 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 <div class="container">
 	
 	<form method="GET"  action="US1_42_Gerer_projets.php">
-		<div align="center">
-			<button align="center" type="submit" class="btn btn-primary btn-md">Back to the projects</button>
-		</div>
+		
+			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
+		
 	</form>
 	<div align="center">
 		<h2>Please fill all the information</h2>
@@ -318,7 +318,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 		<br/>
 		
 		<div align="center">
-			<button type='submit' class='btn btn-lg btn-success' name='validate'>Validate and add users</button>
+			<button type='submit' class='btn btn-lg btn-outline-success' name='validate'>Validate and add users</button>
 			<input type='hidden' name='id_project' value='<?php echo $id_project; ?>'>
 		</div>
 		
