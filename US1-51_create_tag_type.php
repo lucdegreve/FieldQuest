@@ -30,8 +30,8 @@
             // To add a new client  
             require "./tab_donnees/funct_connex.php";
 			echo'<form action="US1-54_manage_tags.php">
-				<button name="return" class="btn btn-outline-info" type="submit">back</button>
-				</form><h1>Add a new tag type</h1>';
+				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
+				</form><h4>Add a new tag type</h4>';
                                 
                             
             $con=new Connex();
