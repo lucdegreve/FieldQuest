@@ -46,6 +46,9 @@
 					<button class="btn btn-primary" onclick="location.href='US_1.21_account_monitoring_by_user.php'" >
 					<img src="picto\person.png" class="rounded float-right" alt="Responsive image" width="75px" height ="75px">
 					</button>
+					<button class="btn btn-primary" onclick="location.href='US_0_11_login_page .php'" > 
+					<img src="picto\deconnect.png" class="rounded float-right" alt="Responsive image" width="75px" height ="75px">
+					</button>
 					
 				</nav>
 		</body>
