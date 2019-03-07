@@ -267,7 +267,7 @@
 	<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
-		//Drag and drop available only if box has been checked + a new file has to be selected if the box has been checked
+		//Drag and drop available only if box has been checked
 		$('#new_file').change(function() {
 			if(this.checked != true){
 				$("#conditional_part").hide();
@@ -277,7 +277,7 @@
 			}
 		});		
 		
-		//If box has been selected, a new ile has to be selected
+		//If box has been selected, a new file has to be selected
 		function validate(){
 			if(document.form_edit.new_file.checked == true){
 				if(document.form_edit.file.value != ""){
