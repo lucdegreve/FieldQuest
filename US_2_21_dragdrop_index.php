@@ -197,7 +197,7 @@ if (!isset($_GET['validate'])){
 									</datalist>
 									
 								<!-- Button to add the selected user to the project -->
-								<input type="button" value="Add a user" name="addu" onclick="add_user1()">
+								<button type="button" class="btn btn-lg btn-outline-warning" name="addu" onclick="add_user1()"><font size=4>Add a user</font></button>
 							</div>
 							<p> Associated user : <span id="associated_users"></span></p>
 						<?php } ?>
