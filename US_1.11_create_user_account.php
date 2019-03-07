@@ -45,10 +45,13 @@ So we have to create dynamic list of project to add or to remove, what we do wit
     		<?php
     				 include("en_tete.php");
     		?>
-        <strong> Please fill all the information </strong>
+	</br>
+	<div class="container">
+		<div align="center">
+			<h2>Please fill all the information</h2>
+		</div>
         <BR/>
-        <BR/>
-        NB : All the fields with (*) must be filled
+        <strong>NB : All the fields with (*) must be filled</strong>
 
         <!-- Function valider(), verify for each need field if it is filled. If not, warning message appears -->
         <script type="text/javascript">
@@ -183,7 +186,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                                       echo '<option value="'.$table_project[$k][0].'"> Project '.$table_project[$k][0].' : '.$table_project[$k][1].' </option>';
                                   }
                             echo '</datalist>';
-                        echo '<input type="button" value="Add a project" name="addproject" onclick=addproject1() >';
+                        echo '<button type="button" class="btn btn-md btn-outline-warning" name="addproject" onclick=addproject1() >Add a project</button>';
                     echo '</div>';
                 ?>
 
@@ -280,10 +283,12 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 </BR>
                 <p> </BR> Associated project(s) : <span id="associated_project"></span></p>
                 <BR/>
-                <BR/>
-                <input type="submit" name="createaccount" value="Create account">
+				<div align="center">
+					<button type="submit" name="createaccount" class="btn btn-lg btn-success">Create account</button>
+				</div>
                 <BR/>
         </form>
+	</div>
 
         <!-- After submitting this form, issset verifies if first name and last name are filled, if so, data are loaded in the database -->
         <?php
