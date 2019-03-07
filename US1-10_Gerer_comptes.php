@@ -44,7 +44,12 @@ Not done yet : Link with modify account page
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8"></div>
+			<div class="col-md-1">
+				<form method="GET"  action="US1-10_Gerer_comptes.php">
+					<button align="center" type="submit" class="btn btn-primary btn-md">Back</button>
+				</form>
+			</div>
+			<div class="col-md-7"></div>
 			<div class="col-md-4">
 				<form name="add_account" action="US_1.11_create_user_account.php" method="GET">
 					<button type='submit' class='btn btn-success btn-block'><B>Add an account</B></button>
