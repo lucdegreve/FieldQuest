@@ -143,7 +143,9 @@ include("en_tete_login.php");
                                      <p class="comments text-light" > <?php echo $psError; ?></p>
                                 </div>
                                 
-                                <button type="submit" class="btn btn-success">Connect</button>
+								<div align="center">
+									<button type="submit" class="btn btn-success">Connection</button>
+								</div>
                             </form>
                         
                            
