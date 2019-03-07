@@ -64,7 +64,7 @@ $connex = $con->connection;
 
 // Get user Id from session
 $id_user=$_SESSION['id_user_account'];
-$id_user = 1;
+
 ?>
 
 	<div class="row">
