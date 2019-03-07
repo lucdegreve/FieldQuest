@@ -24,6 +24,7 @@
 
 		<?php
 		include("tab_donnees/tab_donnees.class.php");
+		echo "</br>";
 		//DB connection
 		include("tab_donnees/funct_connex.php");
 		$con=new Connex();
@@ -104,7 +105,7 @@
 					?>
 				</div>
 			</div>
-		</div>
+		</div></br></br>
 		<?php
 				 include("pied_de_page.php");
 		?>
