@@ -34,6 +34,20 @@ Output variables :
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.css"/>
 <link href="css/custom.css" rel="stylesheet" type="text/css">
 
+
+<!-- downloading leaflet libraries for the map-->
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.css" />
+
+
 </head>
 <body>
 <?php 
@@ -74,7 +88,11 @@ $id_user = 1;
 							<?php include ("US_4_21_access_history.php"); ?>
 					</div>
 					<div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map">
-							<?php include ("US4_22_Map.php"); ?>
+						<div id="map-holder">
+						  <div class="container fill">
+							<div id="map"><?php include ("US4_22_Map.php"); ?></div>
+						  </div>
+						</div>
 					</div>
 			</div>  
 		</div>
@@ -85,4 +103,6 @@ $id_user = 1;
 	include("pied_de_page.php");
 ?>
 </body>
+
+
 </html>

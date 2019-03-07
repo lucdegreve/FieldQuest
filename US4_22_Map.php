@@ -9,30 +9,25 @@ This page will be used in "US4_22_Main_page_history_with_filters.php"
 	
 ------------------------------------------------------------->		
 	<title>Results from request</title>
-	<!-- downloading leaflet libraries -->
-
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
-	<script src="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.js"></script>
-	<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.css" />
 
 
-	<!-- creating map style -->
-	<style>
-		html, body {
-			height: 100%;
-			margin: 0;
+	<!-- creating map style in main page US4_22_Main_page_history_with_filters.php -->
+<style>
+	html, body {
+		height: 100%;
+		margin: 0;
+	}
+	#map{
+		width: 800px;
+		height:600px;
+		min-height: 100%;
+		min-width: 100%;
+		display: block;
+	}
+	#map-holder{
+			height: 70%;
 		}
-		#map {
-			width: 800px;
-			height: 600px;
-		}
-	</style>	
+</style>	
 </head>
 <body>
 
@@ -48,7 +43,6 @@ require_once "Zip_classes/src/zip.php";
     $zip->zip_start("zip_map_file.zip");
 
 // real query that'll be used when pages are linked
-
 
 $query_map = "SELECT f.id_file as id_file, f.latitude as latitude, f.longitude as longitude, f.file_name as file_name, f.file_place as file_place, f.file_comment as file_comment
                 FROM files f
@@ -135,7 +129,6 @@ while ($row = pg_fetch_array($result)) {
 	array_push($fichresult,$fich);
 }
 	$link=$fichresult[$j][4]."".$fichresult[$j][3];
-	echo $link;
 
 ?>
 
@@ -143,7 +136,7 @@ while ($row = pg_fetch_array($result)) {
 
 // creatinG the map
 	var dll_link = '';
-	var map = L.map('map').setView([2.7246093749999925,48.57478976304037], 2);
+	var map = L.map('map').setView([46.240630, -6.737615], 3);
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
