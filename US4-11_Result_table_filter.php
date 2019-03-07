@@ -335,7 +335,7 @@ Output variables :
 
                                                                                             //Récuperation des valeurs pour la fonction download
 
-                                                                                            echo " <a href = ".$link." download>Telecharger</a></li> </br> ";
+                                                                                            echo " <a href = ".$link." download>Download file</a></li> </br> ";
 
                                                                                             $pos=$pos+1;
 
@@ -371,7 +371,7 @@ Output variables :
 
 										echo "<td>";
 
-											echo '</br><div align="center"><label><input type="checkbox" name="brochure[]" value="'.$rowdl[0].$listdl.'"></label></div>'; 
+											echo '</br><div align="center"><label><input type="checkbox" name="brochure[]" value="'.$rowdl[0].$listdl.'"></label></div>';
 
 										echo "</td>";
 
