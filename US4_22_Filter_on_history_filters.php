@@ -39,7 +39,7 @@ $table_projects = new Tab_donnees($result_project,"PG");
 ?>
 
 <!--------------------- Form to select filters --------------------->
-	<form name= "form_filters" method="POST">
+	<form name= "form_filters" method="POST" action="US4_22_Main_page_history_with_filters.php">
 	
 		<?php
 		// Filter on file format 
@@ -94,7 +94,7 @@ $table_projects = new Tab_donnees($result_project,"PG");
 		// Filter on data type tag 
 		include "US_4_11_filtre_avec_tag_data_type.php";
 		?>
-	
+		<button class="btn btn-block btn-outline-success btn-sm" type="submit" name="Search">Search</button>
 	</form>
 </body>
 </html>
