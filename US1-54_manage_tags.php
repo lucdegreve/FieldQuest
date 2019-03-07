@@ -42,15 +42,16 @@
         
 	<?php
 		include("en_tete.php");
+		echo "</br>";
     ?>
-    <h1> Manage tags</h1>
+    <h2> Manage tags</h2>
     <a href="US1-51_create_tag_type.php"><button type="button" class='btn btn-outline-primary'>New tag category</button></a>
     <a href="US1-53_create_tag.php"><button type="button" class='btn btn-outline-primary'>New tag</button> </a>
     </br>
     
     <a href="US1-54_modify_tag_type.php"><button type="button" class='btn btn-outline-warning'  >Modify tag category</button> </a>
     <a href="US1-54_modify_tag.php"><button type="button" class='btn btn-outline-warning'>Modify tag</button></a>
-    </br>
+    </br></br>
 
     <?php
         require "./tab_donnees/funct_connex.php";
@@ -84,6 +85,7 @@
             echo '</ul>';	
 		}
     ?>
+</br></br>
 </div>    
 </body>  
 	<?php
