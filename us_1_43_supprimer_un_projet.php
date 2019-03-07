@@ -12,6 +12,37 @@
 		
 		<?php
 				$id_project= $_GET["id_project"];
+				if (isset($_GET['delete'])){
+		
+		$id_project= $_GET['id_proj'];
+		require "tab_donnees/tab_donnees.class.php";
+		require "tab_donnees/funct_connex.php";
+		$con = new Connex();
+		$connex = $con->connection;
+		$result= pg_query($connex, "SELECT id_file FROM link_file_project where id_project=$id_project"); // selects the files of a project
+
+		$nb_files = pg_num_rows($result);
+		if($nb_files ==0){
+			$sql = pg_query($connex,'Delete from projects where id_project='.$id_project.'');  // if the project is empty we can delete it
+			$sql2 = pg_query($connex,'Delete from link_project_users where id_project='.$id_project.'');  // if the project is empty all the we can delete it
+			echo'The project has been deleted';
+			echo "</br></br></br></br>";
+			echo '<form name="return" action="US1_42_Gerer_projets.php" method="POST">
+					              		<input type="submit" name="return" value="Return to data management page">
+					         		</form>';
+			echo "</br></br></br></br></br></br></br>";
+			}
+		else {
+			echo"The project isn't empty and cannot be deleted";
+			echo "</br></br></br></br>";
+			echo '<form name="return" action="US1_42_Gerer_projets.php" method="POST">
+					              		<input type="submit" name="return" value="Return to data management page">
+					         		</form>';
+			echo "</br></br></br></br></br></br></br>";
+			}
+
+		}
+else {
 		?>
 		
 		<!-- Message to check if the user really want to delete a project -->
@@ -57,31 +88,10 @@
 
 		<!-- If the user click on YES -->
 
-		<?php if (isset($_GET['delete'])){
-		
-		$id_project= $_GET['id_proj'];
-		require "tab_donnees/tab_donnees.class.php";
-		require "tab_donnees/funct_connex.php";
-		$con = new Connex();
-		$connex = $con->connection;
-		$result= pg_query($connex, "SELECT id_file FROM link_file_project where id_project=$id_project"); // selects the files of a project
 
-		$nb_files = pg_num_rows($result);
-		if($nb_files ==0){
-			$sql = pg_query($connex,'Delete from projects where id_project='.$id_project.'');  // if the project is empty we can delete it
-			echo'The project has been deleted';
-			}
-		else {
-			echo'<script type="text/javascript">';
-			echo "alert('The project isn't empty and cannot be deleted')";
-			echo'</script>';
-			}
-
-		}
-		
-		?>
 		
 		<?php
+}
 				 include("pied_de_page.php");
 		?>
 		
