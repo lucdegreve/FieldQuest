@@ -48,9 +48,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 	</br>
 	<div class="container">
 		<form method="GET"  action="US1-10_Gerer_comptes.php">
-			<div align="center">
-				<button align="center" type="submit" class="btn btn-primary btn-md">Back to the accounts</button>
-			</div>
+			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
 		</form>
 		
 		<div align="center">
@@ -290,7 +288,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 <p> </BR> Associated project(s) : <span id="associated_project"></span></p>
                 <BR/>
 				<div align="center">
-					<button type="submit" name="createaccount" class="btn btn-lg btn-success">Create account</button>
+					<button type="submit" name="createaccount" class="btn btn-lg btn-outline-success">Create account</button>
 				</div>
                 <BR/>
         </form>
