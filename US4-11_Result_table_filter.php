@@ -155,7 +155,7 @@ Output variables :
 					
 					<div class="col-md-9"><h1><B>Files list</B></h1></div>
 
-					<div class="col-md-1" align="right">
+					<div class="col-md-3" align="right">
 
 						<button type="submit" class="btn btn-md btn-success">Download selection</button>
 
