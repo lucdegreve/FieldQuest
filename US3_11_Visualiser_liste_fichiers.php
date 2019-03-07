@@ -56,7 +56,7 @@
 							while($row=pg_fetch_array($result_files_id)){
 								$id=$row[0];
 								//Query to get the last version for each file name
-								$query="SELECT id_file, file_name, to_char(upload_date,'DD/MM/YYYY'), file_size, label_validation_state, id_version, last_name, first_name, id_original_file, label_format
+								$query="SELECT id_file, file_name, to_char(upload_date,'DD/MM/YYYY'), file_size, label_validation_state, id_version, last_name, first_name, id_original_file, label_format, file_place
 								FROM user_account ua JOIN files f ON ua.id_user_account=f.id_user_account JOIN validation_state vs ON f.id_validation_state=vs.id_validation_state JOIN format ON f.id_format=format.id_format
 								WHERE id_original_file='".$id."' AND id_version=(SELECT MAX(id_version) FROM files WHERE id_original_file='".$id."')";
 								$result_files_list=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
@@ -71,6 +71,8 @@
 									$first_name=$col[7];
 									$original_id=$col[8];
 									$extension=$col[9];
+									$place = $col[10];
+									$link = $place."".$name;
 								}
 								
 								//State "being checked"                               								
@@ -191,6 +193,9 @@
 		function popup_visualize(original_id) {	
 			window.open("US5_2_Visualize.php?original_id="+original_id,'newWin','width=1000,height=400');
 		}	
+			function popup_visualize_pdf(link) {	
+				window.open(link,'newWin','width=1000,height=400');
+			}	
 		
 		//Ouvrir la page "edit file"
 		function edit_file(id_file) { 
