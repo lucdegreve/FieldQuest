@@ -272,7 +272,7 @@ if (!isset($_GET['validate'])){
 						<?php } ?>
 					</div>
 					<div class="col-md-2"></div><div class="col-md-2">
-						<button type="submit" name="validate" class="btn btn-lg btn-success btn-block" onclick="return validate()"><h2>Send the form</h2></button>
+						<button type="submit" class="btn btn-lg btn-success btn-block" onclick="return validate()"><font size=4>Send the form</font></button>
 					</div>
 				</div>
 
@@ -284,18 +284,6 @@ if (!isset($_GET['validate'])){
 	<?php
 	include("pied_de_page.php");
 	?>
-
-	<script type="text/javascript">
-		function validate(){
-			if(document.formdepot.file.value != ""){
-				return true;
-			}
-			else{
-				alert("Please, add a file !");
-				return false;
-			}
-		}
-	</script>
 
 <?php
 // Recuperation of the last data uploaded coordinates / Made by Eva & Guillaume
@@ -318,11 +306,20 @@ if ($last_data[0]>-300)
 
 <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
  <!-- Openlayesr JS fIle -->
+ 
+<script type="text/javascript">
+	function validate(){
+		if(document.formdepot.file.value != ""){
+			return true;
+		}
+		else{
+			alert("Please, add a file !");
+			return false;
+		}
+	}
+</script>
 
- <script type="text/javascript"  >
-
-
-
+ <script type="text/javascript">
  // creating map : center on last datas
  var map = new ol.Map({
         target: 'map',
