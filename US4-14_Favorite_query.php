@@ -51,11 +51,11 @@ Output variables :	id_favorite_search
                                     while ($row = pg_fetch_array($result))
                                     {
                                             echo '<ul>' ;
-                                                    echo "<H6>".$row[1]."<a href=US4-11_Main_page_filter.php?id_favorite_search=$row[0] class='lien'><img src='picto/search.png' width='30' height='30'></a></H6>";
+                                                    echo "<H6>".$row[1]."<a href=US4-11_Main_page_filter.php?id_favorite_search=".$row[0]." class='lien'><img src='picto/search.png' width='30' height='30'></a></H6>";
                                                     echo $row[2];
                                                     
-                                                    // ajoute éventuellement la colonne supprimer
-                                                    //echo "<br/><a href = 'us_1_43_supprimer_un_projet.?id_project=".$row[0]."' class='lien'>Delete</a><hr>";
+                                                    // ajoute colonne supprimer
+                                                    echo "<br/><a href = 'US4-14_Delete_favorite_query.php?id_favorite_search=".$row[0]."' class='lien'>Delete</a><hr>";
                                             echo '</ul>';
                                     }
                                 
