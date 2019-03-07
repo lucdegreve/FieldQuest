@@ -313,8 +313,13 @@ Output variables :
                                                                                             $listdl[] =  $rowdl[1];
 
                                                                                             $listdl[] = $rowdl[2];
+																							
+																							$extension = $rowdl[2];
+																							
+																							$link = $rowdl[0]."".$rowdl[1];
 
                                                                                             $listdl = join( $listdl, ".");
+																							
 
                                                                                             $_SESSION["path[".$pos."]"] = $rowdl[0];
 
@@ -337,8 +342,20 @@ Output variables :
 											?>
 
 											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>								
-
+											<?php if ($extension =='jpg' or $extension =='png'){
+											?>	
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>picture preview</button>														
 											<?php
+											// closing the extension if
+												  }
+												  if ($extension =='pdf'){
+													echo '	<a href='.$link.' target="_blank" class="btn btn-sm btn-outline-primary btn-block" >PDF preview</a>';
+												  }
+												  if ($extension =='xls'){ 
+											?>
+												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>XLS preview</button>	
+											<?php	
+											}
 
 										echo "</td>";										
 
@@ -387,6 +404,14 @@ Output variables :
                 window.open("US3_11_Visualiser_liste_fichiers_P2.php?original_id="+original_id,'newWin','width=1000,height=400');
 
         }	
+		
+				//Ouvrir la popup pour visualiser le fichier
+		function popup_visualize(original_id) {	
+			window.open("US5_2_Visualize.php?original_id="+original_id,'newWin','width=1000,height=400');
+		}	
+			function popup_visualize_xls(original_id) {	
+				window.open("US5_2_Visualize_xls?original_id="+original_id,'newWin','width=1000,height=400');
+			}	
 
         
 
