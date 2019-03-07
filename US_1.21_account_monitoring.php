@@ -1,12 +1,47 @@
-<?php
-     session_start();
+<?php session_start();
+    if(!isset($_GET["modify_account"])){
+        if(isset($_SESSION["id_project_list_am"])){
+            unset($_SESSION["id_project_list_am"]);
+       }
+    }
 ?>
+
+<!--
+       US1-11 Modify user account
+Developped by Adrien
+This page contains the form to create a new account.
+Needed/called pages : 	tab_donnees.class.php, funct_connex.php,
+            delete_project_account_monitoring
+            reinject_project_datalist_account_monitoring_from_delete.php
+
+            majprojectproposition_account_monitoring.php
+            majremoveproject_account_monitoring.php
+
+            remove_project_from_datalist_account_monitoring.php
+            reinject_project_datalist_from_remove_account_monitoring.php
+
+
+Input variables : 		$id_user_account
+
+Output variables :
+		name of the form : account_monitoring
+		variables submitted in the form : All the ones from user_account + the id of linked projects
+
+Description :
+In this script we modify the user account in order to update the table "user_account" in the database.
+Verifying that needed fields (such as name or first_name) are checked with Javascript function
+This part is not difficult BUT
+We have a table of the projects already associated with the user that must be dynamic (2 Ajax functions)
+AND
+We need to associate project if the admin want to do so
+So we have to create dynamic list of project to add or to remove, what we do with 4 Ajax functions
+
+------------------------------------------------------------->
 
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
         <title> Account monitoring </title>
-        <!-- Account monitoring by Adrien -->
         <link rel = "stylesheet" href ="css/bootstrap.min.css">
         <link rel = "stylesheet" href ="css/custom.css">
     </head>
@@ -40,59 +75,76 @@
     		?>
 
         <BR/>
-        <!-- Form to go to the account manage page -->
-        <form name='backtomanageaccounts' method='GET' action='US1-10_Gerer_comptes.php'>
-            <button type='submit' class='btn btn-info' name='back'>Back to accounts</button>
-	</form>
-        
         <strong> Here are your profile information </strong>
         <BR/>
         <BR/>
         Fields with (*) must be filled
 
         <?php
-            // Session variable
-            //$id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
-            // For now I will use this one --> it has to be removed when Session start is working !
-            //$id_user_account = 1;
-            
-            // id of the clicked user
-            $id_user_account = $_GET['id_user_account'];
 
-            // Connexion to class file and connexion file
+            $id_user_account = $_SESSION["id_user_account"];
+            // A ENLEVER APRES VERIFICATION
+            $id_user_account = 2;
+
             require "tab_donnees/tab_donnees.class.php";
             require "tab_donnees/funct_connex.php";
-            // Variables needed for connexion
             $con = new Connex();
             $connex = $con->connection;
         ?>
 
         <?php
-        if (isset($_GET["last_name"],$_GET["first_name"]))
-        {
-            $last_name = $_GET["last_name"];
-            $first_name = $_GET["first_name"];
-            $company = $_GET["company"];
-            $address = $_GET["address"];
-            $postcode = $_GET["postcode"];
-            $city = $_GET["city"];
-            $country = $_GET["country"];
-            $email = $_GET["email"];
-            $phone = $_GET["phone"];
-            $website = $_GET["website"];
+        // We must put an isset now, Indeed the following form must be pre-filled AND when you click sur modify
+        // You have to update the database and to re pre-fill the form to have a view
 
-            // Query to update database
-            $query = "UPDATE user_account
-                      SET last_name = '".$last_name."', first_name = '".$first_name."',  company = '".$company."',
-                      address = '".$address."', postcode = '".$postcode."', city = '".$city."', country = '".$country."',
-                      email = '".$email."', phone = '".$phone."', website = '".$website."'
-                      WHERE id_user_account = '".$id_user_account."'";
-            $query_result = pg_query($connex,$query) or die (pg_last_error() );
-            echo "</BR>";
-            echo "</BR>";
-            echo "Data have been correctly inserted into database";
-        }
+            if (isset($_GET["last_name"],$_GET["first_name"])){
+                $last_name = $_GET["last_name"];
+                $first_name = $_GET["first_name"];
+                $company = $_GET["company"];
+                $address = $_GET["address"];
+                $postcode = $_GET["postcode"];
+                $city = $_GET["city"];
+                $country = $_GET["country"];
+                $email = $_GET["email"];
+                $phone = $_GET["phone"];
+                $website = $_GET["website"];
+
+                $query = "UPDATE user_account
+                          SET last_name = '".$last_name."', first_name = '".$first_name."',  company = '".$company."',
+                          address = '".$address."', postcode = '".$postcode."', city = '".$city."', country = '".$country."',
+                          email = '".$email."', phone = '".$phone."', website = '".$website."'
+                          WHERE id_user_account = '".$id_user_account."'";
+                $query_result = pg_query($connex,$query) or die (pg_last_error() );
+
+                // Adding project to the user created
+
+                // First, deleting all the associated projects
+                $query_delete = "DELETE FROM link_project_users WHERE id_user_account =".$id_user_account;
+                $query_result_delete = pg_query($connex,$query_delete) or die (pg_last_error());
+
+                // Then, Taking all the project
+                $id_already_associated_p = $_SESSION["already_associated_projects"]; //tableau avec trois colonnes
+                $id_projects_added = $_SESSION["id_project_list_am"]; //tableau d'identifiant
+                if ($id_already_associated_p[0]!="") {
+                    for ($i=0; $i < count($id_already_associated_p); $i++) {
+                        $id_projects_added[]=$id_already_associated_p[$i][0];
+                    }
+                }
+
+                // To finally add them
+                if ($id_projects_added[0]!="") {
+                    $new_nb_of_project = count($id_projects_added);
+                    for ($i=0; $i < $new_nb_of_project ; $i++) {
+                        $query_add = "INSERT INTO link_project_users
+                        VALUES (".$id_projects_added[$i].", ".$id_user_account.")";
+                        $query_result_add = pg_query($connex,$query_add) or die (pg_last_error() );
+                    }
+                }
+
+
+            }
         ?>
+
+
         <form name="account_monitoring" action="US_1.21_account_monitoring.php" onsubmit="return valider()" method="GET">
             <BR/>
 
@@ -134,12 +186,200 @@
                         echo '<td> Company website</td><td> <input type="text" size = "50" name="website" value="'.$row[9].'"> </td>';
                     echo '</tr>';
                 echo '</table>';
-                
-                echo '<input type="hidden" name="id_user_account" value="'.$id_user_account.'"></input>';
             ?>
 
-            <BR/>
-            <input type="submit" name="modify_account" value="Modify user account">
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script type="text/javascript">
+            // Here are all the Ajax functions that will be used to associate/remove/delete projects of the user
+
+                function addproject2(){
+                // Add project into the span "associated project" in two steps
+
+                     //First adding into the span
+                     $.ajax({
+
+                         type: 'get',
+                         dataType: 'html',
+                         url: 'majprojectproposition_account_monitoring.php',
+                         timeout: 1000,
+                         data: {
+                            id_project_value_am: document.account_monitoring.project_list.value
+                         },
+                         //var id_project_value = document.account_creation.list_user_type.value
+                         success: function (response) {
+                           document.getElementById("associated_project").innerHTML=response;
+                         },
+                         error: function () {
+                           alert('Query has failed');
+                         }
+                      });
+
+                     // Secondly removing it from the datalist
+                     $.ajax({
+
+                         type: 'get',
+                         dataType: 'html',
+                         url: 'remove_project_from_datalist_account_monitoring.php',
+                         timeout: 1000,
+                         data: {
+                           id_project_erase_am: document.account_monitoring.project_list.value
+                           },
+                         success: function (response) {
+                           document.getElementById("list_projects_a").innerHTML=response;
+                           },
+                         error: function () {
+                           alert('Query has failed');
+                         }
+                     });
+
+                  }
+
+                  function deleteproject1(str){
+                  // Delete a project from the table of already associated files in two steps
+
+                      // First, removing it from the table
+                      $.ajax({
+                    			type: 'get',
+                    			dataType: 'html',
+                    			url: 'delete_project_account_monitoring.php',
+                    			timeout: 1000,
+                    			data: {
+                    				    id_project_to_delete:str
+                    			},
+                    			success : function(response){
+                                    document.getElementById("associated_projects_before").innerHTML=response;
+                    			},
+                    			error: function () {
+                    				alert('Query has failed');
+                    			}
+                  		});
+
+                      //Then re-adding it to the datalist
+                      $.ajax({
+                          type: 'get',
+                          dataType: 'html',
+                          url: 'reinject_project_datalist_account_monitoring_from_delete.php',
+                          timeout: 1000,
+                          data: {
+                            id_project_to_add_from_delete:str
+                            },
+                          success: function (response) {
+                            document.getElementById("list_projects_a").innerHTML=response;
+                            },
+                          error: function () {
+                            alert('Query has failed');
+                          }
+                      });
+
+                   }
+
+                  function removeproject2(str){
+                  // When you add a project into the span you add a button "remove"
+                  // This function removes a project from this span in two steps
+
+                        //First it to remove it from the span
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'html',
+                            url: 'majremoveproject_account_monitoring.php',
+                            timeout: 1000,
+                            data: {
+                              id_project_value_rm:str
+                            },
+                            success: function (response) {
+                                document.getElementById("associated_project").innerHTML=response;
+                            },
+                            error: function () {
+                                alert('Query has failed');
+                            }
+                        });
+
+                        // Then, re-add it into the datalist
+                        $.ajax({
+                            type: 'get',
+                            dataType: 'html',
+                            url: 'reinject_project_datalist_from_remove_account_monitoring.php',
+                            timeout: 1000,
+                            data: {
+                                id_project_to_add_am:str
+                            },
+                            success: function (response) {
+                                document.getElementById("list_projects_a").innerHTML=response;
+                            },
+                            error: function () {
+                                alert('Query has failed');
+                            }
+                        });
+
+                  }
+
+              </script>
+
+              <?php
+              // Now creation of the table of already associated projects
+              $query_already_associated_project = "SELECT lpu.id_project, name_project
+                                                      FROM link_project_users lpu
+                                                        JOIN projects p on lpu.id_project = p.id_project
+                                                          WHERE id_user_account = $id_user_account";
+              $result_already_associated_project = pg_query($connex, $query_already_associated_project) or die ("Failed to fetch user accounts");
+              $tab = new Tab_donnees($result_already_associated_project,"PG");
+              $tab_associated_project = $tab->t_enr;
+              $_SESSION["already_associated_projects"]=$tab_associated_project;
+
+              $nb_rows = pg_num_rows($result_already_associated_project);
+              echo "</BR>";
+              echo'<div id="associated_projects_before" class= "col-md-6">';
+                  echo '<table>';
+                      for ($i=0; $i < $nb_rows ; $i++) {
+                        echo '<tr>';
+                            echo '<td> Projet '.$tab_associated_project[$i][0].' : '.$tab_associated_project[$i][1].' </td> <td> <input type="button" name="delete_project" value="Delete" onclick=deleteproject1('.$tab_associated_project[$i][0].')> </td>';
+                        echo '</tr>';
+                      }
+                  echo '</table>';
+              echo '</div>';
+              echo "</BR>";
+              ?>
+
+              <?php
+              // Then creation of the datalist
+
+              $query_project = "SELECT id_project, name_project
+                                  FROM projects
+                                    WHERE id_project NOT IN (SELECT id_project FROM link_project_users WHERE id_user_account = $id_user_account )";
+              $result_project = pg_query($connex, $query_project) or die ("Failed to fetch user accounts");
+              $tab = new Tab_donnees($result_project,"PG");
+              $table_project_2 = $tab->t_enr;
+              $_SESSION["not_associated_projects_account_monitoring"] = $table_project_2;
+              $nb_rows = pg_num_rows($result_project);
+
+              echo "</BR>";
+              echo '<label for="label_project"> Add a project to this user : </label>';
+
+              echo'<div id="list_projects_a" class="col-md-6">';
+                  echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
+                      echo '<datalist id="project_choice">';
+                            for ($k = 0; $k<$nb_rows; $k++ ){
+                                echo '<option value="'.$table_project_2[$k][0].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
+                            }
+                      echo '</datalist>';
+                  echo '<input type="button" value="Add a project" name="addproject" onclick=addproject2() >';
+              echo '</div>';
+              ?>
+
+
+              <BR/>
+              <p> Associated project(s) : <span id="associated_project"></span></p>
+              <BR/>
+              <BR/>
+              <input type="submit" name="modify_account" value="Modify user account">
+
+              <?php
+              echo "</BR>";
+              echo "</BR>";
+                  if (isset($_GET["last_name"],$_GET["first_name"])){
+                          echo "Database have been correctly updated";
+                  }
+              ?>
         </form>
       	<?php
       			 include("pied_de_page.php");
