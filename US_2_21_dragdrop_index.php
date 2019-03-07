@@ -91,7 +91,7 @@ if (!isset($_GET['validate'])){
 		//Get id of the user
 		$id_user=$_SESSION['id_user_account'];
 		$user_type=$_SESSION['id_user_type'];
-		//$id_user=7;
+		$id_user=7;
 		//$user_type=2;
 		//DB connection
 		require "./tab_donnees/tab_donnees.class.php";
