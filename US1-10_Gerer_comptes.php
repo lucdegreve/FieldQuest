@@ -25,6 +25,7 @@ Not done yet : Link with modify account page
 <?php
 	// Include header
 	include("en_tete.php");
+	echo "</br>";
 	// Include files containing connexion to database & tab_donnees class
 	require "tab_donnees/tab_donnees.class.php";
 	require "tab_donnees/funct_connex.php";
@@ -43,8 +44,8 @@ Not done yet : Link with modify account page
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-9">			</div>
-			<div class="col-md-3">
+			<div class="col-md-8"></div>
+			<div class="col-md-4">
 				<form name="add_account" action="US_1.11_create_user_account.php" method="GET">
 					<button type='submit' class='btn btn-success btn-block'><B>Add an account</B></button>
 				</form>
@@ -72,7 +73,7 @@ Not done yet : Link with modify account page
 	<div class="row"></div>
 	
 	</div>
-<br/><br/><br/><br/>
+<br/><br/>
 	<?php
 	// Include footer
 	include("pied_de_page.php");
