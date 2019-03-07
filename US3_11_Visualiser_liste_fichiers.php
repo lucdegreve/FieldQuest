@@ -152,9 +152,21 @@
 										echo "<td>";
 											?>
 											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup("<?php echo $original_id; ?>")'>See versions</button>	
-											<?php if ($extension =='jpg' or $extension =='png'){ ?>						
-											<button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>Visualize</button>														
-											<?php }
+											<!-- if extension is image, offer possibility to visualize it -->
+											<?php if ($extension =='jpg' or $extension =='png'){
+											?>	
+											<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize("<?php echo $original_id; ?>")'>picture preview</button>														
+											<?php
+											// closing the extension if
+												  }
+												  if ($extension =='pdf'){
+													echo '	<a href='.$link.' target="_blank" class="btn btn-sm btn-outline-primary btn-block" >PDF preview</a>';
+												  }
+												  if ($extension =='xls'){ 
+											?>
+												<button type='button' id='btnVersions' name='btnVersions' class='btn btn-sm btn-outline-primary btn-block' onclick='return popup_visualize_xls("<?php echo $original_id; ?>")'>XLS preview</button>	
+											<?php	
+											}
 										echo "</td>";										
 										echo "<td></td>";
 									echo "</tr>";
@@ -193,8 +205,8 @@
 		function popup_visualize(original_id) {	
 			window.open("US5_2_Visualize.php?original_id="+original_id,'newWin','width=1000,height=400');
 		}	
-			function popup_visualize_pdf(link) {	
-				window.open(link,'newWin','width=1000,height=400');
+			function popup_visualize_xls(original_id) {	
+				window.open("US5_2_Visualize_xls?original_id="+original_id,'newWin','width=1000,height=400');
 			}	
 		
 		//Ouvrir la page "edit file"
