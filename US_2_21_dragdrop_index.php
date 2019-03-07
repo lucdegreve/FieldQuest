@@ -1,7 +1,9 @@
 <!doctype html>
 
 <?php
-session_start();
+//Header
+include("en_tete.php");
+echo "</br>";
 //In the case the page is just updated, we need to empty the session variable not to keep users in memory
 if (!isset($_GET['validate'])){
 	if(isset($_SESSION["id_user_list"])){
@@ -87,16 +89,11 @@ if (!isset($_GET['validate'])){
 		
 		
 		<?php
-		//Header
-		include("en_tete.php");
-		echo "</br>";
 		//Get id of the user
-		$_SESSION["latitude"]=NULL;
-		$_SESSION["longitude"]=NULL;
-		//$id_user=$_SESSION['id_user']; A DECOMMENTER
-		//$user_type=$_SESSION['user_type']; A DECOMMENTER
-		$id_user=7;
-		$user_type=2;
+		$id_user=$_SESSION['id_user_account'];
+		$user_type=$_SESSION['id_user_type'];
+		//$id_user=7;
+		//$user_type=2;
 		//DB connection
 		require "./tab_donnees/tab_donnees.class.php";
 		require "./tab_donnees/funct_connex.php";
@@ -180,28 +177,30 @@ if (!isset($_GET['validate'])){
 						Comment : <br/> <textarea id="Comment" name="Comment" class="form-control" form="formdepot"></textarea></br>
 						
 						<?php
-						//Query to get all external users
-						$result_external_users=pg_query($connex, "SELECT id_user_account, last_name, first_name FROM user_account WHERE id_user_type=3 ORDER BY last_name");
-						$tab_external_users=new Tab_donnees($result_external_users,"PG");
-						$tab_external_users = $tab_external_users->t_enr;
-						$_SESSION["users_not_asso_before"]=$tab_external_users; //for ajax dynamic part in update_list.php
-						?>						
-						<!-- Datalist with the external users -->
-						<label for="Users"> Choose a user to associate to the file :</label></br>
-						<div id="list_users_a">
-								<input list="users" type="text" id="users_na" autocomplete="off">
-								<datalist id="users">
-									<?php
-									for($i=0; $i<count($tab_external_users); $i++){	
-										echo'<option value="'.$tab_external_users[$i][0].'" label="'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'">'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'</option>';
-									}
-									?>
-								</datalist>
-								
-							<!-- Button to add the selected user to the project -->
-							<input type="button" value="Add a user" name="addu" onclick="add_user1()">
-						</div>
-						<p> Associated user : <span id="associated_users"></span></p>
+						if($user_type==1 or $user_type==2){ 
+							//Query to get all external users
+							$result_external_users=pg_query($connex, "SELECT id_user_account, last_name, first_name FROM user_account WHERE id_user_type=3 ORDER BY last_name");
+							$tab_external_users=new Tab_donnees($result_external_users,"PG");
+							$tab_external_users = $tab_external_users->t_enr;
+							$_SESSION["users_not_asso_before"]=$tab_external_users; //for ajax dynamic part in update_list.php
+							?>						
+							<!-- Datalist with the external users -->						
+							<label for="Users"> Choose a user to associate to the file :</label></br>
+							<div id="list_users_a">
+									<input list="users" type="text" id="users_na" autocomplete="off">
+									<datalist id="users">
+										<?php
+										for($i=0; $i<count($tab_external_users); $i++){	
+											echo'<option value="'.$tab_external_users[$i][0].'" label="'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'">'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'</option>';
+										}
+										?>
+									</datalist>
+									
+								<!-- Button to add the selected user to the project -->
+								<input type="button" value="Add a user" name="addu" onclick="add_user1()">
+							</div>
+							<p> Associated user : <span id="associated_users"></span></p>
+						<?php } ?>
 					</div></div> 
 
 					<div class="col-md-6"><div class="jumbotron">
