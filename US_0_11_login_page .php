@@ -142,8 +142,9 @@ include("en_tete.php");
                                     <input type="password" name="ps" class="form-control" id="Password1" placeholder="Password">
                                      <p class="comments text-light" > <?php echo $psError; ?></p>
                                 </div>
-                                
-                                <button type="submit" class="btn btn-success">Connect</button>
+                                <div align="center">
+									<button type="submit" class="btn btn-success">Connection</button>
+								</div>
                             </form>
                         
                            
