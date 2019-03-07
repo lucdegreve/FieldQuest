@@ -48,7 +48,6 @@ if (!isset($_GET['validate'])){
 	<body>
 	
 		<!-- Function add_user for datalist -->
-		<script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> 
 		<script type="text/javascript">
 			function add_user1(){
 				$.ajax({
