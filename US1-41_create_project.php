@@ -184,11 +184,10 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 
 <div class="container">
 	
-	<form method="GET"  action="US1_42_Gerer_projets.php">
-		
-			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
-		
+	<form method="GET"  action="US1_42_Gerer_projets.php">		
+		<button type="submit" class="btn btn-outline-info btn-md">Back</button>		
 	</form>
+	
 	<div align="center">
 		<h2>Please fill all the information</h2>
 	</div></br>
