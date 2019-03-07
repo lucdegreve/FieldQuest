@@ -54,17 +54,18 @@ $query_map = "SELECT f.id_file as id_file, f.latitude as latitude, f.longitude a
                     LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
                     LEFT JOIN tags t ON t.id_tag=ltp.id_tag
                 WHERE f.id_user_account = '".$id_user."' AND ";
-                
-                if ($_POST['start']!=''){
-                        $start_date = $_POST['start'];
-                        $query_map .= " f.upload_date >'".$start_date."' AND ";
+                if (isset ($_POST['start'])){
+					if ($_POST['start']!=''){
+							$start_date = $_POST['start'];
+							$query_map .= " f.upload_date >'".$start_date."' AND ";
+					}
+				}
+                if (isset ($_POST['end'])){
+					if ($_POST['end']!=''){
+							$end_date = $_POST['end'];
+							$query_map .= " f.upload_date <'".$end_date."' AND ";
+					}
                 }
-                
-                if ($_POST['end']!=''){
-                        $end_date = $_POST['end'];
-                        $query_map .= " f.upload_date <'".$end_date."' AND ";
-                }
-                
                 if (isset($_POST['format'])){
                         $query_map .= " f.id_format IN (";
                         foreach ($_POST['format'] AS $i){
