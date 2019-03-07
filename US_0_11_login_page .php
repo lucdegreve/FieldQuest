@@ -9,7 +9,6 @@
 
 <?php
 include("en_tete_login.php");
-    //session_start();
     $login = $ps = "";
     $loginError = $psError = "";
     if($_SERVER["REQUEST_METHOD"] == "POST" )
@@ -169,7 +168,12 @@ include("en_tete_login.php");
 		</br>
 		</br>
 		
-        
+		<?php
+			if(isset($_GET["disconnect"])){
+				echo "You have been disconnected";
+				session_destroy();
+			}
+        ?>
         
         
         
