@@ -39,7 +39,6 @@ Output variables :
 
 <!-- Function add_user for datalist -->
 <script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript">
 	function add_user1(){
 		$.ajax({
@@ -236,51 +235,41 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 					// table of users affected to that project for now
 					echo'<div id="associated_users_before" class= "col-md-6">';
 						echo'<table>';
-						for ($i=0;$i<$table_users_a->nb_enr;$i++){
+						for ($i=0;$i<count($table_users_a1);$i++){
 							$users[]=$table_users_a1[$i][0];
 							echo'<tr id='.$i.'>';
 								echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
-								echo'<td><button type="button" class="btn btn-danger" name="delete_user" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete</button>'; 
+								echo'<td><input type="button" name="delete_user" value="Delete" onclick=deleteuser1('.$table_users_a1[$i][0].')>'; 
 							echo'</tr>';
 						}
 						echo '</table>';
 					echo'</div>';
 					//$users_all_details=$_SESSION["users_asso_before"];
 					//$users=array_column($users_all_details,0);
-					if ($users == []){
-						$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name 
-																from user_account 
-																ORDER BY last_name")
-																or die ('Failed to fetch users');	
-																
-						$table_user_na = new Tab_donnees($result_users_not_associated,"PG");
-						$table_users_na1 = $table_user_na->t_enr;
-						$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
-					} else {
-						$users=implode(",",$users); //transforms table to list
-						$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name 
-																from user_account 
-																where id_user_account NOT IN ($users)
-																ORDER BY last_name")
-																or die ('Failed to fetch users');	
-																
-						$table_user_na = new Tab_donnees($result_users_not_associated,"PG");
-						$table_users_na1 = $table_user_na->t_enr;
-						$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
-					}
+					$users=implode(",",$users); //transforms table to list
+					$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name 
+															from user_account 
+															where id_user_account NOT IN ($users)
+															ORDER BY last_name")
+															or die ('Failed to fetch status');	
+															
+					$table_user_na = new Tab_donnees($result_users_not_associated,"PG");
+					$table_users_na1 = $table_user_na->t_enr;
+					$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
+					
 					//datalist with the users not associated 
 					echo'<div class= "col-md-1"></div>';
 					echo'<div class= "col-md-5"><label for="Users"> Choose users to associate to the project :</label></div>';
 					echo'<div id="list_users_a" class="col-md-6">';
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
-								for($i=0; $i<$table_user_na->nb_enr; $i++){	
+								for($i=0; $i<count($table_users_na1); $i++){	
 									echo'<option value="'.$table_users_na1[$i][0].'" label="'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'">'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
 								}
 						echo'</datalist>';
 						
 					// button to add the selected user to the project	
-					echo'<button type="button" class="btn btn-success" name="addu" onclick="add_user1()">Add a user</button>';
+					echo'<input type="button" name="addu" value="Add a user" onclick="add_user1()">';
 					echo'</div>';
 					echo'<p> Associated user(s) : <span id="associated_users"></span></p>';
 					
@@ -309,13 +298,13 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 					echo'<div id="list_users_a" class="col-md-6">';
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
-								for($i=0; $i<$table_user_na->nb_enr; $i++){	
+								for($i=0; $i<count($table_users_na1); $i++){	
 									echo'<option value="'.$table_users_na1[$i][0].'" label="'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'">'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
 								}
 						echo'</datalist>';
 						
 					// button to add the selected user to the project	
-					echo'<button type="button" class="btn btn-success" name="addu" onclick="add_user1()">Add a user</button>';
+					echo'<input type="button" name="addu" value="Add a user" onclick="add_user1()">';
 					echo'</div>';
 					echo'<p> Associated user(s) : <span id="associated_users"></span></p>';
 				}
@@ -326,7 +315,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 		<div class="row">
 			<button type='submit' class='btn btn-success' name='validate'>Validate and add users</button>
 			<input type='hidden' name='id_project' value='<?php echo $id_project; ?>'>
-		</div></br></br></br></br>
+		</div>
 	</form>	
 	</div>
 	
@@ -408,7 +397,8 @@ if(isset($_POST['validate'])){
 		
 	}	
 echo'</div>'; //container
-	
+	if(isset($_SESSION["id_user_list"])){
+		unset($_SESSION["id_user_list"]);}
 	}
 ?>
 
