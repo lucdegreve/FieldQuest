@@ -152,7 +152,7 @@ Output variables :
 			<form name="box_download" action="downloadmultiple.php" method="post">
 
 				<div class="row">
-
+					
 					<div class="col-md-9"><h1><B>Files list</B></h1></div>
 
 					<div class="col-md-1" align="right">
@@ -175,7 +175,7 @@ Output variables :
 
 								<th scope="col" width="25%">File name</th>
 
-								<th scope="col" width="10%">Upload date</th>
+								<th scope="col" width="10%"><font size=2>Upload date</font></th>
 
 								<th scope="col" width="17%">Origin</th>
 
@@ -335,7 +335,7 @@ Output variables :
 
                                                                                             //Récuperation des valeurs pour la fonction download
 
-                                                                                            echo " <a href = ".$link." download>Download file</a></li> </br> ";
+                                                                                            echo " <a href = ".$link." download>Telecharger</a></li> </br> ";
 
                                                                                             $pos=$pos+1;
 
@@ -371,7 +371,7 @@ Output variables :
 
 										echo "<td>";
 
-											echo '</br><div align="center"><label><input type="checkbox" name="brochure[]" value="'.$rowdl[0].$listdl.'"></label></div>';
+											echo '</br><div align="center"><label><input type="checkbox" name="brochure[]" value="'.$rowdl[0].$listdl.'"></label></div>'; 
 
 										echo "</td>";
 
