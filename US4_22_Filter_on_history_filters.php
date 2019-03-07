@@ -47,8 +47,8 @@ require_once "./tab_donnees/funct_connex.php";
 require_once "./tab_donnees/tab_donnees.class.php";
 
 // Get id of current user 
-$id_user = $_SESSION['id_user'];
-$id_user = 2;
+$id_user = $_SESSION['id_user_account'];
+
 // Connexion to the database 
 $con=new Connex();
 $connex=$con->connection;
