@@ -23,12 +23,18 @@
 	<!-- creating map style -->
 	<style>
 		html, body {
-			height: 100%;
-			margin: 0;
-		}
-		#map {
-			width: 800px;
-			height: 600px;
+		height: 100%;
+		margin: 0;
+	}
+	#map{
+		width: 800px;
+		height:600px;
+		min-height: 100%;
+		min-width: 100%;
+		display: block;
+	}
+	#map-holder{
+			height: 70%;
 		}
 	</style>
 
@@ -50,23 +56,24 @@ $query_map = "SELECT f.id_file as id_file, f.latitude as latitude, f.longitude a
                 FROM files f
                     LEFT JOIN version v on f.id_version = v.id_version
                     LEFT JOIN link_file_project lfp ON lfp.id_file=f.id_file
-                    LEFT JOIN projects p ON lfp.id_file=p.id_project
+                    LEFT JOIN projects p ON lfp.id_project=p.id_project
                     LEFT JOIN format fr ON fr.id_format=f.id_format
                     LEFT JOIN user_account u ON u.id_user_account=f.id_user_account
                     LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
                     LEFT JOIN tags t ON t.id_tag=ltp.id_tag
                 WHERE f.id_validation_state = '2' AND ";
-                
-                if ($_POST['start']!=''){
-                        $start_date = $_POST['start'];
-                        $query_map .= " f.upload_date >'".$start_date."' AND ";
+                if (isset ($_POST['start'])){
+					if ($_POST['start']!=''){
+							$start_date = $_POST['start'];
+							$query_map .= " f.upload_date >'".$start_date."' AND ";
+					}
+				}
+                if (isset ($_POST['end'])){
+					if ($_POST['end']!=''){
+							$end_date = $_POST['end'];
+							$query_map .= " f.upload_date <'".$end_date."' AND ";
+					}
                 }
-                
-                if ($_POST['end']!=''){
-                        $end_date = $_POST['end'];
-                        $query_map .= " f.upload_date <'".$end_date."' AND ";
-                }
-                
                 if (isset($_POST['format'])){
                         $query_map .= " f.id_format IN (";
                         foreach ($_POST['format'] AS $i){
@@ -107,7 +114,11 @@ $query_map = "SELECT f.id_file as id_file, f.latitude as latitude, f.longitude a
                         $query_map = substr($query_map, 0, strlen($query_map) -2);
                         $query_map .= ")";
                 }
-                
+                if (isset($_POST['sources'])){
+                        if ($_POST['sources']!=''){
+                                $query .= "f.id_user_account IN (".$_POST['sources'].") AND ";
+                        }
+                }
                 
                 if (substr($query_map, -6)=='WHERE '){
                     $query_map = substr($query_map, 0, strlen($query_map) -6);
@@ -118,7 +129,6 @@ $query_map = "SELECT f.id_file as id_file, f.latitude as latitude, f.longitude a
                 }
 		$query_map .= " GROUP BY f.id_file";
 	
-$query = "SELECT id_file, latitude, longitude, file_name,file_place, file_comment FROM  files  ";
 $result = pg_query($connex, $query_map) or die(pg_last_error());
 
 //creating a list of lists containing all the needed informations
@@ -138,6 +148,7 @@ while ($row = pg_fetch_array($result)) {
 <script>
 
 // creatinG the map
+	var dll_link = '';
 	var map = L.map('map').setView([2.7246093749999925,48.57478976304037], 2);
 	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -199,7 +210,6 @@ map.addLayer(editableLayers);
 //what happens when a polygon is created
 map.on('draw:created', function(e) {
 	//if user confirms he wants to download
-if(confirm("Do you want to download these files ?")){
   var type = e.layerType,
     layer = e.layer;
 	Polygon = e.layer;
@@ -220,12 +230,15 @@ for ($j=0;$j<count($fichresult);$j++){
 	var mark = L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> );
 	mark.addTo(map);
 	if(Polygon.getBounds().contains(mark.getLatLng())==true){
-		
+		dll_link=dll_link+ "<?php echo $fichresult[$j][5]."  <a href = ".$link." download>Telecharger</a></li> </br>"; ?> "
+		var popup = L.popup()
+		.setLatLng(Polygon.getBounds().getCenter())
+		.setContent(dll_link)
+		.openOn(map);
 		<?php
-		$file = "US_2_21_dragdrop_upload/apple_lion.jpg";
-	$zip->zip_add('"'.$fichresult[$j][4]."".$fichresult[$j][3].'"');
 	// Quick check to verify that the file exists
 		// adresse a modifier avec la vraie du serveur TELECHARGEMENT NE FONCTIONNANT PAS
+		
 	?>
 	}
 	<?php
@@ -234,7 +247,7 @@ for ($j=0;$j<count($fichresult);$j++){
 	?>
 // save the polygon
   editableLayers.addLayer(layer);
-}
+  dll_link="";
 });
 
 
@@ -254,15 +267,17 @@ for ($j=0;$j<count($fichresult);$j++){
 		
 	?> 
 	// creating all the markers, with the onclickpopup, 
-	L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][3]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> ).addTo(map);
+	L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> ).addTo(map);
 	<?php
 	}
 }
+?>
 
 
-	?>
 </script>
-
+<div id="dialog" title="Basic dialog">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
 
 
 </body>
