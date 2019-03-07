@@ -155,37 +155,25 @@ if(isset($_GET['projet']) && !empty($_GET['projet'])){
     }
 }
 echo "<br/>";
+?>
 
-if($user_type==1){ ?>
-	<div class="container">
-		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
-		<div align="center">
-			<form action="US0_page_accueil_admin.php" method="GET">
-				<button type="submit" class="btn btn-md btn-primary">Back to the home page</button>
-			</form>
-		</div>
+<div class="container">
+	<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
+	<div align="center">
+		<?php if($user_type==1){ ?>
+		<form action="US0_page_accueil_admin.php" method="GET">
+		<?php }
+		if($user_type==2){ ?>
+		<form action="US0_page_accueil_internes.php" method="GET">
+		<?php }
+		if($user_type==3){ ?>
+		<form action="US0_page_accueil_externes.php" method="GET">
+		<?php } ?>
+			<button type="submit" class="btn btn-md btn-primary">Back to the home page</button>
+		</form>
 	</div>
-<?php }
-if($user_type==2){ ?>
-	<div class="container">
-		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
-		<div align="center">
-			<form action="US0_page_accueil_internes.php" method="GET">
-				<button type="submit" class="btn btn-md btn-primary">Back to the home page</button>
-			</form>
-		</div>
-	</div>
-<?php }
-if($user_type==3){ ?>
-	<div class="container">
-		<h1 align="center">Your file has been imported successfully, thank you !</h1></br>
-		<div align="center">
-			<form action="US0_page_accueil_externes.php" method="GET">
-				<button type="submit" class="btn btn-md btn-primary">Back to the home page</button>
-			</form>
-		</div>
-	</div>
-<?php } ?>
+</div>
+
 
 <?php
 //Reset of $_SESSION variables
