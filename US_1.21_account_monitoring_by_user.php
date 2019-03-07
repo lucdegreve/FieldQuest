@@ -97,12 +97,12 @@
           </form>
 
           <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
-              <input type="submit" name="change_password" value="Change your password">
+              <button type="submit" name="change_password" class="btn-outline-warning">Change your password</button>
           </form>
 
-        	<?php
-        			 include("pied_de_page.php");
-        	?>
     </div>
     </body>
+    <?php
+        			 include("pied_de_page.php");
+        	?>
 </html>
