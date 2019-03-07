@@ -100,7 +100,7 @@
         echo '<td> <strong>Old password </strong>  </td><td><input type="password" size = "50"  name="old_password" value="" style="background:#f8f9fa; border-radius: 5px; margin-bottom:10px;"> </td>';
         echo '</tr>';
         echo '<tr>';
-        echo '<td> <strong>New password</strong> </td><td><input type="password" size = "50"  name="new_password" value="" style="background:#f8f9fa; border-radius: 5px;"> </td>';
+        echo '<td> <strong>New password</strong> </td><td><input type="password" size = "50"  name="new_password" value="" style="background:#f8f9fa; border-radius: 5px; margin-bottom:10px;"> </td>';
         echo '</tr>';
         echo '<tr>';
         echo '<td> <strong> Verify password </strong> </td><td><input type="password" size = "50"  name="password_verif" value="" style="background:#f8f9fa; border-radius: 5px;"> </td>';
