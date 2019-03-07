@@ -20,7 +20,6 @@
 
 		<?php
 				 include("en_tete.php");
-				 echo "</br>";
 		?>
 
 		<?php
@@ -95,7 +94,7 @@
 											// ajoute éventuellement la colonne supprimer
 											echo '<td>';
 
-												echo ("<a href = 'us_1_43_supprimer_un_projet.?id_project=".$row[0]."' class='lien'>Delete</A>");
+												echo ("<a href = 'us_1_43_supprimer_un_projet.php?id_project=".$row[0]."' class='lien'>Delete</A>");
 											echo '</td>';
 									echo '</tr>';
 								}
@@ -106,8 +105,6 @@
 				</div>
 			</div>
 		</div>
-		</br></br>
-		
 		<?php
 				 include("pied_de_page.php");
 		?>
