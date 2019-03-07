@@ -58,12 +58,28 @@ $id_user = 1;
 			<?php include "US4_22_Filter_on_history_filters.php"; ?>
 		</div>
 		<div class ="col-md-10">
-			<?php include "US_4_21_access_history.php"; ?>
+			<!-- Navigation tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+							<a href="#list" data-toggle="tab" role="tab" class="nav-link active">Files list</a>
+					</li>
+					<li>
+							<a href="#map" data-toggle="tab" role="tab" class="nav-link">Map</a>
+					</li>
+			</ul>
+			
+			<!-- Table panes -->
+			<div class="tab-content">
+					<div class="tab-pane active" id="list" role="tabpanel" aria-labelledby="list">
+							<?php include ("US_4_21_access_history.php"); ?>
+					</div>
+					<div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map">
+							<?php include ("US4_22_Map.php"); ?>
+					</div>
+			</div>  
 		</div>
 	</div>
-	<div class ="row">
-	<?php include "US4_22_Map.php"; ?>
-	</div>
+	
 <?php
 	// Include footer
 	include("pied_de_page.php");
