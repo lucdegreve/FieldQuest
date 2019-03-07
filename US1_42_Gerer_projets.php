@@ -20,6 +20,7 @@
 
 		<?php
 				 include("en_tete.php");
+				 echo "</br>";
 		?>
 
 		<?php
@@ -105,6 +106,8 @@
 				</div>
 			</div>
 		</div>
+		</br></br>
+		
 		<?php
 				 include("pied_de_page.php");
 		?>
