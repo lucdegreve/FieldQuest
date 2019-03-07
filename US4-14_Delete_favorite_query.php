@@ -22,9 +22,9 @@ Output variables :
                     function delete_search(id_favorite_search) { 
                             document.location.href="US4-14_Delete_favorite_query.php?id_favorite_search="+id_favorite_search+"&delete=";
                     }
-            //Ouvrir la pagde "US4-14_Favorite_query.php"
+            //Ouvrir la page "US4-14_Favorite_query.php"
                     function back_to_favorite_search() { 
-                            document.location.href="US4-14_Favorite_query.php";
+                            document.location.href="US4-11_Main_page_filter.php";
                     }
     </script>
     
@@ -45,7 +45,9 @@ Output variables :
         
         // Session
         $id_user = $_SESSION["id_user_account"];
-        $id_user=3;
+        
+        //For test
+        //$id_user=3;
 
 	// Get the id of the query we want to delete
 	$id_favorite_search = $_GET['id_favorite_search'];
@@ -107,7 +109,11 @@ Output variables :
                 <?php
                 }
         }
-	
+	else {
+            echo "<button type='button' id='btnBack' name='back' class='btn btn-sm btn-success' onclick='return back_to_favorite_search()'>Return</button>";
+            echo "You are not allowed to delete this favorite search.";
+
+        }
 
 	// Include footer
 	include("pied_de_page.php");
