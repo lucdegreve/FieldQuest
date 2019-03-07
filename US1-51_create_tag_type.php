@@ -24,6 +24,7 @@
 	<body>
 		<?php
 				 include("en_tete.php");
+				 echo "</br>";
         ?>
         <div class="container"> 
         <?php  
