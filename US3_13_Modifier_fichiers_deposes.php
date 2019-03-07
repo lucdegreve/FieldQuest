@@ -137,7 +137,7 @@ echo "</br>";
 						<?php
 						//Query projects
 						//$id_user = $_SESSION[$id_user]; A DECOMMENTER QUANS LA VARIABLE DE SESSION SERA VALABLE
-						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=".$id_user." ORDER BY name_project asc");	//CHANGER L'ID					
+						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=".$id_user." ORDER BY name_project asc");				
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
 						?>
