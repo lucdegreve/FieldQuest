@@ -1,5 +1,11 @@
 <!doctype html>
 
+<?php
+//Header
+include("en_tete.php");
+echo "</br>";
+?>
+
 <html lang="en">
 
 	<head>
@@ -38,9 +44,9 @@
 	<body>
 		
 		<?php
-		//Header
-		include("en_tete.php");
-		echo "</br>";
+		//Get id of the user
+		$id_user=$_SESSION['id_user_account'];
+		$user_type=$_SESSION['id_user_type'];
 		//DB connection
 		require "./tab_donnees/tab_donnees.class.php";
 		require "./tab_donnees/funct_connex.php";
@@ -75,18 +81,9 @@
 			$j++;
 		}
 		?>		
-		
-		 
-                <form action="US4-11_Main_page_filter.php">
-                <button name="return" class="btn btn-outline-info btn-lg" type="submit">back</button>
-                    <div align ="center">
-                        <form method="get" action="US3_22_alert_incomplete_file.php">
-                        <button type="submit" class="btn btn-outline-warning btn-lg">Send an alert</button>
-                        </form>
-                    </div>
-                </form>
-                
-                </br>
+		<form method="get" action="US3_22_alert_incomplete_file.php">
+		<button type="submit">Send an alert</button>
+		</form>
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
 			<div class="container-fluid" >
 				<div class="row">
@@ -140,7 +137,7 @@
 						<?php
 						//Query projects
 						//$id_user = $_SESSION[$id_user]; A DECOMMENTER QUANS LA VARIABLE DE SESSION SERA VALABLE
-						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=1 ORDER BY name_project asc");	//CHANGER L'ID					
+						$result_projects_list = pg_query($connex, " SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=".$id_user." ORDER BY name_project asc");	//CHANGER L'ID					
 						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
 						?>
@@ -275,7 +272,7 @@
 	<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
-		//Drag and drop available only if box has been checked + a new file has to be selected if the box has been checked
+		//Drag and drop available only if box has been checked
 		$('#new_file').change(function() {
 			if(this.checked != true){
 				$("#conditional_part").hide();
@@ -285,7 +282,7 @@
 			}
 		});		
 		
-		//If box has been selected, a new ile has to be selected
+		//If box has been selected, a new file has to be selected
 		function validate(){
 			if(document.form_edit.new_file.checked == true){
 				if(document.form_edit.file.value != ""){

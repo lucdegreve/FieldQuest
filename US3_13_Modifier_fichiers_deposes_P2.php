@@ -1,5 +1,11 @@
 <!doctype html> 
 
+<?php
+//Header
+include("en_tete.php");
+echo "</br>";
+?>
+
 <html lang="en">
 
 	<head>	
@@ -15,18 +21,14 @@
 	<body>
 
 		<?php
-		session_start();
 		$id_file=$_SESSION["id_file"];
-		//Header
-		include("en_tete.php");
-		echo "</br>";
 		//DB connection
 		require "./tab_donnees/funct_connex.php";
 		$con = new Connex();
 		$connex = $con->connection;
-		
-		//On met une valeur en dur pour l'id_user_account pour le moment
-		$id_user=7;
+		//Get id of the user
+		$id_user=$_SESSION['id_user_account'];
+		$user_type=$_SESSION['id_user_type'];
 		
 	//IF A NEW FILE HAS BEEN SELECTED
 		if(isset($_GET['new_file'])){
