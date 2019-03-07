@@ -59,7 +59,7 @@
 		$con = new Connex();
         $connex = $con->connection;
 		//request parameters
-		$query = "SELECT tt.id_tag_type, name_tag_type FROM  tag_type tt  ";
+		$query = "SELECT tt.id_tag_type, name_tag_type FROM  tag_type tt  ORDER BY name_tag_type";
 		//request execution
         $result = pg_query($connex, $query) or die(pg_last_error());
 		// Results browsing line by line
