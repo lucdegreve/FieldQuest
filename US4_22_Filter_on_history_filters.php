@@ -1,40 +1,24 @@
 <html>
-<?php session_start(); ?>
 <head>
 <!-----------------------------------------------------------
        US4-22 - Filter for user history of upload- Filters
 	   
 Developped by Ophélie			      
-This page contains the filters to search for files (validated or not) in the user's history. 
+This page contains the filters to search for files (validated or not) in the user's history of upload. 
 
 It uses filter pages : - US4-11_Filtrer_avec_tag_format.php
 					   - US4-11_Filtrer_avec_tag_unit.php
 					   - US_4_11_filtre_avec_tag_data_type.php
+This page is used in "US4_22_Main_page_history_with_filters.php"
 
 Input variables : 		
 
-Output variables :		
+Output variables :	Selected 	Start date (start), End date (end), list of unit tags (unit)
+					list of project tags (project), list of format (format), list of data type (tag)
+					
+					Use method POST 
 		
 ------------------------------------------------------------->	
- 
-<!-- Js, Jquery & Bootstrap Ressources for collapse and checkbox button -->
-   <link href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="styles.css">
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js" integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9"
-	 crossorigin="anonymous">
-</script>
-
-
 
 <!-- Script for handling of checkbox button (bootstrap 4 version) -->
 <script type= 'text/javascript' src = 'manage_checkbox_button_bt4.js'></script>
@@ -42,16 +26,6 @@ Output variables :
 <body>
 
 <?php
-// Include code to connect to the database 
-require_once "./tab_donnees/funct_connex.php";
-require_once "./tab_donnees/tab_donnees.class.php";
-
-// Get id of current user 
-$id_user = $_SESSION['id_user_account'];
-
-// Connexion to the database 
-$con=new Connex();
-$connex=$con->connection;
 
 // Query to get projects 
 $query_project = "SELECT p.id_project ,p.name_project 
@@ -65,8 +39,8 @@ $table_projects = new Tab_donnees($result_project,"PG");
 ?>
 
 <!--------------------- Form to select filters --------------------->
-<form name= "form_filters" method="POST">
-	<div class = 'container'>
+	<form name= "form_filters" method="POST">
+	
 		<?php
 		// Filter on file format 
 		include "US4-11_Filtrer_avec_tag_format.php";
@@ -120,7 +94,7 @@ $table_projects = new Tab_donnees($result_project,"PG");
 		// Filter on data type tag 
 		include "US_4_11_filtre_avec_tag_data_type.php";
 		?>
-	</div> <!-- End container div -->
-</form>
+	
+	</form>
 </body>
 </html>

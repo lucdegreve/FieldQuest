@@ -1,65 +1,19 @@
 <!doctype html>
 <html lang="en">
 
-
 <head>
-
-<?php
-	include("en_tete.php");
-	$id_user=$_SESSION['id_user_account'];
-	
-?>
-
-
 <!-- Développeur : Eva & Liantsoa
 	Access my deposit history
 	-> writing the query to access the list of my submitted files	(changes on query made by Ophélie - query with filters)
 	-> table to display the results of the query
-	--> 
-	
-	    <link href="custom.css" rel="stylesheet" type="text/css">
-		<link href="css/boostrap.min.css" rel="stylesheet" type="text/css">
-        <script src="US_2_21_dragdrop_jquery-3.0.0.js" type="text/javascript"></script>
-        <script src="US_2_21_dragdrop_script.js" type="text/javascript"></script>
-        
+	This page is used in "US4_22_Main_page_history_with_filters.php"
+	-->  
  <title >Upload history</title>
- 
- <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
- 
- <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-		
- <!-- Openlayers CSS file-->
- 
- <style type="text/css">
-  #map{
-   width:40%;
-   height:300px;
-  }
- </style>
- <!--Basic styling for map div, 
- if height is not defined the div will show up with 0 px height  -->
- 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.css"/>
-
 </head>	
 
 <body>
-
 <?php
-
-require_once "./tab_donnees/tab_donnees.class.php";
-require_once "./tab_donnees/funct_connex.php";
-
-$con = new Connex();
-$connex = $con->connection;
-
+// Call to files to connect to the db in main page "US4_22_Main_page_history_with_filters.php"
 $query = "SELECT  f.id_file, f.file_name, f.id_format, vs.label_validation_state, f.id_version, f.upload_date, 
 				  f.file_comment, f.data_init_date, f.data_end_date, f.evaluation_date, f.evaluation_comment, f.file_size 
 					FROM files f
@@ -253,10 +207,7 @@ echo "</BR>";
 			</div>
 		</div>
 		</BR>
-<?php
-	// Include footer
-	include("pied_de_page.php");
-?>
+
 
 </body>
 
