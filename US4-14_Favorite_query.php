@@ -25,17 +25,10 @@ Output variables :	id_favorite_search
 
         <?php
         //Header
-        include("en_tete.php");
-        echo "</br>";
-        //DB connection
-        require "./tab_donnees/funct_connex.php";
-        require "./tab_donnees/tab_donnees.class.php";
-        $con=new Connex();
-        $connex=$con->connection;
+
         $id_user = $_SESSION["id_user_account"];
         $id_user=3;
         
-        echo "<H3>Your favorite searches</H3>";
         
         //Query : select all favorite query from connected user
         $query =  "SELECT f.id_favorite_search, f.search_label, f.comment FROM favorite_search f
@@ -44,8 +37,6 @@ Output variables :	id_favorite_search
         $result = pg_query($connex, $query) or die('Echec de la requête :'.pg_last_error($connex));
         ?>
 
-		<div class="row">
-			<div class="col-md-3"> <!-- List of favorite searches  -->
 				<?php
                                 
                                     while ($row = pg_fetch_array($result))
@@ -60,13 +51,8 @@ Output variables :	id_favorite_search
                                     }
                                 
 				?>
-			</div>
-		</div>
+
 
     </body>
-        
-    	<?php
-	echo "</br></br></br>";
-	include("pied_de_page.php");
-	?>	
+
 </html>
