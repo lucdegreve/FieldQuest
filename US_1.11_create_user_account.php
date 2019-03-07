@@ -47,6 +47,12 @@ So we have to create dynamic list of project to add or to remove, what we do wit
     		?>
 	</br>
 	<div class="container">
+		<form method="GET"  action="US1-10_Gerer_comptes.php">
+			<div align="center">
+				<button align="center" type="submit" class="btn btn-primary btn-md">Back to the accounts</button>
+			</div>
+		</form>
+		
 		<div align="center">
 			<h2>Please fill all the information</h2>
 		</div>
