@@ -81,12 +81,13 @@
 	<body>
         <?php
 				 include("en_tete.php");
+				 echo "</br>";
         ?>
         <div class="container">
         <?php 
         require "./tab_donnees/funct_connex.php";
 		echo'<form action="US1-54_manage_tags.php">
-				<button name="return" class="btn btn-outline-info" type="submit">back</button>
+				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
 				</form>';
         echo '<form  method="get">';
         echo '<fieldset style="width: 500px">
