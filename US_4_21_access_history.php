@@ -104,109 +104,106 @@ $query = "SELECT  f.id_file, f.file_name, f.id_format, vs.label_validation_state
 $result = pg_query($connex,$query) or die (pg_last_error() );
 
 
-
-echo "</BR>";
-
 ?>
+
 
 
 
 </br>
 
+		
+		<div class="row ml-pl-0">
+			<div class="col-md-1 p-0 m-0"></div>
+			<div class="col-md-10 p-0 m-0">
+			
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$('#example').DataTable();
+				} );
+				</script>
 
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-10">
+				<?php
+				//creation du tableau
 				
-					<script type="text/javascript">
-					$(document).ready(function() {
-					    $('#example').DataTable();
-					} );
-					</script>
+					echo '<table id="example" class="display" border="1" cellpadding="0" bordercolor="E8E8E8" bgcolor="white">';
+				// en tete du tableau
+						echo '<thead>';
+							echo '<tr>';
+								echo '<th>' ;
+									echo  'ID';
+								echo '</th>';
+								echo '<th>';
+									echo  'Name';
+								echo '</th>';
+								echo '<th>';
+									echo  'Format';
+								echo '</th>';
+								echo '<th>' ;
+									echo  'Status';
+								echo '</th>';
+								echo '<th>' ;
+									echo  'Version';
+								echo '</th>';
+								echo '<th>';
+									echo  'Upload date';
+								echo '</th>';
+								echo '<th>';
+									echo  'Comment';
+								echo '</th>';
+								echo '<th>';
+									echo  'Init date';
+								echo '</th>';
+								echo '<th>';
+									echo  'End date';
+								echo '</th>';
+								echo '<th>';
+									echo  'Evaluation date';
+								echo '</th>';
+								echo '<th>';
+									echo  'Evaluation comment';
+								echo '</th>';
+								echo '<th>';
+									echo  'Size';
+								echo '</th>';
+								echo '<th>';
+									echo  'Delete';
+								echo '</th>';
+							echo '</tr>';
+						echo '</thead>';
 
-					<?php
-					//creation du tableau
-					
-						echo '<table id="example" class="display" border="1" cellpadding="4" bordercolor="E8E8E8" bgcolor="white">';
-					// en tete du tableau
-							echo '<thead>';
-								echo '<tr>';
-									echo '<th>' ;
-										echo  'ID';
-									echo '</th>';
-									echo '<th>';
-										echo  'Name';
-									echo '</th>';
-									echo '<th>';
-										echo  'Format';
-									echo '</th>';
-									echo '<th>' ;
-										echo  'Status';
-									echo '</th>';
-									echo '<th>' ;
-										echo  'Version';
-									echo '</th>';
-									echo '<th>';
-										echo  'Upload date';
-									echo '</th>';
-									echo '<th>';
-										echo  'Comment';
-									echo '</th>';
-									echo '<th>';
-										echo  'Init date';
-									echo '</th>';
-									echo '<th>';
-										echo  'End date';
-									echo '</th>';
-									echo '<th>';
-										echo  'Evaluation date';
-									echo '</th>';
-									echo '<th>';
-										echo  'Evaluation comment';
-									echo '</th>';
-									echo '<th>';
-										echo  'Size';
-									echo '</th>';
-									echo '<th>';
-										echo  'Delete';
-									echo '</th>';
+				//corps du tableau
+						echo '<tbody>';
+						while ($row = pg_fetch_array($result))
+							
+							{
+								echo '<tr>' ;
+									for($i=0; $i<  pg_num_fields($result); $i++)
+									{
+										echo '<td>';
+											echo $row[$i]."  ";
+										echo '</td>';											
+									}
+										echo '<td>';
+											if ($row[3]=='not validated')
+											{
+											echo ("<a href =# class='lien'>Delete</A>");
+											}
+											else
+											{
+											echo "";
+											}
+										echo '</td>';			
 								echo '</tr>';
-							echo '</thead>';
+							}
+						echo '</tbody>';
+					echo '</table>'
 
-					//corps du tableau
-							echo '<tbody>';
-							while ($row = pg_fetch_array($result))
-								
-								{
-									echo '<tr>' ;
-										for($i=0; $i<  pg_num_fields($result); $i++)
-										{
-											echo '<td>';
-												echo $row[$i]."  ";
-											echo '</td>';											
-										}
-											echo '<td>';
-												if ($row[3]=='not validated')
-												{
-												echo ("<a href =# class='lien'>Delete</A>");
-												}
-												else
-												{
-												echo "";
-												}
-											echo '</td>';			
-									echo '</tr>';
-								}
-							echo '</tbody>';
-						echo '</table>'
-
-					?>
-				</div>
-				<div class="col-md-1"></div>
+				?>
 			</div>
+			<div class="col-md-1 p-0 m-0"></div>
 		</div>
-		</BR>
+		
+		
 
 
 </body>

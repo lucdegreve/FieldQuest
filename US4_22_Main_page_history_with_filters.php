@@ -33,31 +33,36 @@ Output variables :
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.4/dt-1.10.13/cr-1.3.2/fc-3.2.2/kt-2.2.0/r-2.1.0/rr-1.2.0/sc-1.4.2/se-1.2.0/datatables.min.css"/>
-
+<link href="css/custom.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 <?php 
+
+// Header 
+include("en_tete.php"); 
+
 // Files to connect to the db & use recordset
 require_once "./tab_donnees/tab_donnees.class.php";
 require_once "./tab_donnees/funct_connex.php";
 // Connexion to the database
 $con = new Connex();
 $connex = $con->connection;
-// Header 
-include("en_tete.php"); 
+
 // Get user Id from session
 $id_user=$_SESSION['id_user_account'];
 $id_user = 1;
 ?>
-<div class="row">
-	<div class="col col-md-3">
-		<?php include "US4_22_Filter_on_history_filters.php"; ?>
+
+	<div class="row">
+		<div class="col col-md-2 mr-pr-0 mr-n4">
+			<?php include "US4_22_Filter_on_history_filters.php"; ?>
+		</div>
+		<div class ="col-md-10 p-0 mx-n5">
+			<?php include "US_4_21_access_history.php"; ?>
+		</div>
 	</div>
-	<div class ="col-md-9">
-		<?php include "US_4_21_access_history.php"; ?>
-	</div>
-</div>
+
 <?php
 	// Include footer
 	include("pied_de_page.php");
