@@ -5,7 +5,10 @@
         <?php
 				 include("en_tete.php");
         ?>
+        <form action="US4-11_Main_page_filter.php">
+				<button name="return" class="btn btn-outline-info" type="submit">back</button>
         <div align="center">
+        
             <!-- if the comment is already written --> 
             <?php
             require "tab_donnees/tab_donnees.class.php";
