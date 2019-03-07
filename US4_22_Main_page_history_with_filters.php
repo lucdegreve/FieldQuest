@@ -1,5 +1,4 @@
 <html>
-<?php session_start(); ?>
 <head>
 <!-----------------------------------------------------------
        US4-22 & US4-21 - Access history and search using tags 
@@ -55,10 +54,10 @@ $id_user = 1;
 ?>
 
 	<div class="row">
-		<div class="col col-md-2 mr-pr-0 mr-n4">
+		<div class="col col-md-2">
 			<?php include "US4_22_Filter_on_history_filters.php"; ?>
 		</div>
-		<div class ="col-md-10 p-0 mx-n5">
+		<div class ="col-md-10">
 			<?php include "US_4_21_access_history.php"; ?>
 		</div>
 	</div>

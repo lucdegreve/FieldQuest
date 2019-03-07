@@ -112,16 +112,16 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 </br>
 
 		
-		<div class="row ml-pl-0">
-			<div class="col-md-1 p-0 m-0"></div>
-			<div class="col-md-10 p-0 m-0">
+		<div class="row">
+			
+			<div class="col-md-10">
 			
 				<script type="text/javascript">
 				$(document).ready(function() {
 					$('#example').DataTable();
 				} );
 				</script>
-
+				<div class ="table-responsive-md">
 				<?php
 				//creation du tableau
 				
@@ -199,8 +199,8 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 					echo '</table>'
 
 				?>
+				</div>
 			</div>
-			<div class="col-md-1 p-0 m-0"></div>
 		</div>
 		
 		
