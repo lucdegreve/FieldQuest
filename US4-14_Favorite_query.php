@@ -9,9 +9,13 @@ Developped by Diane
 
 Input variables : 		
 
-Output variables :								
+Output variables :	id_favorite_search							
             
 ---------------------------------------------------------------------------------->	
+
+<META charset="utf-8">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/custom.css">
 
     </head>
 
@@ -31,28 +35,30 @@ Output variables :
         $id_user = $_SESSION["id_user_account"];
         $id_user=3;
         
+        echo "<H3>Your favorite searches</H3>";
+        
         //Query : select all favorite query from connected user
         $query =  "SELECT f.id_favorite_search, f.search_label, f.comment FROM favorite_search f
                     WHERE status_public_private = false AND id_user_account=".$id_user;
                     
         $result = pg_query($connex, $query) or die('Echec de la requête :'.pg_last_error($connex));
-        $table_saved_search = new Tab_donnees($result,"PG");
         ?>
 
 		<div class="row">
-			<div class="col-md-12"> <!-- Table with user accounts  -->
+			<div class="col-md-3"> <!-- List of favorite searches  -->
 				<?php
-				//Headers names
-				$tab_headers[0]='id';
-				$tab_headers[1]='Search label';
-				$tab_headers[2]='Comment';
-				//Columns
-                                $tab_display[0]='id_favorite_search';
-				$tab_display[1]='search_label';
-				$tab_display[2]='comment';
-				$table_saved_search->creer_tableau("display nowrap", "accounts", "", "", "id_user_account", "", "",
-									"US_1.21_account_monitoring.php", "US1-12_Supprimer_compte.php",
-									$tab_headers, $tab_display, "", "");
+                                
+                                    while ($row = pg_fetch_array($result))
+                                    {
+                                            echo '<ul>' ;
+                                                    echo "<H6>".$row[1]."<a href=US4-11_Main_page_filter.php?id_favorite_search=$row[0] class='lien'><img src='picto/search.png' width='30' height='30'></a></H6>";
+                                                    echo $row[2];
+                                                    
+                                                    // ajoute éventuellement la colonne supprimer
+                                                    //echo "<br/><a href = 'us_1_43_supprimer_un_projet.?id_project=".$row[0]."' class='lien'>Delete</a><hr>";
+                                            echo '</ul>';
+                                    }
+                                
 				?>
 			</div>
 		</div>
