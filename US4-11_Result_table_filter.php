@@ -37,12 +37,22 @@ Output variables :
                         FROM files f
                             LEFT JOIN version v on f.id_version = v.id_version
                             LEFT JOIN link_file_project lfp ON lfp.id_file=f.id_file
-                            LEFT JOIN projects p ON lfp.id_file=p.id_project
+                            LEFT JOIN projects p ON lfp.id_project=p.id_project
                             LEFT JOIN format fr ON fr.id_format=f.id_format
                             LEFT JOIN user_account u ON u.id_user_account=f.id_user_account
                             LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
-                            LEFT JOIN tags t ON t.id_tag=ltp.id_tag
-                        WHERE f.id_validation_state = '2' AND ";
+							LEFT JOIN tags t ON t.id_tag=ltp.id_tag
+							Where f.id_file NOT IN (0) AND ";
+				
+				if (isset($_POST['Validation_state'])){
+						$query .= " f.id_validation_state IN (";
+						foreach ($_POST['Validation_state'] AS $i){
+                                $query .= $i.", ";
+                        }
+						$query = substr($query, 0, strlen($query) -2);
+                        $query .= ")";
+                        $query .= " AND ";
+				}
 
                 if (isset($_POST['start'])){
                         if ($_POST['start']!=''){
