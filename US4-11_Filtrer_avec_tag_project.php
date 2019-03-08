@@ -56,10 +56,11 @@ $table_projects = new Tab_donnees($result_project,"PG");
 				if (in_array($id_project,$liste_project_fs)){
 								echo '<input type="checkbox" style="display: none;" name="projet[]" value="'.$id_project.'" checked/>';
 							}
-				else {
-					echo '<input type="checkbox" style="display: none;" name="projet[]" value="'.$id_project.'" />';
-				}
 			}
+			else {
+				echo '<input type="checkbox" style="display: none;" name="projet[]" value="'.$id_project.'" />';
+			}
+			
 			echo '</span>';
 			
 		}

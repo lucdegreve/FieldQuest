@@ -57,10 +57,11 @@ Output variables :		id of selected formats
 						if (in_array($id_format,$liste_format_fs)){
 								echo '<input type="checkbox" style="display: none;" name="format[]" value="'.$id_format.'" checked/>';
 							}
-						else {
-							echo '<input type="checkbox" style="display: none;" name="format[]" value="'.$id_format.'" unchecked/>';
-						}
 					}
+					else {
+						echo '<input type="checkbox" style="display: none;" name="format[]" value="'.$id_format.'" unchecked/>';
+					}
+					
 					echo '</span>';
 				}
 				?>

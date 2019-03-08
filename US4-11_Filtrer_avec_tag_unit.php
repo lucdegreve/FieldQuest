@@ -45,6 +45,7 @@ Output variables :		id of selected tags
 					$id_tag = $table_units-> t_enr[$i][0];
 					// Get name of the tag n°$i  of recordset
 					$tag_name = $table_units-> t_enr [$i][1];
+					
 				
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';

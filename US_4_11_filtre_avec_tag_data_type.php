@@ -79,10 +79,11 @@ Output variables :		id of selected formats
 									if (in_array($id_tag,$liste_tag_fs)){
 											echo '<input type="checkbox" style="display: none;" name="tag[]" value="'.$id_tag.'" checked/>';
 									}
-									else {
-											echo '<input type="checkbox" style="display: none;" name="tag[]" value="'.$id_tag.'" unchecked/>';
-									}
-								}                  
+								}
+								else {
+										echo '<input type="checkbox" style="display: none;" name="tag[]" value="'.$id_tag.'" unchecked/>';
+								}
+								                 
 								echo '</span>';
 								
 								}
