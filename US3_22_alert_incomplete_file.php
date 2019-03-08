@@ -4,9 +4,13 @@
 	<body>
         <?php
 				 include("en_tete.php");
+				 echo "</br>";
         ?>
+		
+		<div class="container">
         <form action="US4-11_Main_page_filter.php">
-				<button name="return" class="btn btn-outline-info" type="submit">back</button>
+				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
+				
         <div align="center">
         
             <!-- if the comment is already written --> 
@@ -37,15 +41,19 @@
             $result = pg_query($connex,$query) or die (pg_last_error() );
                     $donnees = pg_fetch_array($result);
                     $user_mail = $donnees[0];
-                    echo '<h1>Envoyer une alerte concernant ce fichier</h1></br>';
+                    echo '</br><h2>Envoyer une alerte concernant ce fichier</h2></br>';
+					echo "</div>";
                     // and fill the form
                     echo '<form id ="alertform" name="alertform" action="US3_22_alert_incomplete_file.php?user_mail='.$user_mail.'" method="GET">';
                     echo  '<input type="hidden" name="user_mail" value='.$user_mail.'>';
-                    echo '	<B>Comment :</B> <br/> <textarea id="Comment" name="Comment" class="col-md-7 col-md-offset-6" class="form-control" form="alertform"></textarea></br>';
-                    echo '<button type="submit" class="btn btn-lg btn-success" >Send e-mail</button>';
+                    echo '	<B>Comment :</B> <br/> <textarea id="Comment" name="Comment" class="form-control" form="alertform"></textarea></br>';
+					echo "<div align='center'>";
+						echo '<button type="submit" class="btn btn-md btn-success" >Send e-mail</button>';
+					echo "</div>";
             }
              ?>
-        </div>
+		</form>
+		</div>
 	</body>
         <?php
 		include("pied_de_page.php");
