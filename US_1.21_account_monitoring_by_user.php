@@ -9,16 +9,17 @@
     </head>
 
     <body>
-    
+
         <?php
               include("en_tete.php");
         ?>
         <div class='container'>
-       <form action="US0_page_accueil_externes.php">
-            <button name="return" class="btn btn-outline-info" type="submit">back</button>
+        <form action="US0_page_accueil_externes.php">
+            <button name="return" class="btn btn-outline-info" type="submit">Back</button>
+        </form>
         <BR/>
         <h1> Here are your profile information </h1>
-        <BR/>
+
         <?php
               $id_user = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
               // For now I will use this one --> it has to be removed when Session start is working !
@@ -29,7 +30,7 @@
               $con = new Connex();
               $connex = $con->connection;
 
-              if(isset($_GET['change_info']) AND $_GET['change_info']=='Change your information')
+              if(isset($_GET['change_info']))
               {
                       // Session variable
 
@@ -49,7 +50,7 @@
                               WHERE id_user_account = '".$id_user."'";
                     $query_result = pg_query($connex,$query) or die (pg_last_error() );
                     echo "</br>";
-                    echo "Data have been correctly inserted into database";
+
               }
           ?>
           <form name="account_monitoring_user" action="US_1.21_account_monitoring_by_user.php" method="GET">
@@ -96,14 +97,18 @@
             <button type="submit" class="btn btn-outline-success" name="change_info">Change your information</button>
           </form>
 
+          <?php
+              if(isset($_GET['change_info'])){
+                  echo "Database have been correctly updated";
+              }
+          ?>
+
           <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
               <button type="submit" name="change_password" class="btn-outline-warning">Change your password</button>
           </form>
-		  
+
 			<button type="submit" class="btn btn-md btn-danger" onclick="location.href='US_1.22_p2_delete_account.php'" name="delete_account">Delete my account</button>
-        	<?php
-        			 include("pied_de_page.php");
-        	?>
+
     </div>
     </body>
     <?php

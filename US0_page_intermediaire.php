@@ -15,8 +15,7 @@
 			//page intermediaire qui recupere le login et la passeword quand un utilisateur veut se connecter et dirigera ensuite vers la page accueil specififique a chaque utilisateur
 			// connexion à la base de données Fieldquest
 
-			//recuperate header
-		  //include("en_tete.php");
+			session_start();
 
 			//recuparate id_user and id user type
 			$id_user=$_GET['id_user'];

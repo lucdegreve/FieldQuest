@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
     if(!isset($_GET["createaccount"])){
         if(isset($_SESSION["id_project_list"])){
             unset($_SESSION["id_project_list"]);
