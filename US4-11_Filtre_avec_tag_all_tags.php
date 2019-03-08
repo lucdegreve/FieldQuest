@@ -9,6 +9,8 @@ This page contains code to display the filter labels:
 - US4-11_Filtrer_avec_tag_unit.php
 - US_4_11_filtre_avec_tag_data_type.php
 
+Modified by Eva to add the "save a query" page
+
 Input variables : 		
 
 Output variables :		id of selected tags		
@@ -105,11 +107,11 @@ function OnButton2()
 					
 					<?php 
 				
+				// If the user saved a favorite search in the "Save filter" page 
+				// We show a message "A new favorite search has been saved" and we add the data in the database
 				if (isset($_POST['Save_in_favorite'])) { 
 					
-				echo "</br> on essaye de sauvegarder dans la bd";
-				
-				echo "</br> Il reste à envoyer ces données dans bdd </br></br>";
+				echo '</br> <p><font color="red"> A new favorite search has been saved </font></p>';
 				
 						
 						$startdate = NULL;
