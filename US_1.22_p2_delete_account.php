@@ -61,12 +61,12 @@
 						</div>
 				    	<div class="col-2">
 						    <form name="suppr" action="US_1.22_p2_delete_account.php" method="GET">
-			              		<input type="submit" name="delete" value="Yes">
+			              		<button class="btn btn-outline-warning" type="submit" name="delete" >Yes</button>
 			         		</form>
 			         	</div>
 			         	<div class="col-2">
 			         		<form name="return" action="US_1.21_account_monitoring_by_user.php" method="GET">
-			              		<input type="submit" name="return" value="No / Return">
+			              		<button class="btn btn-outline-info" type="submit" name="return">No/Return</button>
 			         		</form>
 	         			</div>
 	         			<div class="col-4">
