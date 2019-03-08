@@ -89,8 +89,13 @@ echo "</br>";
 		}
 		?>
 		
-		<div class="container-fluid">		
-            <button class="btn btn-lg btn-outline-warning" onclick='return send_mail("<?php echo $id_file; ?>")'><font size=4>Send an alert</font></button>		
+		<div class="container-fluid">
+			<div class="row">
+				<form method="GET" action="US3_11_Visualiser_liste_fichiers.php">
+					<button type="submit" class="btn btn-outline-info btn-lg"><font size=4>Back</font></button>
+				</form>
+				<button class="btn btn-lg btn-outline-warning" onclick='return send_mail("<?php echo $id_file; ?>")'><font size=4>Send an alert</font></button>	
+			</div>
 		</div></br>
 		
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
