@@ -210,7 +210,7 @@ for ($j=0;$j<count($fichresult);$j++){
 	var mark = L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> );
 	mark.addTo(map);
 	if(Polygon.getBounds().contains(mark.getLatLng())==true){
-		dll_link=dll_link+ "<?php echo $fichresult[$j][5]."  <a href = ".$link." download>Telecharger</a></li> </br>"; ?> "
+		dll_link=dll_link+ "<?php echo "  <a href = ".$link." download>Download</a></li> ".$fichresult[$j][5]."</br>"; ?> "
 		var popup = L.popup()
 		.setLatLng(Polygon.getBounds().getCenter())
 		.setContent(dll_link)

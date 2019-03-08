@@ -168,12 +168,8 @@ while ($row = pg_fetch_array($result)) {
 	});
 	
 var editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
 
 // Initialise the FeatureGroup to store editable layers
-var editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
-
 var drawPluginOptions = {
   position: 'topright',
   draw: {
@@ -190,13 +186,13 @@ var drawPluginOptions = {
     // disable toolbar item by setting it to false
     polyline: false,
     circle: false, // Turns off this drawing tool
-    //rectangle: false,
+    rectangle: false,
     marker: false,
 	circlemarker: false,
     },
   edit: {
-    featureGroup: editableLayers, //REQUIRED!!
-    remove: false
+    featureGroup: editableLayers,	//REQUIRED!!
+    remove: true
   }
 };
 
@@ -204,8 +200,6 @@ var drawPluginOptions = {
 var drawControl = new L.Control.Draw(drawPluginOptions);
 map.addControl(drawControl);
 
-var editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
 
 //what happens when a polygon is created
 map.on('draw:created', function(e) {
@@ -230,7 +224,7 @@ for ($j=0;$j<count($fichresult);$j++){
 	var mark = L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> );
 	mark.addTo(map);
 	if(Polygon.getBounds().contains(mark.getLatLng())==true){
-		dll_link=dll_link+ "<?php echo $fichresult[$j][5]."  <a href = ".$link." download>Telecharger</a></li> </br>"; ?> "
+		dll_link=dll_link+ "<?php echo "  <a href = ".$link." download>Download</a></li> ".$fichresult[$j][5]."</br>"; ?> "
 		var popup = L.popup()
 		.setLatLng(Polygon.getBounds().getCenter())
 		.setContent(dll_link)
@@ -248,6 +242,7 @@ for ($j=0;$j<count($fichresult);$j++){
 // save the polygon
   editableLayers.addLayer(layer);
   dll_link="";
+  map.addLayer(editableLayers);
 });
 
 
