@@ -30,11 +30,12 @@
 			<table class='table'>
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col" width="35%">File name</th>
+						<th scope="col" width="25%">File name</th>
 						<th scope="col" width="20%">Upload/update date</th>
 						<th scope="col" width="25%">Origin/editor</th>
 						<th scope="col" width="10%">Size</th>
 						<th scope="col" width="10%">Version</th>
+						<th scope="col" width="10%"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -59,7 +60,7 @@
 							echo "<td>".$first_name." ".$last_name."</td>";
 							echo "<td>".$size."</td>";
 							echo "<td>".$version."</td>";
-							echo "<td> <a href = ".$link." download>Telecharger</a></li> </br> ";
+							echo "<td> <a href = ".$link." download>Download</a></li> </br> ";
 						echo "</tr>";
 					}?>
 				</tbody>
