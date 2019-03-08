@@ -127,11 +127,37 @@ Output variables :
 						
 						
 					}
-					
-					include ("US4-11_Filtre_avec_tag_all_tags.php"); 
+
 					
 					?>
+                                        
+                            <!-- Navigation tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                            <a href="#search" data-toggle="tab" role="tab" class="nav-link active">Search</a>
+                                    </li>
+                                    <li>
+                                            <a href="#favorite" data-toggle="tab" role="tab" class="nav-link">Favorite</a>
+                                    </li>
+                                    <li>
+                                            <a href="#saved" data-toggle="tab" role="tab" class="nav-link">Saved</a>
+                                    </li>
+                            </ul>
+                            
+                            <!-- Table panes -->
+                            <div class="tab-content">
+                                    <div class="tab-pane active" id="search" role="tabpanel" aria-labelledby="search">
+                                            <?php include ("US4-11_Filtre_avec_tag_all_tags.php"); ?>
+                                    </div>
+                                    <div class="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite">
+                                            <?php include ("US4-14_Favorite_query.php"); ?>
+                                    </div>
+                                    <div class="tab-pane fade" id="saved" role="tabpanel" aria-labelledby="saved">
+                                            <?php include ("US4_12_filtre_avec_requete_enregistree.php"); ?>
+                                    </div>
+                            </div>
                 </div>
+                
                 <div class="col-md-9">
                         <!-- Navigation tabs -->
                         <ul class="nav nav-tabs" role="tablist">
