@@ -1,5 +1,5 @@
 <!-- Binome : Liantsoa :page accueil de l'admin-->
-   
+
 
 <! DOCTYPE html>
 <html>
@@ -12,10 +12,12 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-	<body>
+	<body style="background-color:#005bbf">
+
 	<?php
-		include("en_tete.php");
+    include("en_tete.php");
 		include("menu_administrateurs.html");
+    echo'<img src="picto/welcome.png" class="img-fluid" alt="Responsive image">';
 		include("pied_de_page.php");
 	?>
     </body>
