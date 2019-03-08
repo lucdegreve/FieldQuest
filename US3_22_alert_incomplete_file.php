@@ -1,19 +1,22 @@
 <html lang="en">
 	<head>
-        <!-- Développeur : Manu ; Modif : Diane-->
-        <!-- Send mail to the uploader of a file to have more info -->
-        <!-- Input : id_file -->
-        
 	</head>
 	<body>
         <?php
 				 include("en_tete.php");
 				 echo "</br>";
+				 $id_file=$_GET['id_file'];
         ?>
 		
 		<div class="container">
-        <form action="US4-11_Main_page_filter.php">
-				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
+		
+			<button class="btn btn-outline-info btn-md" onclick='return back("<?php echo $id_file; ?>")'>Back</button>			
+			<script type="text/javascript">
+				function back(id_file) { 
+					document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
+				}
+			</script>
+		
 				
         <div align="center">
         
@@ -26,18 +29,12 @@
                     $comment = $_GET['Comment'];
                     $user_mail = $_GET['user_mail'];
                     echo "Le mail a bien été envoyé";
-                    
                     // Actually not sending the mail because of fakes emails adress.
-                    //Now it's sending the mail ->
-                    //Test : need to have valid mail adress in the database
                     mail($user_mail, // you will send the message to this e-mail adress 
                      "Fieldquest - Incomplete files", // mail subject
                      "Your files are incomplete. Here's the administrator comment : ".$comment); // message to send 
                      }
             else { // else find the users email
-                    // put the real $id_file once linked
-                    $id_file = $_GET["id_file"];
-                    //$id_file = 2; // Test var
                 $con = new Connex();
             $connex = $con->connection;
                     $query_pre = "SELECT id_user_account from files where id_file = ".$id_file." ";
@@ -57,13 +54,14 @@
 					echo "<div align='center'>";
 						echo '<button type="submit" class="btn btn-md btn-success" >Send e-mail</button>';
 					echo "</div>";
+					echo "</form>";
             }
              ?>
-		</form>
 		</div>
 	</body>
+	
         <?php
 		include("pied_de_page.php");
-    ?>
+		?>
 </html>
 	
