@@ -51,9 +51,20 @@ $table_projects = new Tab_donnees($result_project,"PG");
 			// Make checkbox button 
 			echo '<span class="button-checkbox">';
 			echo '<button type="button" class="btn btn-sm" data-color="primary" id = project_"'. $id_project .'">'.$name_project.'</button>';
-			echo '<input type="checkbox" style="display: none;" name="projet[]" value="'.$id_project.'"/>';
+			//If a favorite search has been launched, we preselect the filters "project" of the projects which are required in the favorite search
+			if (isset($liste_project_fs)){
+				if (in_array($id_project,$liste_project_fs)){
+								echo '<input type="checkbox" style="display: none;" name="projet[]" value="'.$id_project.'" checked/>';
+							}
+				else {
+					echo '<input type="checkbox" style="display: none;" name="projet[]" value="'.$id_project.'" />';
+				}
+			}
 			echo '</span>';
+			
 		}
+		
+		
 		?>
 	</div>
   </div>
