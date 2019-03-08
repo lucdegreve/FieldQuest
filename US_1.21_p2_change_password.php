@@ -111,8 +111,10 @@
 
         echo '<input type="hidden" size = "50"  name="true_password" value='.$row[0].'>';
 
-        //echo '<BR/>';
-        echo '<button type="submit" name="change_password" class="btn btn-success" style=" float:right;">Submit</button>';
+        echo '<BR/>';
+		echo "<div align='center'>";
+			echo '<button type="submit" name="change_password" class="btn btn-success">Submit</button>';
+		echo "</div>";
         echo '</form>';
         ?>
         
