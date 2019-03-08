@@ -2,7 +2,7 @@
 <head>
 <!-----------------------------------------------------------
        US4-11 Filtrer avec des tags - File format  
-Developped by OphÃƒÂ©lie	& Diane		      
+Developped by OphÃƒÆ’Ã‚Â©lie	& Diane		      
 This page contains code to display the filter labels:
 - US4-11_Filtrer_avec_tag_project.php
 - US4-11_Filtrer_avec_tag_format.php
@@ -111,71 +111,71 @@ function OnButton2()
 				
 				echo "</br> Il reste à envoyer ces données dans bdd </br></br>";
 				
-				
-	
-					
+						
+						$startdate = NULL;
+						$enddate = NULL;
+						
 						if (isset($_POST['start'])){
-							echo "start date : ".$_POST['start'];
-							echo "</br>";
-						}
-						if (isset($_POST['end'])){
-							echo "end date : ".$_POST['end'];
-							echo "</br>";
+							$startdate = $_POST['start'];
 						}
 						
-						if (isset($_POST['valid'])){
-							echo " validation state : ";
-							foreach ($_POST['valid'] AS $i){
-                    		echo $i." ";
-                    		}
-                    		echo "</br>";
+						if (isset($_POST['end'])){
+							$enddate = $_POST['end'];
 						}
+						
+						$queryid = "SELECT MAX(id_favorite_search) FROM favorite_search";
+						$result=pg_query($connex, $queryid) or die('Query failed : ' . pg_last_error());
+						$rowid=pg_fetch_array($result);
+						$idsearch=$rowid[0]+1;
+						
+						$queryinsert ="INSERT INTO favorite_search (id_favorite_search, id_user_account, search_label, comment, status_public_private, status_on_off, begin_date, end_date) VALUES ('".$idsearch."', '".$_SESSION['id_user_account']."', '".$_POST['name']."', '".$_POST['comment']."', true, true, '".$startdate."', '".$enddate."')";
+						$result=pg_query($connex, $queryinsert) or die('Query failed : ' . pg_last_error());	
+						
+						// a ajouter dans BD dès que la table est créée
+						/*if (isset($_POST['valid'])){
+							foreach ($_POST['valid'] AS $i){
+                    		$queryinsert ="INSERT INTO link_validation_fs (id_validation_state, id_favorite_search) VALUES ('".$i."', '".$idsearch."');
+                    		$result=pg_query($connex, $queryinsert) or die('Query failed : ' . pg_last_error());
+                    		}
+						}*/
 						
 						if (isset($_POST['format'])){
-							echo "format : ";
                     		foreach ($_POST['format'] AS $i){
-                    		echo $i." ";
+                    		$queryinsert ="INSERT INTO link_format_fs (id_format, id_favorite_search) VALUES ('".$i."', '".$idsearch."')";
+                    		$result=pg_query($connex, $queryinsert) or die('Query failed : ' . pg_last_error());
                     		}
-                    		echo "</br>";
                     	}
                     	
                     	if (isset($_POST['project'])){
-                    		echo "project : ";
                     		foreach ($_POST['project'] AS $i){
-                    		echo $i." ";
+                    		$queryinsert ="INSERT INTO link_projects_fs (id_project, id_favorite_search) VALUES ('".$i."', '".$idsearch."')";
+                    		$result=pg_query($connex, $queryinsert) or die('Query failed : ' . pg_last_error());
                     		}
-                    		echo "</br>";
                     	}
                     	
-						if (isset($_POST['sources'])){
-							echo "sources : ";
+                    	// a ajouter dans BD dès que la table est créée
+						/*if (isset($_POST['sources'])){
                     		foreach ($_POST['sources'] AS $i){
-                    		echo $i." ";
+                    		$queryinsert ="INSERT INTO link_sources_fs (id_source, id_favorite_search) VALUES ('".$i."', '".$idsearch."');
+                    		$result=pg_query($connex, $queryinsert) or die('Query failed : ' . pg_last_error());
                     		}
-                    		echo "</br>";
-                    	}
+                    	}*/
                     	
                     	if (isset($_POST['unit'])){
-                    		echo "units : ";
                     		foreach ($_POST['unit'] AS $i){
-                    		echo $i." ";
+                    		$queryinsert ="INSERT INTO link_tags_fs (id_tag, id_favorite_search) VALUES ('".$i."', '".$idsearch."')";
+                    		$result=pg_query($connex, $queryinsert) or die('Query failed : ' . pg_last_error());
                     		}
-                    		echo "</br>";
                     	}
                     	
 						if (isset($_POST['tag'])){
-							echo "tag : ";
                     		foreach ($_POST['tag'] AS $i){
-                    		echo $i." ";
+                    		$queryinsert ="INSERT INTO link_tags_fs (id_tag, id_favorite_search) VALUES ('".$i."', '".$idsearch."')";
+                    		$result=pg_query($connex, $queryinsert) or die('Query failed : ' . pg_last_error());
                     		}
-                    		echo "</br>";
                     	}
-                    	
-						echo "</br> name : ".$_POST['name'];
-						
-						echo "</br> comment : ".$_POST['comment'];
-						
-						} 
+                    							
+					} 
 						
 					?>
 
