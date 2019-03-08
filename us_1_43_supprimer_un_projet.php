@@ -28,7 +28,7 @@
 			echo'The project has been deleted';
 			echo "</br></br></br></br>";
 			echo '<form name="return" action="US1_42_Gerer_projets.php" method="POST">
-					              		<input type="submit" name="return" value="Return to data management page">
+					              		<button class ="btn btn-outline-info" type="submit" name="return">Return to data management page</button>
 					         		</form>';
 			echo "</br></br></br></br></br></br></br>";
 			}
@@ -36,7 +36,7 @@
 			echo"The project isn't empty and cannot be deleted";
 			echo "</br></br></br></br>";
 			echo '<form name="return" action="US1_42_Gerer_projets.php" method="POST">
-					              		<input type="submit" name="return" value="Return to data management page">
+					              		<button class="btn btn-outline-info" type="submit" name="return" >Return to data management page</button>
 					         		</form>';
 			echo "</br></br></br></br></br></br></br>";
 			}
@@ -55,7 +55,7 @@ else {
 				<div class="col-6">
 					<div class="card text-center">
 					  <div class="card-body">
-					    <h5 class="card-title">Do you really want to delete this project <?php echo $id_project; ?> ?</h5>
+					    <h5 class="card-title">Do you really want to delete this project ?</h5>
 					    <p class="card-text"> 
 					    	<div class="row">
 					    		<div class="col-4">
@@ -64,13 +64,13 @@ else {
 						    		<!-- we create a hidden input to keep the value of the id_project once the form is set-->
 								    <form name="suppr" action="us_1_43_supprimer_un_projet.php" method="GET">
 								    	<input type="hidden" name="id_proj" value="<?php echo $id_project; ?>">
-					              		<input type="submit" name="delete" value="Yes">
+					              		<button class="btn btn-outline-warning" type="submit" name="delete">Yes</button>
 					         		</form>
 					         	</div>
 					         	<div class="col-2">
 					         	<!-- we create a button to go back to the page "manage the projects" -->
 					         		<form name="return" action="US1_42_Gerer_projets.php" method="POST">
-					              		<input type="submit" name="return" value="No / Return">
+					              		<button class="btn btn-outline-info" type="submit" name="return" >No/Return</button>
 					         		</form>
 			         			</div>
 			         			<div class="col-4">
