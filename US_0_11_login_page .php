@@ -143,7 +143,7 @@ include("en_tete_login.php");
                                 </div>
                                 
 								<div align="center">
-									<button type="submit" class="btn btn-success">Connection</button>
+									<button type="submit" class="btn btn-success">Log in</button>
 								</div>
                             </form>
                         
