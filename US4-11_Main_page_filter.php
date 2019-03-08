@@ -76,31 +76,61 @@ Output variables :
         ?>
         <div class="row">
                 <div class="col-md-3">
-                        <!-- Navigation tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
-                                        <a href="#search" data-toggle="tab" role="tab" class="nav-link active">Search</a>
-                                </li>
-                                <li>
-                                        <a href="#favorite" data-toggle="tab" role="tab" class="nav-link">Favorite</a>
-                                </li>
-                                <li>
-                                        <a href="#saved" data-toggle="tab" role="tab" class="nav-link">Saved</a>
-                                </li>
-                        </ul>
-                        
-                        <!-- Table panes -->
-                        <div class="tab-content">
-                                <div class="tab-pane active" id="search" role="tabpanel" aria-labelledby="search">
-                                        <?php include ("US4-11_Filtre_avec_tag_all_tags.php"); ?>
-                                </div>
-                                <div class="tab-pane fade" id="favorite" role="tabpanel" aria-labelledby="favorite">
-                                        <?php include ("US4-14_Favorite_query.php"); ?>
-                                </div>
-                                <div class="tab-pane fade" id="saved" role="tabpanel" aria-labelledby="saved">
-                                        <?php include ("US4_12_filtre_avec_requete_enregistree.php"); ?>
-                                </div>
-                        </div>
+                    <?php 
+					// If a favorite search has been selected just before, this php code recuperate the id of this favorite_search. After that, some queries 
+					// in the DB allow to obtain all the filters (project, formats, dates, tags) which correspond to this search. The informations is memorised in the
+					// variables ($liste_project_fs,$liste_format_fs,$liste_tag_fs,$begin_date_fs,$end_date_fs). These variables will be used later.
+					
+					
+					if (isset($_GET["id_favorite_search"])){
+						$id_favorite_search=$_GET["id_favorite_search"];
+						
+						//$id_favorite_search=1;// At the moment,we initialize the variable of the favorite_search.
+						$query_format_fs="select id_format from link_format_fs where id_favorite_search=".$id_favorite_search;
+						$result_format_fs = pg_query($connex, $query_format_fs);
+						$liste_format_fs=[];
+						$i=0;
+						while ($row=pg_fetch_array($result_format_fs)){
+							$liste_format_fs[$i]=$row[0];
+							$i++;
+
+						}
+						$query_project_fs="select id_project from link_projects_fs where id_favorite_search=".$id_favorite_search;
+						$result_project_fs = pg_query($connex, $query_project_fs);
+						$liste_project_fs=[];
+						$i=0;
+						while ($row=pg_fetch_array($result_project_fs)){
+							$liste_project_fs[$i]=$row[0];
+							$i++;
+
+						}
+						$query_tag_fs="select id_tag from link_tags_fs where id_favorite_search=".$id_favorite_search;
+						$result_tag_fs = pg_query($connex, $query_tag_fs);
+						$liste_tag_fs=[];
+						$i=0;
+						while ($row=pg_fetch_array($result_tag_fs)){
+							$liste_tag_fs[$i]=$row[0];
+							$i++;
+
+						}
+						
+						$query_begin_date_fs="select begin_date from favorite_search where id_favorite_search=".$id_favorite_search;
+						$result_begin_date_fs=pg_query($connex,$query_begin_date_fs);
+						$row=pg_fetch_array($result_begin_date_fs);
+						$begin_date_fs=$row[0];
+						
+						$query_end_date_fs="select end_date from favorite_search where id_favorite_search=".$id_favorite_search;
+						$result_end_date_fs=pg_query($connex,$query_end_date_fs);
+						$row=pg_fetch_array($result_end_date_fs);
+						$end_date_fs=$row[0];
+						
+						
+						
+					}
+					
+					include ("US4-11_Filtre_avec_tag_all_tags.php"); 
+					
+					?>
                 </div>
                 <div class="col-md-9">
                         <!-- Navigation tabs -->
