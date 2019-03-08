@@ -48,7 +48,33 @@ Output variables :
 <!-- data recovery from the selection page -->
 
 		<?php
-				
+				if (isset($_POST['Validation_state'])){
+                    $valid = Array();
+                    foreach ($_POST['Validation_state'] AS $i){
+                    	$valid[] = $i; //array format
+                    }
+                	echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        				echo 'Validation state :';
+                        			foreach($valid as $i){
+                        			
+                        					$query="SELECT label_validation_state FROM validation_state WHERE id_validation_state = $i";
+											$result=pg_query($connex, $query) or die('Query failed : ' . pg_last_error());	
+											$row=pg_fetch_array($result);
+											//echo print_r($row);
+											//echo implode("",$row);
+
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['label_validation_state'].'</button>';
+                        			}
+                        			echo '</div></div>';  
+                        		echo '</div>';
+                        	echo '<div class="col-md-3"></div>';
+                        echo '</div>';
+                    echo '</div>';                }
+
                 if (isset($_POST['start'])){
                 	if ($_POST['start']!=''){
                         $start_date = $_POST['start']; //only one value, string format 
