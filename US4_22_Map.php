@@ -156,11 +156,7 @@ while ($row = pg_fetch_array($result)) {
 	});
 	
 var editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
 
-// Initialise the FeatureGroup to store editable layers
-var editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
 
 var drawPluginOptions = {
   position: 'topright',
@@ -184,16 +180,14 @@ var drawPluginOptions = {
     },
   edit: {
     featureGroup: editableLayers, //REQUIRED!!
-    remove: false
+    remove: true,
+	edit : false
   }
 };
 
 // Initialise the draw control and pass it the FeatureGroup of editable layers
 var drawControl = new L.Control.Draw(drawPluginOptions);
 map.addControl(drawControl);
-
-var editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
 
 //what happens when a polygon is created
 map.on('draw:created', function(e) {
@@ -208,9 +202,7 @@ for ($j=0;$j<count($fichresult);$j++){
 // link for ddl
 	$link=$fichresult[$j][4]."".$fichresult[$j][3];
 	?>
-	var greenIcon = new LeafIcon({iconUrl: 'dot.png'}),
-		redIcon = new LeafIcon({iconUrl: 'dot.png'}),
-		orangeIcon = new LeafIcon({iconUrl: 'dot.png'});
+	var greenIcon = new LeafIcon({iconUrl: 'dot.png'});
 	<?php
 	//ensure we have all geolocalisation datas
 	if  ($fichresult[$j][1]!=null and $fichresult[$j][2]!=null ){
@@ -236,6 +228,7 @@ for ($j=0;$j<count($fichresult);$j++){
 // save the polygon
   editableLayers.addLayer(layer);
   dll_link="";
+  map.addLayer(editableLayers);
 });
 
 
@@ -246,9 +239,7 @@ for ($j=0;$j<count($fichresult);$j++){
 // link for ddl
 	$link=$fichresult[$j][4]."".$fichresult[$j][3];
 	?>
-	var greenIcon = new LeafIcon({iconUrl: 'dot.png'}),
-		redIcon = new LeafIcon({iconUrl: 'dot.png'}),
-		orangeIcon = new LeafIcon({iconUrl: 'dot.png'});
+	var greenIcon = new LeafIcon({iconUrl: 'dot.png'});
 	<?php
 	//ensure we have all geolocalisation datas
 	if  ($fichresult[$j][1]!=null and $fichresult[$j][2]!=null ){
@@ -260,6 +251,7 @@ for ($j=0;$j<count($fichresult);$j++){
 	}
 }
 ?>
+
 
 
 </script>
