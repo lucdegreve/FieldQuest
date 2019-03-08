@@ -2,7 +2,7 @@
 <head>
 <!-----------------------------------------------------------
        US4-11 Filtrer avec des tags - File format  
-Developped by OphÃ©lie	& Diane		      
+Developped by OphÃƒÂ©lie	& Diane		      
 This page contains code to display the filter labels:
 - US4-11_Filtrer_avec_tag_project.php
 - US4-11_Filtrer_avec_tag_format.php
@@ -102,6 +102,78 @@ function OnButton2()
 					<button type='submit' class='btn btn_lg btn-success' name='search' value="Button1" onclick="return OnButton1();">Search</button>
 					<!-- Save button -->
 					<button type='submit' class='btn btn_lg btn-success' name='save' value="Button2" onclick="return OnButton2();">Save filters</button>
+					
+					<?php 
+				
+				if (isset($_POST['Save_in_favorite'])) { 
+					
+				echo "</br> on essaye de sauvegarder dans la bd </br>";
+				
+				echo "</br> Il reste à envoyer ces données dans bdd </br>";
+				
+				
+	
+					
+						if (isset($_POST['start'])){
+							echo $_POST['start'];
+							echo "</br>";
+						}
+						if (isset($_POST['end'])){
+							echo $_POST['end'];
+							echo "</br>";
+						}
+						
+						if (isset($_POST['valid'])){
+							foreach ($_POST['valid'] AS $i){
+                    		echo $i." ";
+                    		}
+                    		echo "</br>";
+						}
+						
+						if (isset($_POST['format'])){
+                    		foreach ($_POST['format'] AS $i){
+                    		echo $i." ";
+                    		}
+                    		echo "</br>";
+                    	}
+                    	
+                    	if (isset($_POST['project'])){
+                    		foreach ($_POST['project'] AS $i){
+                    		echo $i." ";
+                    		}
+                    		echo "</br>";
+                    	}
+                    	
+						if (isset($_POST['sources'])){
+                    		foreach ($_POST['sources'] AS $i){
+                    		echo $i." ";
+                    		}
+                    		echo "</br>";
+                    	}
+                    	
+                    	if (isset($_POST['unit'])){
+                    		foreach ($_POST['unit'] AS $i){
+                    		echo $i." ";
+                    		}
+                    		echo "</br>";
+                    	}
+                    	
+						if (isset($_POST['tag'])){
+                    		foreach ($_POST['tag'] AS $i){
+                    		echo $i." ";
+                    		}
+                    		echo "</br>";
+                    	}
+                    	
+						echo "</br>".$_POST['name'];
+						
+						echo "</br>".$_POST['comment'];
+						
+						} 
+						
+					?>
+
+
                         </div>
 
 </form>
