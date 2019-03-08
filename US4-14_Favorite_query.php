@@ -25,14 +25,14 @@ Output variables :	id_favorite_search
 
         <?php
                 
-                $id_user = $_SESSION["id_user_account"];
+                $id_user_account = $_SESSION["id_user_account"];
                 
                 //For the test
-                //$id_user=3;
+                //$id_user_account=3;
                 
                 //Query : select all favorite query from connected user
                 $query =  "SELECT f.id_favorite_search, f.search_label, f.comment FROM favorite_search f
-                            WHERE status_public_private = false AND id_user_account=".$id_user;
+                            WHERE status_public_private = false AND id_user_account=".$id_user_account;
                             
                 $result = pg_query($connex, $query) or die('Echec de la requête :'.pg_last_error($connex));
 
