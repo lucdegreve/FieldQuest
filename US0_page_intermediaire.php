@@ -14,69 +14,51 @@
 			//Liantsoa
 			//page intermediaire qui recupere le login et la passeword quand un utilisateur veut se connecter et dirigera ensuite vers la page accueil specififique a chaque utilisateur
 			// connexion à la base de données Fieldquest
-			
-			//recuperate header 
-			include("en_tete.php");
-			
+
+			//recuperate header
+		  //include("en_tete.php");
+
 			//recuparate id_user and id user type
 			$id_user=$_GET['id_user'];
 			$id_user_type=$_GET['id_user_type'];
-			
-			// Include the file with all the functions 
+
+			// Include the file with all the functions
             require "tab_donnees/funct_connex.php";
 
             // connexion à la base de données Fieldquest
             $con = new Connex();
             $connex = $con->connection;
-			
+
 			$link = $connex;
-			
+
 			$query = "select id_user_account,id_user_type,first_name,last_name,login ,password from user_account
 			where id_user_account='".$id_user."'AND id_user_type='".$id_user_type."'";
 			$result = pg_query($link, $query);
 			$row=pg_fetch_array($result);
-			
+
 			$id_user=$row[0];
 			$id_user_type=$row[1];
 			$first_name=$row[2];
 			$last_name=$row[3];
-			
+
 			$_SESSION['id_user_account']=$id_user;
 			$id_user=$_SESSION['id_user_account'];
 			$_SESSION['id_user_type']=$id_user_type;
 			$id_user_type=$_SESSION['id_user_type'];
-			
-			echo '<div class="container">';
-				echo '<div class="row">';
-					echo '<div class="col-4">';
-					echo '</div>';
-					echo '<div class="col-8">';
-						if ($id_user_type==1) 
+
+						if ($id_user_type==1)
 						{
-							echo '<h2>You are logged in as <b>'.$first_name.'</b></h2>';
-							echo '<form method="GET"  action="US0_page_accueil_admin.php">';
-							echo '<button align="center" type="submit" class="btn btn-primary btn-lg"><font size=4>Go to the home page</font></button>';
-							echo '</form>';
-						} 
-						if ($id_user_type==2) 
+							header('Location: US0_page_accueil_admin.php');
+						}
+						if ($id_user_type==2)
 						{
-							echo '<h2>You are logged in as <b>'.$first_name.'</b></h2>';
-							echo '<form method="GET"  action="US0_page_accueil_internes.php">';
-							echo '<button align="center" type="submit" class="btn btn-primary btn-lg"><font size=4>Go to the home page</font></button>';
-							echo '</form>';
-						} 
+							header('Location: US0_page_accueil_internes.php');
+						}
 						if ($id_user_type==3)
 						{
-							echo '<h2>You are logged in as <b>'.$first_name.'</b></h2>';
-							echo '<form method="GET"  action="US0_page_accueil_externes.php">';
-							echo '<button align="center" type="submit" class="btn btn-primary btn-lg"><font size=4>Go to the home page</font></button>';
-							echo '</form>';
+              header('Location: US0_page_accueil_externes.php');
 						}
-					echo '</div>';		
-				echo '</div>';
-			echo '</div>';
-			echo "</br>";
-		include("pied_de_page.php");
+
 		?>
   </body>
-</html>		
+</html>

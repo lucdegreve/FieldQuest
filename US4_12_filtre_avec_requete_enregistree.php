@@ -2,49 +2,23 @@
 <html>
 <head>
 <!-- Page made by Guillaume in order to show the result of a query with a public statue -->
+<!-- Edit by Diane -->
 
-<link href="css/custom.css" rel="stylesheet" type="text/css">
-<link href="css/boostrap.min.css" rel="stylesheet" type="text/css">
-<script type= 'text/javascript' src = 'manage_checkbox_button.js'></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
-<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-
-<!-- Openlayers CSS file-->
-<style type="text/css">
-	#map{
-	 width:90%;
-	 height:290px;
-	}
-</style>
 
 <!--Basic styling for map div, if height is not defined the div will show up with 0 px height  -->
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 
 <body>
 
-	<?php
-	//Header
-	include("en_tete.php");
-	//DB connection
-	require "./tab_donnees/tab_donnees.class.php";
-	require "./tab_donnees/funct_connex.php";
-	$con = new Connex();
-	$connex = $con->connection;
-	?>
+
 
 <?php
-$query =  'SELECT f.search_label, f.comment, f.begin_date, f.end_date
+$query =  'SELECT f.id_favorite_search, f.search_label, f.comment, f.begin_date, f.end_date
 						FROM favorite_search f
 						WHERE status_public_private = true';
 $result = pg_query($connex, $query) or die('Echec de la requête :'.pg_last_error($connex));
-
+/*
 echo'<table class="table">';
   echo'<thead class="thead-dark">';
     echo'<tr>';
@@ -68,7 +42,19 @@ echo'<table class="table">';
   echo'</tbody>';
 echo'</table>';
 
-pg_free_result($result);
+pg_free_result($result);*/
+
+
+                
+                    while ($row = pg_fetch_array($result))
+                    {
+                            echo '<ul>' ;
+                                    echo "<H6>".$row[1]."<a href=US4-11_Main_page_filter.php?id_favorite_search=".$row[0]." class='lien'><img src='picto/search.png' width='30' height='30'></a></H6>";
+                                    echo $row[2];
+                            echo '<hr></ul>';
+                    }
+
+
 ?>
 
 </body>

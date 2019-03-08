@@ -39,7 +39,9 @@
     		<?php
     				 include("en_tete.php");
     		?>
-
+                <form name="coucou" action="US_1.21_account_monitoring_by_user.php">
+                    <button name="return" class="btn btn-outline-info" type="submit">Back</button>
+                </form>
         <BR/>
         <h2 style="text-align:center;"> Change your password </h2>
         
@@ -110,7 +112,7 @@
         echo '<input type="hidden" size = "50"  name="true_password" value='.$row[0].'>';
 
         //echo '<BR/>';
-        echo '<input type="submit" name="change_password" value="Submit" style=" float:right;">';
+        echo '<button type="submit" name="change_password" class="btn btn-success" style=" float:right;">Submit</button>';
         echo '</form>';
         ?>
         
@@ -125,11 +127,6 @@
                     </div>
                 </div>
         </div>
-
-        <form action = "US_1.21_account_monitoring_by_user.php" method = "POST" name = "Return">
-        <input type = "submit" value = "Back">
-        </form>
-            
         <br><br><br><br><br><br>
 
     		<?php
