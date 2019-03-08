@@ -57,18 +57,37 @@ Output variables :
                 or die ("<div class = 'alert alert-danger'>This search doesn't exist</div>");
         $id_user_query=pg_fetch_array($result_verif_user)[0];
         
-        //if the connected user is the one who made the query, the delete can be done
+        //the delete can be done only if the connected user is the one who made the query
         if ($id_user_query==$id_user){
             
 		if (isset($_GET['delete'])){
 		
-		$id_favorite_search= $_GET['id_favorite_search'];
-                $query_delete_account = "DELETE FROM favorite_search f WHERE f.id_favorite_search='".$id_favorite_search."'";
-                $result_delete_account = pg_query($connex,$query_delete_account)
-                    or die ("<div class = 'alert alert-danger'>Failed to delete this search</div>");
-                
-                echo "<button type='button' id='btnBack' name='back' class='btn btn-sm btn-success' onclick='return back_to_favorite_search()'>Return</button>";
-                echo '<br/><div class="alert alert-success">This search successfully deleted. </div><br/>';
+                        $id_favorite_search= $_GET['id_favorite_search'];
+                        
+                        //queries to delete favorite search criteria (format, project, tags, tag groups)
+                        $query_format_fs = "DELETE FROM link_format_fs l WHERE l.id_favorite_search='".$id_favorite_search."'";
+                        $query_projects_fs = "DELETE FROM link_projects_fs l WHERE l.id_favorite_search='".$id_favorite_search."'";
+                        $query_tags_fs = "DELETE FROM link_tags_fs l WHERE l.id_favorite_search='".$id_favorite_search."'";
+                        $query_tg_fs = "DELETE FROM link_tg_fs l WHERE l.id_favorite_search='".$id_favorite_search."'";
+                        
+                        //result of those queries
+                        $result_format_fs = pg_query($connex,$query_format_fs)
+                            or die ("<div class = 'alert alert-danger'>Failed to delete the formats</div>");
+                        $result_projects_fs = pg_query($connex,$query_projects_fs)
+                            or die ("<div class = 'alert alert-danger'>Failed to delete the projects</div>");
+                        $result_tags_fs = pg_query($connex,$query_tags_fs)
+                            or die ("<div class = 'alert alert-danger'>Failed to delete the tags</div>");
+                        $result_tg_fs = pg_query($connex,$query_tg_fs)
+                            or die ("<div class = 'alert alert-danger'>Failed to delete the tag groups</div>");
+                        
+                        //query to delete the favorite search
+                        $query_favorite_search = "DELETE FROM favorite_search f WHERE f.id_favorite_search='".$id_favorite_search."'";
+                        $result_favorite_search = pg_query($connex,$query_favorite_search)
+                            or die ("<div class = 'alert alert-danger'>Failed to delete this search</div>");
+                        
+                        //confirmation of delete + back button
+                        echo "<button type='button' id='btnBack' name='back' class='btn btn-sm btn-success' onclick='return back_to_favorite_search()'>Return</button>";
+                        echo '<br/><div class="alert alert-success">This search successfully deleted. </div><br/>';
                 }
                 else {
                 ?>
@@ -91,7 +110,7 @@ Output variables :
                                                             <button type='button' id='btnDelete' name='delete' class='btn btn-sm btn-success btn-block' onclick='return delete_search("<?php echo $id_favorite_search; ?>")'>Yes</button>
 					         	</div>
 					         	<div class="col-3">
-					         	<!-- we create a button to go back to the page "manage the projects" -->
+					         	<!-- we create a button to go back to the page ""filters" -->
                                                             <button type='button' id='btnBack' name='back' class='btn btn-sm btn-danger btn-block' onclick='return back_to_favorite_search()'>No / Return</button>
 			         			</div>
 			         			<div class="col-4">
@@ -110,6 +129,8 @@ Output variables :
                 }
         }
 	else {
+            //the connected user isn't the one who made the favorite search
+            //delete impossible + back button
             echo "<button type='button' id='btnBack' name='back' class='btn btn-sm btn-success' onclick='return back_to_favorite_search()'>Return</button>";
             echo "You are not allowed to delete this favorite search.";
 
