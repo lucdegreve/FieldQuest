@@ -48,7 +48,7 @@ Not done yet : Link with modify account page
 ?>
 
 	<div class="container">
-		<div class="row">			
+		<div class="row">		
 			<div class="col-md-8"></div>
 			<div class="col-md-4">
 				<form name="add_account" action="US_1.11_create_user_account.php" method="GET">

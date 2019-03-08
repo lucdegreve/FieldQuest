@@ -37,7 +37,7 @@ Output variables :			NONE
 		or die ("<div class = 'alert alert-danger'>Failed to delete account</div>");
 	echo '<div class="alert alert-success">Login and password successfully deleted. </div>';
 	echo'<form action = "US1-10_Gerer_comptes.php" method = "POST" name = "Return">';
-	echo'<input type = "submit" value = "Return">';
+	echo'<button type = "submit" class="btn btn-outline-info">Back</button>';
 	echo'</form>';
 	// Include footer
 	include("pied_de_page.php");
