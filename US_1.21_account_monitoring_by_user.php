@@ -132,7 +132,9 @@
 		</div>
 		
 		<div class="col-md-3">
-			<button type="submit" class="btn btn-md btn-danger btn-block" onclick="location.href='US_1.22_p2_delete_account.php'" name="delete_account"><font size=2>Delete my account</font></button>
+			<form name="delete_account_user" method="POST" action="US_1.22_p2_delete_account.php">
+				<button type="submit" class="btn btn-md btn-danger btn-block" ><font size=2>Delete my account</font></button>
+			</form>
 		</div>
 		
 		</div>
