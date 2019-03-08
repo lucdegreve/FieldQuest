@@ -12,13 +12,16 @@
 
         <?php
               include("en_tete.php");
+			  echo "</br>";
         ?>
         <div class='container'>
         <form action="US0_page_accueil_externes.php">
             <button name="return" class="btn btn-outline-info" type="submit">Back</button>
         </form>
-        <BR/>
-        <h1> Here are your profile information </h1>
+		<div align="center">
+			<h2> Here are your profile information </h2>
+		</div>
+		</br>
 
         <?php
               $id_user = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
@@ -94,7 +97,11 @@
                 echo '</tr>';
                 echo '</table>';
           ?>
-            <button type="submit" class="btn btn-outline-success" name="change_info">Change your information</button>
+		  </br>
+		  <div class="row">
+			<div class="col-md-4">
+				<button type="submit" class="btn btn-outline-success btn-block" name="change_info"><font size=2>Change your information</font></button>
+			</div>
           </form>
 
           <?php
@@ -102,12 +109,17 @@
                   echo "Database have been correctly updated";
               }
           ?>
-
+		<div class="col-md-4">
           <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
-              <button type="submit" name="change_password" class="btn-outline-warning">Change your password</button>
+              <button type="submit" name="change_password" class="btn btn-outline-warning btn-block"><font size=2>Change your password</font></button>
           </form>
-
-			<button type="submit" class="btn btn-md btn-danger" onclick="location.href='US_1.22_p2_delete_account.php'" name="delete_account">Delete my account</button>
+		</div>
+		
+		<div class="col-md-3">
+			<button type="submit" class="btn btn-md btn-danger btn-block" onclick="location.href='US_1.22_p2_delete_account.php'" name="delete_account"><font size=2>Delete my account</font></button>
+		</div>
+		
+		</div>
 
     </div>
     </body>

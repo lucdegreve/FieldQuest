@@ -2,18 +2,18 @@
 <html>
     <!-- Sites to do linked lists
     https://javascript.developpez.com/actu/97523/Apprendre-a-creer-des-listes-deroulantes-liees-entre-elles-sans-utiliser-Ajax-un-article-de-NoSmoking/?fbclid=IwAR2Lzp6TXxnHjc7Lx4lrTR6vGO9FoQCR98c4u7GEJOlZgGAgtjJwQIsPJ7s
-    https://siddh.developpez.com/articles/ajax/ 
+    https://siddh.developpez.com/articles/ajax/
     -->
     <!--developpers: Camille Bonas et Julien Louet-->
     <!--Access to this page by clicking on the button "Modify tag " of the page "US1-54_manage_tags.php" -->
     <!-- -->
     <!-- -->
     <!--Avancement: ajout des listes déroulantes pour sélectionner le tag à modifier -->
-    
+
 	<head>
         <META charset="UTF-8">
         <script type="text/javascript">
-            //this function will display an alert popup when sending the informations 
+            //this function will display an alert popup when sending the informations
             //for updating the tag type table
             //and verify the input informations
             function valider(){
@@ -24,7 +24,7 @@
                     al="Enter a tag name";
                 }
                 //if the alert is empty, run the form sending
-                if (al=="") 
+                if (al=="")
                     return true;
                 else // open a pop up with the alert and don't send the form
                     {alert(al);
@@ -35,10 +35,10 @@
 
         <script type='text/javascript'>
             function getXhr(){
-                var xhr = null; 
+                var xhr = null;
                     if(window.XMLHttpRequest) // Firefox and others
-                        xhr = new XMLHttpRequest(); 
-                    else if(window.ActiveXObject){ // Internet Explorer 
+                        xhr = new XMLHttpRequest();
+                    else if(window.ActiveXObject){ // Internet Explorer
                         try {
                                 xhr = new ActiveXObject("Msxml2.XMLHTTP");
                             } catch (e) {
@@ -46,9 +46,9 @@
                             }
                     }
                     else { // if XMLHttpRequest non supported by the browser
-                        alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest..."); 
-                        xhr = false; 
-                    } 
+                        alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest...");
+                        xhr = false;
+                    }
                     return xhr;
             }
 
@@ -76,7 +76,7 @@
                 xhr.send("id_tag_type="+idtypetag);
             }
         </script>
-		
+
 	</head>
 	<body>
         <?php
@@ -84,7 +84,7 @@
 				 echo "</br>";
         ?>
         <div class="container">
-        <?php 
+        <?php
         require "./tab_donnees/funct_connex.php";
 		echo'<form action="US1-54_manage_tags.php">
 				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
@@ -93,9 +93,9 @@
         echo '<fieldset style="width: 500px">
 				<legend>Select the tag to modify</legend>
                 <label>Tag type</label>';
-                //display a list with all the tag type 
+                //display a list with all the tag type
                 //when we select a tag type it calls the go() js function to update the second list
-				echo ' <select name="tag_type" id="tag_type" onchange="go()"> 
+				echo ' <select name="tag_type" id="tag_type" onchange="go()">
 					<option value="-1"></option>';
                     require_once "./tab_donnees/funct_connex.php";
                     $con=new Connex();
@@ -119,36 +119,45 @@
                 </div>';
                 echo '<div style="display:inline"> <button name="modify" type="submit" class="btn btn-outline-warning">Modify</button></div>';
                 ?>
-        
+
         <div style="display:inline"> <button name="delete" type="submit" class="btn btn-outline-danger" onClick="return confirm('Do you really want to delete the tag?')">Delete</button></div>
         </div>
-        <div class="container"> 
+        <div class="container">
                         <?php echo '</fieldset>';
         echo '</form>';
-        
-        // if we click on the Validate button of the previous form 
+
+        // if we click on the Validate button of the previous form
         //(to send the informations to modify the tag type table)
         if (isset($_GET["delete"])){
             $id_tag=$_GET["tag"];
             require_once "tab_donnees/funct_connex.php";
             $con=new Connex();
             $connex=$con->connection;
-            // Request to update the table "tag_type"
-            $query = "DELETE FROM tags  WHERE id_tag='".$id_tag."' " ;       
+            // Request to update the table "tag_type" and all the link tables
+            $query_link_fs = "DELETE FROM link_tags_fs  WHERE id_tag='".$id_tag."' " ;
+            $query_link_project = "DELETE FROM link_tag_project  WHERE id_tag='".$id_tag."' " ;
+            $query_link_tag_groups = "DELETE FROM link_tag_tag_groups  WHERE id_tag='".$id_tag."' " ;
+            $query = "DELETE FROM tags  WHERE id_tag='".$id_tag."' " ;
             // Request execution
-            $result = pg_query($connex, $query)  
-                or die('Échec de la requête : ' . pg_error($connex)); 
+            $result_link_fs = pg_query($connex, $query_link_fs)
+                or die('Échec de la requête : ' . pg_error($connex));
+            $result_link_project = pg_query($connex, $query_link_project)
+                or die('Échec de la requête : ' . pg_error($connex));
+            $result_link_tag_groups = pg_query($connex, $query_link_tag_groups)
+                or die('Échec de la requête : ' . pg_error($connex));
+            $result = pg_query($connex, $query)
+                or die('Échec de la requête : ' . pg_error($connex));
             // displays this message if the modification is a success
             echo 'The tag has been deleted';
         }
 
-        //if we click on previous "modify" it displays a new form 
+        //if we click on previous "modify" it displays a new form
         //to modify the fields of the selected tag
         //which displays the value of the fields to modify it
         if (isset($_GET["modify"])){
-            
+
             $id_tag=$_GET["tag"];
-            $_SESSION["id_tag"]=$id_tag; 
+            $_SESSION["id_tag"]=$id_tag;
             $query3 = 'SELECT * FROM tags where id_tag='.$_GET["tag"];
             $result3 = pg_query($connex, $query3)or die(pg_last_error($connex));
             while($row3 = pg_fetch_assoc($result3)){
@@ -169,10 +178,10 @@
                 <div><button type="submit" class="btn btn-outline-success">Submit</button></div>
                 </form>';
             }
-            
-            
+
+
         }
-        // if we click on the Validate button of the previous form 
+        // if we click on the Validate button of the previous form
         //(to send the informations to modify the tag type table)
         if (isset($_GET["tag_name"])){
             $id_tag=$_SESSION["id_tag"];
@@ -184,21 +193,21 @@
             else $adresse_client= " ";
             if (isset($_GET["tag_description"]))
                 {$tag_description = $_GET["tag_description"];
-            } 
+            }
             require_once "tab_donnees/funct_connex.php";
             $con=new Connex();
             $connex=$con->connection;
             $res = pg_query($connex, "SELECT * FROM tag_type ")or die(pg_last_error($connex));
-            
+
             // Request to update the table "tag_type"
-            $query = "UPDATE tags SET tag_name='".$tag_name."' , tag_description='".$tag_description."' WHERE id_tag='".$id_tag."' " ;       
+            $query = "UPDATE tags SET tag_name='".$tag_name."' , tag_description='".$tag_description."' WHERE id_tag='".$id_tag."' " ;
             // Request execution
-            $result = pg_query($connex, $query)  
-                or die('Échec de la requête : ' . pg_error($connex)); 
+            $result = pg_query($connex, $query)
+                or die('Échec de la requête : ' . pg_error($connex));
             // displays this message if the modification is a success
             echo 'The tag  '.$tag_name.' has been modified';
         }
-        
+
 		?>
         </div>
 	</body>

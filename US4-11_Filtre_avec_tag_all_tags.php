@@ -50,8 +50,6 @@ function OnButton2()
 
 	
 	<?php 
-	//Include page with filter for validation state 
-	include "US4-11_Filtrer_avec_validation_state.php"; 
 	// Include page with collapse button & content for project names
 	include "US4-11_Filtrer_avec_tag_project.php"; 
 	?>
@@ -61,14 +59,28 @@ function OnButton2()
 			Date
 		</button>
 	</p>
-	<div class="collapse" id="collapseDate">
-		<div class="card card-body">
-			<label for ='start_date'>from</label>
-			<input type = 'date' name ='start' id='start_date' >
-			<label for ='end_date'>to</label>
-			<input type='date' name ='end' id='end_date'>
-		</div>
-	</div>
+	<?php
+	echo '<div class="collapse" id="collapseDate">';
+	echo	'<div class="card card-body">';
+	echo		'<label for ="start_date">from</label>';
+	//If a favorite search has been launched, we complete the filter "date"(begin and end) with the dates required in the favorite search
+	if (isset($begin_date_fs)){
+		echo	'<input type = "date" name ="start" id="start_date" value='.$begin_date_fs.'>';
+	}
+	else {
+		echo '<input type = "date" name ="start" id="start_date">';
+	}		
+	echo		'<label for ="end_date">to</label>';
+	if (isset($end_date_fs)){
+		echo		"<input type='date' name ='end' id='end_date' value=".$end_date_fs.">";
+	}
+	else {
+		echo		"<input type='date' name ='end' id='end_date' >";
+	}
+	echo	"</div>";
+	echo "</div>";
+	?>
+	
 	<?php
 	// Include page with collapse button & content for file format 
 	include "US4-11_Filtrer_avec_tag_format.php"; 

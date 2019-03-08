@@ -38,15 +38,18 @@
 
     		<?php
     				 include("en_tete.php");
+					 echo "</br>";
     		?>
-                <form name="coucou" action="US_1.21_account_monitoring_by_user.php">
-                    <button name="return" class="btn btn-outline-info" type="submit">Back</button>
-                </form>
-        <BR/>
+			
+		<div class="container">
+			<form name="back" action="US_1.21_account_monitoring_by_user.php">
+				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
+			</form>
+		</div>
+		
         <h2 style="text-align:center;"> Change your password </h2>
         
         <form name="password_change" action="US_1.21_p2_change_password.php"  onsubmit="return changepassword()" method="GET">
-        <BR/>
 
         <?php
         // Session variable
@@ -111,8 +114,10 @@
 
         echo '<input type="hidden" size = "50"  name="true_password" value='.$row[0].'>';
 
-        //echo '<BR/>';
-        echo '<button type="submit" name="change_password" class="btn btn-success" style=" float:right;">Submit</button>';
+        echo '<BR/>';
+		echo "<div align='center'>";
+			echo '<button type="submit" name="change_password" class="btn btn-success">Submit</button>';
+		echo "</div>";
         echo '</form>';
         ?>
         
