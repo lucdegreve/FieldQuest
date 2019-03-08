@@ -64,6 +64,11 @@
 					<button class="btn btn-primary" onclick="location.href='US_1.21_account_monitoring_by_user.php'" >
 					<?php echo '<h2><B>'.$nom_user.'</B></h2>'; ?>
 					<img src="picto\person.png" class="rounded float-right" alt="Responsive image" width="75px" height ="75px">
+					<a href="US_0_11_login_page .php?disconnect=1"> 
+					<button class="btn btn-primary" > 
+					<img src="picto\deconnect.png" class="rounded float-right" alt="Responsive image" width="75px" height ="75px">
+					</button>
+					</a>
 					
 					</button>
 					
