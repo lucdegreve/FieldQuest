@@ -239,11 +239,8 @@ echo "</BR>";
 				<div class="col-md-1"></div>
 			</div>
 		</div>
-		</BR>
-<?php
-	// Include footer
-	include("pied_de_page.php");
-?>
+
+
 
 </body>
 

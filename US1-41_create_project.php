@@ -1,31 +1,31 @@
-<?php 
+<?php
 //In the case the page is just updated, we need to empty the session variable not to keep users in memory
 if (!isset($_POST['validate'])){
 	if(isset($_SESSION["id_user_list"])){
 		unset($_SESSION["id_user_list"]);}} ?>
-  
+
 <html>
 
 <head>
 <!-----------------------------------------------------------
-       US1-41 Create a project 
-Developped by Diane, Ophélie and Aurélie      
+       US1-41 Create a project
+Developped by Diane, Ophélie and Aurélie
 This page contains the form to create a new project or to modify a project.
 Display : yes
-Needed/called pages : 	tab_donnees.class.php, funct_connex.php, 
-						userprop.php, update_list_1.php, 
+Needed/called pages : 	tab_donnees.class.php, funct_connex.php,
+						userprop.php, update_list_1.php,
 						removeuser.php, update_list_2.php,
 						userdelete.php, update_list_3.php
 
 Input variables : 		$id_project, $_SESSION["id_user_list"]
 
-Output variables :										
+Output variables :
 		name of the form : new_project
-		variables submitted in the form : project_name, project_desc, begin_date, 
+		variables submitted in the form : project_name, project_desc, begin_date,
 			end_date, status, users_associated
-------------------------------------------------------------->	
+------------------------------------------------------------->
 
-<META charset="utf-8"> 
+<META charset="utf-8">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/custom.css">
 
@@ -39,14 +39,14 @@ Output variables :
 ?>
 
 <!-- Function add_user for datalist -->
-<script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script> 
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script type="text/javascript">
 	function add_user1(){
 		$.ajax({
 			type: 'get',
 			dataType: 'html',
-			url: 'userprop.php', 
-			timeout: 1000, 
+			url: 'userprop.php',
+			timeout: 1000,
 			data: {
 				id_user_value: document.new_project.users_na.value
 				},
@@ -56,12 +56,12 @@ Output variables :
 			error: function () {
 				alert('Query has failed');
 			}
-		}); 
+		});
 		$.ajax({
 			type: 'get',
 			dataType: 'html',
-			url: 'update_list_1.php', 
-			timeout: 1000, 
+			url: 'update_list_1.php',
+			timeout: 1000,
 			data: {
 				id_user_erase: document.new_project.users_na.value
 				},
@@ -71,15 +71,15 @@ Output variables :
 			error: function () {
 				alert('Query has failed');
 			}
-		}); 
-	}	
-	
+		});
+	}
+
 	function removeuser1(str){
 		$.ajax({
 			type: 'get',
 			dataType: 'html',
-			url: 'removeuser.php', 
-			timeout: 1000, 
+			url: 'removeuser.php',
+			timeout: 1000,
 			data: {
 				id_user_value:str
 				},
@@ -89,12 +89,12 @@ Output variables :
 			error: function () {
 				alert('Query has failed');
 			}
-		}); 
+		});
 		$.ajax({
 			type: 'get',
 			dataType: 'html',
-			url: 'update_list_2.php', 
-			timeout: 1000, 
+			url: 'update_list_2.php',
+			timeout: 1000,
 			data: {
 				id_user_add: str
 				},
@@ -104,15 +104,15 @@ Output variables :
 			error: function () {
 				alert('Query has failed');
 			}
-		}); 
+		});
 	}
 
 	function deleteuser1(str){
 		$.ajax({
 			type: 'get',
 			dataType: 'html',
-			url: 'userdelete.php', 
-			timeout: 1000, 
+			url: 'userdelete.php',
+			timeout: 1000,
 			data: {
 				id_user_to_delete:str
 				},
@@ -122,12 +122,12 @@ Output variables :
 			error: function () {
 				alert('Query has failed');
 			}
-		}); 
+		});
 		$.ajax({
 			type: 'get',
 			dataType: 'html',
-			url: 'update_list_3.php', 
-			timeout: 1000, 
+			url: 'update_list_3.php',
+			timeout: 1000,
 			data: {
 				id_user_add2: str
 				},
@@ -137,13 +137,13 @@ Output variables :
 			error: function () {
 				alert('Query has failed');
 			}
-		}); 
-	} 
+		});
+	}
 
 </script>
 
 <?php
-// Include the file with all the functions and variables 
+// Include the file with all the functions and variables
 require "tab_donnees/tab_donnees.class.php";
 require "tab_donnees/funct_connex.php";
 
@@ -160,10 +160,10 @@ $table_status = new Tab_donnees($result_status,"PG");
 
 
 if (isset($_GET['id_project'])){	// Get the id of the project to modify and the informations related to the project
-	$id_project = $_GET['id_project'];	
+	$id_project = $_GET['id_project'];
 
 	// Query to get the informations of the project to modify
-	$query_modify_project = "SELECT id_status, name_project, project_description, project_init_date, project_end_date 
+	$query_modify_project = "SELECT id_status, name_project, project_description, project_init_date, project_end_date
 		FROM projects WHERE id_project = '".$id_project."'";
 	$result_modify_project = pg_query($connex, $query_modify_project) or die ('Failed to get project');
 	$row= pg_fetch_array($result_modify_project);
@@ -183,19 +183,19 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 ?>
 
 <div class="container">
-	
+
 	<form method="GET"  action="US1_42_Gerer_projets.php">
-		
+
 			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
-		
+
 	</form>
 	<div align="center">
 		<h2>Please fill all the information</h2>
 	</div></br>
 	<div class="row"><strong>NB : Fields marked with (*) are mandatory</strong></div><br/>
-	
+
 	<form name='new_project' method='POST' onsubmit='return validate_project()' action='US1-41_create_project.php' >
-		<div class ="row">	
+		<div class ="row">
 			<div class= "col-md-1">(*)</div>
 			<div class= "col-md-5">Project name </div>
 			<div class = "col-lg-6"><input type="text" name="project_name" value="<?php echo $name_project; ?>" placeholder="Project name"></div>
@@ -210,7 +210,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 			<div class= "col-md-5">Date of end </div>
 			<div class="col-md-6"><input type="date" name="end_date" value="<?php echo $end_date; ?>"></div>
 		</div><br/>
-		<div class ="row">	
+		<div class ="row">
 			<div class= "col-md-1"></div>
 			<div class= "col-md-5">Project description </div>
 			<div class="col-md-6"><textarea name="project_desc" rows="5"><?php echo $project_desc; ?> </textarea></div>
@@ -220,18 +220,18 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 			<div class= "col-md-5">Status </div>
 			<div class="col-md-6"><?php $table_status->creer_liste_option_plus ( "status", "id_status", "label_status",$status); ?></div>
 		</div></br>
-		<div class ="row">	
+		<div class ="row">
 			<?php
 				//Associate users to a project
 				if (isset($_GET['id_project'])){
-					$id_project = $_GET['id_project'];	
-					$result_users_associated = pg_query($connex, "select id_user_account,last_name, first_name 
-															from user_account 
-															where id_user_account IN (select id_user_account from link_project_users where id_project=$id_project)") 
+					$id_project = $_GET['id_project'];
+					$result_users_associated = pg_query($connex, "select id_user_account,last_name, first_name
+															from user_account
+															where id_user_account IN (select id_user_account from link_project_users where id_project=$id_project)")
 															or die ('Failed to fetch status');
 					$table_user_a = new Tab_donnees($result_users_associated,"PG");
 					$table_users_a1 = $table_user_a->t_enr;
-					
+
 					$_SESSION["users_asso_before"]=$table_users_a1; //for ajax dynamic part in userdelete.php
 					echo'<div class= "col-md-1"></div>';
 					echo'<div class= "col-md-5"> Users associated to that project :</div>';
@@ -243,7 +243,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 							$users[]=$table_users_a1[$i][0];
 							echo'<tr id='.$i.'>';
 								echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
-								echo'<td><button name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>'; 
+								echo'<td><button name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
 							echo'</tr>';
 						}
 						echo '</table>';
@@ -251,82 +251,82 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 					//$users_all_details=$_SESSION["users_asso_before"];
 					//$users=array_column($users_all_details,0);
 					$users=implode(",",$users); //transforms table to list
-					$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name 
-															from user_account 
+					$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name
+															from user_account
 															where id_user_account NOT IN ($users)
 															ORDER BY last_name")
-															or die ('Failed to fetch status');	
-															
+															or die ('Failed to fetch status');
+
 					$table_user_na = new Tab_donnees($result_users_not_associated,"PG");
 					$table_users_na1 = $table_user_na->t_enr;
 					$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
-					
-					//datalist with the users not associated 
+
+					//datalist with the users not associated
 					echo'<div class= "col-md-1"></div>';
 					echo'<div class= "col-md-5"><label for="Users"> Choose users to associate to the project :</label></div>';
 					echo'<div id="list_users_a" class="col-md-6">';
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
-								for($i=0; $i<count($table_users_na1); $i++){	
+								for($i=0; $i<count($table_users_na1); $i++){
 									echo'<option value="'.$table_users_na1[$i][0].'" label="'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'">'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
 								}
 						echo'</datalist>';
-						
-					// button to add the selected user to the project	
+
+					// button to add the selected user to the project
 					echo'<button name="addu" class= "btn btn-outline-warning" onclick="add_user1()">Add a user </button>';
 					echo'</div>';
 					echo'<p> Associated user(s) : <span id="associated_users"></span></p>';
-					
+
 				}else{
 					// Query to get a table with all the users
-						$result_users = pg_query($connex, "select id_user_account 
+						$result_users = pg_query($connex, "select id_user_account
 															from user_account")
 															or die ('Failed to fetch status');
-																					
-						$users=0; 
-					
+
+						$users=0;
+
 					// Query to get users not yet associated to the project
-					$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name 
-																from user_account 
+					$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name
+																from user_account
 																where id_user_account NOT IN ($users)
 																ORDER BY last_name")
-																or die ('Failed to fetch status');	
-																
+																or die ('Failed to fetch status');
+
 					$table_user_na = new Tab_donnees($result_users_not_associated,"PG");
 					$table_users_na1 = $table_user_na->t_enr;
 					$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
-					
-					//datalist with the users not associated 
+
+					//datalist with the users not associated
 					echo'<div class= "col-md-1"></div>';
 					echo'<div class= "col-md-5"><label for="Users"> Choose users to associate to the project :</label></div>';
 					echo'<div id="list_users_a" class="col-md-6">';
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
-								for($i=0; $i<count($table_users_na1); $i++){	
+								for($i=0; $i<count($table_users_na1); $i++){
 									echo'<option value="'.$table_users_na1[$i][0].'" label="'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'">'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
 								}
 						echo'</datalist>';
-						
-					// button to add the selected user to the project	
+
+					// button to add the selected user to the project
 					echo'<button type="button" name="addu" class="btn btn-md btn-outline-warning" onclick="add_user1()">Add a user</button>';
 					echo'</div>';
 					echo'<p> Associated user(s) : <span id="associated_users"></span></p>';
 				}
-				
+
 				echo'</div>';
 			?>
 		<br/>
-		
+
 		<div align="center">
 			<button type='submit' class='btn btn-lg btn-outline-success' name='validate'>Validate and add users</button>
 			<input type='hidden' name='id_project' value='<?php echo $id_project; ?>'>
 		</div>
-		
-	</form>	
+
+	</form>
 	</div>
-	
-	
-<?php	// Validate and add or modify the project 
+
+
+<?php	// Validate and add or modify the project
 if(isset($_POST['validate'])){
 	$id_users_asso_after=$_SESSION["id_user_list"];//to get users associated to the current project
 	if (($_POST['id_project'])!=""){
@@ -336,53 +336,56 @@ if(isset($_POST['validate'])){
 		$project_desc = $_POST['project_desc'];
 		$project_start = $_POST['begin_date'];
 		// variable to get users associated to the project before modification and kept during modification
-		$users_kept=$_SESSION["users_asso_before"]; 
+		$users_kept=$_SESSION["users_asso_before"];
 		//to have users already associated before modif and the new ones in same variable
 		for($i=0;$i<count($users_kept);$i++){
 			$id_users_asso_after[]=$users_kept[$i][0];
 		}
 		if ($_POST['end_date']!=""){
 			$project_end = $_POST['end_date'];
-			
-			$query_modify_project = "UPDATE projects SET id_status='".$project_status."', name_project='".$project_name."', project_description='".$project_desc."', 
+
+			$query_modify_project = "UPDATE projects SET id_status='".$project_status."', name_project='".$project_name."', project_description='".$project_desc."',
 			project_init_date='".$project_start."', project_end_date='".$project_end."' WHERE id_project = '".$id_project."'";
-			
+
 		}else{
-			$query_modify_project = "UPDATE projects SET id_status='".$project_status."', name_project='".$project_name."', project_description='".$project_desc."', 
+			$query_modify_project = "UPDATE projects SET id_status='".$project_status."', name_project='".$project_name."', project_description='".$project_desc."',
 			project_init_date='".$project_start."',project_end_date=NULL WHERE id_project = '".$id_project."'";
 		}
 		$result = pg_query($connex, $query_modify_project) or die ('<div class="alert alert-danger">Failed to modify project</div>');
 			echo '<div class="alert alert-success">Project modified</div>';
-		
+
 		//to delete former users associated to the project
 		$result_delete_users = pg_query($connex, "DELETE FROM link_project_users where id_project=$id_project")
-			 or die ('<div class="alert alert-danger">Failed to add project</div>');	
-		
-		
+			 or die ('<div class="alert alert-danger">Failed to add project</div>');
+
+
 		//to add users to current project
 		for ($i=0;$i<count($id_users_asso_after);$i++){
-			$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account) 
+			$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account)
 													VALUES ('".$id_project."','".$id_users_asso_after[$i]."')")
-			 or die ('<div class="alert alert-danger">Failed to add project</div>');		
+			 or die ('<div class="alert alert-danger">Failed to add project</div>');
 		}
 	} else {
+		$query_new_id_project = "SELECT MAX(id_project) from projects";
+		$result_new_id_project = pg_query($connex, $query_new_id_project) or die ('<div class="alert alert-danger">Failed to find new id for project</div>');
+		$new_id_project = pg_fetch_row($result_new_id_project)[0]+1;
 		$project_name = $_POST['project_name'];
 		$project_status = $_POST['status'];
 		$project_desc = $_POST['project_desc'];
 		$project_start = $_POST['begin_date'];
-		
+
 		if ($_POST['end_date']!=""){
 			$project_end = $_POST['end_date'];
-			
-			$query_add_project = "INSERT INTO projects (id_status, name_project, project_description, project_init_date, project_end_date)
-				VALUES ('".$project_status."', '".$project_name."', '".$project_desc."', '".$project_start."', '".$project_end."')";
-			
+
+			$query_add_project = "INSERT INTO projects (id_project, id_status, name_project, project_description, project_init_date, project_end_date)
+				VALUES ('".$new_id_project."','".$project_status."', '".$project_name."', '".$project_desc."', '".$project_start."', '".$project_end."')";
+
 		}else{
-			$query_add_project = "INSERT INTO projects (id_status, name_project, project_description, project_init_date)
-			VALUES ('".$project_status."', '".$project_name."', '".$project_desc."', '".$project_start."')";
+			$query_add_project = "INSERT INTO projects (id_project, id_status, name_project, project_description, project_init_date)
+			VALUES ('".$new_id_project."','".$project_status."', '".$project_name."', '".$project_desc."', '".$project_start."')";
 		}
 		$result = pg_query($connex, $query_add_project) or die ('<div class="alert alert-danger">Failed to add project</div>');
-		
+
 		// to have id_project of the project being created
 		$result_id_project = pg_query($connex, "SELECT max(id_project) from projects")
 				 or die ('<div class="alert alert-danger">Query failed</div>');
@@ -390,18 +393,20 @@ if(isset($_POST['validate'])){
 		$id_project1 = $id_pro->t_enr;
 		$id_new_project="";
 		$id_new_project=$id_project1[0][0];
-		
+
 		//to add users to current project being created
-		for ($i=0;$i<count($id_users_asso_after);$i++){
-			$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account) 
-													VALUES ('".$id_new_project."','".$id_users_asso_after[$i]."')")
-			or die ('<div class="alert alert-danger">Failed to add project</div>');		
-		}
+		if($id_user_asso_after!=NULL){
+			for ($i=0;$i<count($id_users_asso_after);$i++){
+				$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account)
+														VALUES ('".$id_new_project."','".$id_users_asso_after[$i]."')")
+														or die ('<div class="alert alert-danger">Failed to add project</div>');
+				}
+			}
 		echo '<div class="alert alert-success">';
 			echo 'Project added';
 		echo '</div>';
-		
-	}	
+
+	}
 echo'</div>'; //container
 	if(isset($_SESSION["id_user_list"])){
 		unset($_SESSION["id_user_list"]);}
