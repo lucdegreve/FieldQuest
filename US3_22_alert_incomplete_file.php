@@ -1,5 +1,9 @@
 <html lang="en">
 	<head>
+        <!-- Développeur : Manu ; Modif : Diane-->
+        <!-- Send mail to the uploader of a file to have more info -->
+        <!-- Input : id_file -->
+        
 	</head>
 	<body>
         <?php
@@ -7,6 +11,7 @@
         ?>
         <form action="US4-11_Main_page_filter.php">
 				<button name="return" class="btn btn-outline-info" type="submit">back</button>
+        </form>
         <div align="center">
         
             <!-- if the comment is already written --> 
@@ -18,7 +23,10 @@
                     $comment = $_GET['Comment'];
                     $user_mail = $_GET['user_mail'];
                     echo "Le mail a bien été envoyé";
+                    
                     // Actually not sending the mail because of fakes emails adress.
+                    //Now it's sending the mail ->
+                    //Test : need to have valid mail adress in the database
                     mail($user_mail, // you will send the message to this e-mail adress 
                      "Fieldquest - Incomplete files", // mail subject
                      "Your files are incomplete. Here's the administrator comment : ".$comment); // message to send 
