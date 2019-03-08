@@ -15,9 +15,25 @@
 			  echo "</br>";
         ?>
         <div class='container'>
-        <form action="US0_page_accueil_externes.php">
-            <button name="return" class="btn btn-outline-info" type="submit">Back</button>
-        </form>
+		<?php
+		if($_SESSION['id_user_type']==3){
+			echo'<form action="US0_page_accueil_externes.php">';
+				echo'<button name="return" class="btn btn-outline-info" type="submit">Back</button>';
+			echo'</form>';
+		}
+		else{
+			if($_SESSION['id_user_type']==1){
+				echo'<form action="US0_page_accueil_admin.php">';
+					echo'<button name="return" class="btn btn-outline-info" type="submit">Back</button>';
+				echo'</form>';
+			}
+			else {	
+				echo'<form action="US0_page_accueil_internes.php">';
+					echo'<button name="return" class="btn btn-outline-info" type="submit">Back</button>';
+				echo'</form>';
+			}
+		}
+		?>
 		<div align="center">
 			<h2> Here are your profile information </h2>
 		</div>
