@@ -74,7 +74,15 @@ Output variables :		id of selected formats
 								
 								echo '<span class="button-checkbox">';
 								echo '<button type="button" class="btn btn-sm" data-color="primary" id = "'. $id_tag .'">'.$name_tag.'</button>';
-                                echo '<input type="checkbox" style="display: none;" name="tag[]" value="'.$id_tag.'"/>';
+								//If a favorite search has been launched, we preselect the filters "tags" of the tags which are required in the favorite search
+								if (isset($liste_tag_fs)){
+									if (in_array($id_tag,$liste_tag_fs)){
+											echo '<input type="checkbox" style="display: none;" name="tag[]" value="'.$id_tag.'" checked/>';
+									}
+									else {
+											echo '<input type="checkbox" style="display: none;" name="tag[]" value="'.$id_tag.'" unchecked/>';
+									}
+								}                  
 								echo '</span>';
 								
 								}
