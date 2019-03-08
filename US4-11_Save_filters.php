@@ -239,6 +239,32 @@ Output variables :
 
           
 <!-- end of the recovery, beginning of the form -->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">
+					Query name : <input type="text" id="name" name="name" required minlength="2" maxlength="10">				
+				</div></div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">
+					<textarea id="comment" name="comment" required minlength="2" maxlength="10" style="height:100px; width:400px"> Insert your comment here </textarea>				
+				</div></div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-3"></div>
