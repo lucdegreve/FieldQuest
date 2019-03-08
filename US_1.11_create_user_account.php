@@ -51,6 +51,13 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
 		</form>
 		
+		<?php if (isset($_GET["last_name"],$_GET["first_name"])){
+			echo "<div align='center'>";
+			echo "<font color='green'>User account have been correctly created and inserted into the database !</font>";
+			echo "</div>";
+			echo "</br>";
+		}?>
+		
 		<div align="center">
 			<h2>Please fill all the information</h2>
 		</div>
@@ -356,8 +363,6 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                     VALUES (".$tab_id_project_assiocated[$i].", ".$new_id_user.")";
                     $query_result_add = pg_query($connex,$query_add) or die (pg_last_error() );
                 }
-
-                echo "User account have been correctly created and inserted into the database";
 
                 if(isset($_SESSION["id_project_list"])){
                 // Once user created we need to destroy session list to create another account
