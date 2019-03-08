@@ -27,7 +27,7 @@
         $tab = new Tab_donnees($result,"PG");
         $table_project = $tab->t_enr;
         echo "<BR/>";
-        echo '<input type="button" name="button_project '.$table_project[0][0].'" value=" Project '.$table_project[0][0].' :'.$table_project[0][1].'">';
-        echo '<input type="button" name="remove_project" value="Remove project" onclick=removeproject1('.$table_project[0][0].')>';
+        echo '<button class="btn btn-outline-info" name="button_project '.$table_project[0][0].'" >Project '.$table_project[0][0].' :'.$table_project[0][1].'</button>';
+        echo '<button class="btn btn-outline-warning" name="remove_project" onclick=removeproject1('.$table_project[0][0].')>Remove project</button> ';
     }
 ?>

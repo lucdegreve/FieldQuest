@@ -25,5 +25,5 @@
               echo '<option value="'.$projects_for_list_2[$k][0].'"> Project '.$projects_for_list_2[$k][0].' : '.$projects_for_list_2[$k][1].' </option>';
         }
   echo'</datalist>';
-  echo '<input type="button" value="Add a project" name="addproject" onclick=addproject1() >';
+  echo '<button class="btn btn-outline-warning" name="addproject" onclick=addproject1() >Add a project</button> ';
 ?>
