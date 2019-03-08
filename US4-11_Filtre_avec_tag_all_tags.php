@@ -50,6 +50,10 @@ function OnButton2()
 
 	
 	<?php 
+	if ($_SESSION['id_user_type']!=3){
+	//Include page with filter for validation state 
+		include "US4-11_Filtrer_avec_validation_state.php"; 
+	}
 	// Include page with collapse button & content for project names
 	include "US4-11_Filtrer_avec_tag_project.php"; 
 	?>
