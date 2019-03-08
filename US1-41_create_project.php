@@ -184,10 +184,11 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 
 <div class="container">
 	
-	<form method="GET"  action="US1_42_Gerer_projets.php">		
-		<button type="submit" class="btn btn-outline-info btn-md">Back</button>		
+	<form method="GET"  action="US1_42_Gerer_projets.php">
+		
+			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
+		
 	</form>
-	
 	<div align="center">
 		<h2>Please fill all the information</h2>
 	</div></br>
@@ -242,7 +243,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 							$users[]=$table_users_a1[$i][0];
 							echo'<tr id='.$i.'>';
 								echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
-								echo'<td><input type="button" name="delete_user" value="Delete" onclick=deleteuser1('.$table_users_a1[$i][0].')>'; 
+								echo'<td><button name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>'; 
 							echo'</tr>';
 						}
 						echo '</table>';
@@ -272,7 +273,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 						echo'</datalist>';
 						
 					// button to add the selected user to the project	
-					echo'<input type="button" name="addu" value="Add a user" onclick="add_user1()">';
+					echo'<button name="addu" class= "btn btn-outline-warning" onclick="add_user1()">Add a user </button>';
 					echo'</div>';
 					echo'<p> Associated user(s) : <span id="associated_users"></span></p>';
 					
