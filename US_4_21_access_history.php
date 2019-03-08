@@ -62,7 +62,7 @@
 $con = new Connex();
 $connex = $con->connection;
 
-$query = "SELECT f.id_file, f.file_name, f.id_format, fo.label_format, v.label_validation_state, f.id_version, f.upload_date, f.file_comment, f.data_init_date, f.data_end_date, f.evaluation_date, f.evaluation_comment, f.file_size, f.file_place
+$query = "SELECT f.id_file, f.file_name, f.id_format, fo.label_format, v.label_validation_state, f.id_version, f.upload_date, f.file_comment, f.data_init_date, f.data_end_date, f.upload_date, f.evaluation_comment, f.file_size, f.file_place
 FROM files as f JOIN validation_state v ON f.id_validation_state = v.id_validation_state
 JOIN format fo ON fo.id_format=f.id_format
 WHERE f.id_user_account=$id_user;";
