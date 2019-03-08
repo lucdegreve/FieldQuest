@@ -107,23 +107,24 @@ function OnButton2()
 				
 				if (isset($_POST['Save_in_favorite'])) { 
 					
-				echo "</br> on essaye de sauvegarder dans la bd </br>";
+				echo "</br> on essaye de sauvegarder dans la bd";
 				
-				echo "</br> Il reste à envoyer ces données dans bdd </br>";
+				echo "</br> Il reste à envoyer ces données dans bdd </br></br>";
 				
 				
 	
 					
 						if (isset($_POST['start'])){
-							echo $_POST['start'];
+							echo "start date : ".$_POST['start'];
 							echo "</br>";
 						}
 						if (isset($_POST['end'])){
-							echo $_POST['end'];
+							echo "end date : ".$_POST['end'];
 							echo "</br>";
 						}
 						
 						if (isset($_POST['valid'])){
+							echo " validation state : ";
 							foreach ($_POST['valid'] AS $i){
                     		echo $i." ";
                     		}
@@ -131,6 +132,7 @@ function OnButton2()
 						}
 						
 						if (isset($_POST['format'])){
+							echo "format : ";
                     		foreach ($_POST['format'] AS $i){
                     		echo $i." ";
                     		}
@@ -138,6 +140,7 @@ function OnButton2()
                     	}
                     	
                     	if (isset($_POST['project'])){
+                    		echo "project : ";
                     		foreach ($_POST['project'] AS $i){
                     		echo $i." ";
                     		}
@@ -145,6 +148,7 @@ function OnButton2()
                     	}
                     	
 						if (isset($_POST['sources'])){
+							echo "sources : ";
                     		foreach ($_POST['sources'] AS $i){
                     		echo $i." ";
                     		}
@@ -152,6 +156,7 @@ function OnButton2()
                     	}
                     	
                     	if (isset($_POST['unit'])){
+                    		echo "units : ";
                     		foreach ($_POST['unit'] AS $i){
                     		echo $i." ";
                     		}
@@ -159,15 +164,16 @@ function OnButton2()
                     	}
                     	
 						if (isset($_POST['tag'])){
+							echo "tag : ";
                     		foreach ($_POST['tag'] AS $i){
                     		echo $i." ";
                     		}
                     		echo "</br>";
                     	}
                     	
-						echo "</br>".$_POST['name'];
+						echo "</br> name : ".$_POST['name'];
 						
-						echo "</br>".$_POST['comment'];
+						echo "</br> comment : ".$_POST['comment'];
 						
 						} 
 						
