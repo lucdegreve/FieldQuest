@@ -19,14 +19,14 @@
                     $user_mail = $_GET['user_mail'];
                     echo "Le mail a bien été envoyé";
                     // Actually not sending the mail because of fakes emails adress.
-                    /* mail($user_mail, // you will send the message to this e-mail adress 
+                    mail($user_mail, // you will send the message to this e-mail adress 
                      "Fieldquest - Incomplete files", // mail subject
-                     "Your files are incomplete. Here's the administrator comment : ".$comment); // message to send */
+                     "Your files are incomplete. Here's the administrator comment : ".$comment); // message to send 
                      }
             else { // else find the users email
                     // put the real $id_file once linked
-                    //$id_file = $_GET["id_file"];
-                    $id_file = 2; // Test var
+                    $id_file = $_GET["id_file"];
+                    //$id_file = 2; // Test var
                 $con = new Connex();
             $connex = $con->connection;
                     $query_pre = "SELECT id_user_account from files where id_file = ".$id_file." ";

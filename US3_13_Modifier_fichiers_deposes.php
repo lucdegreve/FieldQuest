@@ -38,6 +38,13 @@ echo "</br>";
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+                
+                <script type="text/javascript">
+                    //Open page to send mail
+                    function send_mail(id_file) { 
+                            document.location.href="US3_22_alert_incomplete_file.php?id_file="+id_file;
+                    }
+                </script>
 
 	</head>
 
@@ -83,9 +90,9 @@ echo "</br>";
 		?>
 		
 		<div class="container-fluid">
-		<form name="alert" method="get" action="US3_22_alert_incomplete_file.php">
-			<button type="submit" class="btn btn-lg btn-outline-warning"><font size=4>Send an alert</font></button>
-		</form>
+		
+                <button type="submit" class="btn btn-lg btn-outline-warning" onclick='return send_mail("<?php echo $id_file; ?>")'><font size=4>Send an alert</font></button>
+		
 		</div></br>
 		
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
