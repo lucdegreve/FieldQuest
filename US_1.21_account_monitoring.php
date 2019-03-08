@@ -81,9 +81,9 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
         <?php
 
-            $id_user_account = $_SESSION["id_user_account"];
+            $id_user_account = $_GET["id_user_account"];
             // A ENLEVER APRES VERIFICATION
-            $id_user_account = 2;
+            //$id_user_account = 2;
 
             require "tab_donnees/tab_donnees.class.php";
             require "tab_donnees/funct_connex.php";
@@ -319,7 +319,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
               $query_already_associated_project = "SELECT lpu.id_project, name_project
                                                       FROM link_project_users lpu
                                                         JOIN projects p on lpu.id_project = p.id_project
-                                                          WHERE id_user_account = $id_user_account";
+                                                          WHERE lpu.id_user_account = $id_user_account";
               $result_already_associated_project = pg_query($connex, $query_already_associated_project) or die ("Failed to fetch user accounts");
               $tab = new Tab_donnees($result_already_associated_project,"PG");
               $tab_associated_project = $tab->t_enr;
