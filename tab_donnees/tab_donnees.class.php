@@ -257,8 +257,9 @@ class Tab_donnees
 		echo '<script type="text/javascript">';
 		echo "$(document).ready(function() {
 			$('#".$id_tablo."').DataTable( {
+				responsive: true,
 				'scrollY': 200,
-				'scrollX': true
+				'scrollX': false
 			} );
 		} );";
 		echo "</script>";

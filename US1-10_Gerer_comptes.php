@@ -47,17 +47,19 @@ Not done yet : Link with modify account page
 
 ?>
 
-	<div class="container">
+	
 		<div class="row">			
-			<div class="col-md-8"></div>
+			<div class="col-md-7"></div>
 			<div class="col-md-4">
 				<form name="add_account" action="US_1.11_create_user_account.php" method="GET">
 					<button type='submit' class='btn btn-success btn-block'><B>Add an account</B></button>
 				</form>
 			</div>
+			<div class="col-md-1"></div>
 		</div>
 		<div class="row">
-			<div class="col-md-12"> <!-- Table with user accounts  -->
+			<div class="col-md-1"></div>
+			<div class="col-md-10"> <!-- Table with user accounts  -->
 				<?php
 				//Headers names
 				$tab_headers[0]='Last name';
@@ -74,8 +76,9 @@ Not done yet : Link with modify account page
 									$tab_headers, $tab_display, "", "");
 				?>
 			</div>
+			<div class="col-md-1"></div>
 		</div>
-	<div class="row"></div>
+	<div class="row">
 	
 	</div>
 <br/><br/>
