@@ -45,7 +45,7 @@
             $result = pg_query($connex,$query) or die (pg_last_error() );
                     $donnees = pg_fetch_array($result);
                     $user_mail = $donnees[0];
-                    echo '</br><h2>Envoyer une alerte concernant ce fichier</h2></br>';
+                    echo '</br><h2>Send an alert concerning this file : </h2></br>';
 					echo "</div>";
                     // and fill the form
                     echo '<form id ="alertform" name="alertform" action="US3_22_alert_incomplete_file.php?user_mail='.$user_mail.'" method="GET">';
