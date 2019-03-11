@@ -23,6 +23,6 @@
 		            echo '<option value="'.$not_associated_project_account_monitoring[$k][0].'"> Project '.$not_associated_project_account_monitoring[$k][0].' : '.$not_associated_project_account_monitoring[$k][1].' </option>';
 		        }
 		  echo '</datalist>';
-  echo '<input type="button" value="Add a project" name="addproject" onclick=addproject2() >';
+  echo '<button type="button" class="btn btn-outline-warning" name="addproject" onclick=addproject2() >Add a project</button>';
 
 ?>

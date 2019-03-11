@@ -386,7 +386,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                   echo '<table>';
                       for ($i=0; $i < $nb_rows ; $i++) {
                         echo '<tr>';
-                            echo '<td> Projet '.$tab_associated_project[$i][0].' : '.$tab_associated_project[$i][1].' </td> <td> <button name="delete_project" class= "btn btn-outline-danger" onclick=deleteproject1('.$tab_associated_project[$i][0].')>Delete </button></td>';
+                            echo '<td> Projet '.$tab_associated_project[$i][0].' : '.$tab_associated_project[$i][1].' </td> <td> <button type="button" name="delete_project" class= "btn btn-outline-danger" onclick=deleteproject1('.$tab_associated_project[$i][0].')>Delete </button></td>';
                         echo '</tr>';
                       }
                   echo '</table>';

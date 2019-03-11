@@ -24,7 +24,7 @@
 	for ($i=0;$i<$nb_project_a;$i++){
     echo '<tr>';
         echo '<td> Projet '.$project_list_already_associated[$i][0].' : '.$project_list_already_associated[$i][1].' </td>
-        <td> <input type="button" name="delete_project" value="Delete" onclick=deleteproject1('.$tab_associated_project[$i][0].')> </td>';
+        <td> <button type="button" class="btn btn-outline-danger" name="delete_project" onclick=deleteproject1('.$tab_associated_project[$i][0].')>Delete</button> </td>';
     echo '</tr>';
 	}
 	echo '</table>';
