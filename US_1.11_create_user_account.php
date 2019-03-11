@@ -46,17 +46,14 @@ So we have to create dynamic list of project to add or to remove, what we do wit
     				 include("en_tete.php");
     		?>
 	</br>
+	<?php if (isset($_GET["last_name"],$_GET["first_name"])){
+			echo "<div class='alert alert-success'>The user account has been correctly created. A confirmation e-mail has been sent.</div>";
+		}?>
 	<div class="container">
 		<form method="GET"  action="US1-10_Gerer_comptes.php">
 			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
 		</form>
 		
-		<?php if (isset($_GET["last_name"],$_GET["first_name"])){
-			echo "<div align='center'>";
-			echo "<font color='green'>User account have been correctly created and inserted into the database !</font>";
-			echo "</div>";
-			echo "</br>";
-		}?>
 		
 		<div align="center">
 			<h2>Please fill all the information</h2>
@@ -357,12 +354,14 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
                 // Adding the projects
                 $tab_id_project_assiocated = $_SESSION["id_project_list"];
-                $nb_projects = count($tab_id_project_assiocated);
-                for ($i=0; $i < $nb_projects ; $i++) {
-                    $query_add = "INSERT INTO link_project_users
-                    VALUES (".$tab_id_project_assiocated[$i].", ".$new_id_user.")";
-                    $query_result_add = pg_query($connex,$query_add) or die (pg_last_error() );
-                }
+				if ($tab_id_project_assiocated[0]!= ""){
+					$nb_projects = count($tab_id_project_assiocated);
+					for ($i=0; $i < $nb_projects ; $i++) {
+						$query_add = "INSERT INTO link_project_users
+						VALUES (".$tab_id_project_assiocated[$i].", ".$new_id_user.")";
+						$query_result_add = pg_query($connex,$query_add) or die (pg_last_error() );
+					}
+				}
 
                 if(isset($_SESSION["id_project_list"])){
                 // Once user created we need to destroy session list to create another account
