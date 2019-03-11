@@ -55,7 +55,7 @@
 				<div class="col-md-12">
 					<?php
 					//creation du tableau
-						echo '<table id="example" class="display" border=1 bordercolor="black" bgcolor="white" size = 20>';
+						echo '<table id="example" class="display" border=0 bordercolor="black" bgcolor="white" size = 20>';
 
 					// en tete du tableau
 
@@ -109,12 +109,12 @@
 										}
 											// ajoute éventuellement la colonne edit
 											echo '<td>';
-												echo ("<a href = 'US1-41_create_project.php?id_project=".$row[0]."' class='lien'>Edit</A>");
+												echo ("<a href = 'US1-41_create_project.php?id_project=".$row[0]."' class='btn btn-outline-warning btn-sm'>Edit</A>");
 											echo '</td>';
 											// ajoute éventuellement la colonne supprimer
 											echo '<td>';
 
-												echo ("<a href = 'us_1_43_supprimer_un_projet.php?id_project=".$row[0]."' class='lien'>Delete</A>");
+												echo ("<a href = 'us_1_43_supprimer_un_projet.php?id_project=".$row[0]."' class='btn btn-outline-danger btn-sm'>Delete</A>");
 											echo '</td>';
 									echo '</tr>';
 								}
