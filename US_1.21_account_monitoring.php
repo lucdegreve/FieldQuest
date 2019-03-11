@@ -418,12 +418,14 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                             }
                       echo '</datalist>';
                   echo '</fieldset>';
-              echo '<button value="Add a project" class="btn btn-outline-warning" name="addproject" onclick=addproject2() >Add a Project </button>';
+              echo '<button type="button" value="Add a project" class="btn btn-outline-warning" name="addproject" onclick=addproject2() >Add a Project </button>';
 
               ?>
 
               </BR>
-            </br></br>
+			  <p> Associated project(s) : <span id="associated_project"></span></p>
+              <BR/>
+           
 
 
 
