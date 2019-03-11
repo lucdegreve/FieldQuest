@@ -4,6 +4,11 @@
 //Header
 include("en_tete.php");
 echo "</br>";
+
+$_SESSION['upload_filename'] = array();
+$_SESSION['upload_file_size'] = array();
+
+
 //In the case the page is just updated, we need to empty the session variable not to keep users in memory
 if (!isset($_GET['validate'])){
 	if(isset($_SESSION["id_user_list"])){
@@ -106,7 +111,7 @@ if (!isset($_GET['validate'])){
 					<div class="col-md-6"><div class="jumbotron">
 						<!-- Drag and drop container -->
 						<h2><B>Your file</B></h2>
-						<input type="file" name="file" id="file">
+						<input type="file" name="file" id="file" multiple>
 						<div class="upload-area"  id="uploadfile" align="left">
 							<B>Drag and drop a file here</B></br>or<br/><B>Click to select a file</B>
 						</div>
