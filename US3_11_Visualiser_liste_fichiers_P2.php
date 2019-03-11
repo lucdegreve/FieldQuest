@@ -60,7 +60,7 @@
 							echo "<td>".$first_name." ".$last_name."</td>";
 							echo "<td>".$size."</td>";
 							echo "<td>".$version."</td>";
-							echo "<td> <a href = ".$link." download>Download</a></li> </br> ";
+							echo "<td> <a href = ".$link." download class='btn btn-outline-success btn-sm' role='button'>Download</a></li> </br> ";
 						echo "</tr>";
 					}?>
 				</tbody>
