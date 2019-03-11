@@ -174,7 +174,7 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 											echo  'Evaluation comment';
 										echo '</th>';
 										echo '<th>';
-											echo  'Size';
+											echo  'Size(Octet)';
 										echo '</th>';
 										echo '<th>';
 											echo  'Delete';
@@ -245,15 +245,18 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 
 												}else{
 													echo '<td>';
+													if ($i== 1){
+														echo substr($row[$i],10)."";
+													} else {
 													echo $row[$i]."";
-
+													}
 												echo '</td>';
 
 												}
 
 											}
 												echo '<td>';
-													if ($row[3]=='not validated')
+													if ($row[4]=='Not validated')
 													{
 													echo ("<a href ='US3_11_Visualiser_liste_fichiers.php' class='lien'>Delete</A>");
 													}
