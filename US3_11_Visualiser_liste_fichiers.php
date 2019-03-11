@@ -28,7 +28,7 @@
 		<div class="container-fluid"> 
 			<form name="box_delete" method="GET" action="US3_4_Supprimer_fichiers_deposes.php">
 				<div class="row">
-					<div class="col-md-10"><h1><B>Files list</B></h1></div>
+					<div class="col-md-10"><h1>Files list</h1></div>
 					<div class="col-md-2" align="right">
 						<button type="submit" class="btn btn-md btn-danger">Delete selection</button>
 					</div>
@@ -41,7 +41,7 @@
 								<th scope="col" width="20%">File name</th>
 								<th scope="col" width="10%">Upload date</th>
 								<th scope="col" width="12%">Origin</th>
-								<th scope="col" width="8%">Size</th>
+								<th scope="col" width="12%">Size (Octet) </th>
 								<th scope="col" width="10%"></th>
 								<th scope="col" width="10%"></th>
 								<th scope="col" width="10%"></th>
