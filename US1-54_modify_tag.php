@@ -81,7 +81,7 @@
 	<body>
         <?php
 				 include("en_tete.php");
-				 echo "</br>";
+
         ?>
         <div class="container">
         <?php
@@ -90,12 +90,17 @@
 				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
 				</form>';
         echo '<form  method="get">';
-        echo '<fieldset style="width: 500px">
-				<legend>Select the tag to modify</legend>
-                <label>Tag type</label>';
-                //display a list with all the tag type
-                //when we select a tag type it calls the go() js function to update the second list
-				echo ' <select name="tag_type" id="tag_type" onchange="go()">
+        echo '
+				<h4>Select the tag to modify</h4></br>
+
+
+					<div class="input-group mb-3">
+				   	<div class="input-group-prepend">
+				       <span class="input-group-text"> Tag type :</span>
+				    </div>';
+									//display a list with all the tag type
+									//when we select a tag type it calls the go() js function to update the second list
+				echo ' <select class="custom-select" name="tag_type" id="tag_type" onchange="go()">
 					<option value="-1"></option>';
                     require_once "./tab_donnees/funct_connex.php";
                     $con=new Connex();
@@ -111,12 +116,18 @@
                         echo' value='.$row["id_tag_type"].'>'.$row["name_tag_type"].'</option>';
                     }
                 echo '</select>
-				<label>Tag</label>
-				<div id="tag" style="display:inline">
-				<select name="tag">';
-                    echo '<option value="-1"></option>';
+								</div>
+                </div><div class="container">
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						 <span class="input-group-text"> Tag type :</span>
+					</div>
+
+				<select class="custom-select" id="tag" name="tag" style="display:inline">';
+        echo '<option value="-1"></option>';
 				echo '</select>
-                </div>';
+        </div>';
                 echo '<div style="display:inline"> <button name="modify" type="submit" class="btn btn-outline-warning">Modify</button></div>';
                 ?>
 
@@ -148,7 +159,7 @@
             $result = pg_query($connex, $query)
                 or die('Échec de la requête : ' . pg_error($connex));
             // displays this message if the modification is a success
-            echo 'The tag has been deleted';
+            echo '<p>The tag has been deleted</p>';
         }
 
         //if we click on previous "modify" it displays a new form
@@ -161,17 +172,16 @@
             $query3 = 'SELECT * FROM tags where id_tag='.$_GET["tag"];
             $result3 = pg_query($connex, $query3)or die(pg_last_error($connex));
             while($row3 = pg_fetch_assoc($result3)){
-                echo '<form method="GET" name="edition_tag" action="US1-54_modify_tag.php">
+                echo '</br><form method="GET" name="edition_tag" action="US1-54_modify_tag.php">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Edit the tag name : </span> </br>
+                        <span class="input-group-text" id="inputGroup-sizing-default">Edit the tag name :</span> </br>
                     </div>
-                    <input type="text" name="tag_name" value="'.$row3["tag_name"].'" ><br/>
+                    <input type="text" class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="tag_name" value="'.$row3["tag_name"].'" ><br/>
                 </div>
-                </br>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default"> Edit the description :</span>
+                        <span class="input-group-text" id="inputGroup-sizing-default"> Edit the tag description :</span>
                     </div>
                     <textarea class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="tag_description"  >'.$row3["tag_description"].'</textarea><br/>
                 </div>
@@ -205,7 +215,7 @@
             $result = pg_query($connex, $query)
                 or die('Échec de la requête : ' . pg_error($connex));
             // displays this message if the modification is a success
-            echo 'The tag  '.$tag_name.' has been modified';
+            echo ' <p>The tag  '.$tag_name.' has been modified</p>';
         }
 
 		?>

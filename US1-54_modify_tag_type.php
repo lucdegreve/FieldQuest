@@ -111,24 +111,24 @@
             $query3 = 'SELECT * FROM tag_type where id_tag_type='.$_GET["tag_type"];
             $result3 = pg_query($connex, $query3)or die(pg_last_error($connex));
             while($row3 = pg_fetch_assoc($result3)){
-                echo '<form method="GET" name="edition_tag_type" action="US1-54_modify_tag_type.php" onsubmit="return validation()">
+                echo '<div class="container"><form method="GET" name="edition_tag_type" action="US1-54_modify_tag_type.php" onsubmit="return validation()">
                 </br>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Edit the tag type </span>
+                        <span class="input-group-text" id="inputGroup-sizing-default">Edit the tag type :</span>
                     </div>
-                    <input type="text" class="col-md-6 col-md-offset-6" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_tag_type" value="'.$row3["name_tag_type"].'" ><br/>
+                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_tag_type" value="'.$row3["name_tag_type"].'" ><br/>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Edit the description</span>
+                        <span class="input-group-text" id="inputGroup-sizing-default">Edit the tag description :</span>
                     </div>
-                    <input type="text" class="col-md-6 col-md-offset-6" class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="description_tag_type" value="'.$row3["description_tag_type"].'">
+                    <textarea class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="description_tag_type" value="'.$row3["description_tag_type"].'"></textarea>
                 </div>
 
                 <div><button type="submit" class="btn btn-outline-success">Validate</button></div>
-                </form>';
+                </form></div>';
             }
 
         }
