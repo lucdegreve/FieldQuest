@@ -28,7 +28,7 @@
 		<div class="container-fluid"> 
 			<form name="box_delete" method="GET" action="US3_4_Supprimer_fichiers_deposes.php">
 				<div class="row">
-					<div class="col-md-10"><h1><B>Files list</B></h1></div>
+					<div class="col-md-10"><h1>Files list</h1></div>
 					<div class="col-md-2" align="right">
 						<button type="submit" class="btn btn-md btn-danger">Delete selection</button>
 					</div>
