@@ -42,10 +42,19 @@ Output variables :
                             LEFT JOIN user_account u ON u.id_user_account=f.id_user_account
                             LEFT JOIN link_tag_project ltp ON ltp.id_file=f.id_file
                             LEFT JOIN tags t ON t.id_tag=ltp.id_tag
-                        WHERE f.id_validation_state = '2' AND ";
+                        Where f.id_file NOT IN (0) AND ";
 						
 				//If a favorite search has been launched, we complete the query with the filters of this search:
-				
+				if (isset($_POST['Validation_state'])){ 
+                                        $query .= " f.id_validation_state IN ("; 
+                                        foreach ($_POST['Validation_state'] AS $i){ 
+                                            $query .= $i.", "; 
+                                        } 
+                                        $query = substr($query, 0, strlen($query) -2); 
+                                        $query .= ")"; 
+                                        $query .= " AND "; 
+                                } 
+                                
 				if (isset($begin_date_fs)){
 							if ($begin_date_fs!=''){
                                 $start_date = $begin_date_fs;
@@ -319,7 +328,7 @@ Output variables :
 
 								//State "validated"
 
-								if($valid=="validated"){
+								//if($valid=="Validated"){
 
 									if($id_file!=$original_id){
 
@@ -345,7 +354,7 @@ Output variables :
 
 										// Popover to display metadata for each file
 
-										echo '<td>'.$name.' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
+										echo '<td>'.substr($name,10).' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
 
 										echo "<td>".$date."</td>";
 
@@ -413,7 +422,7 @@ Output variables :
 
 									echo "</tr>";
 
-								}
+								//}
 
 							}
 

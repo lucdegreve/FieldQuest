@@ -39,22 +39,11 @@ echo "</br>";
 				$original_id=$row[0];
 				$id_user_account=$row[1];
 			}
-
-			//Tous les echo ci dessous ne seront pas présents plus tard mais ils aident pour travailler sur la page !
-			echo "<U>Commentaires à supprimer</U> : a file has been added !</br>";
-			echo "File name : ".$_SESSION["upload_filename"]."<br/>";
-			echo "File location : ".$_SESSION["upload_location"]."<br/>";
-			echo "File modification date : ".$_SESSION["upload_date"]."<br/>";
-			echo "File new size (octet) : ".$_SESSION["upload_file_size"]."<br/>";
-			echo "ID of the modified file : ".$id_file."</br>";
-			echo "ID of the original file : ".$original_id."</br>";
-			echo "ID of the user account : ".$id_user_account."</br>";
 			
 			//Get the last version of the file
 			$result_max_version=pg_query($connex, "SELECT MAX(id_version) FROM files WHERE id_original_file=".$original_id) or die('Échec de la requête : ' . pg_last_error());
 			$max_version=pg_fetch_array($result_max_version)[0];
 			$max_version=$max_version + 1;
-			echo "Version à affecter à ce nouveau fichier : ".$max_version."</br>";
 			
 			//Get new file format
 			$file_extension=end(explode('.',$_SESSION["upload_filename"]));
@@ -83,11 +72,9 @@ echo "</br>";
 					}
 				}
 			}
-			echo "Format du nouveau fichier : ".$id_format." ".$file_extension."</br>";
 			
 			//Get new comment
 			$comment=$_GET['Comment'];
-			echo "Commentaire : ".$comment."</br>";
 			
 			//Get start and end dates
 				//Date from the daterange picker
@@ -105,23 +92,19 @@ echo "</br>";
 				//Real dates
 				$start_date = $daydeb."/".$monthdeb."/".$yeardeb;
 				$end_date = $dayend."/".$monthend."/".$yearend;
-			echo "Start date : ".$start_date." & End date : ".$end_date."</br>";
 				
 			//Get new latitude and longitude
 			$longitude= $_SESSION['longitude'];
-			$latitude = $_SESSION['latitude'];
-			echo "Latitude : ".$latitude." & Longitude : ".$longitude."</br>";		
+			$latitude = $_SESSION['latitude'];		
 			
 			//Get new tags
 			$selected_tags=array(); //Empty list which will contain all selected tags id
 			$result_id_tag=pg_query($connex, "SELECT id_tag, tag_name FROM  tags") or die(pg_last_error());
-			echo "Liste des tags sélectionnés : ";
 			//For every tag, check if tag is selected
 			while($row=pg_fetch_array($result_id_tag)) { 
 				$var=$_GET[$row["id_tag"]."_tag"];
 				if ($var == "on") { //If checkbox is checked...
 					array_push($selected_tags, $row["id_tag"]); //... add tag id to array
-					echo $row["tag_name"].", ";
 				}
 			}
 			
@@ -134,8 +117,7 @@ echo "</br>";
 			$result_new_id=pg_query($connex, "SELECT id_file FROM files WHERE file_name='".$_SESSION["upload_filename"]."'") or die(pg_last_error());
 			while($row = pg_fetch_array($result_new_id)) { 
 				$new_id=$row[0];
-			}
-			echo "</br>Nouvel ID généré : ".$new_id;			
+			}			
 			
 			//Get the new projects and insert them in the DB
 			if(isset($_GET['projet']) && !empty($_GET['projet'])){ 
@@ -158,18 +140,8 @@ echo "</br>";
 	//IF THERE IS NO NEW FILE
 		else{
 			
-			//Tous les echo ci dessous ne seront pas présents plus tard mais ils aident pour travailler sur la page !
-			echo "<U>Commentaires à supprimer</U> : No file added !</br>";
-			echo "File name : ".$_SESSION["upload_filename"]."<br/>";
-			echo "File location : ".$_SESSION["upload_location"]."<br/>";
-			echo "File modification date : ".$_SESSION["upload_date"]."<br/>";
-			echo "File new size (octet) : ".$_SESSION["upload_file_size"]."<br/>";
-			echo "ID of the modified file : ".$id_file."</br>";
-			echo "ID of the user account : ".$id_user_account."</br>";
-			
 			//Get new comment
 			$comment=$_GET['Comment'];
-			echo "Commentaire : ".$comment."</br>";
 			
 			//Get start and end dates
 				//Date from the daterange picker
@@ -187,7 +159,6 @@ echo "</br>";
 				//Real dates
 				$start_date = $daydeb."/".$monthdeb."/".$yeardeb;
 				$end_date = $dayend."/".$monthend."/".$yearend;
-			echo "Start date : ".$start_date." & End date : ".$end_date."</br>";
 			
 			//Get the new projects
 				//A CODER
@@ -195,18 +166,15 @@ echo "</br>";
 			//Get new latitude and longitude
 			$longitude= $_SESSION['longitude'];
 			$latitude = $_SESSION['latitude'];
-			echo "Latitude : ".$latitude." & Longitude : ".$longitude."</br>";
 
 			//Get new tags
 			$selected_tags=array(); //Empty list which will contain all selected tags id
 			$result_id_tag=pg_query($connex, "SELECT id_tag, tag_name FROM  tags") or die(pg_last_error());
-			echo "Liste des tags sélectionnés : ";
 			//For every tag, check if tag is selected
 			while($row=pg_fetch_array($result_id_tag)) { 
 				$var=$_GET[$row["id_tag"]."_tag"];
 				if ($var == "on") { //If checkbox is checked...
 					array_push($selected_tags, $row["id_tag"]); //... add tag id to array
-					echo $row["tag_name"].", ";
 				}
 			}
 			

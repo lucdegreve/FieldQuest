@@ -75,7 +75,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
     		?>
 <div align="center">
         <BR/>
-        <h2> Here are your profile information </h2>
+        <h2> Please find here the user's information </h2>
         <BR/>
         Fields with (*) must be filled
 

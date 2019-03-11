@@ -77,10 +77,10 @@
 								}
 								
 								//State "being checked"                               								
-                                if($valid=="being checked"){
+                                if($valid=="Being checked"){
 									echo "<tr class='table-active'>";
 										echo "<th scope='row'></th>";
-										echo "<th scope='row'>".substr($name."</td>",10);
+										echo "<th scope='row'>".substr($name,10)."</th>";
 										echo "<th scope='row'>".$date."</th>";
 										echo "<th scope='row'>".$first_name." ".$last_name."</th>";
 										echo "<th scope='row'>".$size."</th>";
@@ -114,10 +114,10 @@
 								}
 								
 								//State "not validated"
-								if($valid=="not validated"){
+								if($valid=="Not validated"){
 									echo "<tr>";
 										echo "<td><img src='picto/refused.png' width='27' height='27'/></td>";
-										echo "<td>".substr($name."</td>",10);
+										echo "<td>".substr($name,10)."</th>";
 										echo "<td>".$date."</td>";
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";
@@ -149,7 +149,7 @@
 								}
 								
 								//State "validated"
-								if($valid=="validated"){
+								if($valid=="Validated"){
 									if($id_file!=$original_id){
 										//Query to get right "upload date" and "origin"
 										$query_origin="SELECT to_char(upload_date,'DD/MM/YYYY'), last_name, first_name FROM user_account ua JOIN files f ON ua.id_user_account=f.id_user_account WHERE id_file=".$original_id;
@@ -162,7 +162,7 @@
 									}						
 									echo "<tr>";
 										echo "<td><img src='picto/validated.png' width='30' height='30'/></td>";
-										echo "<td>".substr($name."</td>",10);
+										echo "<td>".substr($name,10)."</th>";
 										echo "<td>".$date."</td>";
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";

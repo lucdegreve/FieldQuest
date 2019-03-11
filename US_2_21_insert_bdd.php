@@ -91,7 +91,7 @@ if (isset($file_format)){
 		}
 else{
 	// creating format into db
-		$query = "insert into format (label_format) VALUES('".$file_extension."') ";
+		$query = "INSERT INTO format(label_format) VALUES('".$file_extension."') ";
 		$result = pg_query($connex, $query) or die(pg_last_error());
 		//finding new id  for this format in DB
 		$query = "SELECT label_format, id_format FROM format";
@@ -117,9 +117,9 @@ else{
 
 
 
-		$query = "INSERT INTO files(id_user_account,use_id_user_account,id_format,id_validation_state,id_version,upload_date, file_name, file_comment, data_init_date,data_end_date,latitude,longitude,file_place,file_size)
+		$query = "INSERT INTO files(id_user_account,use_id_user_account,id_format,id_validation_state,id_version,upload_date, file_name, file_comment, data_init_date,data_end_date,latitude,longitude,file_place,file_size,id_original_file)
         VALUES ('".$origin."','".$origin."','".$file_format."','".$id_validation_state."',
-        1,'".$today_fr."','".$file_name."','".$comment."','".$starting_date."','".$ending_date."','".$latitude."','".$longitude."','".$file_place."','".$file_size."')";
+        1,'".$today_fr."','".$file_name."','".$comment."','".$starting_date."','".$ending_date."','".$latitude."','".$longitude."','".$file_place."','".$file_size."',0)";
         $query_result = pg_query($connex,$query) or die (pg_last_error() );
 
 
