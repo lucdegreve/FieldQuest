@@ -86,7 +86,7 @@ if (!isset($_GET['validate'])){
 			}
 		</script>
 		
-		
+	
 		<?php
 		//Get id of the user
 		$id_user=$_SESSION['id_user_account'];
@@ -144,10 +144,19 @@ if (!isset($_GET['validate'])){
 						<!-- Projects -->
 						<?php
 						//Query projects
-						$query_projects_list = "SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=".$id_user." ORDER BY name_project asc";
-						$result_projects_list = pg_query($connex, $query_projects_list);	//CHANGER L'ID
-						$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
+						
+						if ($user_type==1)
+						{
+							$query_projects_list = "SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project ORDER BY name_project asc";
+							$result_projects_list = pg_query($connex, $query_projects_list);	//CHANGER L'ID
+							$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
+						}
+						else {
+							$query_projects_list = "SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project where lpu.id_user_account=".$id_user." ORDER BY name_project asc";
+							$result_projects_list = pg_query($connex, $query_projects_list);	//CHANGER L'ID
+							$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						//$tab_projects_list -> creer_liste_option_multiple("lst_proj", "id_project", "name_project","",multiple);
+						}
 						?>
 						Select one or several project(s) :
 						<div class="container">
