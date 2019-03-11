@@ -433,12 +433,12 @@ class Tab_donnees
 			// ajoute éventuellement la colonne modifier
 			if ($modif != "")
             {
-				echo ("<TD><a href = $modif?$champ_lien=$lien class='lien'>Edit</A></TD>");
+                                echo("<TD><a class='btn btn-outline-warning btn-sm' data-toggle='collapse' href=$modif?$champ_lien=$lien role='button' aria-expanded='false' aria-controls='collapseExample'>Edit</a></TD>");
 			}
 			// ajoute éventuellement la colonne supprimer
 			if ($supprim != "")
             {
-				echo ("<TD><a href = $supprim?$champ_lien=$lien class='lien'>Delete</A></TD>");
+                                echo("<TD><a class='btn btn-outline-danger btn-sm' data-toggle='collapse' href=$supprim?$champ_lien=$lien role='button' aria-expanded='false' aria-controls='collapseExample'>Delete</a></TD>");
 			}
 			echo "</tr>";
          }
