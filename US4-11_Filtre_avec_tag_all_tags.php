@@ -93,7 +93,9 @@ function OnButton2()
 	// Include page with collapse button & content for unit 
 	include "US4-11_Filtrer_avec_tag_unit.php";
 	// Include page with source bar search 
+	if ($_SESSION['id_user_type']!=3){
 	include "US4_11_Requete_source_final.php";
+	}
 	// Include page with collapse button & content for data type 
 	include "US_4_11_filtre_avec_tag_data_type.php";
 	

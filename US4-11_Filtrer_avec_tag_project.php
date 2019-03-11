@@ -21,10 +21,16 @@ Output variables :		id of selected formats
 </head>
 <body>
 <?php
+$id_user_account=$_SESSION['id_user_account'];
 // Call to connexion file and connexion etablished in main page 'US4-11_Filtre_avec_tag_all_tags.php'
 	
 // Query to get projects 
-$query_project = "SELECT id_project ,name_project FROM projects";
+if ($_SESSION['id_user_type']!=3){
+	$query_project = "SELECT id_project ,name_project FROM projects";
+}
+else{
+	$query_project = "SELECT id_project ,name_project FROM projects where id_project IN (select id_project from link_project_users where id_user_account=$id_user_account)";
+}
 $result_project = pg_query($connex, $query_project);
 
 // Resultset as a table
