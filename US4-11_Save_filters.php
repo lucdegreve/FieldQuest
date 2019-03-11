@@ -30,6 +30,8 @@ Output variables :
         
 ?>
 
+<form action = "US4-11_Main_page_filter.php" method = "POST" name = "save_filter">
+
 <div class="container-fluid">
 		<div class="row">
 			<div class="col-md-3"></div>
@@ -67,7 +69,8 @@ Output variables :
 											//echo print_r($row);
 											//echo implode("",$row);
 
-                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['label_validation_state'].'</button>';
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$i.'" name="valid[]">'.$row['label_validation_state'].'</button>';
+                        				echo '<input type="hidden" style="display: none;" value="'.$i.'" name="valid[]">';
                         			}
                         			echo '</div></div>';  
                         		echo '</div>';
@@ -83,7 +86,8 @@ Output variables :
            						echo '<div class="col-md-3"></div>';
            						echo '<div class="col-md-6">';
                         			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
-                        			echo 'Start date : '.'<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$start_date.'">'.$start_date.'</button>';
+                        			echo 'Start date : '.'<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$start_date.'" name="start_date">'.$start_date.'</button>';
+                        			echo '<input type="hidden" style="display: none;" value="'.$start_date.'" name="start">';
                         			echo '</div></div>'; 
                         		echo '</div>';
                         		echo '<div class="col-md-3"></div>';
@@ -100,7 +104,8 @@ Output variables :
            						echo '<div class="col-md-3"></div>';
            						echo '<div class="col-md-6">';
                         			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
-                        			echo 'End date : '.'<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$end_date.'">'.$end_date.'</button>';
+                        			echo 'End date : '.'<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$end_date.'" name="end_date">'.$end_date.'</button>';
+                        			echo '<input type="hidden" style="display: none;" value="'.$end_date.'" name="end">';
                         			echo '</div></div>'; 
                         		echo '</div>';
                         		echo '<div class="col-md-3"></div>';
@@ -127,7 +132,9 @@ Output variables :
 											$row=pg_fetch_array($result);
 											//echo implode("",$row);
 
-                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['label_format'].'</button>';
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$i.'" name="format[]">'.$row['label_format'].'</button>';
+                        				echo '<input type="hidden" style="display: none;" value="'.$i.'" name="format[]">';
+
                         			}
                         			echo '</div></div>';  
                         		echo '</div>';
@@ -155,7 +162,9 @@ Output variables :
 											//echo print_r($row);
 											//echo implode("",$row);
 
-                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['name_project'].'</button>';
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$i.'" name="project[]">'.$row['name_project'].'</button>';
+                        				echo '<input type="hidden" style="display: none;" value="'.$i.'" name="project[]">';
+
                         			}
                         			echo '</div></div>';  
                         		echo '</div>';
@@ -167,7 +176,7 @@ Output variables :
                 if (isset($_POST['sources'])){
                		if ($_POST['sources']!='' AND $_POST['sources'] != NULL){
                         $sources = $_POST['sources']; //string format
-                	}
+                	
                 	
 					echo '<div class="container-fluid">';
                         	echo '<div class="row">';
@@ -186,7 +195,9 @@ Output variables :
 											//echo print_r($row);
 											//echo implode("",$row);
 
-				                		echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['first_name'].' '.$row['last_name'].'</button>';
+				                		echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$i.'" name="sources[]">'.$row['first_name'].' '.$row['last_name'].'</button>';
+				                		echo '<input type="hidden" style="display: none;" value="'.$i.'" name="sources[]">';
+
 				                	}
 				                	if (strlen($sources)==1){
 				                		$i = substr($sources, -1, 1);
@@ -197,13 +208,16 @@ Output variables :
 											//echo print_r($row);
 											//echo implode("",$row);
 
-				                		echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['first_name'].' '.$row['last_name'].'</button>';
+				                		echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$i.'" name="sources[]">'.$row['first_name'].' '.$row['last_name'].'</button>';
+				                		echo '<input type="hidden" style="display: none;" value="'.$i.'" name="sources[]">';
+
 				                	}
                         			echo '</div></div>';  
                         		echo '</div>';
                         	echo '<div class="col-md-3"></div>';
                         echo '</div>';
                     echo '</div>';
+                    }
                 }
                 
                 if (isset($_POST['unit'])){
@@ -225,7 +239,9 @@ Output variables :
 											//echo print_r($row);
 											//echo implode("",$row);
 
-                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['tag_name'].'</button>';
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$i.'" name="unit[]">'.$row['tag_name'].'</button>';
+                        				echo '<input type="hidden" style="display: none;" value="'.$i.'" name="unit[]">';
+
                         			}
                         			echo '</div></div>';  
                         		echo '</div>';
@@ -252,7 +268,9 @@ Output variables :
 											$row=pg_fetch_array($result);
 											//echo implode("",$row);
 
-                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['tag_name'].'</button>';
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" value="'.$i.'" name="tag[]">'.$row['tag_name'].'</button>';
+                        				echo '<input type="hidden" style="display: none;" value="'.$i.'" name="tag[]">';
+
                         			}
                         			echo '</div></div>'; 
                         		echo '</div>';
@@ -283,26 +301,27 @@ Output variables :
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">
-					<textarea id="comment" name="comment" required minlength="2" maxlength="10" style="height:100px; width:400px"> Insert your comment here </textarea>				
+					<textarea id="comment" name="comment" style="height:100px; width:400px"> Insert your comment here </textarea>				
 				</div></div>
 			</div>
 			<div class="col-md-3"></div>
 		</div>
 	</div>
 
-
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 					<!-- Search button -->
-					<button type='submit' class='btn btn_lg btn-success' name='Save in favorite' value="Button1">Save filters</button>
+					<button type='submit' class='btn btn_lg btn-success' name='Save_in_favorite' value="Button1">Save filters</button>
 					<!-- Save button -->
 					<button type='submit' class='btn btn_lg btn-success' name='Return' value="Button2">Return</button>
 			</div>
 			<div class="col-md-3"></div>
 		</div>
 	</div>
+
+</form>
 
 	</body>
 	

@@ -395,7 +395,7 @@ if(isset($_POST['validate'])){
 		$id_new_project=$id_project1[0][0];
 
 		//to add users to current project being created
-		if($id_user_asso_after!=NULL){
+		if($id_users_asso_after!=NULL){
 			for ($i=0;$i<count($id_users_asso_after);$i++){
 				$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account)
 														VALUES ('".$id_new_project."','".$id_users_asso_after[$i]."')")
