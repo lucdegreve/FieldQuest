@@ -55,7 +55,8 @@
         // Session variable
         $id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
         // For now I will use this one --> it has to be removed when Session start is working !
-        $id_user_account = 1;
+        //$id_user_account = 1;
+        //echo $id_user_account;
 
         // Connexion to class file and connexion file
         require "tab_donnees/tab_donnees.class.php";
@@ -112,7 +113,7 @@
         echo '</tr>';
         echo '</table>';
 
-        echo '<input type="hidden" size = "50"  name="true_password" value='.$row[0].'>';
+        echo '<input type="hidden" size = "50"  name="true_password" value="'.$row[0].'">';
 
         echo '<BR/>';
 		echo "<div align='center'>";
