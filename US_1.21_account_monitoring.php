@@ -376,11 +376,12 @@ So we have to create dynamic list of project to add or to remove, what we do wit
               $nb_rows = pg_num_rows($result_already_associated_project);
 
 
-              echo '</br><fieldset style="width: 180px">
+              echo '<fieldset style="width: 180px">
               <input class="form-control" type="text" placeholder="Associated project(s) :" readonly>
               </fieldset>
-            </br>';
-// Julien Lorriette : Problème d'Ajax avec la fonction addprojet2 qui appelle une donnée "associated_project" qui n'est présente nulle part ! 
+                <span id="associated_project"></span></p>
+              <BR/>';
+// Julien Lorriette : Problème d'Ajax avec la fonction addprojet2 qui appelle une donnée "associated_project" qui n'est présente nulle part !
 // Elle était dans un <span> avant bootsraping, sans aucune valeur de donnée : à corriger (aucune idée de ce que cette donnée est censée être utile pour...)
               echo'<div id="associated_projects_before" class= "col-md-6">';
                   echo '<table>';
@@ -407,25 +408,30 @@ So we have to create dynamic list of project to add or to remove, what we do wit
               $nb_rows = pg_num_rows($result_project);
 
               echo "</BR>";
-              echo '<fieldset style="width: 500px"><div class="input-group mb-3 ">';
-                  echo '<div class="input-group-prepend" id="list_projects_a">
-                          <span class="input-group-text " id="inputGroup-sizing-default"> <strong>Add a new project to this user : </strong></span>
-                        </div>';
-                  echo '<input class="form-control" aria-describedby="inputGroup-sizing-default" list="project_choice" type="text" id="project_list" autocomplete = "off">';
+
+              echo '<fieldset style="width: 400px">
+              <input class="form-control" type="text" placeholder="Add a new project to this user :" readonly>
+              </fieldset>';
+
+              echo'<div id="list_projects_a" class="col-md-6">';
+
+                  echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
+                      //div ou span ici à rafraichir en fonction des remove et add
                       echo '<datalist id="project_choice">';
-                            for ($k = 0; $k<$nb_rows; $k++ ){
+                            for ($k = 0; $k<$nb_rows;$k++ ){
                                 echo '<option value="'.$table_project_2[$k][0].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
                             }
                       echo '</datalist>';
-                  echo '</fieldset>';
-              echo '<button type="button" value="Add a project" class="btn btn-outline-warning" name="addproject" onclick=addproject2() >Add a Project </button>';
+                  echo '<button type="button" value="Add a project" class="btn btn-md btn-outline-warning" name="addproject" onclick=addproject2()>Add a project</button>';
+              echo '</div>';
+
+
+
 
               ?>
 
-              </BR>
-			  <p> Associated project(s) : <span id="associated_project"></span></p>
-              <BR/>
-           
+
+
 
 
 
