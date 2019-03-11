@@ -23,8 +23,10 @@
 
 		$nb_files = pg_num_rows($result);
 		if($nb_files ==0){
-			$sql = pg_query($connex,'Delete from projects where id_project='.$id_project.'');  // if the project is empty we can delete it
+		
 			$sql2 = pg_query($connex,'Delete from link_project_users where id_project='.$id_project.'');  // if the project is empty all the we can delete it
+			$sql = pg_query($connex,'Delete from projects where id_project='.$id_project.'');  // if the project is empty we can delete it
+			
 			echo "<h1 align='center'>The project has been deleted</h1></br>";
 			echo "</br></br></br></br>";
 			echo '<form name="return" action="US1_42_Gerer_projets.php" method="POST">
