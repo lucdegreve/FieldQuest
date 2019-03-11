@@ -41,6 +41,6 @@ Output variables :
 				}
 		echo'</datalist>';
 	// button to add the selected user to the project	
-	echo'<button type="button" class="btn btn-success" name="addu" onclick="add_user1()">Add a user</button>';
+	echo'<button type="button" class="btn btn-outline-warning" name="addu" onclick="add_user1()">Add a user</button>';
 					
 ?>
