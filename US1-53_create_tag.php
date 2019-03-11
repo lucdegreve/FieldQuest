@@ -32,13 +32,16 @@
 				 include("en_tete.php");
 				 echo "</br>";
         ?>
-        <div class="container">
+        
         <?php 
             // To add a new client 
             require "./tab_donnees/funct_connex.php";
 			echo '<form name="coucou" action="US1-54_manage_tags.php">
 				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
 				</form>';
+        ?>
+        <div class="container">
+        <?php
             $con=new Connex();
             $connex=$con->connection;    
             // parameters of request
@@ -49,8 +52,7 @@
             $result = pg_query($connex, $query)  
                 or die('Échec de la requête : ' . pg_last_error($connex));
 				echo '<form name="form_creation" action="US1-53_create_tag.php" onsubmit="return validation()" method="get">';
-				echo '<div class="card" style="width:800px">';
-					echo '<h4 class="card-title">Add a new tag</h4> <br/> ';
+					echo '<h1 class="card-title" align="center">Add a new tag</h1>';
 					echo '<div class=card-body>';
 					echo '<label>Choose your tag type :</label><br/>
 					<select name="liste_type" >;
@@ -64,7 +66,7 @@
                                                 <span class="input-group-text" id="inputGroup-sizing-default"> Enter the tag name : </span>
                                             </div>
                                             </br>
-                                            <input type="text" name="tag_name"><br/></br>
+                                            <input class="form-control" type="text" name="tag_name"><br/></br>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -74,7 +76,7 @@
 										</div>
                                         <div><button type="submit" class="btn btn-outline-success">Validate</button></div>
 						</div>
-					</div>		
+					
 				</form>';
 				?>
 		</div>
