@@ -30,7 +30,7 @@
 		$con=new Connex();
 		$connex=$con->connection;
 		//Query
-		$result=pg_query($connex, "SELECT id_project, name_project  , TO_CHAR(project_init_date, 'DD/MM/YYYY')  FROM projects ORDER BY project_init_date DESC") or die('Échec de la requête : ' . pg_last_error());
+		$result=pg_query($connex, "SELECT id_project, id_status, name_project  , TO_CHAR(project_init_date, 'DD/MM/YYYY')  FROM projects ORDER BY project_init_date DESC") or die('Échec de la requête : ' . pg_last_error());
 
 			// Parcours des résultats ligne par ligne
 			// Pour chaque ligne mysqli_fetch_array renvoie un tableau de valeurs
@@ -55,12 +55,15 @@
 				<div class="col-md-12">
 					<?php
 					//creation du tableau
-						echo '<table id="example" class="display" border=0 bordercolor="black" bgcolor="white" size = 30>';
+						echo '<table id="example" class="display" border=1 bordercolor="black" bgcolor="white" size = 20>';
 
 					// en tete du tableau
 
 							echo '<thead>';
 							echo '<tr>';
+							echo '<th>' ;
+							echo  'State';
+							echo '</th>';
 							echo '<th>' ;
 							echo  'Project name';
 							echo '</th>';
@@ -84,17 +87,34 @@
 									echo '<tr>' ;
 										for($i=1; $i<  pg_num_fields($result); $i++)
 										{
-											echo '<td>';
+											
+											if($i==1){
+												echo '<td width="20">';
+												if($row[$i]==2){
+													echo "Finished";
+													}
+												else if($row[$i]==1){
+													echo "On going";
+
+													}
+												else if($row[$i]==3){
+													echo "Upcomming";
+													}
+												}
+											else{
+												echo '<td>';
 												echo $row[$i]."  ";
+												}
 											echo '</td>';
 										}
 											// ajoute éventuellement la colonne edit
 											echo '<td>';
-												echo ("<a class='btn btn-outline-warning btn-sm' data-toggle='collapse' href = 'US1-41_create_project.php?id_project=".$row[0]."' >Edit</A>");
+												echo ("<a href = 'US1-41_create_project.php?id_project=".$row[0]."' class='lien'>Edit</A>");
 											echo '</td>';
 											// ajoute éventuellement la colonne supprimer
 											echo '<td>';
-												echo ("<a class='btn btn-outline-danger btn-sm' href = 'us_1_43_supprimer_un_projet.php?id_project=".$row[0]."' class='lien'>Delete</A>");
+
+												echo ("<a href = 'us_1_43_supprimer_un_projet.php?id_project=".$row[0]."' class='lien'>Delete</A>");
 											echo '</td>';
 									echo '</tr>';
 								}
