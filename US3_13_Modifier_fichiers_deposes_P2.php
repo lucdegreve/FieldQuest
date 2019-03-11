@@ -159,9 +159,6 @@ echo "</br>";
 				//Real dates
 				$start_date = $daydeb."/".$monthdeb."/".$yeardeb;
 				$end_date = $dayend."/".$monthend."/".$yearend;
-			
-			//Get the new projects
-				//A CODER
 				
 			//Get new latitude and longitude
 			$longitude= $_SESSION['longitude'];
