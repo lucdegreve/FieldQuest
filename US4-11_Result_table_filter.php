@@ -203,7 +203,9 @@ Output variables :
 
 		$result_files_id=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
 		$nbrows=pg_num_rows($result_files_id);
-                
+               
+		//Path to download file							
+        $path='US_2_21_dragdrop_upload/'; 
 		?>
 
 
@@ -215,7 +217,7 @@ Output variables :
 
 				<div class="row">
 
-					<div class="col-md-9"><h1><B>Files list</B></h1></div>
+					<div class="col-md-9"><h1>Files list</h1></div>
 
 					<div class="col-md-1" align="right">
 
@@ -235,13 +237,13 @@ Output variables :
 
 								<th scope="col" width="5%">State</th>
 
-								<th scope="col" width="25%">File name</th>
+								<th scope="col" width="21%">File name</th>
 
-								<th scope="col" width="10%">Upload date</th>
+								<th scope="col" width="17%">Upload date</th>
 
 								<th scope="col" width="17%">Origin</th>
 
-								<th scope="col" width="8%">Size</th>
+								<th scope="col" width="20%">Size(Octet)</th>
 
 								<th scope="col" width="10%"></th>
 
@@ -325,10 +327,56 @@ Output variables :
 								// Delete last ', ' in $metadata
 
 								$metadata = substr($metadata, 0, strlen($metadata)-2);
-
+								//State "being checked"                               								
+                                if($valid=="Being checked"){
+									echo "<tr class='table-active'>";
+										echo "<th scope='row'></th>";
+										echo "<th scope='row'>".substr($name,10)."</th>";
+										echo "<th scope='row'>".$date."</th>";
+										echo "<th scope='row'>".$first_name." ".$last_name."</th>";
+										echo "<th scope='row'>".$size."</th>";
+										echo "<td>";
+                                            echo "<a href='".$path.$name."' download> ";                                                
+												echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download file</button>';                                            
+                                            echo "</a>";
+										echo "</td>";
+										echo "<td>";
+											echo '<button type="button" id="btnEdit" name="btnEdit" class="btn btn-sm btn-outline-warning btn-block" onclick="return edit_file('.$id_file.')">Edit</button>';													
+										echo "</td>";
+										echo "<td>";
+											echo "<button type='button' id='btnDelete' name='btnDelete' class='btn btn-sm btn-outline-danger btn-block' onclick='return delete_file(".$id_file.")'>Delete</button>";
+										echo "</td>";
+										echo "<td>";
+											echo '</br><div align="center"><input type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'"></div>';
+										echo "</td>";
+									echo "</tr>";
+								}
+								
+								//State "not validated"
+								if($valid=="Not validated"){
+									echo "<tr>";
+										echo "<td><img src='picto/refused.png' width='27' height='27'/></td>";
+										echo "<td>".substr($name,10)."</th>";
+										echo "<td>".$date."</td>";
+										echo "<td>".$first_name." ".$last_name."</td>";
+										echo "<td>".$size."</td>";
+										echo "<td>";                                    
+                                            echo "<a href='".$path.$name."' download> ";                                    
+												echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download file</button>';
+                                            echo "</a>";                                    
+										echo "</td>";
+										echo "<td></td>";
+										echo "<td>";
+											echo "<button type='button' id='btnDelete' name='btnDelete' class='btn btn-sm btn-outline-danger btn-block' onclick='return delete_file(".$id_file.")'>Delete</button>";
+										echo "</td>";
+										echo "<td>";
+											echo '</br><div align="center"><input type="checkbox" name="id_file_'.$id_file.'" value="'.$id_file.'"></div>';									
+										echo "</td>";
+									echo "</tr>";
+								}
 								//State "validated"
 
-								if($valid=="validated"){
+								if($valid=="Validated"){
 
 									if($id_file!=$original_id){
 
@@ -392,9 +440,10 @@ Output variables :
 
                                                                                             //Récuperation des valeurs pour la fonction download
 
-                                                                                            echo '<a href="download.php?file='.$listdl.'&i='.$pos.'" class="btn btn-sm btn-outline-success btn-block">Dowload File</a>';
-
-                                                                                            $pos=$pos+1;
+																							echo "<a href='".$path.$name."' download> ";                                            
+																								echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download file</button>';                                    
+																							echo "</a>";                                                                                            
+																							$pos=$pos+1;
 
 										echo "</td>";
 
