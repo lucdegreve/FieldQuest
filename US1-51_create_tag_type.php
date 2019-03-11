@@ -24,15 +24,11 @@
 	<body>
 		<?php
 				 include("en_tete.php");
-				 
-        ?>
-
-        <?php
             // To add a new client
             require "./tab_donnees/funct_connex.php";
-			echo'<form action="US1-54_manage_tags.php">
+			echo'<div class="container">
+			<form action="US1-54_manage_tags.php">
 				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
-				<div class="container">
 				</form><h4>Add a new tag type</h4>';
 
 
