@@ -328,7 +328,7 @@ Output variables :
 
 								//State "validated"
 
-								//if($valid=="Validated"){
+								if($valid=="validated"){
 
 									if($id_file!=$original_id){
 
@@ -354,7 +354,7 @@ Output variables :
 
 										// Popover to display metadata for each file
 
-										echo '<td>'.substr($name,10).' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
+										echo '<td>'.$name.' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
 
 										echo "<td>".$date."</td>";
 
@@ -422,7 +422,7 @@ Output variables :
 
 									echo "</tr>";
 
-								//}
+								}
 
 							}
 
@@ -437,8 +437,225 @@ Output variables :
 			</form>
 
 		</div>
-
+	
+	Filters selected : 
                 
+	<?php
+				if (isset($_POST['Validation_state'])){
+                    $valid = Array();
+                    foreach ($_POST['Validation_state'] AS $i){
+                    	$valid[] = $i; //array format
+                    }
+                	echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        				echo 'Validation state :';
+                        			foreach($valid as $i){
+                        			
+                        					$query="SELECT label_validation_state FROM validation_state WHERE id_validation_state = $i";
+											$result=pg_query($connex, $query) or die('Query failed : ' . pg_last_error());	
+											$row=pg_fetch_array($result);
+											//echo print_r($row);
+											//echo implode("",$row);
+
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['label_validation_state'].'</button>';
+                        			}
+                        			echo '</div></div>';  
+                        		echo '</div>';
+                        	echo '<div class="col-md-3"></div>';
+                        echo '</div>';
+                    echo '</div>';                }
+
+                if (isset($_POST['start'])){
+                	if ($_POST['start']!=''){
+                        $start_date = $_POST['start']; //only one value, string format 
+                        echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        			echo 'Start date : '.'<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$start_date.'">'.$start_date.'</button>';
+                        			echo '</div></div>'; 
+                        		echo '</div>';
+                        		echo '<div class="col-md-3"></div>';
+                        	echo '</div>';
+                        echo '</div>';
+                	}
+                }
+
+                if (isset($_POST['end'])){
+                	if ($_POST['end']!=''){
+                        $end_date = $_POST['end']; //only one value, string format 
+                        echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        			echo 'End date : '.'<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$end_date.'">'.$end_date.'</button>';
+                        			echo '</div></div>'; 
+                        		echo '</div>';
+                        		echo '<div class="col-md-3"></div>';
+                        	echo '</div>';
+                        echo '</div>';
+                	}
+                }
+                
+                if (isset($_POST['format'])){
+                	$format = Array();
+                    foreach ($_POST['format'] AS $i){
+                    	$format[] = $i;
+                    }
+                    echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        				echo 'Format(s) :';
+                        			foreach($format as $i){
+                        			
+                        					$query="SELECT label_format FROM format WHERE id_format = $i";
+											$result=pg_query($connex, $query) or die('Query failed : ' . pg_last_error());	
+											$row=pg_fetch_array($result);
+											//echo implode("",$row);
+
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['label_format'].'</button>';
+                        			}
+                        			echo '</div></div>';  
+                        		echo '</div>';
+                        	echo '<div class="col-md-3"></div>';
+                        echo '</div>';
+                    echo '</div>';
+                }
+                
+                if (isset($_POST['projet'])){
+                	$projet = Array();
+                    foreach ($_POST['projet'] AS $i){
+                    	$projet[] = $i; //array format
+                    }
+                	echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        				echo 'Project(s) :';
+                        			foreach($projet as $i){
+                        			
+                        					$query="SELECT name_project FROM projects WHERE id_project = $i";
+											$result=pg_query($connex, $query) or die('Query failed : ' . pg_last_error());	
+											$row=pg_fetch_array($result);
+											//echo print_r($row);
+											//echo implode("",$row);
+
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['name_project'].'</button>';
+                        			}
+                        			echo '</div></div>';  
+                        		echo '</div>';
+                        	echo '<div class="col-md-3"></div>';
+                        echo '</div>';
+                    echo '</div>';
+                }
+                
+                if (isset($_POST['sources'])){
+               		if ($_POST['sources']!='' AND $_POST['sources'] != NULL){
+                        $sources = $_POST['sources']; //string format
+                	
+                	
+					echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        				echo 'Source(s) :';
+                        			while (strlen($sources)>=3){
+				                		$a = strripos($sources, ",");
+				                		$i= substr($sources, $a+1, strlen($sources)); 
+				                		$sources = substr($sources, 0, $a);
+				                		
+				                			$query="SELECT first_name, last_name FROM user_account WHERE id_user_account = $i";
+											$result=pg_query($connex, $query) or die('Query failed : ' . pg_last_error());	
+											$row=pg_fetch_array($result);
+											//echo print_r($row);
+											//echo implode("",$row);
+
+				                		echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['first_name'].' '.$row['last_name'].'</button>';
+				                	}
+				                	if (strlen($sources)==1){
+				                		$i = substr($sources, -1, 1);
+				                		
+				                			$query="SELECT first_name, last_name FROM user_account WHERE id_user_account = $i";
+											$result=pg_query($connex, $query) or die('Query failed : ' . pg_last_error());	
+											$row=pg_fetch_array($result);
+											//echo print_r($row);
+											//echo implode("",$row);
+
+				                		echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['first_name'].' '.$row['last_name'].'</button>';
+				                	}
+                        			echo '</div></div>';  
+                        		echo '</div>';
+                        	echo '<div class="col-md-3"></div>';
+                        echo '</div>';
+                    echo '</div>';
+					}
+                }
+                
+                if (isset($_POST['unit'])){
+                	$unit = Array();
+                    foreach ($_POST['unit'] AS $i){
+                    	$unit[] = $i; //array format
+                    }
+                	echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        				echo 'Unit(s) :';
+                        			foreach($unit as $i){
+                        			
+                        					$query="SELECT tag_name FROM tags WHERE id_tag = $i";
+											$result=pg_query($connex, $query) or die('Query failed : ' . pg_last_error());	
+											$row=pg_fetch_array($result);
+											//echo print_r($row);
+											//echo implode("",$row);
+
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['tag_name'].'</button>';
+                        			}
+                        			echo '</div></div>';  
+                        		echo '</div>';
+                        	echo '<div class="col-md-3"></div>';
+                        echo '</div>';
+                    echo '</div>';
+                }
+                
+                if (isset($_POST['tag'])){
+                	$tag = Array();
+                    foreach ($_POST['tag'] AS $i){
+                    	$tag[] = $i; //array format
+                    }
+                	echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        				echo 'Tag(s) :';
+                        			foreach($tag as $i){
+                        			
+                        					$query="SELECT tag_name FROM tags WHERE id_tag = $i";
+											$result=pg_query($connex, $query) or die('Query failed : ' . pg_last_error());	
+											$row=pg_fetch_array($result);
+											//echo implode("",$row);
+
+                        				echo '<button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="'.$i.'">'.$row['tag_name'].'</button>';
+                        			}
+                        			echo '</div></div>'; 
+                        		echo '</div>';
+                        	echo '<div class="col-md-3"></div>';
+                        echo '</div>';
+                    echo '</div>';
+                }  
+          
+          ?>
 
 
 
