@@ -337,13 +337,20 @@ echo'</div>'; //container
 					echo'</div>';
 					//$users_all_details=$_SESSION["users_asso_before"];
 					//$users=array_column($users_all_details,0);
-					$users=implode(",",$users); //transforms table to list
-					$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name
+					if ($users[0]==""){
+						$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name
+															from user_account
+															ORDER BY last_name")
+															or die ('Failed to fetch status');
+					}
+					else{
+						$users=implode(",",$users); //transforms table to list
+						$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name
 															from user_account
 															where id_user_account NOT IN ($users)
 															ORDER BY last_name")
 															or die ('Failed to fetch status');
-
+					}
 					$table_user_na = new Tab_donnees($result_users_not_associated,"PG");
 					$table_users_na1 = $table_user_na->t_enr;
 					$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
@@ -360,22 +367,21 @@ echo'</div>'; //container
 						echo'</datalist>';
 
 					// button to add the selected user to the project
-					echo'<button name="addu" class= "btn btn-outline-warning" onclick="add_user1()">Add a user </button>';
+					echo'<button name="addu" type="button" class= "btn btn-outline-warning" onclick="add_user1()">Add a user </button>';
 					echo'</div>';
 					echo'<p> Associated user(s) : <span id="associated_users"></span></p>';
 
 				}else{
 					// Query to get a table with all the users
-						$result_users = pg_query($connex, "select id_user_account
-															from user_account")
-															or die ('Failed to fetch status');
+						//$result_users = pg_query($connex, "select id_user_account
+															//from user_account")
+															//or die ('Failed to fetch status');
 
-						$users=0;
+						//$users=0;
 
 					// Query to get users not yet associated to the project
 					$result_users_not_associated = pg_query($connex, "select id_user_account,last_name, first_name
 																from user_account
-																where id_user_account NOT IN ($users)
 																ORDER BY last_name")
 																or die ('Failed to fetch status');
 
