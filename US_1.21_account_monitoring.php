@@ -109,7 +109,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 $website = $_GET["website"];
 
                 $id_user_account = $_GET["id_user_account"];
-                echo '</br><p><font color="red"> Database have been correctly updated</font></p>';
+                echo '</br><p><b><font color="#33cc33"> Database have been correctly updated</b></font></p>';
 
                 $query = "UPDATE user_account
                           SET last_name = '".$last_name."', first_name = '".$first_name."',  company = '".$company."',
