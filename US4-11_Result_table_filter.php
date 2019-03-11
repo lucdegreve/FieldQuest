@@ -217,7 +217,7 @@ Output variables :
 
 				<div class="row">
 
-					<div class="col-md-9"><h1><B>Files list</B></h1></div>
+					<div class="col-md-9"><h1>Files list</h1></div>
 
 					<div class="col-md-1" align="right">
 
