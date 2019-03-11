@@ -82,7 +82,7 @@
                 // Then present all the info properly in a table
                 echo '
 
-                <div class="input-group mb-2">
+                <div class="input-group mb-3">
 
                     <div class="input-group-prepend">
                         <span class="input-group-text"> (*) Last name : </span>
@@ -90,63 +90,63 @@
                     </br>
                     <input type="text"  name="last_name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[0].' ">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> (*) First name : </span>
                         </div>
                         </br>
                         <input type="text" size = "50" name="first_name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[1].'">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                       <div class="input-group-prepend">
                           <span class="input-group-text"> Company : </span>
                       </div>
                     </br>
                     <input type="text" size = "50" name="company" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[2].'">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> Address : </span>
                         </div>
                         </br>
                         <input type="text" size = "50" name="address" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[3].'">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                         <span class="input-group-text"> Postcode : </span>
                         </div>
                         </br>
                         <input type="text" size = "50" name="postcode" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[4].'">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> City : </span>
                         </div>
                         </br>
                         <input type="text" size = "50" name="city" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[5].'">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> Country : </span>
                         </div>
                         </br>
                         <input type="text" size = "50" name="country" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[6].'">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> Email address : </span>
                         </div>
                         </br>
                         <input type="text" size = "50" name="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[7].'">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> Telephone number : </span>
                         </div>
                         </br>
                         <input type="text" size = "50" name="phone" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[8].'">
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> Company website : </span>
                         </div>
