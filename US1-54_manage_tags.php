@@ -48,10 +48,10 @@
 		<h2>Manage tags</h2>
 	</div></br>
 	
-    <a href="US1-51_create_tag_type.php"><button type="button" class='btn btn-outline-primary'>New tag category</button></a>
+    <a href="US1-51_create_tag_type.php"><button type="button" class='btn btn-outline-primary'>New tag type</button></a>
     <a href="US1-53_create_tag.php"><button type="button" class='btn btn-outline-primary'>New tag</button> </a>
     
-    <a href="US1-54_modify_tag_type.php"><button type="button" class='btn btn-outline-warning'  >Modify tag category</button> </a>
+    <a href="US1-54_modify_tag_type.php"><button type="button" class='btn btn-outline-warning'  >Modify tag type</button> </a>
     <a href="US1-54_modify_tag.php"><button type="button" class='btn btn-outline-warning'>Modify tag</button></a>
     </br></br>
 
