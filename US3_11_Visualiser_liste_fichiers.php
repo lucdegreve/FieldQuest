@@ -41,7 +41,7 @@
 								<th scope="col" width="20%">File name</th>
 								<th scope="col" width="10%">Upload date</th>
 								<th scope="col" width="12%">Origin</th>
-								<th scope="col" width="8%">Size</th>
+								<th scope="col" width="12%">Size (Octet) </th>
 								<th scope="col" width="10%"></th>
 								<th scope="col" width="10%"></th>
 								<th scope="col" width="10%"></th>
