@@ -147,7 +147,7 @@ if (!isset($_GET['validate'])){
 						
 						if ($user_type==1)
 						{
-							$query_projects_list = "SELECT * from projects p JOIN link_project_users lpu ON p.id_project=lpu.id_project ORDER BY name_project asc";
+							$query_projects_list = "SELECT * from projects  ORDER BY name_project asc";
 							$result_projects_list = pg_query($connex, $query_projects_list);	//CHANGER L'ID
 							$tab_projects_list = new Tab_donnees($result_projects_list,"PG");
 						}
