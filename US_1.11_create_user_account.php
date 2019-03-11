@@ -55,8 +55,8 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 		<form method="GET"  action="US1-10_Gerer_comptes.php">
 			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
 		</form>
-		
-		
+
+
 		<div align="center">
 			<h2>Please fill all the information</h2>
 		</div>
@@ -94,7 +94,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
         </script>
 
         <!-- Now we create the form to be filles -->
-
+        <div align="center">
         <form name="account_creation" action="US_1.11_create_user_account.php" onsubmit="return valider()" method="GET">
                 <Br/>
 
@@ -111,11 +111,16 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 ?>
 
                 <!-- Table creation -->
-                <table>
+
+
                     <!-- Here is a table of all the fields admin have to fill -->
                     <!-- Attention à l'identifiant utilisateur ?? -->
-                    <tr>
-                        <td> (*) User type </td><td>
+
+
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text"> User type : </span>
+                      </div>
                           <?php
                                 // When you create an account you need to choose if it is an admin, an intern user or an extern user
                                 // Query to get all information from user_type to make a list of user_type.
@@ -125,41 +130,70 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                                 // Here is the list of user types
                                 $tab->creer_liste_option_plus ("list_user_type", "id_user_type", "name_user_type");
                           ?>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td> (*) Last name </td><td> <input type="text" size = "50" name="last_name" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> (*) First name </td><td> <input type="text" size = "50"  name="first_name" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> Company </td><td> <input type="text" size = "50"  name="company" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> Address </td><td> <input type="text" size = "50"  name="address" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> Postcode </td><td> <input type="text" size = "50"  name="postcode" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> City </td><td> <input type="text" size = "50"  name="city" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> Country </td><td> <input type="text" size = "50"  name="country" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> Email </td><td> <input type="text" size = "50"  name="email" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> Phone number </td><td> <input type="text" size = "50"  name="phone" value=""> </td>
-                    </tr>
-                    <tr>
-                        <td> Company website </td><td> <input type="text" size = "50" name="website" value=""> </td>
-                    </tr>
-                </table>
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> (*) Last name : </span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="last_name" value=""> </td>
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> (*) First name : </span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  name="first_name" value="">
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> Company : </span>
+                          </div>
+                          </br><input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="company" value="">
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> Address : </span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="address" value="">
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> Postcode : </span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="postcode" value=""> </td>
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> City : </span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="city" value=""> </td>
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> Country : </span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  name="country" value=""> </td>
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> Email address : </span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  name="email" value=""> </td>
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> Telephone number : </span>
+                          </div>
+                          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="phone" value=""> </td>
+                      </div>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"> Company website : </span>
+                          </div>
+                      <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="website" value=""> </td>
+                      </div>
 
-                <BR/>
+
+                      <BR/>
 
                 <!-- Following php is to implement for the first time the datalist that will be used to associate
                 projects to the user -->
@@ -180,10 +214,11 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
 
                     $nb_rows = pg_num_rows($result_project);
+                    
+                    echo '<fieldset style="width: 400px">
+                    <input class="form-control" type="text" placeholder="Please choose the project(s) this user will work on :" readonly>
+                    </fieldset>';
 
-
-
-                    echo '<label for="label_project"> Please choose the project(s) this user will work on : </label>';
                     echo'<div id="list_projects_a" class="col-md-6">';
 
                         echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
@@ -287,8 +322,11 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
                 </script>
 
-                </BR>
-                <p> </BR> Associated project(s) : <span id="associated_project"></span></p>
+              </BR></br>
+                <fieldset style="width: 180px">
+                <input class="form-control" type="text" placeholder="Associated project(s) :" readonly>
+                </fieldset>
+                  <span id="associated_project"></span></p>
                 <BR/>
 				<div align="center">
 					<button type="submit" name="createaccount" class="btn btn-lg btn-outline-success">Create account</button>
@@ -369,10 +407,11 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 }
             }
         ?>
-
+      </div>
     		<?php
     				 include("pied_de_page.php");
 
     		?>
+
     </body>
 </html>
