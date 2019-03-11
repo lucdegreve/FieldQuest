@@ -24,14 +24,15 @@
 	<body>
 		<?php
 				 include("en_tete.php");
-				 echo "</br>";
+				 
         ?>
-        <div class="container">
+
         <?php
             // To add a new client
             require "./tab_donnees/funct_connex.php";
 			echo'<form action="US1-54_manage_tags.php">
 				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
+				<div class="container">
 				</form><h4>Add a new tag type</h4>';
 
 
@@ -44,21 +45,21 @@
             // and recuperation of recordset
             $result = pg_query($connex, $query)
                 or die('Échec de la requête : ' . pg_last_error($connex));
-				echo '<form name="form_creation" action="US1-53_create_tag_type.php" onsubmit="return validation()" method="get">';
-                
+				echo '<form name="form_creation" action="US1-51_create_tag_type.php" onsubmit="return validation()" method="get">';
+
 					echo '</select></br>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroup-sizing-default"> Enter the tag type : </span>
                                             </div>
                                             </br>
-                                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="tag_name"><br/></br>
+                                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_tag_type"><br/></br>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" > Enter a description :</span>
                                             </div>
-                                            <textarea class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="tag_description"></textarea></br>
+                                            <textarea class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="description_tag_type"></textarea></br>
 					</div>
                                         <div><button type="submit" class="btn btn-outline-success">Validate</button></div>
 				</form>';
@@ -68,7 +69,7 @@
 
 
             if (isset($_GET["name_tag_type"])){ //if we click on validate the previous form, we create the tag in the database
-                require_once "funct_connex.php";
+                require_once "tab_donnees/funct_connex.php";
                 $con=new Connex();
                 $connex=$con->connection;
                 $query = "SELECT *  FROM tag_type";
@@ -104,7 +105,7 @@
                 $res = pg_query($connex, $sql)
                 or die('Échec de la requête : ' . pg_last_error($connex));
 
-                echo 'New type tag '.$name_tag_type.' created';
+                echo '<div class="container"> <p style="strong">New type tag '.$name_tag_type.' created	</p> </div>';
 
             }
 
