@@ -82,6 +82,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
         <?php
 
             $id_user_account = $_GET["id_user_account"];
+
             // A ENLEVER APRES VERIFICATION
             //$id_user_account = 2;
 
@@ -106,6 +107,9 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 $email = $_GET["email"];
                 $phone = $_GET["phone"];
                 $website = $_GET["website"];
+                
+                $id_user_account = $_GET["id_user_account"];
+                echo '</br><p><font color="red"> Database have been correctly updated</font></p>';
 
                 $query = "UPDATE user_account
                           SET last_name = '".$last_name."', first_name = '".$first_name."',  company = '".$company."',
@@ -184,6 +188,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                     echo '<tr>';
                         echo '<td> Company website</td><td> <input type="text" size = "50" name="website" value="'.$row[9].'"> </td>';
                     echo '</tr>';
+                    echo '<input type="hidden" size = "50" name="id_user_account" value="'.$id_user_account.'">';
                 echo '</table>';
             ?>
 </div>
@@ -370,12 +375,6 @@ So we have to create dynamic list of project to add or to remove, what we do wit
               <BR/>
               <button type="submit" class="btn btn-outline-success" name="modify_account">Modify user account</button>
 
-              <?php
-              echo "</BR>";
-                  if (isset($_GET["last_name"],$_GET["first_name"])){
-                          echo "Database have been correctly updated";
-                  }
-              ?>
         </form></div>
       	<?php
       			 include("pied_de_page.php");
