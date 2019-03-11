@@ -7,15 +7,19 @@
         <script type="text/javascript">
             function validation(){
                 var al="";
+				if(document.form_creation.liste_type.value == "Select a new category for your new tag") {
+                // enter a tag name
+                    al= al+"Choose a tag type \n";
+                }
                 // if value of surname field is empty
                 if(document.form_creation.tag_name.value == "") {
                 // enter a tag name
-                    al="Enter a tag name";
+                    al= al+"Enter a tag name";
                 }
                 if (al=="")
                     return true;
-                else
-                    {alert(al);
+                else{
+					alert(al);
                     return false;
                 }
             }
