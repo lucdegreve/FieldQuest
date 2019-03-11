@@ -1,4 +1,4 @@
-<?php 
+<?php
     if(!isset($_GET["modify_account"])){
         if(isset($_SESSION["id_project_list_am"])){
             unset($_SESSION["id_project_list_am"]);
@@ -107,7 +107,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 $email = $_GET["email"];
                 $phone = $_GET["phone"];
                 $website = $_GET["website"];
-                
+
                 $id_user_account = $_GET["id_user_account"];
                 echo '</br><p><font color="red"> Database have been correctly updated</font></p>';
 
@@ -157,39 +157,82 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 $row = pg_fetch_row($result);
 
                 // Then present all the info properly in a table
-                echo '<table>';
-                    echo '<tr>';
-                        echo '<td> (*) Last name  </td> <td> <input type="text" size = "50" name="last_name" value="'.$row[0].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> (*) First name </td><td> <input type="text" size = "50" name="first_name" value="'.$row[1].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> Company </td><td> <input type="text" size = "50" name="company" value="'.$row[2].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> Address </td><td> <input type="text" size = "50" name="address" value="'.$row[3].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> Postcode </td><td> <input type="text" size = "50" name="postcode" value="'.$row[4].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> City </td><td> <input type="text" size = "50" name="city" value="'.$row[5].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> Country </td><td> <input type="text" size = "50" name="country" value="'.$row[6].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> Email </td><td> <input type="text" size = "50" name="email" value="'.$row[7].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> Phone number </td><td> <input type="text" size = "50" name="phone" value="'.$row[8].'"> </td>';
-                    echo '</tr>';
-                    echo '<tr>';
-                        echo '<td> Company website</td><td> <input type="text" size = "50" name="website" value="'.$row[9].'"> </td>';
-                    echo '</tr>';
-                    echo '<input type="hidden" size = "50" name="id_user_account" value="'.$id_user_account.'">';
-                echo '</table>';
+                echo '<div class="container" align="center">
+
+                <div class="input-group mb-3">
+
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> (*) Last name : </span>
+                    </div>
+                    </br>
+                    <input type="text" size = "50" name="last_name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[0].' ">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> (*) First name : </span>
+                        </div>
+                        </br>
+                        <input type="text" size = "50" name="first_name" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[1].'">
+                    </div>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text"> Company : </span>
+                      </div>
+                    </br>
+                    <input type="text" size = "50" name="company" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[2].'">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Address : </span>
+                        </div>
+                        </br>
+                        <input type="text" size = "50" name="address" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[3].'">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text"> Postcode : </span>
+                        </div>
+                        </br>
+                        <input type="text" size = "50" name="postcode" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[4].'">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> City : </span>
+                        </div>
+                        </br>
+                        <input type="text" size = "50" name="city" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[5].'">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Country : </span>
+                        </div>
+                        </br>
+                        <input type="text" size = "50" name="country" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[6].'">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Email address : </span>
+                        </div>
+                        </br>
+                        <input type="text" size = "50" name="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[7].'">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Telephone number : </span>
+                        </div>
+                        </br>
+                        <input type="text" size = "50" name="phone" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[8].'">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Company website : </span>
+                        </div>
+                        </br>
+                        <input type="text" size = "50" name="website" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value="'.$row[9].'">
+                    </div>
+                    <input type="hidden" size = "50" name="id_user_account" value="'.$id_user_account.'">
+                  </div>
+                </div>';
             ?>
 </div>
             <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -331,7 +374,14 @@ So we have to create dynamic list of project to add or to remove, what we do wit
               $_SESSION["already_associated_projects"]=$tab_associated_project;
 
               $nb_rows = pg_num_rows($result_already_associated_project);
-              
+
+
+              echo '</br><fieldset style="width: 180px">
+              <input class="form-control" type="text" placeholder="Associated project(s) :" readonly>
+              </fieldset>
+            </br>';
+// Julien Lorriette : Problème d'Ajax avec la fonction addprojet2 qui appelle une donnée "associated_project" qui n'est présente nulle part ! 
+// Elle était dans un <span> avant bootsraping, sans aucune valeur de donnée : à corriger (aucune idée de ce que cette donnée est censée être utile pour...)
               echo'<div id="associated_projects_before" class= "col-md-6">';
                   echo '<table>';
                       for ($i=0; $i < $nb_rows ; $i++) {
@@ -341,7 +391,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                       }
                   echo '</table>';
               echo '</div>';
-             
+
               ?>
 
               <?php
@@ -357,22 +407,26 @@ So we have to create dynamic list of project to add or to remove, what we do wit
               $nb_rows = pg_num_rows($result_project);
 
               echo "</BR>";
-              echo '<label for="label_project"> Add a project to this user : </label>';
-
-              echo'<div id="list_projects_a" class="col-md-6">';
-                  echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
+              echo '<fieldset style="width: 500px"><div class="input-group mb-3 ">';
+                  echo '<div class="input-group-prepend" id="list_projects_a">
+                          <span class="input-group-text " id="inputGroup-sizing-default"> <strong>Add a new project to this user : </strong></span>
+                        </div>';
+                  echo '<input class="form-control" aria-describedby="inputGroup-sizing-default" list="project_choice" type="text" id="project_list" autocomplete = "off">';
                       echo '<datalist id="project_choice">';
                             for ($k = 0; $k<$nb_rows; $k++ ){
                                 echo '<option value="'.$table_project_2[$k][0].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
                             }
                       echo '</datalist>';
-                  echo '<button value="Add a project" class="btn btn-outline-warning" name="addproject" onclick=addproject2()>Add a Project </button>';
-              echo '</div>';
+                  echo '</fieldset>';
+              echo '<button value="Add a project" class="btn btn-outline-warning" name="addproject" onclick=addproject2() >Add a Project </button>';
+
               ?>
 
               </BR>
-              <p> Associated project(s) : <span id="associated_project"></span></p>
-              <BR/>
+            </br></br>
+
+
+
               <button type="submit" class="btn btn-outline-success" name="modify_account">Modify user account</button>
 
         </form></div>
