@@ -330,7 +330,7 @@ echo'</div>'; //container
 							$users[]=$table_users_a1[$i][0];
 							echo'<tr id='.$i.'>';
 								echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
-								echo'<td><button name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
+								echo'<td><button type="button" name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
 							echo'</tr>';
 						}
 						echo '</table>';
