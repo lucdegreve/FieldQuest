@@ -46,9 +46,11 @@ So we have to create dynamic list of project to add or to remove, what we do wit
     				 include("en_tete.php");
     		?>
 	</br>
-	<?php if (isset($_GET["last_name"],$_GET["first_name"])){
+	<?php if (isset($_GET["createaccount"])){
+		if (isset($_GET["last_name"],$_GET["first_name"])){
 			echo "<div class='alert alert-success'>The user account has been correctly created. A confirmation e-mail has been sent.</div>";
-		}?>
+		}
+	}?>
 	<div class="container">
 		<form method="GET"  action="US1-10_Gerer_comptes.php">
 			<button type="submit" class="btn btn-outline-info btn-md">Back</button>
@@ -167,9 +169,6 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
                     $id_user_account = $_SESSION["id_user_account"];
 
-                    // A ENELEVER DES QUE LE CODE SERA VERIFIE
-                    $id_user_account = 1;
-
                     $query_project = "SELECT id_project, name_project
                   	                   FROM projects";
                   	$result_project = pg_query($connex, $query_project) or die ("Failed to fetch user accounts");
@@ -194,7 +193,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                                       echo '<option value="'.$table_project[$k][0].'"> Project '.$table_project[$k][0].' : '.$table_project[$k][1].' </option>';
                                   }
                             echo '</datalist>';
-                        echo '<button type="button" class="btn btn-md btn-outline-warning" name="addproject" onclick=addproject1() >Add a project</button>';
+                        echo '<button type="button" class="btn btn-md btn-outline-warning" name="addproject" onclick=addproject1()>Add a project</button>';
                     echo '</div>';
                 ?>
 
@@ -300,7 +299,8 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
         <!-- After submitting this form, issset verifies if first name and last name are filled, if so, data are loaded in the database -->
         <?php
-            if (isset($_GET["last_name"],$_GET["first_name"]))
+            //if (isset($_GET["last_name"],$_GET["first_name"]))
+				if (isset($_GET["createaccount"]))
             {
                 $user_type = $_GET["list_user_type"];
                 $last_name = $_GET["last_name"];

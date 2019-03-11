@@ -32,8 +32,8 @@
         $table_project = $tab->t_enr;
 
         echo "<BR/>";
-        echo '<button class="btn btn-outline-info" name="button_project '.$table_project[0][0].'" >Project '.$table_project[0][0].' :'.$table_project[0][1].'</button>';    
-        echo '<button class="btn btn-outline-warning" name="remove_project" onclick=removeproject1('.$table_project[0][0].')>Remove project</button> ';
+        echo '<button type="button" class="btn btn-outline-info" name="button_project '.$table_project[0][0].'" >Project '.$table_project[0][0].' :'.$table_project[0][1].'</button>';    
+        echo '<button type="button" class="btn btn-outline-warning" name="remove_project" onclick=removeproject1('.$table_project[0][0].')>Remove project</button> ';
 
     }
 ?>
