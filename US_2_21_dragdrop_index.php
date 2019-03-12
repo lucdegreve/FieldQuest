@@ -47,7 +47,6 @@ if (!isset($_GET['validate'])){
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 	</head>
 
@@ -136,26 +135,7 @@ if (!isset($_GET['validate'])){
 						<h2><B>Other information</B></h2></br>
 
 						<!-- Period -->
-                        <!-- *********************************-->
-                        <div class="input-group " >
-                            <div class="row" style="width:100%">
-                                <div class="col-sm-4">
-                                    <label for="select-period"  style="width:100%;">Select a period:</label>                         
-                                </div>
-                                <div class="col-sm-8" style="width:100%; " >
-                                    <div class="input-group no-gutters  " style=" width:100%;">
-                                        <div class="input-group-text " style="border: 1px ridge rgb(220, 220, 220, 0.9); float:left; "><i class="far fa-calendar-alt" style="font-size:30px; color:#00A5DB "></i></div>
-                                        <input id="select-period" type="text" name="daterange" value="" class="btn btn-lg btn-outline-primary no-gutters" style="font-size:20px; font-weight:bold; width:80%" /></br>
-                                    </div>
-                                </div>
-                            
-                            </div> 
-                        </div>
-            
-                    
-                    
-                    
-                    
+						Select a period : <input type="text" name="daterange" value=""/></br>
 						<script>
 						$(function() {
 						  $('input[name="daterange"]').daterangepicker({
@@ -224,7 +204,7 @@ if (!isset($_GET['validate'])){
 									<datalist id="users">
 										<?php
 										for($i=0; $i<count($tab_external_users); $i++){	
-											echo'<option value="'.$tab_external_users[$i][0].'" label="'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'">'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'</option>';
+											echo'<option value="'.$tab_external_users[$i][1].'" >'.$tab_external_users[$i][1].' '.$tab_external_users[$i][2].'</option>';
 										}
 										?>
 									</datalist>

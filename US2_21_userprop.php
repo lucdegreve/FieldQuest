@@ -21,13 +21,17 @@ Output variables :		$_SESSION["id_user_list"]
     $connex = $con->connection;
 	
 	//Variable from US1-41_create_project
-    $id_user_value = $_GET["id_user_value"];
+    $name_user = $_GET["id_user_value"];
+	$query1 = "SELECT id_user_account,last_name,first_name FROM user_account WHERE last_name ='".$name_user."'";
+	$result1= pg_query($connex, $query1);
+	$tab1 = new Tab_donnees($result1,"PG");
+	$table_users1 = $tab1->t_enr;
 	
-	if($id_user_value!=""){
+	if($name_user!=""){
 		//To create variables without emptying them each time
 		if(!isset($_SESSION["id_user_list"]) or $_SESSION["id_user_list"]==""){
-			$_SESSION["id_user_list"]=$id_user_value;
-			$query = "SELECT id_user_account,last_name, first_name FROM user_account WHERE id_user_account = ".$id_user_value;
+			$_SESSION["id_user_list"]=$table_users1[0][0];
+			$query = "SELECT id_user_account,last_name, first_name FROM user_account WHERE id_user_account = ".$table_users1[0][0];
 			$result= pg_query($connex, $query);
 			$tab = new Tab_donnees($result,"PG");
 			$table_users = $tab->t_enr;
