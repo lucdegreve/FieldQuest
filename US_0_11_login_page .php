@@ -170,7 +170,7 @@ include("en_tete_login.php");
 		
 		<?php
 			if(isset($_GET["disconnect"])){
-				echo "You have been disconnected";
+				echo '<div class="alert alert-danger">You have been disconnected.</div>';
 				session_destroy();
 			}
         ?>
