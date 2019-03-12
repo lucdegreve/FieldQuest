@@ -87,6 +87,18 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 	// Here are all the Ajax functions that will be used to associate/remove/delete projects of the user
 
 		function addproject2(){
+		// if the form is empty
+		
+			var msg = "" ;
+	
+	        if (document.account_monitoring.project_list.value == "") {
+	               msg = msg + "You did not selected a project \n" ;
+	               alert(msg);
+	               return false;
+	        }
+	                
+	        else { 
+
 		// Add project into the span "associated project" in two steps
 		
 			 //First adding into the span
@@ -124,7 +136,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 				 }
 			 });
 		 
-
+			}
 
 		  }
 
@@ -407,7 +419,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 	  </fieldset>';
 	  echo'<div id="list_projects_a" class="col-md-6">';
 	  
-		echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
+		echo '<input list="project_choice" type="text" id="project_list" name="project_list" autocomplete = "off">';
 				echo '<datalist id="project_choice">';
 							for ($k = 0; $k<$nb_rows;$k++ ){
 										echo '<option value="'.$table_project_2[$k][0].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
