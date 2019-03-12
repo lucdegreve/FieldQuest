@@ -402,7 +402,7 @@ Output variables :
 
 										// Popover to display metadata for each file
 
-										echo '<td>'.$name.' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
+										echo '<td>'.substr($name,10).' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
 
 										echo "<td>".$date."</td>";
 
