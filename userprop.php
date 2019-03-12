@@ -22,10 +22,12 @@ Output variables :		$_SESSION["id_user_list"]
 	
 	//Variable from US1-41_create_project
     $id_user_value = $_GET["id_user_value"];
-	$query1 = "SELECT id_user_account,last_name, first_name FROM user_account WHERE last_name ='".$id_user_value."'";
+	$query1 = "SELECT id_user_account,last_name,first_name FROM user_account WHERE last_name ='".$id_user_value."'";
 	$result1= pg_query($connex, $query1);
 	$tab1 = new Tab_donnees($result1,"PG");
-	$table_users1 = $tab1->t_enr;
+	$table_users_1 = $tab1->t_enr;
+
+	//echo 'id_modif: '.$table_users_1[0][0];
 	if($id_user_value!=""){
 
 	//To create variables without emptying them each time
@@ -36,14 +38,14 @@ Output variables :		$_SESSION["id_user_list"]
     }else {
       $user_list = $_SESSION["id_user_list"];
     }
-	$user_list[] = $table_users1[0][0];
+	$user_list[] = $table_users_1[0][0];
 	$_SESSION["id_user_list"] = $user_list;
 	$nb_id_user = count($user_list);
-	//echo 'user list '.var_dump($user_list);
+
 	
 	  // Query to get all information from user_account to make a list of user.
 	  for ($i=0; $i < $nb_id_user; $i++) {
-		  $query = "SELECT id_user_account,last_name, first_name FROM user_account WHERE id_user_account ='".$user_list[$i][0]."'";
+		  $query = "SELECT id_user_account,last_name, first_name FROM user_account WHERE id_user_account ='".$user_list[$i]."'";
 		  $result= pg_query($connex, $query);
 		  $tab = new Tab_donnees($result,"PG");
 		  $table_users = $tab->t_enr;
