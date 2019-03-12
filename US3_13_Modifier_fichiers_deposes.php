@@ -91,7 +91,7 @@ echo "</br>";
 		
 		<div class="container-fluid">
 			<div class="row">
-				<form method="GET" action="US3_11_Visualiser_liste_fichiers.php">
+				<form method="GET" action="US4-11_Main_page_filter.php">
 					<button type="submit" class="btn btn-outline-info btn-lg"><font size=4>Back</font></button>
 				</form>
 				<button class="btn btn-lg btn-outline-warning" onclick='return send_mail("<?php echo $id_file; ?>")'><font size=4>Send an alert</font></button>	
