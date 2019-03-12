@@ -62,7 +62,7 @@ Output variables :
     <body>
 
 
-
+		
         <?php
         //Header
         include("en_tete.php");
@@ -74,6 +74,16 @@ Output variables :
         $connex=$con->connection;
         
         ?>
+		
+		<?php
+		if (isset($_GET['unvalidate_button'])){
+			if (isset($_GET['id_file_hidden'])){
+					$id_file=$_GET['id_file_hidden'];
+					// Get user Id from session
+					$result_file=pg_query($connex, "UPDATE files SET id_validation_state = 3 WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
+			}
+		}
+		?>
         <div class="row">
                 <div class="col-md-3">
                     <?php 

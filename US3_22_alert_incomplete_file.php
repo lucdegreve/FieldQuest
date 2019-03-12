@@ -5,7 +5,7 @@
         <?php
 				 include("en_tete.php");
 				 echo "</br>";
-				 $id_file=$_GET['id_file'];
+				 $id_file=$_GET['id_file_hidden'];
         ?>
 		
 		<div class="container">

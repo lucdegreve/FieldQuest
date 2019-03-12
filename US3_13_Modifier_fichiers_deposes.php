@@ -92,18 +92,17 @@ echo "</br>";
 	
 		<div class="container-fluid">
 			<div class="row">
-				<form method="GET" action="US3_11_Visualiser_liste_fichiers.php">
+				<form method="GET" action="US4-11_Main_page_filter.php">
 					<button type="submit" class="btn btn-outline-info btn-lg"><font size=4>Back</font></button>
-				
+				</form>
+				<form method="GET" action="US3_22_alert_incomplete_file.php">
+					<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">
 				<button class="btn btn-lg btn-outline-warning" onclick='return send_mail("<?php echo $id_file; ?>")'><font size=4>Send an alert</font></button>
-				<button type="submit" class="btn btn-lg btn-success" onclick="<?php if (isset($_GET['id_file'])){
-						$id_file=$_GET['id_file'];
-						// Get user Id from session
-						$id_user=$_SESSION['id_user_account'];
-						$result_file=pg_query($connex, "UPDATE files SET id_validation_state = 3 WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
-						}
-						?>"><font size=4>Not Validate</font>
-				</button>
+				</form>
+				<form method="GET" action="US4-11_Main_page_filter.php">
+				<button type="submit" class="btn btn-lg btn-success" name="unvalidate_button" ><font size=4>Not Validate</font>			
+				</button> 
+				<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">
 				</form>
 			</div>
 		</div></br>
