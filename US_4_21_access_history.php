@@ -143,7 +143,7 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 										echo '</th>';
 
 										echo '<th>';
-											echo  'Visualize';
+											echo  'View File';
 										echo '</th>';
 
 										echo '<th>';
@@ -198,19 +198,19 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 													switch ($format){
 														case 'jpg':
 															echo '<td>';
-																echo "  <button type='button' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>Visualize</button>	  ";
+																echo "  <button type='button' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>View File</button>	  ";
 															echo '</td>';
 															break;
 
 														case 'png':
 															echo '<td>';
-																echo "  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>Visualize</button>	  ";
+																echo "  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>View File</button>	  ";
 															echo '</td>';
 															break;
 															
 														case 'JPG':
 															echo '<td>';
-																echo "  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>Visualize</button>	  ";
+																echo "  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>View File</button>	  ";
 															echo '</td>';
 															break;
 
@@ -223,7 +223,7 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 
 														case 'pdf':
 															echo '<td>';
-																echo '<a href='.$link.' target="_blank" >'."  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'>".'Visualize'."</button>".'</a>';
+																echo '<a href='.$link.' target="_blank" >'."  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'>".'View File'."</button>".'</a>';
 															echo '</td>';
 															break;
 
