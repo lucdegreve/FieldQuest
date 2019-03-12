@@ -57,35 +57,33 @@ else {
 				<div class="col-3">
 				</div>
 				<div class="col-6">
-					<div class="card text-center">
-					  <div class="card-body">
-					    <h5 class="card-title">Do you really want to delete this project ?</h5>
-					    <p class="card-text"> 
+					<div align='center'>
+					    <h4>Do you really want to delete this project ?</h4>
+                                        </div>
 					    	<div class="row">
-					    		<div class="col-4">
+					    		<div class="col-3">
 								</div>
-						    	<div class="col-2">
+						    	<div class="col-3">
 						    		<!-- we create a hidden input to keep the value of the id_project once the form is set-->
 								    <form name="suppr" action="us_1_43_supprimer_un_projet.php" method="GET">
 								    	<input type="hidden" name="id_proj" value="<?php echo $id_project; ?>">
 					              		<button class="btn btn-outline-warning" type="submit" name="delete">Yes</button>
 					         		</form>
 					         	</div>
-					         	<div class="col-2">
+					         	<div class="col-5">
 					         	<!-- we create a button to go back to the page "manage the projects" -->
 					         		<form name="return" action="US1_42_Gerer_projets.php" method="POST">
-					              		<button class="btn btn-outline-info" type="submit" name="return" >No/Return</button>
+					              		<button class="btn btn-outline-info" type="submit" name="return" >No/Go Back</button>
 					         		</form>
 			         			</div>
-			         			<div class="col-4">
+			         			<div class="col-5">
 								</div>
 			         		</div>
-					    </p>
-					  </div>
-					</div>
+					   
 				</div>
 				<div class="col-3">
 				</div>
+                                </br>
 			</div>
 		</div>
 		
