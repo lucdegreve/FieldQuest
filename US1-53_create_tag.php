@@ -36,54 +36,14 @@
         <?php
             // To add a new client
             require "./tab_donnees/funct_connex.php";
-			echo '<div class="container">
-				<form name="coucou" action="US1-54_manage_tags.php">
-				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
-				</form>';
+                    
 
             $con=new Connex();
             $connex=$con->connection;
-            // parameters of request
-            $query = "SELECT id_tag_type, name_tag_type  FROM tag_type
-                GROUP BY id_tag_type ORDER BY name_tag_type";
-            // request execution
-            // and recuperation of recordset
-            $result = pg_query($connex, $query)
-                or die('Échec de la requête : ' . pg_last_error($connex));
-				echo '<form name="form_creation" action="US1-53_create_tag.php" onsubmit="return validation()" method="get">';
-					echo '<h4 class="card-title">Add a new tag</h4>
-					<div class="input-group mb-3">
-  				<div class="input-group-prepend">
-					<span class="input-group-text"> Choose your tag type :</span></div>
-					<select class="custom-select" name="liste_type" >';
-
-
-
-						while($row = pg_fetch_array($result)){
-							echo '<option value ='.$row["id_tag_type"].'> '.$row["name_tag_type"].' </option>';
-						}
-					echo '</select></div>
-
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroup-sizing-default"> Enter the tag name : </span>
-                                            </div>
-                                            </br>
-                                            <input class="form-control" type="text" name="tag_name"><br/></br>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text" > Enter a description :</span>
-                                            </div>
-                                            <textarea class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="tag_description">Comment</textarea></br>
-										</div>
-                                        <div><button type="submit" class="btn btn-outline-success">Validate</button></div>
-						</div>
-
-				</form>';
-				?>
-		</div>
-			<?php
+            
+        ?>
+        
+        <?php
 
 
 
@@ -129,6 +89,52 @@
             }
 
             ?>
+        <div class="container">
+            <form name="coucou" action="US1-54_manage_tags.php">
+                    <button name="return" class="btn btn-outline-info" type="submit">Back</button>
+            </form>
+        <?php
+            // parameters of request
+            $query = "SELECT id_tag_type, name_tag_type  FROM tag_type
+                GROUP BY id_tag_type ORDER BY name_tag_type";
+            // request execution
+            // and recuperation of recordset
+            $result = pg_query($connex, $query)
+                or die('Échec de la requête : ' . pg_last_error($connex));
+				echo '<form name="form_creation" action="US1-53_create_tag.php" onsubmit="return validation()" method="get">';
+					echo '<h4 class="card-title">Add a new tag</h4>
+					<div class="input-group mb-3">
+  				<div class="input-group-prepend">
+					<span class="input-group-text"> Choose your tag type :</span></div>
+					<select class="custom-select" name="liste_type" >';
+
+
+
+						while($row = pg_fetch_array($result)){
+							echo '<option value ='.$row["id_tag_type"].'> '.$row["name_tag_type"].' </option>';
+						}
+					echo '</select></div>
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-default"> Enter the tag name : </span>
+                                            </div>
+                                            </br>
+                                            <input class="form-control" type="text" name="tag_name"><br/></br>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" > Enter a description :</span>
+                                            </div>
+                                            <textarea class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="tag_description">Comment</textarea></br>
+										</div>
+                                        <div><button type="submit" class="btn btn-outline-success">Validate</button></div>
+						</div>
+
+				</form>';
+				?>
+		</div>
+			
 			</div>
 		</div>
 	</body>

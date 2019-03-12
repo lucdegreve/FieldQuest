@@ -27,12 +27,13 @@
 			$sql2 = pg_query($connex,'Delete from link_project_users where id_project='.$id_project.'');  // if the project is empty all the we can delete it
 			$sql = pg_query($connex,'Delete from projects where id_project='.$id_project.'');  // if the project is empty we can delete it
 			
-			echo "<h1 align='center'>The project has been deleted</h1></br>";
-			echo "</br></br></br></br>";
+			echo "<div class='alert alert-danger'><B>The project has been deleted</B></div></br>";
+                        echo'<div align="center">';
 			echo '<form name="return" action="US1_42_Gerer_projets.php" method="POST">
 					              		<button class ="btn btn-outline-info" type="submit" name="return">Return to data management page</button>
 					         		</form>';
-			echo "</br></br></br></br></br></br></br>";
+                        echo'</div>';            
+			echo "</br></br></br></br></br></br></br></br>";
 			}
 		else {
 			echo "<h1 align='center'>The project isn't empty and cannot be deleted</h1></br>";
@@ -42,7 +43,7 @@
 					              		<button class="btn btn-outline-info" type="submit" name="return" >Return to data management page</button>
 					         		</form>';
 			echo '</div>';
-			echo "</br></br></br></br></br></br></br>";
+			
 			}
 
 		}
