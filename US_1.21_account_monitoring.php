@@ -56,6 +56,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 	require_once "tab_donnees/funct_connex.php";
 	$con = new Connex();
 	$connex = $con->connection;
+	
 	?>
 	<script type="text/javascript">
 		// Function valider(), verify for each field if it is filled. If not, warning message appears
@@ -207,7 +208,11 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 		  }
 
 	</script>
-
+	<div class='container'> 
+		<form action = "US1-10_Gerer_comptes.php" method = "POST" name = "Return"> 
+			<button type = 'submit' class='btn btn-outline-info'>Back</button> 
+		</form> 
+	</div> 
         <?php
         // We must put an isset now, Indeed the following form must be pre-filled AND when you click on modify
         // You have to update the database and to re pre-fill the form to have a view
