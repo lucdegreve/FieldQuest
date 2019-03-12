@@ -124,7 +124,7 @@
                 $res = pg_query($connex, $sql)
                 or die('Échec de la requête : ' . pg_last_error($connex));
 
-                echo '<div class="container"><p> New tag '.$tag_name.' created</p></div>';
+                echo '<div class="alert alert-success">New tag<B> '.$tag_name.' </B>created</div>';
 
             }
 

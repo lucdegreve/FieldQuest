@@ -101,10 +101,10 @@
                 $res = pg_query($connex, $sql)
                 or die('Échec de la requête : ' . pg_last_error($connex));
 
-                echo '<div class="container"> <p style="strong">New type tag '.$name_tag_type.' created	</p> </div>';
+                echo '<div class="alert alert-success"> New type tag<B> '.$name_tag_type.' </B>created</div>';
 
             }
-
+            
             ?>
 	</body>
 	<?php
