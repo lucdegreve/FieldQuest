@@ -11,8 +11,6 @@
         $_SESSION["id_project_list_am"]=array();
     }
     else {
-		unset($_SESSION["id_project_list_am"]);
-		$_SESSION["id_project_list_am"]=array();
         $project_list_am = $_SESSION["id_project_list_am"];
     }
 	
