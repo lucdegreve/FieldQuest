@@ -7,6 +7,8 @@
 
 <!--Basic styling for map div, if height is not defined the div will show up with 0 px height  -->
 <meta charset="utf-8">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -45,11 +47,11 @@ echo'</table>';
 pg_free_result($result);*/
 
 
-                
+                    echo '<hr>';
                     while ($row = pg_fetch_array($result))
                     {
                             echo '<ul>' ;
-                                    echo "<H6>".$row[1]."<a href=US4-11_Main_page_filter.php?id_favorite_search=".$row[0]." class='lien'><img src='picto/search.png' width='30' height='30'></a></H6>";
+                                    echo "<H6> <a class='btn btn-outline-primary btn-sm btn-block' href=US4-11_Main_page_filter.php?id_favorite_search=".$row[0]." class='lien'> <i class='fas fa-search' style='float:left; position:relative; '></i> ".$row[1]."</a></H6>";
                                     echo $row[2];
                             echo '<hr></ul>';
                     }
