@@ -333,12 +333,14 @@ if(isset($_POST['validate'])){
 					// table of users affected to that project for now
 					echo'<div id="associated_users_before">';
 						echo'<table>';
-						for ($i=0;$i<count($table_users_a1);$i++){
-							$users[]=$table_users_a1[$i][0];
-							echo'<tr id='.$i.'>';
-								echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
-								echo'<td><button type="button" name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
-							echo'</tr>';
+						if ( $table_user_a->nb_enr !=0){
+							for ($i=0;$i<count($table_users_a1);$i++){
+								$users[]=$table_users_a1[$i][0];
+								echo'<tr id='.$i.'>';
+									echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
+									echo'<td><button type="button" name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
+								echo'</tr>';
+							}
 						}
 						echo '</table>';
 					echo'</div>';
