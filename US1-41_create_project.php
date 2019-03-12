@@ -371,7 +371,7 @@ if(isset($_POST['validate'])){
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
 								for($i=0; $i<count($table_users_na1); $i++){
-									echo'<option value="'.$table_users_na1[$i][0].'" label="'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'">'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
+									echo'<option value="'.$table_users_na1[$i][1].'">'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
 								}
 						echo'</datalist>';
 
@@ -403,7 +403,7 @@ if(isset($_POST['validate'])){
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
 								for($i=0; $i<count($table_users_na1); $i++){
-									echo'<option value="'.$table_users_na1[$i][0].'" label="'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'">'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
+									echo'<option value="'.$table_users_na1[$i][1].'" >'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
 								}
 						echo'</datalist>';
 

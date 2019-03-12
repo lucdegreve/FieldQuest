@@ -37,7 +37,7 @@ Output variables :
 	echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 		echo'<datalist id="users">';
 				for($i=0; $i<count($users_for_list2); $i++){	
-					echo'<option value="'.$users_for_list2[$i][0].'" label="'.$users_for_list2[$i][1].' '.$users_for_list2[$i][2].'">'.$users_for_list2[$i][1].' '.$users_for_list2[$i][2].'</option>';
+					echo'<option value="'.$users_for_list2[$i][1].'" >'.$users_for_list2[$i][1].' '.$users_for_list2[$i][2].'</option>';
 				}
 		echo'</datalist>';
 	// button to add the selected user to the project	

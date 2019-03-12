@@ -19,6 +19,7 @@ Output variables :
     // Variables needed for connexion
     $con = new Connex();
     $connex = $con->connection;
+	
     $id_user_value = $_GET["id_user_value"];
 	$user_list = $_SESSION["id_user_list"];
 	$nb_id_user_b = count($user_list);
@@ -30,14 +31,14 @@ Output variables :
 		}
 	}
 	$_SESSION["id_user_list"] = $user_list;
-	
+	//echo'user_list'.var_dump($user_list);
 	$nb_id_user = count($user_list);
 	//$nb_id=array_count_values ($user_list); // counts frequency of each element
 	  // Query to get all information from user_type to make a list of user type.
 	  // With this admin will choose between three possibilities what type of user the account is for
 	  for ($i=0; $i < $nb_id_user; $i++) {
 
-		  $query = "SELECT id_user_account,last_name, first_name FROM user_account WHERE id_user_account = ".$user_list[$i];
+		  $query = "SELECT id_user_account,last_name, first_name FROM user_account WHERE id_user_account = '".$user_list[$i]."'";
 
 		  $result= pg_query($connex, $query);
 		  $tab = new Tab_donnees($result,"PG");
