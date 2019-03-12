@@ -23,7 +23,7 @@
   echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
 		  echo '<datalist id="project_choice">';
 		        for ($k = 0; $k<$nb_projects_a;$k++ ){
-		              echo '<option value="'.$projects_list_to_update[$k][0].'"> Project '.$projects_list_to_update[$k][0].' : '.$projects_list_to_update[$k][1].' </option>';
+		              echo '<option value="'.$projects_list_to_update[$k][1].'"> Project '.$projects_list_to_update[$k][0].' : '.$projects_list_to_update[$k][1].' </option>';
 		        }
 		  echo'</datalist>';
   echo '<button type="button" class="btn btn-outline-warning" name="addproject" onclick=addproject2() >Add a project</button> ';

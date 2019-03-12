@@ -422,7 +422,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 		echo '<input list="project_choice" type="text" id="project_list" name="project_list" autocomplete = "off">';
 				echo '<datalist id="project_choice">';
 							for ($k = 0; $k<$nb_rows;$k++ ){
-										echo '<option value="'.$table_project_2[$k][0].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
+										echo '<option value="'.$table_project_2[$k][1].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
 							}
 				echo'</datalist>';
 				

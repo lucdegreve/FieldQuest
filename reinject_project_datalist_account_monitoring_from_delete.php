@@ -20,7 +20,7 @@
   echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
 		  echo '<datalist id="project_choice">';
 		        for ($k = 0; $k<$nb_projects_ad; $k++ ){
-		            echo '<option value="'.$not_associated_project_account_monitoring[$k][0].'"> Project '.$not_associated_project_account_monitoring[$k][0].' : '.$not_associated_project_account_monitoring[$k][1].' </option>';
+		            echo '<option value="'.$not_associated_project_account_monitoring[$k][1].'"> Project '.$not_associated_project_account_monitoring[$k][0].' : '.$not_associated_project_account_monitoring[$k][1].' </option>';
 		        }
 		  echo '</datalist>';
   echo '<button type="button" class="btn btn-outline-warning" name="addproject" onclick=addproject2() >Add a project</button>';
