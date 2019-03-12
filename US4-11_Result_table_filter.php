@@ -6,7 +6,7 @@
 
        US4-11 Filtrer avec des tags - Table of query result  
 
-Developped by Ophélie	& Diane	
+Developped by OphÃ©lie	& Diane	
 
 This page displays the result of the search by tags as a table. 
 
@@ -201,7 +201,7 @@ Output variables :
 
 		//Query : list of distinct file names
 
-		$result_files_id=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
+		$result_files_id=pg_query($connex, $query) or die('Ã‰chec de la requÃªte : ' . pg_last_error());
 		$nbrows=pg_num_rows($result_files_id);
                
 		//Path to download file							
@@ -263,7 +263,7 @@ Output variables :
 
 							<?php
                                                         
-                                                        //Compteur pour faire transiter la donnée vers le téléchargement
+                                                        //Compteur pour faire transiter la donnÃ©e vers le tÃ©lÃ©chargement
 							$pos=0;
 
 							while($row=pg_fetch_array($result_files_id)){
@@ -278,7 +278,7 @@ Output variables :
 
 								WHERE id_original_file='".$id."' AND id_version=(SELECT MAX(id_version) FROM files WHERE id_original_file='".$id."')";
 
-								$result_files_list=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
+								$result_files_list=pg_query($connex, $query) or die('Ã‰chec de la requÃªte : ' . pg_last_error());
                                                                 
                                                                 //Type of metadata of the file
                                                                 
@@ -384,7 +384,7 @@ Output variables :
 
 										$query_origin="SELECT to_char(upload_date,'DD/MM/YYYY'), last_name, first_name FROM user_account ua JOIN files f ON ua.id_user_account=f.id_user_account WHERE id_file=".$original_id;
 
-										$result_origin=pg_query($connex, $query_origin) or die('Échec de la requête : ' . pg_last_error());
+										$result_origin=pg_query($connex, $query_origin) or die('Ã‰chec de la requÃªte : ' . pg_last_error());
 
 										while($col=pg_fetch_array($result_origin)){
 
@@ -402,7 +402,7 @@ Output variables :
 
 										// Popover to display metadata for each file
 
-										echo '<td>'.$name.' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
+										echo '<td>'.substr($name,10).' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
 
 										echo "<td>".$date."</td>";
 
@@ -421,7 +421,7 @@ Output variables :
                                                                                                       ON fi.id_format = fo.id_format
                                                                                                       WHERE fi.id_file = $original_id";
 
-                                                                                            $resultdl = pg_query($querydl) or die('Échec de la requête : ' . pg_last_error());
+                                                                                            $resultdl = pg_query($querydl) or die('Ã‰chec de la requÃªte : ' . pg_last_error());
 
 
                                                                                             //creation d'une liste contenant le non, l'extension et la pos du fichier
@@ -438,7 +438,7 @@ Output variables :
 
                                                                                             $_SESSION["path[".$pos."]"] = $rowdl[0];
 
-                                                                                            //Récuperation des valeurs pour la fonction download
+                                                                                            //RÃ©cuperation des valeurs pour la fonction download
 
 																							echo "<a href='".$path.$name."' download> ";                                            
 																								echo '<button type="button" id="btnDownload" name="btnDownload" class="btn btn-sm btn-outline-success btn-block" onclick="return download_file('.$id_file.')">Download file</button>';                                    
@@ -718,7 +718,7 @@ Output variables :
 
 <script type="text/javascript">
 
-        //Ouvrir la popup pour afficher les différentes versions
+        //Ouvrir la popup pour afficher les diffÃ©rentes versions
 
         function popup(original_id) {	
 
