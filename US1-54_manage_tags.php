@@ -35,25 +35,26 @@
 
         } ) ;
     </script>
-	
+
 </head>
-<body> 
+<body>
 <?php
 	include("en_tete.php");
 	echo "</br>";
 ?>
 <div class="container">
-	
+
 	<div align="center">
-		<h2>Manage tags</h2>
+		<h3>Manage tags</h3>
 	</div></br>
-	
+    <div align="center">
     <a href="US1-51_create_tag_type.php"><button type="button" class='btn btn-outline-primary'>New tag type</button></a>
     <a href="US1-53_create_tag.php"><button type="button" class='btn btn-outline-primary'>New tag</button> </a>
-    
+
     <a href="US1-54_modify_tag_type.php"><button type="button" class='btn btn-outline-warning'  >Modify tag type</button> </a>
     <a href="US1-54_modify_tag.php"><button type="button" class='btn btn-outline-warning'>Modify tag</button></a>
-    </br></br>
+    </div>
+    </br>
 
     <?php
 		echo "<div align='center'>";
@@ -66,8 +67,8 @@
 		//request execution
         $result = pg_query($connex, $query) or die(pg_last_error());
 		// Results browsing line by line
-		// For each line pg_fetch_array return a value table  
-		while ($row = pg_fetch_array($result)) { 
+		// For each line pg_fetch_array return a value table
+		while ($row = pg_fetch_array($result)) {
 			// The access to a table element can be do thanks to index or field name
             // Here we are using field name
             $id_cat= $row["id_tag_type"];
@@ -77,7 +78,7 @@
                 echo '<li class="toggleSubMenu"><span>'.$row["name_tag_type"].' </span>';
                     echo '<ul class="subMenu">';
                     $query2 = "SELECT id_tag_type, tag_name,  tag_description FROM tags where id_tag_type=".$id_cat." ORDER BY tag_name"; //it gives the name of the tag within the category
-                    $result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
+                    $result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex));
                     while ($row2 = pg_fetch_array($result2))
                         echo '<li> <a href="#" title="'.$row2["tag_name"].'" value="'.$row2["id_tag_type"].'">'.$row2["tag_name"].'</a></li>';
                         $_SESSION["id_tag_type"]=$row2["id_tag_type"]; //on garde l'id de la catégorie en variable de session
@@ -85,14 +86,13 @@
                         $_SESSION["tag_description"]=$row2["tag_description"];
                         echo '</ul>';
                 echo '</li>';
-            echo '</ul>';	
+            echo '</ul>';
 		}
 		echo "</div>"
     ?>
 </br></br>
-</div>    
-</body>  
+</div>
+</body>
 	<?php
 		include("pied_de_page.php");
 	?>
-
