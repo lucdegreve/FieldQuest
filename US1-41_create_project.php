@@ -29,7 +29,7 @@ Output variables :
 
 <?php
 				 include("en_tete.php");
-				
+				 
 				//In the case the page is just updated, we need to empty the session variable not to keep users in memory
 				if (!isset($_POST['validate'])){
 					if(isset($_SESSION["id_user_list"])){
@@ -192,10 +192,8 @@ if(isset($_POST['validate'])){
 		// variable to get users associated to the project before modification and kept during modification
 		$users_kept=$_SESSION["users_asso_before"];
 		//to have users already associated before modif and the new ones in same variable
-		if ($users_kept[0] != ""){
-			for($i=0;$i<count($users_kept);$i++){
-				$id_users_asso_after[]=$users_kept[$i][0];
-			}
+		for($i=0;$i<count($users_kept);$i++){
+			$id_users_asso_after[]=$users_kept[$i][0];
 		}
 		if ($_POST['end_date']!=""){
 			$project_end = $_POST['end_date'];
@@ -216,12 +214,10 @@ if(isset($_POST['validate'])){
 
 
 		//to add users to current project
-		if ($id_users_asso_after[0] != ""){
-			for ($i=0;$i<count($id_users_asso_after);$i++){
-				$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account)
-														VALUES ('".$id_project."','".$id_users_asso_after[$i]."')")
-				 or die ('<div class="alert alert-danger">Failed to add project</div>');
-			}
+		for ($i=0;$i<count($id_users_asso_after);$i++){
+			$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account)
+													VALUES ('".$id_project."','".$id_users_asso_after[$i]."')")
+			 or die ('<div class="alert alert-danger">Failed to add project</div>');
 		}
 	} else {
 		$query_new_id_project = "SELECT MAX(id_project) from projects";
@@ -266,7 +262,6 @@ if(isset($_POST['validate'])){
 
 	}
 }
-
 ?>
 
 <div class="container">
@@ -277,40 +272,52 @@ if(isset($_POST['validate'])){
 
 	</form>
 
-	<div align="center">
-		<h2>Please fill all the information</h2>
-	</div></br>
-	<div class="row"><strong>NB : Fields marked with (*) are mandatory</strong></div><br/>
 
-	<form name='new_project' method='POST' onsubmit='return validate_project()' action='US1-41_create_project.php' >
-		<div class ="row">
-			<div class= "col-md-1">(*)</div>
-			<div class= "col-md-5">Project name </div>
-			<div class = "col-lg-6"><input type="text" name="project_name" value="<?php echo $name_project; ?>" placeholder="Project name"></div>
-		</div><br/>
-		<div class ="row">
-			<div class= "col-md-1">(*)</div>
-			<div class= "col-md-5">Date of beginning</div>
-			<div class="col-md-6"><input type="date" name="begin_date" value="<?php echo $init_date; ?>"></div>
-		</div><br/>
-		<div class ="row">
-			<div class= "col-md-1"> </div>
-			<div class= "col-md-5">Date of end </div>
-			<div class="col-md-6"><input type="date" name="end_date" value="<?php echo $end_date; ?>"></div>
-		</div><br/>
-		<div class ="row">
-			<div class= "col-md-1"></div>
-			<div class= "col-md-5">Project description </div>
-			<div class="col-md-6"><textarea name="project_desc" rows="5"><?php echo $project_desc; ?> </textarea></div>
-		</div><br/>
-		<div class ="row">
-			<div class= "col-md-1">(*)</div>
-			<div class= "col-md-5">Status </div>
-			<div class="col-md-6"><?php $table_status->creer_liste_option_plus ( "status", "id_status", "label_status",$status); ?></div>
-		</div></br>
-		<div class ="row">
+	<h4 align="center">Please fill all the information</h4>
+</br>
+<div class="row"><strong>NB : Fields marked with (*) are mandatory</strong></div><br/>
+
+
+<form name='new_project' method='POST' onsubmit='return validate_project()' action='US1-41_create_project.php'>
+	<div class="input-group mb-3">
+			<div class="input-group-prepend">
+					<span class="input-group-text"> (*) Project name : </span>
+			</div>
+			</br>
+			<input type="text" name="project_name" value="<?php echo $name_project; ?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+	<div class="input-group mb-3">
+			<div class="input-group-prepend">
+					<span class="input-group-text"> (*) Date of beginning : </span>
+			</div>
+			</br>
+			<input type="date" name="begin_date" value="<?php echo $init_date; ?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+	<div class="input-group mb-3">
+			<div class="input-group-prepend">
+					<span class="input-group-text"> (*) Date of end : </span>
+			</div>
+			</br>
+			<input type="date" name="end_date" value="<?php echo $end_date; ?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+	<div class="input-group mb-3">
+			<div class="input-group-prepend">
+					<span class="input-group-text"> (*) Project description : </span>
+			</div>
+			</br>
+			<textarea class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="project_desc" rows="3"><?php echo $project_desc; ?></textarea>
+	</div>
+	<div class="input-group mb-3">
+			<div class="input-group-prepend">
+					<span class="input-group-text"> Tag type :</span>
+			</div>
+			<?php $table_status->creer_liste_option_plus ( "status", "id_status", "label_status",$status); ?>
+	</div>
+
+
 			<?php
 				//Associate users to a project
+				echo '<div class ="row">';
 				if (isset($_GET['id_project'])){
 					$id_project = $_GET['id_project'];
 					$result_users_associated = pg_query($connex, "select id_user_account,last_name, first_name
@@ -321,20 +328,17 @@ if(isset($_POST['validate'])){
 					$table_users_a1 = $table_user_a->t_enr;
 
 					$_SESSION["users_asso_before"]=$table_users_a1; //for ajax dynamic part in userdelete.php
-					echo'<div class= "col-md-1"></div>';
-					echo'<div class= "col-md-5"> Users associated to that project :</div>';
+					echo 'Users associated to that project :';
 					$users=[]; //variable with id of all the users affected to that project
 					// table of users affected to that project for now
-					echo'<div id="associated_users_before" class= "col-md-6">';
+					echo'<div id="associated_users_before">';
 						echo'<table>';
-						if ($table_user_a->nb_enr != 0){
-							for ($i=0;$i<count($table_users_a1);$i++){
-								$users[]=$table_users_a1[$i][0];
-								echo'<tr id='.$i.'>';
-									echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
-									echo'<td><button type="button" name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
-								echo'</tr>';
-							}
+						for ($i=0;$i<count($table_users_a1);$i++){
+							$users[]=$table_users_a1[$i][0];
+							echo'<tr id='.$i.'>';
+								echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
+								echo'<td><button type="button" name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
+							echo'</tr>';
 						}
 						echo '</table>';
 					echo'</div>';
@@ -359,9 +363,9 @@ if(isset($_POST['validate'])){
 					$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
 
 					//datalist with the users not associated
-					echo'<div class= "col-md-1"></div>';
-					echo'<div class= "col-md-5"><label for="Users"> Choose users to associate to the project :</label></div>';
-					echo'<div id="list_users_a" class="col-md-6">';
+
+					echo'Choose users to associate to the project :';
+					echo'<div id="list_users_a">';
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
 								for($i=0; $i<count($table_users_na1); $i++){
@@ -387,8 +391,12 @@ if(isset($_POST['validate'])){
 					$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
 
 					//datalist with the users not associated
-					echo'<div class= "col-md-1"></div>';
-					echo'<div class= "col-md-5"><label for="Users"> Choose users to associate to the project :</label></div>';
+
+
+					echo '<fieldset style="width: 335px">
+					<input class="form-control" type="text" placeholder="Choose users to associate to the project :" readonly>
+					</fieldset>';
+
 					echo'<div id="list_users_a" class="col-md-6">';
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
@@ -399,8 +407,12 @@ if(isset($_POST['validate'])){
 
 					// button to add the selected user to the project
 					echo'<button type="button" name="addu" class="btn btn-md btn-outline-warning" onclick="add_user1()">Add a user</button>';
-					echo'</div>';
-					echo'<p> Associated user(s) : <span id="associated_users"></span></p>';
+					echo'</div></br>';
+					echo'<div class="container" align="center">';
+					echo '<fieldset style="width: 170px">
+					<input class="form-control" type="text" placeholder="Associated user(s) :" readonly>
+					</fieldset>';
+					echo '<span id="associated_users"></span></div>';
 				}
 
 			echo'</div>';
@@ -414,8 +426,7 @@ if(isset($_POST['validate'])){
 
 	</form>
 	</div>
-
-</div> <!-- container -->
+</div> <!-- container->
 		<?php
 				 include("pied_de_page.php");
 		?>
