@@ -32,7 +32,7 @@ Output variables :		$_SESSION["id_user_list"]
 			$tab = new Tab_donnees($result,"PG");
 			$table_users = $tab->t_enr;
 			echo "<BR/>";
-			echo '<button class="btn btn-outline-info" name="button_user '.$table_users[0][0].'" >'.$table_users[0][1].' '.$table_users[0][2].'</button>';
+			echo '<button class="btn btn-outline-info" name="button_user '.$table_users[0][0].'" disabled>'.$table_users[0][1].' '.$table_users[0][2].'</button>';
 			echo '<button type="button" class="btn btn-outline-warning" name="remove_user" onclick=removeuser1('.$table_users[0][0].')>Remove user</button>'; // removeuser1 is an ajax function called in US1-41_create_project
 		}
 		else {
@@ -41,7 +41,7 @@ Output variables :		$_SESSION["id_user_list"]
 			$tab = new Tab_donnees($result,"PG");
 			$table_users = $tab->t_enr;
 			echo "<BR/>";
-			echo '<button class="btn btn-outline-info" name="button_user '.$table_users[0][0].'" >'.$table_users[0][1].' '.$table_users[0][2].'</button>';
+			echo '<button class="btn btn-outline-info" name="button_user '.$table_users[0][0].'" disabled>'.$table_users[0][1].' '.$table_users[0][2].'</button>';
 			echo '<button class="btn btn-outline-warning" name="remove_user" onclick=removeuser1('.$table_users[0][0].')>Remove user</button>'; // removeuser1 is an ajax function called in US1-41_create_project
 			echo "</br><font color='red'>You have already choosen a user !</font>";
 		}
