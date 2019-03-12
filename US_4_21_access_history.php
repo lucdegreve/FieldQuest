@@ -198,7 +198,7 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 													switch ($format){
 														case 'jpg':
 															echo '<td>';
-																echo "  <button type='button' class='btn btn-outline-primary'  onclick='return popup_visualize($row[0])'>Visualize</button>	  ";
+																echo "  <button type='button' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>Visualize</button>	  ";
 															echo '</td>';
 															break;
 
@@ -207,35 +207,29 @@ $result = pg_query($connex,$query) or die (pg_last_error() );
 																echo "  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>Visualize</button>	  ";
 															echo '</td>';
 															break;
+															
+														case 'JPG':
+															echo '<td>';
+																echo "  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'  onclick='return popup_visualize($row[0])'>Visualize</button>	  ";
+															echo '</td>';
+															break;
 
 														case 'xlsx':
 															echo '<td>';
-
-																echo '	<a href='.$link.' target="_blank" class="btn btn-sm btn-outline-primary btn-block" style="" > Download';
-
-
-																echo '</a>';
-
+																// we don't know how to visualize a xlsx file
+																echo '<center><font color="79C8EA"><small><i>No visualization available</i></small></font></center>';															
 															echo '</td>';
 															break;
 
 														case 'pdf':
 															echo '<td>';
-														   echo '	<a href='.$link.' target="_blank" class="btn btn-sm btn-outline-primary btn-block" >Visualize</a>';
+																echo '<a href='.$link.' target="_blank" >'."  <button type='button' id='btnVisualize' name='btnVisualize' class='btn btn-sm btn-outline-primary btn-block'>".'Visualize'."</button>".'</a>';
 															echo '</td>';
-
-
-
 															break;
 
 														default:
 															 echo '<td>';
-
-
-																echo '	<a href='.$link.' target="" class="btn btn-sm btn-outline-primary btn-block" style="" > Download';
-
-																echo '</a>';
-
+																echo '<center><font color="79C8EA"><small><i>No visualization available</i></small></font></center>';
 															echo '</td>';
 															break;
 													}
