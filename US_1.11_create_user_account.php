@@ -225,7 +225,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                             //div ou span ici à rafraichir en fonction des remove et add
                             echo '<datalist id="project_choice">';
                                   for ($k = 0; $k<$nb_rows;$k++ ){
-                                      echo '<option value="'.$table_project[$k][0].'"> Project '.$table_project[$k][0].' : '.$table_project[$k][1].' </option>';
+                                      echo '<option value="'.$table_project[$k][1].'"> Project '.$table_project[$k][0].' : '.$table_project[$k][1].' </option>';
                                   }
                             echo '</datalist>';
                         echo '<button type="button" class="btn btn-md btn-outline-warning" name="addproject" onclick=addproject1()>Add a project</button>';

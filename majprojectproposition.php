@@ -6,6 +6,10 @@
     $con = new Connex();
     $connex = $con->connection;
     $id_project_value = $_GET["id_project_value"];
+	$query1 = "SELECT id_project,name_project FROM projects WHERE name_project ='".$id_project_value."'";
+	$result1= pg_query($connex, $query1);
+	$tab1 = new Tab_donnees($result1,"PG");
+	$table_project1 = $tab1->t_enr;
 
     if(!isset($_SESSION["id_project_list"])){
         //$_SESSION["id_project_list"]=array();
@@ -15,7 +19,7 @@
         $project_list = $_SESSION["id_project_list"];
     }
 
-    $project_list[] = $id_project_value;
+    $project_list[] = $table_project1[0][0];
 
     // Re-injected new project list in SESSION variable
     $_SESSION["id_project_list"] = $project_list;
