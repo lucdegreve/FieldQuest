@@ -735,6 +735,12 @@ Output variables :
                 document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
 
         }
+		
+		function delete_file(id_file) { 
+
+                document.location.href="US3_4_Supprimer_fichiers_deposes.php?id_file="+id_file;
+
+        }
 
         
 
