@@ -28,7 +28,7 @@
                     // send email 
                     $comment = $_GET['Comment'];
                     $user_mail = $_GET['user_mail'];
-                    echo "Le mail a bien été envoyé";
+                    echo "Email has been correctly sent";
                     // Actually not sending the mail because of fakes emails adress.
                     mail($user_mail, // you will send the message to this e-mail adress 
                      "Fieldquest - Incomplete files", // mail subject
@@ -57,6 +57,7 @@
 					echo "</form>";
             }
              ?>
+		</div>
 		</div>
 	</body>
 	
