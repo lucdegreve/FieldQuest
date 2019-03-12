@@ -113,7 +113,12 @@ include("en_tete_login.php");
 
     <body>
         
-       
+       <?php
+			if(isset($_GET["disconnect"])){
+				echo "<div class='alert alert-danger'><B> You have been disconnected</B></div>";
+				session_destroy();
+			}
+        ?>
         
         
         
@@ -168,12 +173,7 @@ include("en_tete_login.php");
 		</br>
 		</br>
 		
-		<?php
-			if(isset($_GET["disconnect"])){
-				echo "You have been disconnected";
-				session_destroy();
-			}
-        ?>
+		
         
         
         
