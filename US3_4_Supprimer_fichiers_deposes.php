@@ -72,9 +72,10 @@
 		?>
 		
 		<div class="container">
-			<h1>Files have been deleted successfully !</h1></br>
+			
 			<div align="center">
-				<form action="US3_11_Visualiser_liste_fichiers.php" method="GET">
+			<h1>Files have been deleted successfully !</h1></br>
+				<form action="US4-11_Main_page_filter.php" method="GET">
 					<button type="submit" class="btn btn-md btn-primary">Previous page</button>
 				</form>
 			</div>
