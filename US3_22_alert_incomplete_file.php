@@ -5,26 +5,23 @@
         <?php
 				 include("en_tete.php");
 				 echo "</br>";
-				 $id_file=$_GET['id_file_hidden'];
-        ?>
-		
-		<div class="container">
-		
-			<button class="btn btn-outline-info btn-md" onclick='return back("<?php echo $id_file; ?>")'>Back</button>			
-			<script type="text/javascript">
-				function back(id_file) { 
-					document.location.href="US3_13_Modifier_fichiers_deposes.php?id_file="+id_file;
-				}
-			</script>
-		
-				
-        <div align="center">
-        
+						
+		?>
+		        
             <!-- if the comment is already written --> 
             <?php
             require "tab_donnees/tab_donnees.class.php";
             require "tab_donnees/funct_connex.php";
             if (isset($_GET['Comment'])){
+            
+            			$id_file = $_GET['id_file_after'];
+				        echo    '<div class="container">';
+						echo	'<form method="GET" action="US3_13_Modifier_fichiers_deposes.php">';
+						echo	'<button type="submit" class="btn btn-outline-info btn-md">Back</button>';
+						echo	'<input type="hidden" value="'.$id_file.'" name="id_file">'	;		
+						echo	'</form>'	;	
+				        echo    '<div align="center">';           
+           			
                     // send email 
                     $comment = $_GET['Comment'];
                     $user_mail = $_GET['user_mail'];
@@ -35,6 +32,16 @@
                      "Your files are incomplete. Here's the administrator comment : ".$comment); // message to send 
                      }
             else { // else find the users email
+            
+            			$id_file = $_GET['id_file_hidden'];
+				        echo    '<div class="container">';
+						echo	'<form method="GET" action="US3_13_Modifier_fichiers_deposes.php">';
+						echo	'<button type="submit" class="btn btn-outline-info btn-md">Back</button>';
+						echo	'<input type="hidden" value="'.$id_file.'" name="id_file">'	;		
+						echo	'</form>'	;	
+				        echo    '<div align="center">'; 
+            
+            
                 $con = new Connex();
             $connex = $con->connection;
                     $query_pre = "SELECT id_user_account from files where id_file = ".$id_file." ";
@@ -52,6 +59,7 @@
                     echo  '<input type="hidden" name="user_mail" value='.$user_mail.'>';
                     echo '	<B>Comment :</B> <br/> <textarea id="Comment" name="Comment" class="form-control" form="alertform"></textarea></br>';
 					echo "<div align='center'>";
+						echo '<input type="hidden" value="'.$id_file.'" name="id_file_after">';
 						echo '<button type="submit" class="btn btn-md btn-success" >Send e-mail</button>';
 					echo "</div>";
 					echo "</form>";
@@ -59,10 +67,13 @@
              ?>
 		</div>
 		</div>
+		
+
 	</body>
 	
-        <?php
+		<?php
 		include("pied_de_page.php");
 		?>
-</html>
+
+       </html>
 	

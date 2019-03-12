@@ -9,7 +9,7 @@ echo "</br>";
 <html lang="en">
 
 	<head>
-		<!-- Développeur : Elsa, JB & Fagniné -->
+		<!-- DÃ©veloppeur : Elsa, JB & FagninÃ© -->
 		<!-- Drag and drop which download file automatically when drop -->
 		<!-- Modify metadata (with current metadata mentionned in the fields) -->
 		
@@ -61,9 +61,10 @@ echo "</br>";
 		$connex = $con->connection;
 		//Get variable from form
 		$id_file=$_GET['id_file'];
+		echo $id_file;
 		$_SESSION["id_file"]=$id_file;
 		//Query to get current information about the file
-		$result_info=pg_query($connex, "SELECT latitude, longitude, to_char(data_init_date,'MM/DD/YYYY'), to_char(data_end_date,'MM/DD/YYYY'), file_comment FROM files WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
+		$result_info=pg_query($connex, "SELECT latitude, longitude, to_char(data_init_date,'MM/DD/YYYY'), to_char(data_end_date,'MM/DD/YYYY'), file_comment FROM files WHERE id_file=".$id_file) or die('Ã‰chec de la requÃªte : ' . pg_last_error());
 		while($row=pg_fetch_array($result_info)){
 			$latitude=$row[0];
 			$longitude=$row[1];
@@ -72,7 +73,7 @@ echo "</br>";
 			$comment=$row[4];
 		}
 		//Query to get the current projects linked to the file
-		$result_project=pg_query($connex, "SELECT id_project FROM link_file_project WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
+		$result_project=pg_query($connex, "SELECT id_project FROM link_file_project WHERE id_file=".$id_file) or die('Ã‰chec de la requÃªte : ' . pg_last_error());
 		$i=0;
 		$tab_checked_projects=array();
 		while($proj=pg_fetch_array($result_project)){
@@ -80,7 +81,7 @@ echo "</br>";
 			$i++;
 		}
 		//Query to get the current tags linked to the file
-		$result_tags=pg_query($connex, "SELECT id_tag FROM link_tag_project WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
+		$result_tags=pg_query($connex, "SELECT id_tag FROM link_tag_project WHERE id_file=".$id_file) or die('Ã‰chec de la requÃªte : ' . pg_last_error());
 		$j=0;
 		$tab_checked_tags = array();
 		while($tag=pg_fetch_array($result_tags)){
@@ -132,7 +133,7 @@ echo "</br>";
 						</div>	
 						Latitude : <span id="Latitude"><?php echo $latitude; ?></span></br>
 						Longitude : <span id="Longitude"><?php echo $longitude; ?></span>
-						<!-- Si aucune coordonnée n'est sélectionnée, il faut transmettre les anciennes -->
+						<!-- Si aucune coordonnÃ©e n'est sÃ©lectionnÃ©e, il faut transmettre les anciennes -->
 						<?php $_SESSION['latitude']=$latitude;
 						$_SESSION['longitude']=$longitude; ?>
 					</div></div>
@@ -171,9 +172,9 @@ echo "</br>";
 									<?php 
 									//For each project 
 									for ($i=0; $i<$tab_projects_list->nb_enregistrements (); $i++){
-										//Get id of the project n°$i of recordset
+										//Get id of the project nÂ°$i of recordset
 										$id_project = $tab_projects_list-> t_enr[$i][0];
-										//Get label of the project n°$i of recordset
+										//Get label of the project nÂ°$i of recordset
 										$name_project = $tab_projects_list-> t_enr [$i][2];
 										
 										$check=false;
@@ -252,7 +253,7 @@ echo "</br>";
 								echo '<ul class="subMenu">';
 								
 								$query2 = "SELECT id_tag, tag_name FROM tags where id_tag_type=".$id_cat." ORDER BY tag_name"; //it gives the name of the tag within the category
-								$result2 = pg_query($connex, $query2)  or die('Échec de la requête : ' . pg_error($connex)); 
+								$result2 = pg_query($connex, $query2)  or die('Ã‰chec de la requÃªte : ' . pg_error($connex)); 
 								while ($row2 = pg_fetch_array($result2)) {
 									$check=false;
 									for($k=0;$k<count($tab_checked_tags);$k++){
