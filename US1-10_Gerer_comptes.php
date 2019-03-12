@@ -41,7 +41,8 @@ Not done yet : Link with modify account page
 
 	// Query for the list of user account
 	$query_user_account = "SELECT acnt.id_user_account, acnt.last_name, acnt.first_name, acnt.company, type.name_user_type
-		FROM user_account acnt JOIN user_type as type ON acnt.id_user_type = type.id_user_type";
+		FROM user_account acnt JOIN user_type as type ON acnt.id_user_type = type.id_user_type
+		WHERE acnt.password IS NOT NULL AND acnt.login IS NOT NULL";
 	$result_user_account = pg_query($connex, $query_user_account) or die ("Failed to fetch user accounts");
 	$table_user_account = new Tab_donnees($result_user_account,"PG");
 
