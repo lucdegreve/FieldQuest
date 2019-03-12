@@ -192,8 +192,10 @@ if(isset($_POST['validate'])){
 		// variable to get users associated to the project before modification and kept during modification
 		$users_kept=$_SESSION["users_asso_before"];
 		//to have users already associated before modif and the new ones in same variable
-		for($i=0;$i<count($users_kept);$i++){
-			$id_users_asso_after[]=$users_kept[$i][0];
+		if ($users_kept[0] != ""){
+			for($i=0;$i<count($users_kept);$i++){
+				$id_users_asso_after[]=$users_kept[$i][0];
+			}
 		}
 		if ($_POST['end_date']!=""){
 			$project_end = $_POST['end_date'];
@@ -214,10 +216,12 @@ if(isset($_POST['validate'])){
 
 
 		//to add users to current project
-		for ($i=0;$i<count($id_users_asso_after);$i++){
-			$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account)
-													VALUES ('".$id_project."','".$id_users_asso_after[$i]."')")
-			 or die ('<div class="alert alert-danger">Failed to add project</div>');
+		if ($id_users_asso_after[0] != ""){
+			for ($i=0;$i<count($id_users_asso_after);$i++){
+				$result_add_users = pg_query($connex, "INSERT INTO link_project_users(id_project, id_user_account)
+														VALUES ('".$id_project."','".$id_users_asso_after[$i]."')")
+				 or die ('<div class="alert alert-danger">Failed to add project</div>');
+			}
 		}
 	} else {
 		$query_new_id_project = "SELECT MAX(id_project) from projects";
@@ -323,12 +327,14 @@ if(isset($_POST['validate'])){
 					// table of users affected to that project for now
 					echo'<div id="associated_users_before" class= "col-md-6">';
 						echo'<table>';
-						for ($i=0;$i<count($table_users_a1);$i++){
-							$users[]=$table_users_a1[$i][0];
-							echo'<tr id='.$i.'>';
-								echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
-								echo'<td><button type="button" name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
-							echo'</tr>';
+						if ($table_user_a->nb_enr != 0){
+							for ($i=0;$i<count($table_users_a1);$i++){
+								$users[]=$table_users_a1[$i][0];
+								echo'<tr id='.$i.'>';
+									echo'<td>'.$table_users_a1[$i][1].' '.$table_users_a1[$i][2].'</td>';
+									echo'<td><button type="button" name="delete_user" class="btn btn-outline-danger" onclick=deleteuser1('.$table_users_a1[$i][0].')>Delete </button>';
+								echo'</tr>';
+							}
 						}
 						echo '</table>';
 					echo'</div>';
