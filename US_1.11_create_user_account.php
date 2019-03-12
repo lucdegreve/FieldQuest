@@ -221,7 +221,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
                     echo'<div id="list_projects_a" class="col-md-6">';
 
-                        echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
+                        echo '<input list="project_choice" type="text" id="project_list" name="project_list" autocomplete = "off">';
                             //div ou span ici à rafraichir en fonction des remove et add
                             echo '<datalist id="project_choice">';
                                   for ($k = 0; $k<$nb_rows;$k++ ){
@@ -238,6 +238,17 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 <script type="text/javascript">
 
                 function addproject1(){
+                	
+	            	var msg = "" ;
+	
+	                if (document.account_creation.project_list.value == "") {
+	                      msg = msg + "You did not selected a project \n" ;
+	                      alert(msg);
+	                    return false;
+	                }
+	                
+	                else { 
+	                	                
                     // This function associates a project to an user with two steps
 
                        // First part of this function add a project in the span "associated project"
@@ -275,8 +286,10 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                             				    alert('Query has failed');
                             			}
                             	});
+                        //return true;
 
-                        }
+                       }
+                   }
 
                 function removeproject1(str){
                 // When you add a project, a remove button is also added allowing you to remove the project just added
