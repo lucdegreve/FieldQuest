@@ -212,7 +212,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 	</div>
 	<div class="input-group mb-3">
 			<div class="input-group-prepend">
-					<span class="input-group-text"> (*) Date of end : </span>
+					<span class="input-group-text">  Date of end : </span>
 			</div>
 			</br>
 			<input type="date" name="end_date" value="<?php echo $end_date; ?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
