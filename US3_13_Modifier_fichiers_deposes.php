@@ -61,7 +61,7 @@ echo "</br>";
 		$connex = $con->connection;
 		//Get variable from form
 		$id_file=$_GET['id_file'];
-		echo $id_file;
+		//echo $id_file;
 		$_SESSION["id_file"]=$id_file;
 		//Query to get current information about the file
 		$result_info=pg_query($connex, "SELECT latitude, longitude, to_char(data_init_date,'MM/DD/YYYY'), to_char(data_end_date,'MM/DD/YYYY'), file_comment FROM files WHERE id_file=".$id_file) or die('Ã‰chec de la requÃªte : ' . pg_last_error());
