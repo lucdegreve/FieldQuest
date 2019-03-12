@@ -29,7 +29,7 @@ Output variables :
 
 <?php
 				 include("en_tete.php");
-				 
+
 				//In the case the page is just updated, we need to empty the session variable not to keep users in memory
 				if (!isset($_POST['validate'])){
 					if(isset($_SESSION["id_user_list"])){
@@ -212,7 +212,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 	</div>
 	<div class="input-group mb-3">
 			<div class="input-group-prepend">
-					<span class="input-group-text">  Date of end : </span>
+					<span class="input-group-text"> (*) Date of end : </span>
 			</div>
 			</br>
 			<input type="date" name="end_date" value="<?php echo $end_date; ?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
@@ -234,8 +234,9 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 
 			<?php
 				//Associate users to a project
-				echo '<div class ="row">';
+
 				if (isset($_GET['id_project'])){
+					echo '<div class ="container" align="center">';
 					$id_project = $_GET['id_project'];
 					$result_users_associated = pg_query($connex, "select id_user_account,last_name, first_name
 															from user_account
@@ -245,10 +246,13 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 					$table_users_a1 = $table_user_a->t_enr;
 
 					$_SESSION["users_asso_before"]=$table_users_a1; //for ajax dynamic part in userdelete.php
-					echo 'Users associated to that project :';
+					echo '<fieldset style="width: 315px">
+					<input class="form-control" type="text" placeholder="Users already associated to that project :" readonly>
+					</fieldset></div>';
+
 					$users=[]; //variable with id of all the users affected to that project
 					// table of users affected to that project for now
-					echo'<div id="associated_users_before">';
+					echo'<div id="associated_users_before" class="container" align="center">';
 						echo'<table>';
 						if ( $table_user_a->nb_enr !=0){
 							for ($i=0;$i<count($table_users_a1);$i++){
@@ -260,7 +264,7 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 							}
 						}
 						echo '</table>';
-					echo'</div>';
+					echo'</div></br>';
 					//$users_all_details=$_SESSION["users_asso_before"];
 					//$users=array_column($users_all_details,0);
 					if ($users[0]==""){
@@ -282,20 +286,29 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 					$_SESSION["users_not_asso_before"]=$table_users_na1; //for ajax dynamic part in update_list.php
 
 					//datalist with the users not associated
+					echo '<div class="container">
+					<fieldset style="width: 350px">
+					<input class="form-control" type="text" placeholder="Choose new users to associate to the project :" readonly>
+					</fieldset></div>';
 
-					echo'Choose users to associate to the project :';
-					echo'<div id="list_users_a">';
+					echo'<div id="list_users_a" class="container">';
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
 								for($i=0; $i<count($table_users_na1); $i++){
-									echo'<option value="'.$table_users_na1[$i][1].'">'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
+									echo'<option value="'.$table_users_na1[$i][1].'" >'.$table_users_na1[$i][1].' '.$table_users_na1[$i][2].'</option>';
 								}
 						echo'</datalist>';
 
+
+
 					// button to add the selected user to the project
 					echo'<button name="addu" type="button" class= "btn btn-outline-warning" onclick="add_user1()">Add a user </button>';
-					echo'</div>';
-					echo'<p> Associated user(s) : <span id="associated_users"></span></p>';
+					echo'</div></br>';
+					echo '<div class="container">
+					<fieldset style="width: 335px">
+					<input class="form-control" type="text" placeholder="New associated user(s) :" readonly>
+					</fieldset></div></div>';
+					echo'<div class="container" align="center"><span id="associated_users"></span></div>';
 
 				}else{
 
@@ -312,11 +325,15 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 					//datalist with the users not associated
 
 
-					echo '<fieldset style="width: 335px">
-					<input class="form-control" type="text" placeholder="Choose users to associate to the project :" readonly>
-					</fieldset>';
 
-					echo'<div id="list_users_a" class="col-md-6">';
+
+
+					echo '<div class="container" align="center">
+					<fieldset style="width: 335px">
+					<input class="form-control" type="text" placeholder="Choose users to associate to the project :" readonly>
+					</fieldset></div>';
+
+					echo'<div id="list_users_a" class="container">';
 					echo'<input list="users" type="text" id="users_na" autocomplete="off">';
 						echo'<datalist id="users">';
 								for($i=0; $i<count($table_users_na1); $i++){
@@ -330,16 +347,16 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 					echo'<div class="container" align="center">';
 					echo '<fieldset style="width: 170px">
 					<input class="form-control" type="text" placeholder="Associated user(s) :" readonly>
-					</fieldset>';
-					echo '<span id="associated_users"></span></div>';
+					</fieldset></div></div>';
+					echo '<div class="container" align="center"><span id="associated_users"></span></div></div>';
 				}
 
 			echo'</div>';
 			?>
-		<br/>
 
+		</br>
 		<div align="center">
-			<button type='submit' class='btn btn-lg btn-outline-success' name='validate'>Validate and add users</button>
+			<button type='submit' class='btn btn-lg btn-outline-success' name='validate'>Validate the modifications</button>
 			<input type='hidden' name='id_project' value='<?php echo $id_project; ?>'>
 		</div>
 
