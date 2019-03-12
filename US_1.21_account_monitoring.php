@@ -67,6 +67,12 @@ So we have to create dynamic list of project to add or to remove, what we do wit
     		<?php
     				 include("en_tete.php");
     		?>
+<div class='container'>
+    <form action = "US1-10_Gerer_comptes.php" method = "POST" name = "Return">
+        <button type = 'submit' class='btn btn-outline-info'>Back</button>
+    </form>
+</div>
+        
 			<?php
     if(!isset($_GET["modify_account"])){
         if(isset($_SESSION["id_project_list_am"])){
@@ -142,7 +148,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
             }
         ?>
-<div align="center">
+<div align='center'>
         <BR/>
         <h2> Please find here the user's information </h2>
         <BR/>
