@@ -121,7 +121,7 @@
 
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-						 <span class="input-group-text"> Tag type :</span>
+						 <span class="input-group-text"> Tag </span>
 					</div>
 
 				<select class="custom-select" id="tag" name="tag" style="display:inline">';
