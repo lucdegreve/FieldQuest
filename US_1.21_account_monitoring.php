@@ -1,10 +1,4 @@
-<?php
-    if(!isset($_GET["modify_account"])){
-        if(isset($_SESSION["id_project_list_am"])){
-            unset($_SESSION["id_project_list_am"]);
-       }
-    }
-?>
+
 
 <!--
        US1-11 Modify user account
@@ -73,11 +67,13 @@ So we have to create dynamic list of project to add or to remove, what we do wit
     		<?php
     				 include("en_tete.php");
     		?>
-<div align="center">
-        <BR/>
-        <h2> Please find here the user's information </h2>
-        <BR/>
-        Fields with (*) must be filled
+			<?php
+    if(!isset($_GET["modify_account"])){
+        if(isset($_SESSION["id_project_list_am"])){
+            unset($_SESSION["id_project_list_am"]);
+       }
+    }
+?>
 
         <?php
 
@@ -109,8 +105,6 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 $website = $_GET["website"];
 
                 $id_user_account = $_GET["id_user_account"];
-                echo '</br><p><b><font color="#33cc33"> Database have been correctly updated</b></font></p>';
-
                 $query = "UPDATE user_account
                           SET last_name = '".$last_name."', first_name = '".$first_name."',  company = '".$company."',
                           address = '".$address."', postcode = '".$postcode."', city = '".$city."', country = '".$country."',
@@ -142,11 +136,18 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                         $query_result_add = pg_query($connex,$query_add) or die (pg_last_error() );
                     }
                 }
-
+				echo '<div class="alert alert-success">';
+					echo "The user's information has been updated";
+				echo '</div>';
 
             }
         ?>
-
+<div align="center">
+        <BR/>
+        <h2> Please find here the user's information </h2>
+        <BR/>
+        Fields with (*) must be filled
+</div> <!-- end div align center-->
 
         <form name="account_monitoring" action="US_1.21_account_monitoring.php" onsubmit="return valider()" method="GET">
             <BR/>
@@ -235,16 +236,91 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                 </div>';
             ?>
 </div>
-            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+           <div align="center">
+
+              <?php
+              // Now creation of the table of already associated projects
+              $query_already_associated_project = "SELECT lpu.id_project, name_project
+                                                      FROM link_project_users lpu
+                                                        JOIN projects p on lpu.id_project = p.id_project
+                                                          WHERE lpu.id_user_account = $id_user_account";
+              $result_already_associated_project = pg_query($connex, $query_already_associated_project) or die ("Failed to fetch user accounts");
+              $tab = new Tab_donnees($result_already_associated_project,"PG");
+              $tab_associated_project = $tab->t_enr;
+              $_SESSION["already_associated_projects"]=$tab_associated_project;
+
+              $nb_rows = pg_num_rows($result_already_associated_project);
+
+
+              echo '</br><fieldset style="width: 180px">
+              <input class="form-control" type="text" placeholder="Associated project(s) :" readonly>
+              </fieldset>
+            </br>';
+              echo'<div id="associated_projects_before" class= "col-md-6">';
+                  echo '<table>';
+                      for ($i=0; $i < $nb_rows ; $i++) {
+                        echo '<tr>';
+                            echo '<td> Projet '.$tab_associated_project[$i][0].' : '.$tab_associated_project[$i][1].' </td> <td> <button type="button" name="delete_project" class= "btn btn-outline-danger" onclick=deleteproject1('.$tab_associated_project[$i][0].')>Delete </button></td>';
+                        echo '</tr>';
+                      }
+                  echo '</table>';
+              echo '</div>';
+
+              ?>
+
+              <?php
+              // Then creation of the datalist
+
+              $query_project = "SELECT id_project, name_project
+                                  FROM projects
+                                    WHERE id_project NOT IN (SELECT id_project FROM link_project_users WHERE id_user_account = $id_user_account )";
+              $result_project = pg_query($connex, $query_project) or die ("Failed to fetch user accounts");
+              $tab = new Tab_donnees($result_project,"PG");
+              $table_project_2 = $tab->t_enr;
+              $_SESSION["not_associated_projects_account_monitoring"] = $table_project_2;
+              $nb_rows = pg_num_rows($result_project);
+
+              echo "</BR>";
+			  echo '<fieldset style="width: 400px">
+              <input class="form-control" type="text" placeholder="Add a new project to this user :" readonly>
+              </fieldset>';
+              echo'<div id="list_projects_a" class="col-md-6">';
+			  
+			  	echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
+						echo '<datalist id="project_choice">';
+									for ($k = 0; $k<$nb_rows;$k++ ){
+												echo '<option value="'.$table_project_2[$k][0].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
+									}
+						echo'</datalist>';
+						
+				echo '<button type="button" class="btn btn-outline-warning" name="addproject" onclick=addproject2() >Add a project</button> ';
+
+			 
+			  
+			  
+			  echo '</div>';
+
+              ?>
+
+              </BR>
+			  <p> Associated project(s) : <span id="associated_project"></span></p>
+              <BR/>
+           
+
+
+
+              <button type="submit" class="btn btn-outline-success" name="modify_account">Modify user account</button>
+			</div>
+        </form>
+		 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
             <script type="text/javascript">
             // Here are all the Ajax functions that will be used to associate/remove/delete projects of the user
 
                 function addproject2(){
                 // Add project into the span "associated project" in two steps
-
+				
                      //First adding into the span
                      $.ajax({
-
                          type: 'get',
                          dataType: 'html',
                          url: 'majprojectproposition_account_monitoring.php',
@@ -263,7 +339,6 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
                      // Secondly removing it from the datalist
                      $.ajax({
-
                          type: 'get',
                          dataType: 'html',
                          url: 'remove_project_from_datalist_account_monitoring.php',
@@ -278,6 +353,8 @@ So we have to create dynamic list of project to add or to remove, what we do wit
                            alert('Query has failed');
                          }
                      });
+				 
+
 
                   }
 
@@ -360,84 +437,7 @@ So we have to create dynamic list of project to add or to remove, what we do wit
 
                   }
 
-              </script><div align="center">
-
-              <?php
-              // Now creation of the table of already associated projects
-              $query_already_associated_project = "SELECT lpu.id_project, name_project
-                                                      FROM link_project_users lpu
-                                                        JOIN projects p on lpu.id_project = p.id_project
-                                                          WHERE lpu.id_user_account = $id_user_account";
-              $result_already_associated_project = pg_query($connex, $query_already_associated_project) or die ("Failed to fetch user accounts");
-              $tab = new Tab_donnees($result_already_associated_project,"PG");
-              $tab_associated_project = $tab->t_enr;
-              $_SESSION["already_associated_projects"]=$tab_associated_project;
-
-              $nb_rows = pg_num_rows($result_already_associated_project);
-
-
-              echo '<fieldset style="width: 180px">
-              <input class="form-control" type="text" placeholder="Associated project(s) :" readonly>
-              </fieldset>
-                <span id="associated_project"></span></p>
-              <BR/>';
-// Julien Lorriette : Problème d'Ajax avec la fonction addprojet2 qui appelle une donnée "associated_project" qui n'est présente nulle part !
-// Elle était dans un <span> avant bootsraping, sans aucune valeur de donnée : à corriger (aucune idée de ce que cette donnée est censée être utile pour...)
-              echo'<div id="associated_projects_before" class= "col-md-6">';
-                  echo '<table>';
-                      for ($i=0; $i < $nb_rows ; $i++) {
-                        echo '<tr>';
-                            echo '<td> Projet '.$tab_associated_project[$i][0].' : '.$tab_associated_project[$i][1].' </td> <td> <button type="button" name="delete_project" class= "btn btn-outline-danger" onclick=deleteproject1('.$tab_associated_project[$i][0].')>Delete </button></td>';
-                        echo '</tr>';
-                      }
-                  echo '</table>';
-              echo '</div>';
-
-              ?>
-
-              <?php
-              // Then creation of the datalist
-
-              $query_project = "SELECT id_project, name_project
-                                  FROM projects
-                                    WHERE id_project NOT IN (SELECT id_project FROM link_project_users WHERE id_user_account = $id_user_account )";
-              $result_project = pg_query($connex, $query_project) or die ("Failed to fetch user accounts");
-              $tab = new Tab_donnees($result_project,"PG");
-              $table_project_2 = $tab->t_enr;
-              $_SESSION["not_associated_projects_account_monitoring"] = $table_project_2;
-              $nb_rows = pg_num_rows($result_project);
-
-              echo "</BR>";
-
-              echo '<fieldset style="width: 400px">
-              <input class="form-control" type="text" placeholder="Add a new project to this user :" readonly>
-              </fieldset>';
-
-              echo'<div id="list_projects_a" class="col-md-6">';
-
-                  echo '<input list="project_choice" type="text" id="project_list" autocomplete = "off">';
-                      //div ou span ici à rafraichir en fonction des remove et add
-                      echo '<datalist id="project_choice">';
-                            for ($k = 0; $k<$nb_rows;$k++ ){
-                                echo '<option value="'.$table_project_2[$k][0].'"> Project '.$table_project_2[$k][0].' : '.$table_project_2[$k][1].' </option>';
-                            }
-                      echo '</datalist>';
-                  echo '<button type="button" value="Add a project" class="btn btn-md btn-outline-warning" name="addproject" onclick=addproject2()>Add a project</button>';
-              echo '</div>';
-
-
-
-
-              ?>
-
-
-
-
-
-
-              <button type="submit" class="btn btn-outline-success" name="modify_account">Modify user account</button>
-
-        </form></div>
+              </script>
       	<?php
       			 include("pied_de_page.php");
       	?>
