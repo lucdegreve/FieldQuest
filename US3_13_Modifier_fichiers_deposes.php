@@ -103,11 +103,8 @@ $_SESSION['upload_file_size'] = array();
 					<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">
 				<button class="btn btn-lg btn-outline-warning" onclick='return send_mail("<?php echo $id_file; ?>")'><font size=4>Send an alert</font></button>
 				</form>
-				<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
-				<button type="submit" class="btn btn-outline-success" onclick="return validate()"><font size=4>Validate</font></button>
-				</form>
 				<form method="GET" action="US4-11_Main_page_filter.php">
-				<button type="submit" class="btn btn-outline-danger" name="unvalidate_button" ><font size=4>Invalidate</font>			
+				<button type="submit" class="btn btn-lg btn-success" name="unvalidate_button" ><font size=4>Invalidate</font>			
 				</button> 
 				<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">
 				</form>
@@ -115,7 +112,6 @@ $_SESSION['upload_file_size'] = array();
 		</div></br>
 		
 		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
-				
 			<div class="container-fluid">
 				<div class="row">
 				
@@ -296,7 +292,9 @@ $_SESSION['upload_file_size'] = array();
 				</div>
 			</div>
 			
-			
+			<div align="center">
+				<button type="submit" class="btn btn-lg btn-success" onclick="return validate()"><font size=4>Validate</font></button>
+			</div>
 		</form></br>
 		
 	</body>
