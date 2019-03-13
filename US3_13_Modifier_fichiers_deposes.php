@@ -104,7 +104,7 @@ $_SESSION['upload_file_size'] = array();
 				<button class="btn btn-lg btn-outline-warning" onclick='return send_mail("<?php echo $id_file; ?>")'><font size=4>Send an alert</font></button>
 				</form>
 				<form method="GET" action="US4-11_Main_page_filter.php">
-				<button type="submit" class="btn btn-lg btn-success" name="unvalidate_button" ><font size=4>Not Validate</font>			
+				<button type="submit" class="btn btn-lg btn-success" name="unvalidate_button" ><font size=4>Unvalidate</font>			
 				</button> 
 				<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">
 				</form>
