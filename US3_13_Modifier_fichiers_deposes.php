@@ -108,10 +108,10 @@ $_SESSION['upload_file_size'] = array();
 				</button> 
 				<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">
 				</form>
+				<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
+				<button type="submit" class="btn btn-outline-success" onclick="return validate()"><font size=4>Validate</font></button>
 			</div>
 		</div></br>
-		
-		<form id="form_edit" name="form_edit" action="US3_13_Modifier_fichiers_deposes_P2.php" method="GET">
 			<div class="container-fluid">
 				<div class="row">
 				
@@ -292,9 +292,7 @@ $_SESSION['upload_file_size'] = array();
 				</div>
 			</div>
 			
-			<div align="center">
-				<button type="submit" class="btn btn-lg btn-success" onclick="return validate()"><font size=4>Validate</font></button>
-			</div>
+			
 		</form></br>
 		
 	</body>
