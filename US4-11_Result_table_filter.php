@@ -531,6 +531,17 @@ Output variables :
 	Filters selected : 
                 
 	<?php
+	
+		if (isset($_POST['search'])){
+			unset($_SESSION['selected_validation_state']);
+			unset($_SESSION['selected_start_date']);
+			unset($_SESSION['selected_end_date']);
+			unset($_SESSION['selected_format']);
+			unset($_SESSION['selected_project']);
+			unset($_SESSION['selected_sources']);
+			unset($_SESSION['selected_unit']);
+			unset($_SESSION['selected_tag']);
+		}
 				if (isset($_POST['Validation_state'])){
                     $valid = Array();
                     foreach ($_POST['Validation_state'] AS $i){
