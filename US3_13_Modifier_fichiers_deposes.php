@@ -6,6 +6,7 @@ include("en_tete.php");
 echo "</br>";
 $_SESSION['upload_filename'] = array();
 $_SESSION['upload_file_size'] = array();
+
 ?>
 
 <html lang="en">
@@ -96,14 +97,14 @@ $_SESSION['upload_file_size'] = array();
 		<div class="container-fluid">
 			<div class="row">
 				<form method="GET" action="US4-11_Main_page_filter.php">
-					<button type="submit" class="btn btn-outline-info btn-lg" name="back"><font size=4>Back</font></button>
+					<button type="submit" class="btn btn-outline-info btn-lg"><font size=4>Back</font></button>
 				</form>
 				<form method="GET" action="US3_22_alert_incomplete_file.php">
 					<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">
 				<button class="btn btn-lg btn-outline-warning" onclick='return send_mail("<?php echo $id_file; ?>")'><font size=4>Send an alert</font></button>
 				</form>
 				<form method="GET" action="US4-11_Main_page_filter.php">
-				<button type="submit" class="btn btn-lg btn-outline-danger" name="unvalidate_button" ><font size=4>Not Validate</font>			
+				<button type="submit" class="btn btn-lg btn-success" name="unvalidate_button" ><font size=4>Not Validate</font>			
 				</button> 
 				<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">
 				</form>
@@ -129,7 +130,7 @@ $_SESSION['upload_file_size'] = array();
 					</div></div>
 					
 					<div class="col-md-6"><div class="jumbotron">
-						<h2><B>Select a new data localisation</B></h2></br>
+						<h2><B>Select a new data location</B></h2></br>
 						<div style="margin:0 auto" id="map" >
 							<!-- Your map will be shown inside this div-->
 						</div>	
