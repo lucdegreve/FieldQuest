@@ -371,7 +371,9 @@ Output variables :
                                 if($valid=="Being checked"){
 									echo "<tr class='table-active'>";
 										echo "<th scope='row'></th>";
-										echo '<th scope="row">'.substr($name,10).'<a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></th>';
+										if($metadata <> "Tags: None"){
+											echo '<td>'.substr($name,10).' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
+										}
 										echo "<th scope='row'>".$date."</th>";
 										echo "<th scope='row'>".$first_name." ".$last_name."</th>";
 										echo "<th scope='row'>".$size."</th>";
@@ -396,7 +398,9 @@ Output variables :
 								if($valid=="Not validated"){
 									echo "<tr>";
 										echo "<td><img src='picto/refused.png' width='27' height='27'/></td>";
-										echo '<td>'.substr($name,10).'<a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></th>';
+										if($metadata <> "Tags: None"){
+											echo '<td>'.substr($name,10).' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
+										}
 										echo "<td>".$date."</td>";
 										echo "<td>".$first_name." ".$last_name."</td>";
 										echo "<td>".$size."</td>";
@@ -441,9 +445,10 @@ Output variables :
 										echo "<td><img src='picto/validated.png' width='30' height='30'/></td>";
 
 										// Popover to display metadata for each file
-
-										echo '<td>'.substr($name,10).' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
-
+										if($metadata <> "Tags: None"){
+											echo '<td>'.substr($name,10).' <a tabindex="0" class="badge badge-light" role="button" data-toggle="popover" data-trigger="focus" title="Metadata related to this file" data-content="'.$metadata.'">i</a></td>';
+										}
+										
 										echo "<td>".$date."</td>";
 
 										echo "<td>".$first_name." ".$last_name."</td>";
