@@ -41,18 +41,45 @@
 <?php
 	include("en_tete.php");
 	echo "</br>";
-?>
-<div class="container">
+	// Search bar for tags 	
+	$query_search_bar = "SELECT id_tag, tag_name FROM tags";
+	$result_search_bar= pg_query($connex, $query_search_bar);
+	$search_bar = array();
 
+	while ($row = pg_fetch_array($result_search_bar)){
+		$search_bar [$row['id_tag']] = $row['tag_name'];	
+	}
+?>
+
+
+<div class='container'>
 	<div align="center">
 		<h3>Manage tags</h3>
 	</div></br>
-    <div align="center">
-    <a href="US1-51_create_tag_type.php"><button type="button" class='btn btn-outline-primary'>New tag type</button></a>
-    <a href="US1-53_create_tag.php"><button type="button" class='btn btn-outline-primary'>New tag</button> </a>
+	<!-- Search bar for tag-->
+	<div align="center">
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<fieldset style="width: 80px">
+						<input class="form-control" type="text" placeholder="Search :" readonly>
+					</fieldset>
+				</div>
+					<input list="project_choice" aria-label="Default" aria-describedby="inputGroup-sizing-default" class="form-control" type="text" id="project_list" name="project_list" autocomplete = "off">
+						<datalist id="project_choice">
+						<?php
+						  foreach ($search_bar as $tag){
+							  echo "<option value='".$tag."'>".$tag."</option>";
+						  }
+						?>
+						</datalist>
+			</div>
+		
+			<a href="US1-51_create_tag_type.php"><button type="button" class='btn btn-outline-primary'>New tag type</button></a>
+			<a href="US1-53_create_tag.php"><button type="button" class='btn btn-outline-primary'>New tag</button> </a>
 
-    <a href="US1-54_modify_tag_type.php"><button type="button" class='btn btn-outline-warning'  >Modify tag type</button> </a>
-    <a href="US1-54_modify_tag.php"><button type="button" class='btn btn-outline-warning'>Modify tag</button></a>
+			<a href="US1-54_modify_tag_type.php"><button type="button" class='btn btn-outline-warning'  >Modify tag type</button> </a>
+			<a href="US1-54_modify_tag.php"><button type="button" class='btn btn-outline-warning'>Modify tag</button></a>	
+	
     </div>
     </br>
 
@@ -92,6 +119,8 @@
     ?>
 </br></br>
 </div>
+
+
 </body>
 	<?php
 		include("pied_de_page.php");
