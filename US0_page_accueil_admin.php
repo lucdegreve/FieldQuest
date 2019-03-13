@@ -16,7 +16,7 @@
 
 	<?php
     include("en_tete.php");
-		include("menu_administrateurs.html");
+		include("menu_administrateurs.php");
     echo'<img src="picto/welcome.png" class="img-fluid" alt="Responsive image">';
 		include("pied_de_page.php");
 	?>
