@@ -227,10 +227,10 @@ for ($j=0;$j<count($fichresult);$j++){
 	//ensure we have all geolocalisation datas
 	if  ($fichresult[$j][1]!=null and $fichresult[$j][2]!=null ){
 	?> 
-	var mark = L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> );
+	var mark = L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Download</a></li> '"; ?> );
 	mark.addTo(map);
 	if(Polygon.getBounds().contains(mark.getLatLng())==true){
-		dll_link=dll_link+ "<?php echo $fichresult[$j][5]."  <a href = ".$link." download>Telecharger</a></li> </br>"; ?> "
+		dll_link=dll_link+ "<?php echo $fichresult[$j][5]."  <a href = ".$link." download>Download</a></li> </br>"; ?> "
 		var popup = L.popup()
 		.setLatLng(Polygon.getBounds().getCenter())
 		.setContent(dll_link)
@@ -267,7 +267,7 @@ for ($j=0;$j<count($fichresult);$j++){
 		
 	?> 
 	// creating all the markers, with the onclickpopup, 
-	L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Telecharger</a></li> '"; ?> ).addTo(map);
+	L.marker([<?php echo$fichresult[$j][2].",".$fichresult[$j][1];?>], {icon: greenIcon}).bindPopup(<?php echo "'".$fichresult[$j][5]." </br> <a href = ".$link." download>Download</a></li> '"; ?> ).addTo(map);
 	<?php
 	}
 }
