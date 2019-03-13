@@ -30,6 +30,19 @@ Output variables :
 
 ?>
 
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<form method="POST"  action="US4-11_Main_page_filter.php">
+						<button type="submit" class="btn btn-outline-info btn-md">Back</button>
+				</form>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+
+
 <form action = "US4-11_Main_page_filter.php" method = "POST" name = "save_filter">
 
 <div class="container-fluid">
@@ -330,13 +343,14 @@ Output variables :
 					<!-- Search button -->
 					<button type='submit' class='btn btn_lg btn-success' name='Save_in_favorite' value="Button1">Save filters</button>
 					<!-- Save button -->
-					<button type='submit' class='btn btn_lg btn-success' name='Return' value="Button2">Return</button>
+					<!-- <button type='submit' class='btn btn_lg btn-success' name='Return' value="Button2">Return</button> -->
 			</div>
 			<div class="col-md-3"></div>
 		</div>
 	</div>
 
 </form>
+
 
 	</body>
 
