@@ -38,38 +38,23 @@
 
     		<?php
     				 include("en_tete.php");
-					 echo "</br>";
+					 
     		?>
-			
-		<div class="container">
-			<form name="back" action="US_1.21_account_monitoring_by_user.php">
-				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
-			</form>
-		</div>
-		
-        <h2 style="text-align:center;"> Change your password </h2>
-        
-        <form name="password_change" action="US_1.21_p2_change_password.php"  onsubmit="return changepassword()" method="GET">
 
         <?php
+        // Connexion to class file and connexion file
+        require "tab_donnees/tab_donnees.class.php";
+        require "tab_donnees/funct_connex.php";
         // Session variable
         $id_user_account = $_SESSION["id_user_account"]; //Variable session started while connecting the first time
         // For now I will use this one --> it has to be removed when Session start is working !
         //$id_user_account = 1;
         //echo $id_user_account;
 
-        // Connexion to class file and connexion file
-        require "tab_donnees/tab_donnees.class.php";
-        require "tab_donnees/funct_connex.php";
-
-
         // Variables needed for connexion
         $con = new Connex();
         $connex = $con->connection;
 
-        ?>
-
-        <?php
         if (isset($_GET["new_password"]))
         {
         $new_password = $_GET["new_password"];
@@ -80,18 +65,28 @@
                   WHERE id_user_account = '".$id_user_account."'";
         $query_result = pg_query($connex,$query) or die (pg_last_error() );
 
-        echo "Your password has correctly been changed";
+        echo '<div class="alert alert-success">Your password has correctly been changed</div>';
         }
         ?>
-            
+
+		<div class="container">
+			<form name="back" action="US_1.21_account_monitoring_by_user.php">
+				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
+			</form>
+		</div>
+
+        <h2 style="text-align:center;"> Change your password </h2>
+
+        <form name="password_change" action="US_1.21_p2_change_password.php"  onsubmit="return changepassword()" method="GET">
+
          <div class="card border-white" style="padding-top: 2%;">
                 <div class="row">
                     <div class="col-md-1 col-sm-1">
                     </div>
                     <div class="col-md-2 col-sm-1"></div>
                     <!-- Centre de page-->
-                                       
-                    
+
+
                     <div class="col-md-6 col-sm-8 border-white bg-primary" style="border-radius: 15px;padding: 2%;">
 
         <?php
@@ -121,15 +116,15 @@
 		echo "</div>";
         echo '</form>';
         ?>
-        
+
          </div>
-                        
-                     
+
+
 
                     <!-- Centre de page-->
                     <div class="col-md-2 col-sm-1"> </div>
                     <div class="col-md-1 col-sm-1">
-                        <b class="card text-center border-white"></b>           
+                        <b class="card text-center border-white"></b>
                     </div>
                 </div>
         </div>
