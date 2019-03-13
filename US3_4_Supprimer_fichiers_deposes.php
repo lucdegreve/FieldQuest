@@ -74,7 +74,7 @@
 		<div class="container">
 			
 			<div align="center">
-			<h1>Files have been deleted successfully !</h1></br>
+			<h1>File have been deleted successfully !</h1></br>
 				<form action="US4-11_Main_page_filter.php" method="GET">
 					<button type="submit" class="btn btn-md btn-primary">Previous page</button>
 				</form>
