@@ -212,21 +212,21 @@ if (isset($_GET['id_project'])){	// Get the id of the project to modify and the 
 	</div>
 	<div class="input-group mb-3">
 			<div class="input-group-prepend">
-					<span class="input-group-text"> (*) Date of end : </span>
+					<span class="input-group-text">Date of end : </span>
 			</div>
 			</br>
 			<input type="date" name="end_date" value="<?php echo $end_date; ?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 	<div class="input-group mb-3">
 			<div class="input-group-prepend">
-					<span class="input-group-text"> (*) Project description : </span>
+					<span class="input-group-text">Project description : </span>
 			</div>
 			</br>
 			<textarea class="form-control" aria-label="With textarea" aria-describedby="inputGroup-sizing-default" name="project_desc" rows="3"><?php echo $project_desc; ?></textarea>
 	</div>
 	<div class="input-group mb-3">
 			<div class="input-group-prepend">
-					<span class="input-group-text"> Tag type :</span>
+					<span class="input-group-text"> Project status :</span>
 			</div>
 			<?php $table_status->creer_liste_option_plus ( "status", "id_status", "label_status",$status); ?>
 	</div>
