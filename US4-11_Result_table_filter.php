@@ -110,7 +110,7 @@ Output variables :
 				if ($TAG_FS!='('){
 						$query .= " ltp.id_tag IN ".$TAG_FS;
 						$query = substr($query, 0, strlen($query) -2);
-						$query .= ")";
+						$query .= ") AND ";
 				}
 
 				//End of the filters applied for the favorite search
@@ -152,7 +152,7 @@ Output variables :
                 if ($TAG_SLD!='('){
                         $query .= " ltp.id_tag IN ".$TAG_SLD;
                         $query = substr($query, 0, strlen($query) -2);
-                        $query .= ")";
+                        $query .= ") AND ";
                 }
 				// end of previously selected search
 				
@@ -241,7 +241,6 @@ Output variables :
 
 
 		//Query : list of distinct file names
-
 		$result_files_id=pg_query($connex, $query) or die('Échec de la requête : ' . pg_last_error());
 		$nbrows=pg_num_rows($result_files_id);
                
