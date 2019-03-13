@@ -40,10 +40,55 @@
 				 include("en_tete.php");
 
         ?>
-        <div class="container">
+
+
+
         <?php
-        require "./tab_donnees/funct_connex.php";
-		echo'<form action="US1-54_manage_tags.php">
+
+				require "./tab_donnees/funct_connex.php";
+
+
+				// if we click on the Validate button of the previous form
+				//(to send the informations to modify the tag type table)
+				if (isset($_GET["delete"])){
+            $id_tag_type=$_GET["tag_type"];
+            $name_tag_type=$_GET["name_tag_type"];
+            $con=new Connex();
+            $connex=$con->connection;
+            // Request to update the table "tag_type"
+            $query = "DELETE FROM tag_type WHERE id_tag_type='".$id_tag_type."' " ;
+            // Request execution
+            $result = pg_query($connex, $query)
+                or die('Échec de la requête : ' . pg_last_error($connex));
+            // displays this message if the modification is a success
+            echo '<div class="alert alert-danger">The tag has been deleted</div>';
+        }
+
+				// if we click on the Validate button of the previous form
+				//(to send the informations to modify the tag type table)
+				if (isset($_GET["name_tag_type"])){
+						$id_tag_type= $_SESSION["id_tag_type"];
+						$name_tag_type=$_GET["name_tag_type"];
+						if (isset($_GET["description_tag_type"]))
+								{$description_tag_type = $_GET["description_tag_type"];
+						}
+						else $description_tag_type= " ";
+						$con=new Connex();
+						$connex=$con->connection;
+						$res = pg_query($connex, "SELECT * FROM tag_type ")or die(pg_last_error($connex));
+
+						// Request to update the table "tag_type"
+						$sql = "UPDATE tag_type SET name_tag_type='".$name_tag_type."' , description_tag_type='".$description_tag_type."' WHERE id_tag_type='".$id_tag_type."' " ;
+						// Request execution
+						$res = pg_query($connex, $sql) or die('Échec de la requête : ' . pg_last_error($connex));
+						// displays this message if the modification is a success
+						echo '<div class="alert alert-success">The tag type  '.$name_tag_type.' has been modified</div>';
+				}
+
+
+				echo '<div class="container">';
+
+				echo'<form action="US1-54_manage_tags.php">
 				<button name="return" class="btn btn-outline-info" type="submit">Back</button>
 				</form>';
         ?>
@@ -83,21 +128,8 @@
         </form></div>';
 
 
-		// if we click on the Validate button of the previous form
-        //(to send the informations to modify the tag type table)
-        if (isset($_GET["delete"])){
-            $id_tag_type=$_GET["tag_type"];
-            $name_tag_type=$_GET["name_tag_type"];
-            $con=new Connex();
-            $connex=$con->connection;
-            // Request to update the table "tag_type"
-            $query = "DELETE FROM tag_type WHERE id_tag_type='".$id_tag_type."' " ;
-            // Request execution
-            $result = pg_query($connex, $query)
-                or die('Échec de la requête : ' . pg_last_error($connex));
-            // displays this message if the modification is a success
-            echo '<div class="container"> <p>The tag has been deleted</p></div>';
-        }
+
+
 
 
         //if we click on the previous "modify" button of the form
@@ -132,26 +164,7 @@
             }
 
         }
-        // if we click on the Validate button of the previous form
-        //(to send the informations to modify the tag type table)
-        if (isset($_GET["name_tag_type"])){
-            $id_tag_type= $_SESSION["id_tag_type"];
-            $name_tag_type=$_GET["name_tag_type"];
-            if (isset($_GET["description_tag_type"]))
-                {$description_tag_type = $_GET["description_tag_type"];
-            }
-            else $description_tag_type= " ";
-            $con=new Connex();
-            $connex=$con->connection;
-            $res = pg_query($connex, "SELECT * FROM tag_type ")or die(pg_last_error($connex));
 
-            // Request to update the table "tag_type"
-            $sql = "UPDATE tag_type SET name_tag_type='".$name_tag_type."' , description_tag_type='".$description_tag_type."' WHERE id_tag_type='".$id_tag_type."' " ;
-            // Request execution
-            $res = pg_query($connex, $sql) or die('Échec de la requête : ' . pg_last_error($connex));
-            // displays this message if the modification is a success
-            echo '<div class="container"> <p>The tag type  '.$name_tag_type.' has been modified</p></div>';
-        }
 
 		?>
         </div>
