@@ -119,7 +119,7 @@ if (!isset($_GET['validate'])){
 					</div></div>
 
 					<div class="col-md-6"><div class="jumbotron">
-						<h2><B>Select the data localisation</B></h2></br>
+						<h2><B>Select the data location</B></h2></br>
 						<div style="margin:0 auto" id="map" >
 							<!-- Your map will be shown inside this div-->
 						</div>
