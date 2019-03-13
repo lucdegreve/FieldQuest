@@ -208,7 +208,7 @@ echo "</br>";
 		<div class="container">
 			<h1  align="center">Your modification has been considered !</h1></br>
 			<div align="center">
-				<form action="US3_11_Visualiser_liste_fichiers.php" method="GET">
+				<form action="US4-11_Main_page_filter.php" method="GET">
 					<button type="submit" class="btn btn-md btn-primary">Back to the files list</button>
 				</form>
 			</div>
