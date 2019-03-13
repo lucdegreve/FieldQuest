@@ -4,6 +4,9 @@
 //Header
 include("en_tete.php");
 echo "</br>";
+$_SESSION['upload_filename'] = array();
+$_SESSION['upload_file_size'] = array();
+
 ?>
 
 <html lang="en">
@@ -118,8 +121,8 @@ echo "</br>";
 							<label><input id="new_file" type="checkbox" name="new_file" value="check"><h2><B>Add a new file</B></h2></label>
 						</div>
 						<div id="conditional_part" style="display:none">
-							<input type="file" name="file" id="file">							
-							<div class="upload-area"  id="uploadfile">
+							<input type="file" name="file" id="file" multiple>							
+							<div class="upload-area"  id="uploadfile" align="left">
 								<B>Drag and drop new file here</B><br/>or<br/><B>Click to select a new file</B>
 							</div>
 						</div>

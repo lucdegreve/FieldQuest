@@ -45,8 +45,9 @@ echo "</br>";
 			$max_version=pg_fetch_array($result_max_version)[0];
 			$max_version=$max_version + 1;
 			
+			$upload_file_name = $_SESSION["upload_filename"][0];
 			//Get new file format
-			$file_extension=end(explode('.',$_SESSION["upload_filename"]));
+			$file_extension=end(explode('.',$upload_file_name));
 			//Get format ID's
 			$result_formats=pg_query($connex, "SELECT label_format, id_format FROM format") or die('Échec de la requête : ' . pg_last_error());
 			//Check if format already exists and store id/label if so
@@ -107,14 +108,19 @@ echo "</br>";
 					array_push($selected_tags, $row["id_tag"]); //... add tag id to array
 				}
 			}
-			
+			$file_place = $_SESSION["upload_location"];
+			$file_size = $_SESSION["upload_file_size"][0];
 			
 			//Insertion of the data for the modified file which has been uploaded previously
-			$query_insert="INSERT INTO files (id_user_account, use_id_user_account, id_format, id_validation_state, id_version, upload_date, file_name, file_place, file_size, id_original_file, file_comment, data_init_date, data_end_date, latitude, longitude) VALUES (".$id_user_account.",".$id_user.",".$id_format.",2,".$max_version .",'".$_SESSION["upload_date"]."','".$_SESSION["upload_filename"]."','".$_SESSION["upload_location"]."',".$_SESSION["upload_file_size"].",".$original_id.",'".$comment."','".$start_date."','".$end_date."','".$latitude."','".$longitude."')"; 
+			$query_insert="INSERT INTO files (id_user_account, use_id_user_account, id_format, id_validation_state, id_version, upload_date, file_name, file_place, file_size, id_original_file, file_comment, data_init_date, data_end_date, latitude, longitude) 
+			VALUES (".$id_user_account.",".$id_user.",".$id_format.",2,".$max_version .",'".$_SESSION["upload_date"]."','".$upload_file_name."','".$file_place."',".$file_size.",".$original_id.",'".$comment."','".$start_date."','".$end_date."','".$latitude."','".$longitude."')"; 
+			
+			
+			
 			$result_insert=pg_query($connex,$query_insert) or die (pg_last_error() );
 			
 			//Get file's ID from DB to put projects and tags into DB		
-			$result_new_id=pg_query($connex, "SELECT id_file FROM files WHERE file_name='".$_SESSION["upload_filename"]."'") or die(pg_last_error());
+			$result_new_id=pg_query($connex, "SELECT id_file FROM files WHERE file_name='".$upload_file_name."'") or die(pg_last_error());
 			while($row = pg_fetch_array($result_new_id)) { 
 				$new_id=$row[0];
 			}			
