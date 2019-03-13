@@ -10,22 +10,23 @@
 		        
             <!-- if the comment is already written --> 
             <?php
+			
             require "tab_donnees/tab_donnees.class.php";
             require "tab_donnees/funct_connex.php";
             if (isset($_GET['Comment'])){
             
             			$id_file = $_GET['id_file_after'];
-				        echo    '<div class="container">';
+				        echo    '<div class="container-fluid">';
 						echo	'<form method="GET" action="US3_13_Modifier_fichiers_deposes.php">';
 						echo	'<button type="submit" class="btn btn-outline-info btn-md">Back</button>';
 						echo	'<input type="hidden" value="'.$id_file.'" name="id_file">'	;		
 						echo	'</form>'	;	
 				        echo    '<div align="center">';           
-           			
+           			echo "<div class='alert alert-success'><B> Email has been correctly sent</B></div>";
                     // send email 
                     $comment = $_GET['Comment'];
                     $user_mail = $_GET['user_mail'];
-                    echo "<div class='alert alert-success'><B> Email has been correctly sent</B></div>";
+                   
                     // Actually not sending the mail because of fakes emails adress.
                     mail($user_mail, // you will send the message to this e-mail adress 
                      "Fieldquest - Incomplete files", // mail subject
