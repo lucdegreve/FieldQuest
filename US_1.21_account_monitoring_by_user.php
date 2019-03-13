@@ -11,13 +11,11 @@
     <body>
 
         <?php
-        include("en_tete.php");
-
-        if(isset($_GET['change_info'])){
-            echo '<div class="alert alert-success">Database has been correctly updated</div>';
-        }
-      echo '<div class="container">';
-
+              include("en_tete.php");
+			  echo "</br>";
+        ?>
+        <div class='container'>
+		<?php
 		if($_SESSION['id_user_type']==3){
 			echo'<form action="US0_page_accueil_externes.php">';
 				echo'<button name="return" class="btn btn-outline-info" type="submit">Back</button>';
@@ -169,7 +167,11 @@
 			</div>
           </form>
 
-
+          <?php
+              if(isset($_GET['change_info'])){
+                  echo "Database have been correctly updated";
+              }
+          ?>
 		<div class="col-md-4">
           <form name="account_monitoring_user" action="US_1.21_p2_change_password.php" method="GET">
               <button type="submit" name="change_password" class="btn btn-outline-warning btn-block"><font size=2>Change your password</font></button>
