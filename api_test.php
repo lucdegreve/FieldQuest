@@ -1,7 +1,7 @@
 <?php
 
 	/* Developpeur : Gala
-	
+
 	Get JSON file from prevision-meteo.ch API.
 	Insert in DB with all "meteo" tags (id_tag_type = 1)
 	Automatic deposit with validated status
@@ -21,19 +21,19 @@
 
 	//decode JSON to array
 	$data = json_decode($json, true);
-	
+
 	$date = new DateTime();
 	$date_today = $date->format('m-d-Y');
 	$file_place = "US_2_21_dragdrop_upload/";
-	
+
 	$file = $date->getTimestamp() . $date_today.'_weather_data_api.json';
 	// Ouvre un fichier pour lire un contenu existant
 	$current = $json;
 	// Écrit le résultat dans le fichier
 	file_put_contents($file_place.$file, $current);
-	
+
 	$file_name = $file;
-	
+
 	$file_size = filesize($file_place.$file_name);
 
 	$comment="Data from www.prevision-meteo.ch API";
@@ -44,7 +44,7 @@
 	$date=$date_today;
 	//get file format
 	$file_extension = end(explode('.',$file_name));
-	
+
 	// start&end date from DRP us format
 	$start_date = substr($date,0,10);
 	$end_date = substr($date,-10,10);
@@ -72,7 +72,7 @@
 	$todM = substr($today_en,3,2);
 	$todY = substr($today_en,6,4);
 	$today_fr= $todM."/".$todD."/".$todY;    //date at good format
-	
+
 	$all_tags = array();
 	$con = new Connex();
 	$connex = $con->connection;
@@ -80,14 +80,18 @@
 	$result = pg_query($connex, $query) or die(pg_last_error());
 	//get all "meteo" tags
 	while ($row = pg_fetch_array($result)) {
-		echo $row["id_tag"];
 		array_push($all_tags, $row["id_tag"]); //add tag id to array
 	}
-	
+	echo "Your data has been sent successfully.";
+	?>
+	<form method="GET" action="US4-11_Main_page_filter.php" onsubmit="return valider()" name="form">
+	<input type="submit" name="bouton1" value="Return">
+	</form>
+	<?php
 	// getting format id
 	$query = "SELECT label_format, id_format FROM format";
 	$result = pg_query($connex, $query) or die(pg_last_error());
-	
+
 	//finding if format already exists and adding id if so
 	while ($row = pg_fetch_array($result)) {
 		if ($row[0]==$file_extension){
@@ -113,9 +117,9 @@
 				}
 			}
 	}
-	
+
 	$id_validation_state=2;
-	
+
 	$query = "INSERT INTO files(id_user_account,use_id_user_account,id_format,id_validation_state,id_version,upload_date, file_name, file_comment, data_init_date,data_end_date,latitude,longitude,file_place,file_size,id_original_file)
 		VALUES ('".$origin."','".$origin."','".$file_format."','".$id_validation_state."',1,'".$today_fr."','".$file_name."','".$comment."','".$starting_date."','".$ending_date."','".$latitude."','".$longitude."','".$file_place."','".$file_size."',0)";
 
@@ -155,4 +159,4 @@
 		}
 	}
 
-?> 
+?>
