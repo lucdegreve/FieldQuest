@@ -135,7 +135,7 @@ function OnButton2()
 						$rowid=pg_fetch_array($result);
 						$idsearch=$rowid[0]+1;
 						
-						$queryinsert ="INSERT INTO favorite_search (id_favorite_search, id_user_account, search_label, comment, status_public_private, status_on_off, begin_date, end_date) VALUES ('".$idsearch."', '".$_SESSION['id_user_account']."', '".$_POST['name']."', '".$_POST['comment']."', true, true, '".$startdate."', '".$enddate."')";
+						$queryinsert ="INSERT INTO favorite_search (id_favorite_search, id_user_account, search_label, comment, status_public_private, status_on_off, begin_date, end_date) VALUES ('".$idsearch."', '".$_SESSION['id_user_account']."', '".$_POST['name']."', '".$_POST['comment']."', '".$_POST['status']."', true, '".$startdate."', '".$enddate."')";
 						$result=pg_query($connex, $queryinsert) or die('Query failed : ' . pg_last_error());	
 						
 						// a ajouter dans BD dès que la table est créée

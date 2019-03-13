@@ -50,6 +50,21 @@ Output variables :
 <!-- data recovery from the selection page -->
 
 		<?php
+				echo '<div class="container-fluid">';
+                        	echo '<div class="row">';
+           						echo '<div class="col-md-3"></div>';
+           						echo '<div class="col-md-6">';
+                        			echo '<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">';
+                        				echo 'Choose a status for your search : <br/>';
+                        					echo '<input type="radio" name="status" value="true" checked> Public <br>';
+  											echo '<input type="radio" name="status" value="false"> Private <br>';
+                        			echo '</div></div>';
+                        		echo '</div>';
+                        	echo '<div class="col-md-3"></div>';
+                        echo '</div>';
+                    echo '</div>'; 
+			
+					
 				if (isset($_POST['Validation_state'])){
                     $valid = Array();
                     foreach ($_POST['Validation_state'] AS $i){
@@ -289,7 +304,7 @@ Output variables :
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="card text-white bg-primary mb-3" style="border-radius: 20px 50px"><div class="card-body">
-					Query name : <input style="border-radius: 5px 5px" type="text" id="name" name="name" required minlength="2" maxlength="10">
+					Query name : <input style="border-radius: 5px 5px" type="text" id="name" name="name" required minlength="0" maxlength="30">
 				</div></div>
 			</div>
 			<div class="col-md-3"></div>
