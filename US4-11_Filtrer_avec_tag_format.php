@@ -52,7 +52,7 @@ Output variables :		id of selected formats
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';
 					echo '<button type="button" class="btn btn-sm" data-color="primary" id = "format_'. $id_format .'">'.$label_format.'</button>';
-					//If a favorite search has been launched, we preselect the filters "formats" of the formats which are required in the favorite search
+					//If a favorite search has been launched, or a search has been made previously we preselect the filters "formats" of the formats which are required in the favorite search
 					if (isset($liste_format_fs)){	
 						if (in_array($id_format,$liste_format_fs)){
 								echo '<input type="checkbox" style="display: none;" name="format[]" value="'.$id_format.'" checked/>';

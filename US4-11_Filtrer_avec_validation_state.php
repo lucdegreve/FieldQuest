@@ -42,15 +42,24 @@ $table_validation_state = new Tab_donnees($result_validation_state,"PG");
 		<?php 
 		// For each format 
 		for ($i=0; $i< $table_validation_state->nb_enregistrements (); $i++){
-			// Get id of the format n°$i  of recordset
+			// Get id of the validation state n°$i  of recordset
 			$id_validation_state = $table_validation_state-> t_enr[$i][0];
-			// Get label of the format n°$i  of recordset
+			// Get label of the validation state n°$i  of recordset
 			$label_validation_state = $table_validation_state-> t_enr [$i][1];
 		
 			// Make checkbox button 
 			echo '<span class="button-checkbox">';
 			echo '<button type="button" class="btn btn-sm" data-color="primary" id = project_"'. $id_validation_state .'">'.$label_validation_state.'</button>';
-			echo '<input type="checkbox" style="display: none;" name="Validation_state[]" value="'.$id_validation_state.'"/>';
+			// If a search has been previously launched, we preselect the previously selected validation state
+			if (isset($selected_validation_state)){	
+						if (in_array($id_validation_state,$selected_validation_state)){
+							
+								echo '<input type="checkbox" style="display: none;" name="Validation_state[]" value="'.$id_validation_state.'" checked/>';
+							}
+					}
+					else {
+							echo '<input type="checkbox" style="display: none;" name="Validation_state[]" value="'.$id_validation_state.'" unchecked/>';
+						}
 			echo '</span>';
 		}
 		?>

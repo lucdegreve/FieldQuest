@@ -76,18 +76,20 @@ Output variables :
         ?>
 		
 		<?php
+		// Executes query to change file status to not validated when button "unvalidate" clicked in page edit file 
 		if (isset($_GET['unvalidate_button'])){
 			if (isset($_GET['id_file_hidden'])){
 					$id_file=$_GET['id_file_hidden'];
-					// Get user Id from session
 					$result_file=pg_query($connex, "UPDATE files SET id_validation_state = 3 WHERE id_file=".$id_file) or die('Échec de la requête : ' . pg_last_error());
 			}
 		}
+		
 		?>
         <div class="row">
                 <div class="col-md-3">
                     <?php 
-					// If a favorite search has been selected just before, this php code recuperate the id of this favorite_search. After that, some queries 
+					// If a favorite search has been selected just before, or we go back to filter page after a previous search
+					// this php code recuperate the id of this favorite_search. After that, some queries 
 					// in the DB allow to obtain all the filters (project, formats, dates, tags) which correspond to this search. The informations is memorised in the
 					// variables ($liste_project_fs,$liste_format_fs,$liste_tag_fs,$begin_date_fs,$end_date_fs). These variables will be used later.
 					
@@ -134,8 +136,19 @@ Output variables :
 						$row=pg_fetch_array($result_end_date_fs);
 						$end_date_fs=$row[0];
 						
-						
-						
+					} 
+					if (isset($_GET["back"])){
+						// Gets previously selected filters when going back to "find files" from "edit file" 
+						// Get selected filters from "find a file"
+						$selected_validation_state= $_SESSION['selected_validation_state'];
+						$begin_date_fs= $_SESSION['selected_start_date'];
+						$end_date_fs= $_SESSION['selected_end_date'];
+						$liste_format_fs= $_SESSION['selected_format'];
+						$liste_project_fs= $_SESSION['selected_project'];
+						$selected_sources= $_SESSION['selected_sources'];
+						$selected_unit= $_SESSION['selected_unit'];
+						$liste_tag_fs= $_SESSION['selected_tag'];
+
 					}
 
 					

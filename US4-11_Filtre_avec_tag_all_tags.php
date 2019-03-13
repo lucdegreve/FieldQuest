@@ -69,7 +69,10 @@ function OnButton2()
 	echo '<div class="collapse" id="collapseDate">';
 	echo	'<div class="card card-body">';
 	echo		'<label for ="start_date">from</label>';
-	//If a favorite search has been launched, we complete the filter "date"(begin and end) with the dates required in the favorite search
+	/*	If a favorite search has been launched, 
+		or we have previously selected filters and go back to filter page, 
+		we complete the filter "date"(begin and end) with the dates required in the favorite search/previous search
+	*/
 	if (isset($begin_date_fs)){
 		echo	'<input type = "date" name ="start" id="start_date" value='.$begin_date_fs.'>';
 	}

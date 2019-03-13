@@ -6,7 +6,6 @@ include("en_tete.php");
 echo "</br>";
 $_SESSION['upload_filename'] = array();
 $_SESSION['upload_file_size'] = array();
-
 ?>
 
 <html lang="en">
@@ -97,7 +96,7 @@ $_SESSION['upload_file_size'] = array();
 		<div class="container-fluid">
 			<div class="row">
 				<form method="GET" action="US4-11_Main_page_filter.php">
-					<button type="submit" class="btn btn-outline-info btn-lg"><font size=4>Back</font></button>
+					<button type="submit" class="btn btn-outline-info btn-lg" name="back"><font size=4>Back</font></button>
 				</form>
 				<form method="GET" action="US3_22_alert_incomplete_file.php">
 					<input type="hidden" value="<?php echo $id_file; ?>" name="id_file_hidden">

@@ -49,7 +49,16 @@ Output variables :		id of selected tags
 					// Make checkbox button 
 					echo '<span class="button-checkbox">';
 					echo '<button type="button" class="btn btn-sm" data-color="primary" id = "unit_'. $id_tag .'">'.$tag_name.'</button>';
-					echo '<input type="checkbox" style="display: none;" name="unit[]" value="'.$id_tag.'"/>';
+					//If a search has been previously launched , we preselect the filters "units" of the units which are been previously selected
+					if (isset($selected_unit)){	
+						if (in_array($id_tag,$selected_unit)){
+							
+								echo '<input type="checkbox" style="display: none;" name="unit[]" value="'.$id_tag.'" checked/>';
+							}
+					}
+					else {
+							echo '<input type="checkbox" style="display: none;" name="unit[]" value="'.$id_tag.'" unchecked/>';
+						}
 					echo '</span>';
 				}
 				?>

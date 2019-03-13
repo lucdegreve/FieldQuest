@@ -215,7 +215,7 @@ echo "</br>";
 			<h1  align="center">Your modification has been considered !</h1></br>
 			<div align="center">
 				<form action="US4-11_Main_page_filter.php" method="GET">
-					<button type="submit" class="btn btn-md btn-primary">Back to the files list</button>
+					<button type="submit" class="btn btn-md btn-primary" name="back">Back to the files list</button>
 				</form>
 			</div>
 		</div></br>

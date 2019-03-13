@@ -95,7 +95,7 @@ Output variables :
 					
 				}
 
-									//TAG_FS = list of tag selected in the favorite_search(units included)
+				//TAG_FS = list of tag selected in the favorite_search(units included)
 				$TAG_FS='(';
 
 				
@@ -114,6 +114,47 @@ Output variables :
 				}
 
 				//End of the filters applied for the favorite search
+				// If we have previously launched a search and go back to this page
+				if (isset($selected_validation_state)){ 
+                                        $query .= " f.id_validation_state IN ("; 
+                                        foreach ($selected_validation_state AS $i){ 
+                                            $query .= $i.", "; 
+                                        } 
+                                        $query = substr($query, 0, strlen($query) -2); 
+                                        $query .= ")"; 
+                                        $query .= " AND "; 
+                }
+
+                if (isset($_POST['sources'])){
+                        if ($_POST['sources']!=''){
+                                $query .= "f.id_user_account IN (".$_POST['sources'].") AND ";
+                        }
+                }
+
+
+                //TAG_SLD = list of tag selected (units included)
+                $TAG_SLD='(';
+
+                if (isset($_SESSION['selected_unit'])){
+                        foreach ($_SESSION['selected_unit'] AS $i){
+                                $TAG_SLD .= $i.", ";
+                        }
+                        echo '</br>';
+                }
+
+                if (isset($_SESSION['selected_tag'])){
+                        foreach ($_SESSION['selected_tag'] AS $i){
+                                $TAG_SLD .= $i.", ";
+                        }
+                        echo '</br>';
+                }
+
+                if ($TAG_SLD!='('){
+                        $query .= " ltp.id_tag IN ".$TAG_SLD;
+                        $query = substr($query, 0, strlen($query) -2);
+                        $query .= ")";
+                }
+				// end of previously selected search
 				
 				//If some filters are set in the main page, and search button is launched, some other filters are going to be set to the query:
                 if (isset($_POST['start'])){
@@ -184,7 +225,7 @@ Output variables :
                         $query = substr($query, 0, strlen($query) -2);
                         $query .= ")";
                 }
-
+				
                 
                 //Cut end of query
                 if (substr($query, -6)=='WHERE '){
@@ -515,7 +556,11 @@ Output variables :
                         		echo '</div>';
                         	echo '<div class="col-md-3"></div>';
                         echo '</div>';
-                    echo '</div>';                }
+                    echo '</div>';
+					// Save selected filters in a session var 
+					 $_SESSION['selected_validation_state']= $valid;
+
+				}
 
                 if (isset($_POST['start'])){
                 	if ($_POST['start']!=''){
@@ -531,6 +576,8 @@ Output variables :
                         		echo '<div class="col-md-3"></div>';
                         	echo '</div>';
                         echo '</div>';
+						// Save selected filters in a session var 
+						$_SESSION['selected_start_date']= $start_date;
                 	}
                 }
 
@@ -548,6 +595,8 @@ Output variables :
                         		echo '<div class="col-md-3"></div>';
                         	echo '</div>';
                         echo '</div>';
+						// Save selected filters in a session var 
+						$_SESSION['selected_end_date']= $end_date;
                 	}
                 }
                 
@@ -576,6 +625,8 @@ Output variables :
                         	echo '<div class="col-md-3"></div>';
                         echo '</div>';
                     echo '</div>';
+					// Save selected filters in a session var 
+					$_SESSION['selected_format']= $format;
                 }
                 
                 if (isset($_POST['projet'])){
@@ -604,6 +655,8 @@ Output variables :
                         	echo '<div class="col-md-3"></div>';
                         echo '</div>';
                     echo '</div>';
+					// Save selected filters in a session var 
+					$_SESSION['selected_project']= $projet;
                 }
                 
                 if (isset($_POST['sources'])){
@@ -647,6 +700,8 @@ Output variables :
                         echo '</div>';
                     echo '</div>';
 					}
+					// Save selected filters in a session var 
+					$_SESSION['selected_sources']= $sources;
                 }
                 
                 if (isset($_POST['unit'])){
@@ -675,6 +730,8 @@ Output variables :
                         	echo '<div class="col-md-3"></div>';
                         echo '</div>';
                     echo '</div>';
+					// Save selected filters in a session var 
+					$_SESSION['selected_unit']= $unit;
                 }
                 
                 if (isset($_POST['tag'])){
@@ -702,15 +759,10 @@ Output variables :
                         	echo '<div class="col-md-3"></div>';
                         echo '</div>';
                     echo '</div>';
-                }  
-          
+					// Save selected filters in a session var 
+					$_SESSION['selected_tag']= $tag;
+                }  		  
           ?>
-
-
-
-
-
-
 
 
 
